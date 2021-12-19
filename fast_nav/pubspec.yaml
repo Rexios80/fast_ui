@@ -1,7 +1,7 @@
 name: fast_nav
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
+homepage: https://github.com/Rexios80/fast_ui
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
