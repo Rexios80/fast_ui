@@ -25,7 +25,10 @@ class _FastBuilderState extends State<FastBuilder> {
   void initState() {
     super.initState();
     RxNotifier.setupObserver(_observer, widget.builder);
-    _observer.listen(() => setState(() {}));
+    _observer.listen(() {
+      if (!mounted) return;
+      setState(() {});
+    });
   }
 
   @override
