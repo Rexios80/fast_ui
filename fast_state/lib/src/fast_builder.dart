@@ -7,9 +7,9 @@ class FastBuilder extends StatefulWidget {
   final Widget Function() builder;
 
   /// A [FastBuilder] updates when observable properties within change
-  const FastBuilder(
-    this.builder, {
+  const FastBuilder({
     Key? key,
+    required this.builder,
   }) : super(key: key);
 
   @override
@@ -24,7 +24,6 @@ class _FastBuilderState extends State<FastBuilder> {
   @override
   void initState() {
     super.initState();
-    RxNotifier.setupObserver(_observer, widget.builder);
     _observer.listen(() {
       if (!mounted) return;
       setState(() {});
@@ -33,7 +32,7 @@ class _FastBuilderState extends State<FastBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.builder();
+    return RxNotifier.setupObserver(_observer, widget.builder);
   }
 
   @override

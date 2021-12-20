@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: FastBuilder(() => Text('fast_state example')),
+        title: Text('fast_state example'),
       ),
       body: Center(
         child: Column(
@@ -38,7 +38,7 @@ class MyHomePage extends StatelessWidget {
               'You have pushed the button this many times:',
             ),
             FastBuilder(
-              () => Text(
+              builder: () => Text(
                 '${_counter.value}',
                 style: Theme.of(context).textTheme.headline4,
               ),
