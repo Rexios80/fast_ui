@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 /// Reactive object
 class Rx<T> {
   /// The stream controller
-  @protected
+  @visibleForTesting
   final StreamController<T> controller = StreamController.broadcast();
 
   T _value;
