@@ -5,7 +5,7 @@ class FastNav {
   static const _rootNavigatorName = '_rootNavigator';
   static final _navigatorKeys = <String, GlobalKey<NavigatorState>>{};
 
-  /// Register the default navigator with [FastNav]
+  /// Register the root navigator with [FastNav]
   ///
   /// Must be called before calling any navigation methods
   static GlobalKey<NavigatorState> setRootNavigator(
