@@ -51,7 +51,7 @@ class RxObserver {
     _subscription = _controller.stream.listen((_) => callback());
   }
 
-  /// Dispose the [_subscription]
+  /// Cancel all stream subscriptions
   void dispose() {
     _subscription?.cancel();
     for (final subscription in _streamSubscriptions) {
