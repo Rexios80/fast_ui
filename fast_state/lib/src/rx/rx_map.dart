@@ -5,12 +5,12 @@ import 'package:fast_state/src/rx/rx.dart';
 import 'package:fast_state/src/rx_notifier.dart';
 import 'package:flutter/foundation.dart';
 
-/// An observable map
+/// A reactive map
 class RxMap<K, V> extends DelegatingMap<K, V> implements Rx<Map<K, V>> {
   @override
   StreamController<Map<K, V>> get controller => StreamController.broadcast();
 
-  /// Create an observable list
+  /// Create a reactive map
   RxMap(Map<K, V> map) : super(map);
 
   @override
@@ -71,8 +71,8 @@ class RxMap<K, V> extends DelegatingMap<K, V> implements Rx<Map<K, V>> {
   }
 }
 
-/// Extension to allow creating reactive objects for lists
+/// Extension to allow creating reactive maps
 extension RxMapExtension<K, V> on Map<K, V> {
-  /// Create an observable list
+  /// Create a reactive map
   RxMap<K, V> get rx => RxMap<K, V>(this);
 }

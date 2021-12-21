@@ -18,8 +18,8 @@ class RxNotifier {
     // Calling the builder will add any relevant streams to the observer
     final built = builder();
     if (!observer.listenable) {
-      throw 'No observables found in the given FastBuilder.'
-          ' Rx objects must be used in the root widget of a FastBuilder.';
+      throw 'No reactive values found in the given FastBuilder.'
+          ' Rx values must be used in the root widget of a FastBuilder.';
     }
     _observerIntermediate = null;
     return built;

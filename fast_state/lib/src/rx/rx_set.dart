@@ -5,12 +5,12 @@ import 'package:fast_state/src/rx/rx.dart';
 import 'package:fast_state/src/rx_notifier.dart';
 import 'package:flutter/foundation.dart';
 
-/// An observable set
+/// A reactive set
 class RxSet<T> extends DelegatingSet<T> implements Rx<Set<T>> {
   @override
   StreamController<Set<T>> get controller => StreamController.broadcast();
 
-  /// Create an observable list
+  /// Create a reactive list
   RxSet(Set<T> set) : super(set);
 
   @override
@@ -63,8 +63,8 @@ class RxSet<T> extends DelegatingSet<T> implements Rx<Set<T>> {
   }
 }
 
-/// Extension to allow creating reactive objects for lists
+/// Extension to allow creating reactive sets
 extension RxSetExtension<T> on Set<T> {
-  /// Create an observable list
+  /// Create a reactive set
   RxSet<T> get rx => RxSet<T>(this);
 }

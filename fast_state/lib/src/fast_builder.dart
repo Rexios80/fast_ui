@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 /// A [StatefulWidget] that updates with it's observer
 class FastBuilder extends StatefulWidget {
-  /// A Widget builder containing Rx objects
+  /// A Widget builder containing reactive objects
   final Widget Function() builder;
 
-  /// A [FastBuilder] updates when observable properties within change
+  /// A [FastBuilder] updates when reactive properties within change
   const FastBuilder({
     Key? key,
     required this.builder,
