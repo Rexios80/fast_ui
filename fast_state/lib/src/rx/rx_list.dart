@@ -25,7 +25,7 @@ class RxList<T> extends DelegatingList<T> implements Rx<List<T>> {
   set value(List<T> value) {}
 
   @override
-  StreamSubscription<List<T>> listen(void Function(List<T> p1) onChanged) {
+  StreamSubscription<List<T>> listen(void Function(List<T>) onChanged) {
     return controller.stream.listen(onChanged);
   }
 
