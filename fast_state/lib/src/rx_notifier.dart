@@ -30,6 +30,7 @@ class RxNotifier {
 class RxObserver {
   /// The [Stream]s this observer is listening to
   final _streams = <Stream, bool>{};
+  final _streamSubscriptions = <StreamSubscription>[];
   final _controller = StreamController<void>();
   StreamSubscription? _subscription;
 
@@ -41,7 +42,8 @@ class RxObserver {
     // Don't add duplicate streams
     if (_streams[stream] != null) return;
     _streams[stream] = true;
-    stream.listen((_) => _controller.add(null));
+    final subscription = stream.listen((_) => _controller.add(null));
+    _streamSubscriptions.add(subscription);
   }
 
   /// Listen to all [_streams] and call [callback] when any of them emits
@@ -52,5 +54,9 @@ class RxObserver {
   /// Dispose the [_subscription]
   void dispose() {
     _subscription?.cancel();
+    for (final subscription in _streamSubscriptions) {
+      subscription.cancel();
+    }
+    _streamSubscriptions.clear();
   }
 }
