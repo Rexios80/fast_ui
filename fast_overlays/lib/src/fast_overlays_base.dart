@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as material;
 
 /// Contextless overlays
 class FastOverlays {
@@ -48,7 +49,7 @@ class FastOverlays {
   //* Dialogs
 
   /// Show a dialog
-  static Future<T?> dialog<T>({
+  static Future<T?> showDialog<T>({
     required WidgetBuilder builder,
     bool barrierDismissible = true,
     Color? barrierColor = Colors.black54,
@@ -58,7 +59,7 @@ class FastOverlays {
     RouteSettings? routeSettings,
   }) {
     _checkInit();
-    return showDialog<T>(
+    return material.showDialog<T>(
       context: _scaffoldMessengerKey.currentContext!,
       builder: builder,
       barrierDismissible: barrierDismissible,
@@ -71,7 +72,7 @@ class FastOverlays {
   }
 
   /// Show an about dialog
-  static void aboutDialog({
+  static void showAboutDialog({
     String? applicationName,
     String? applicationVersion,
     Widget? applicationIcon,
@@ -81,7 +82,7 @@ class FastOverlays {
     RouteSettings? routeSettings,
   }) {
     _checkInit();
-    showAboutDialog(
+    material.showAboutDialog(
       context: _scaffoldMessengerKey.currentContext!,
       applicationName: applicationName,
       applicationVersion: applicationVersion,
@@ -94,7 +95,7 @@ class FastOverlays {
   }
 
   /// Show a general dialog
-  static Future<T?> generalDialog<T>({
+  static Future<T?> showGeneralDialog<T>({
     required RoutePageBuilder pageBuilder,
     bool barrierDismissible = false,
     String? barrierLabel,
@@ -105,7 +106,7 @@ class FastOverlays {
     RouteSettings? routeSettings,
   }) {
     _checkInit();
-    return showGeneralDialog<T>(
+    return material.showGeneralDialog<T>(
       context: _scaffoldMessengerKey.currentContext!,
       pageBuilder: pageBuilder,
       barrierDismissible: barrierDismissible,
