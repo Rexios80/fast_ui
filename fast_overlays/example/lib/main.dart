@@ -35,7 +35,7 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              child: const Text('Show snackbar'),
+              child: const Text('Snackbar'),
               onPressed: () {
                 FastOverlays.showSnackBar(
                   const SnackBar(content: Text('I am a snackbar')),
@@ -43,12 +43,37 @@ class MyHomePage extends StatelessWidget {
               },
             ),
             ElevatedButton(
-              child: const Text('Show dialog'),
+              child: const Text('Material Banner'),
+              onPressed: () {
+                FastOverlays.showMaterialBanner(
+                  MaterialBanner(
+                    content: const Text('I am a material banner'),
+                    actions: [
+                      TextButton(
+                        child: const Text('Close'),
+                        onPressed: () =>
+                            FastOverlays.hideCurrentMaterialBanner(),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Dialog'),
               onPressed: () {
                 FastOverlays.showDialog(
                   builder: (context) => const AlertDialog(
                     title: Text('I am a dialog'),
                   ),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Bottom Sheet'),
+              onPressed: () {
+                FastOverlays.showBottomSheet(
+                  builder: (context) => const Text('I am a bottom sheet'),
                 );
               },
             ),
