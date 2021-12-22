@@ -22,7 +22,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final _counter = 0.rx;
+  final _int = 0.rx;
+  final _list = [0].rx;
+  final _set = {0}.rx;
+  final _map = {0: 0}.rx;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +37,31 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            const Text('Reactive int:'),
             FastBuilder(
               builder: () => Text(
-                '${_counter.value}',
+                '$_int',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ),
+            const Text('Reactive list:'),
+            FastBuilder(
+              builder: () => Text(
+                '$_list',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ),
+            const Text('Reactive set:'),
+            FastBuilder(
+              builder: () => Text(
+                '$_set',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ),
+            const Text('Reactive map:'),
+            FastBuilder(
+              builder: () => Text(
+                '$_map',
                 style: Theme.of(context).textTheme.headline4,
               ),
             ),
@@ -47,10 +69,17 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _counter.value++,
+        onPressed: increment,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  void increment() {
+    _int.value++;
+    _list.add(_int.value);
+    _set.add(_int.value);
+    _map[_int.value] = _int.value;
   }
 }

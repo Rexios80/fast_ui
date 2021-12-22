@@ -149,7 +149,7 @@ class RxMap<K, V> with Rx<Map<K, V>> implements Map<K, V> {
   }
 
   @override
-  Iterable<V> get values{
+  Iterable<V> get values {
     return value.values;
   }
 }

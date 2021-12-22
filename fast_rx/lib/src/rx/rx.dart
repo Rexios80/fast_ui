@@ -38,7 +38,7 @@ abstract class Rx<T> {
   }
 
   /// Notify listeners with the given value
-  /// 
+  ///
   /// This is used so that object reference reactives can emit updates properly
   @protected
   void notifyWithValue(T value) {
@@ -51,5 +51,27 @@ abstract class Rx<T> {
     if (old != value) {
       notify();
     }
+  }
+
+  /// Override [Object] methods so that they call [register]
+
+  @override
+  bool operator ==(Object other) {
+    return value == other;
+  }
+
+  @override
+  int get hashCode {
+    return value.hashCode;
+  }
+
+  @override
+  String toString() {
+    return value.toString();
+  }
+
+  @override
+  Type get runtimeType {
+    return value.runtimeType;
   }
 }
