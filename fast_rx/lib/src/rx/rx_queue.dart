@@ -18,6 +18,11 @@ class RxQueue<E> extends RxIterable<E> implements Queue<E> {
   }
 
   @override
+  void notify() {
+    notifyWithValue(Queue.from(value));
+  }
+
+  @override
   Queue<R> cast<R>() {
     return value.cast<R>();
   }

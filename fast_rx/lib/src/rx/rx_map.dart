@@ -23,6 +23,11 @@ class RxMap<K, V> with Rx<Map<K, V>> implements Map<K, V> {
   }
 
   @override
+  void notify() {
+    notifyWithValue(Map.from(value));
+  }
+
+  @override
   V? operator [](Object? key) {
     return value[key];
   }

@@ -17,7 +17,7 @@ abstract class Rx<T> {
 
   /// The current value
   ///
-  /// Using this in a Widget will cause the Widget to rebuild when the value changes
+  /// Using this in a FastBuilder will cause a rebuild when the value changes
   T get value;
 
   /// Set the current value
@@ -34,6 +34,14 @@ abstract class Rx<T> {
   ///
   /// Useful if using custom objects
   void notify() {
+    controller.add(value);
+  }
+
+  /// Notify listeners with the given value
+  /// 
+  /// This is used so that object reference reactives can emit updates properly
+  @protected
+  void notifyWithValue(T value) {
     controller.add(value);
   }
 

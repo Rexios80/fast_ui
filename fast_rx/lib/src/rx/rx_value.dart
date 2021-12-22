@@ -9,7 +9,7 @@ class RxValue<T> with Rx<T> {
 
   @override
   T get value {
-    // If this is called in a Widget build method, this will add the stream to the widget's observer
+    // If this is called in a FastBuilder, this will add the stream to the FastBuilder's observer
     register();
     return _value;
   }

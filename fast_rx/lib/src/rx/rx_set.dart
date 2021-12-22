@@ -16,6 +16,11 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
   }
 
   @override
+  void notify() {
+    notifyWithValue(Set.from(value));
+  }
+
+  @override
   Set<R> cast<R>() {
     return value.cast<R>();
   }

@@ -10,12 +10,14 @@ void main() {
       emitsInOrder([
         [0, 1, 2, 3, 4],
         [0, 1, 2, 3],
-        [2, 3],
-        [3],
+        [1, 2, 3],
+        [1, 2, 3],
       ]),
     );
 
     list.add(4);
     list.removeLast();
+    list.removeAt(0);
+    list.notify();
   });
 }

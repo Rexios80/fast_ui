@@ -18,6 +18,11 @@ class RxList<E> extends RxIterable<E> implements List<E> {
   }
 
   @override
+  void notify() {
+    notifyWithValue(List.from(value));
+  }
+
+  @override
   List<R> cast<R>() {
     return value.cast<R>();
   }
