@@ -88,27 +88,28 @@ class FastOverlays {
   //* Bottom sheets
 
   /// Show a bottom sheet
-  static PersistentBottomSheetController<T> showBottomSheet<T>({
-    required WidgetBuilder builder,
-    Color? backgroundColor,
-    double? elevation,
-    ShapeBorder? shape,
-    Clip? clipBehavior,
-    BoxConstraints? constraints,
-    AnimationController? transitionAnimationController,
-  }) {
-    _checkInit();
-    return material.showBottomSheet(
-      context: _navigatorKey.currentContext!,
-      builder: builder,
-      backgroundColor: backgroundColor,
-      elevation: elevation,
-      shape: shape,
-      clipBehavior: clipBehavior,
-      constraints: constraints,
-      transitionAnimationController: transitionAnimationController,
-    );
-  }
+  //! Requires a scaffold context
+  // static PersistentBottomSheetController<T> showBottomSheet<T>({
+  //   required WidgetBuilder builder,
+  //   Color? backgroundColor,
+  //   double? elevation,
+  //   ShapeBorder? shape,
+  //   Clip? clipBehavior,
+  //   BoxConstraints? constraints,
+  //   AnimationController? transitionAnimationController,
+  // }) {
+  //   _checkInit();
+  //   return material.showBottomSheet(
+  //     context: _navigatorKey.currentContext!,
+  //     builder: builder,
+  //     backgroundColor: backgroundColor,
+  //     elevation: elevation,
+  //     shape: shape,
+  //     clipBehavior: clipBehavior,
+  //     constraints: constraints,
+  //     transitionAnimationController: transitionAnimationController,
+  //   );
+  // }
 
   /// Show a modal bottom sheet
   static Future<T?> showModalBottomSheet<T>({
