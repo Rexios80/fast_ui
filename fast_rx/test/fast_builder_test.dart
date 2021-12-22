@@ -7,8 +7,7 @@ void main() {
     final reactive = 0.rx;
     await tester.pumpWidget(
       FastBuilder(
-        builder: () =>
-            MaterialApp(home: Scaffold(body: Text('${reactive.value}'))),
+        () => MaterialApp(home: Scaffold(body: Text('${reactive.value}'))),
       ),
     );
     expect(find.text('0'), findsOneWidget);

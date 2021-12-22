@@ -9,10 +9,10 @@ abstract class Rx<T> {
   /// Stream of value changes
   Stream<T> get stream => _controller.stream;
 
-  /// Register with the [RxNotifier]
+  /// Register with the [RxNotifier] for UI updates
   @protected
   void register() {
-    RxNotifier.addStream(_controller.stream);
+    RxNotifier.addStream(stream);
   }
 
   /// The current value
@@ -24,11 +24,6 @@ abstract class Rx<T> {
   ///
   /// Will notify listeners if the value has changed
   set value(T value);
-
-  /// Listen to value changes
-  StreamSubscription<T> listen(void Function(T) onChanged) {
-    return _controller.stream.listen(onChanged);
-  }
 
   /// Notify listeners with the current value
   ///
@@ -53,7 +48,7 @@ abstract class Rx<T> {
     }
   }
 
-  /// Override [Object] methods so that they call [register]
+  // Override [Object] methods so that they call [register]
 
   @override
   bool operator ==(Object other) {

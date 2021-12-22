@@ -1,39 +1,36 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+fast_ui is a reactive state management solution for Flutter
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.dev/packages/observable_ish), and similar packages
 
 ## Features
+| Class       | Use-case                                    |
+| ----------- | ------------------------------------------- |
+| FastBuilder | Rebuilds when reactive values within change |
+| RxValue<T>  | A reactive value                            |
+| RxList<E>   | A reactive list                             |
+| RxMap<E>    | A reactive map                              |
+| RxSet<E>    | A reactive set                              |
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+There are convenience typedefs for RxBool, RxInt, RxDouble, and RxString
 
 ## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
 ```dart
-const like = 'sample';
+import 'package:fast_rx/fast_rx.dart';
+
+...
+
+final count = 0.rx;
+
+...
+
+count.stream.listen((value) => print(value));
+
+...
+
+FastBuilder(() => Text('$count'));
+
+...
+
+// Will print the value and trigger a rebuild of the FastBuilder
+count.value = 1;
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.

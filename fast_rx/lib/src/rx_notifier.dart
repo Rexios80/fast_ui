@@ -32,8 +32,14 @@ class RxNotifier {
 class RxObserver {
   /// The [Stream]s this observer is listening to
   final _streams = <Stream, bool>{};
+
+  /// The subscriptions to the [_streams]
   final _streamSubscriptions = <StreamSubscription>[];
+
+  /// The controller to send all reactive updates to
   final _controller = StreamController<void>();
+
+  /// The subscription to the [_controller]
   StreamSubscription? _subscription;
 
   /// Returns false if there are no streams to listen to

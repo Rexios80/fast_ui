@@ -8,6 +8,8 @@ fast_ui is a collection of Flutter packages aimed to make UI development faster
 | [fast_nav](fast_nav)           | Contextless navigation                          |
 | [fast_overlays](fast_overlays) | Contextless overlays (snackbars, dialogs, etc.) |
 
+For service location, I recommend [GetIt](https://pub.dev/packages/get_it)
+
 What fast_ui is:
 - Modular
 - Easy to understand

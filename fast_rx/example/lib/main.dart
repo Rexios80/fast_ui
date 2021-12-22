@@ -39,28 +39,28 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             const Text('Reactive int:'),
             FastBuilder(
-              builder: () => Text(
+              () => Text(
                 '$_int',
                 style: Theme.of(context).textTheme.headline4,
               ),
             ),
             const Text('Reactive list:'),
             FastBuilder(
-              builder: () => Text(
+              () => Text(
                 '$_list',
                 style: Theme.of(context).textTheme.headline4,
               ),
             ),
             const Text('Reactive set:'),
             FastBuilder(
-              builder: () => Text(
+              () => Text(
                 '$_set',
                 style: Theme.of(context).textTheme.headline4,
               ),
             ),
             const Text('Reactive map:'),
             FastBuilder(
-              builder: () => Text(
+              () => Text(
                 '$_map',
                 style: Theme.of(context).textTheme.headline4,
               ),
