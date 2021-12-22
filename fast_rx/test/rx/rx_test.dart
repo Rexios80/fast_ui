@@ -5,7 +5,7 @@ void main() {
   test('Rx', () {
     final rx = 0.rx;
 
-    expect(rx.controller.stream, emitsInOrder([0, 1, 2, 3]));
+    expect(rx.stream, emitsInOrder([0, 1, 2, 3]));
 
     // Notify of the initial value
     rx.notify();

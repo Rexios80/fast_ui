@@ -6,7 +6,7 @@ void main() {
     final map = {'a': 1, 'b': 2, 'c': 3}.rx;
 
     expect(
-      map.controller.stream,
+      map.stream,
       emitsInOrder([
         {'a': 10, 'b': 2, 'c': 3},
         {'a': 10, 'c': 3}

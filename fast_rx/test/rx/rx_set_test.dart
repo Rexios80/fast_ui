@@ -6,7 +6,7 @@ void main() {
     final set = {0, 1, 2, 3}.rx;
 
     expect(
-      set.controller.stream,
+      set.stream,
       emitsInOrder([
         {0, 1, 2, 3, 4},
         {0, 1, 3, 4},

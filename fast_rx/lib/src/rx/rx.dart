@@ -4,15 +4,15 @@ import 'package:flutter/foundation.dart';
 
 /// Reactive object
 abstract class Rx<T> {
-  /// The stream controller
-  @protected
-  @visibleForTesting
-  final StreamController<T> controller = StreamController.broadcast();
+  final StreamController<T> _controller = StreamController.broadcast();
+
+  /// Stream of value changes
+  Stream<T> get stream => _controller.stream;
 
   /// Register with the [RxNotifier]
   @protected
   void register() {
-    RxNotifier.addStream(controller.stream);
+    RxNotifier.addStream(_controller.stream);
   }
 
   /// The current value
@@ -27,14 +27,14 @@ abstract class Rx<T> {
 
   /// Listen to value changes
   StreamSubscription<T> listen(void Function(T) onChanged) {
-    return controller.stream.listen(onChanged);
+    return _controller.stream.listen(onChanged);
   }
 
   /// Notify listeners with the current value
   ///
   /// Useful if using custom objects
   void notify() {
-    controller.add(value);
+    _controller.add(value);
   }
 
   /// Notify listeners with the given value
@@ -42,7 +42,7 @@ abstract class Rx<T> {
   /// This is used so that object reference reactives can emit updates properly
   @protected
   void notifyWithValue(T value) {
-    controller.add(value);
+    _controller.add(value);
   }
 
   /// Notify if the value has changed
