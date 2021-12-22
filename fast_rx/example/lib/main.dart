@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:fast_rx/fast_rx.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());

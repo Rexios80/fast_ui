@@ -1,65 +1,105 @@
-import 'dart:async';
-
-import 'package:collection/collection.dart';
-import 'package:fast_rx/src/rx/rx.dart';
-import 'package:fast_rx/src/rx_notifier.dart';
+import 'package:fast_rx/src/rx/rx_iterable.dart';
 import 'package:flutter/foundation.dart';
 
 /// A reactive set
-class RxSet<T> extends DelegatingSet<T> implements Rx<Set<T>> {
-  @override
-  StreamController<Set<T>> get controller => StreamController.broadcast();
+class RxSet<E> extends RxIterable<E> implements Set<E> {
+  final Set<E> _value;
 
-  /// Create a reactive list
-  RxSet(Set<T> set) : super(set);
+  /// Create a reactive set
+  RxSet(this._value);
 
-  @override
   @protected
-  Set<T> get value {
-    RxNotifier.addStream(controller.stream);
-    return this;
+  @override
+  Set<E> get value {
+    register();
+    return _value;
   }
 
   @override
-  @protected
-  set value(Set<T> value) {}
-
-  @override
-  StreamSubscription<Set<T>> listen(void Function(Set<T>) onChanged) {
-    return controller.stream.listen(onChanged);
+  Set<R> cast<R>() {
+    return value.cast<R>();
   }
 
   @override
-  void notify() {
-    controller.add(this);
-  }
-
-  // Set methods
-
-  @override
-  bool add(T value) {
-    final result = super.add(value);
+  bool add(E value) {
+    final result = this.value.add(value);
     notify();
     return result;
   }
 
   @override
-  void addAll(Iterable<T> elements) {
-    super.addAll(elements);
-    notify();
-  }
-
-  @override
-  bool remove(Object? value) {
-    final result = super.remove(value);
-    notify();
-    return result;
+  void addAll(Iterable<E> elements) {
+    final old = Set<E>.from(value);
+    value.addAll(elements);
+    notifyIfChanged(old);
   }
 
   @override
   void clear() {
-    super.clear();
-    notify();
+    final old = Set<E>.from(value);
+    value.clear();
+    notifyIfChanged(old);
+  }
+
+  @override
+  bool containsAll(Iterable<Object?> other) {
+    return value.containsAll(other);
+  }
+
+  @override
+  Set<E> difference(Set<Object?> other) {
+    return value.difference(other);
+  }
+
+  @override
+  Set<E> intersection(Set<Object?> other) {
+    return value.intersection(other);
+  }
+
+  @override
+  E? lookup(Object? object) {
+    return value.lookup(object);
+  }
+
+  @override
+  bool remove(Object? value) {
+    final old = Set<E>.from(this.value);
+    final result = this.value.remove(value);
+    notifyIfChanged(old);
+    return result;
+  }
+
+  @override
+  void removeAll(Iterable<Object?> elements) {
+    final old = Set<E>.from(value);
+    value.removeAll(elements);
+    notifyIfChanged(old);
+  }
+
+  @override
+  void removeWhere(bool Function(E element) test) {
+    final old = Set<E>.from(value);
+    value.removeWhere(test);
+    notifyIfChanged(old);
+  }
+
+  @override
+  void retainAll(Iterable<Object?> elements) {
+    final old = Set<E>.from(value);
+    value.retainAll(elements);
+    notifyIfChanged(old);
+  }
+
+  @override
+  void retainWhere(bool Function(E element) test) {
+    final old = Set<E>.from(value);
+    value.retainWhere(test);
+    notifyIfChanged(old);
+  }
+
+  @override
+  Set<E> union(Set<E> other) {
+    return value.union(other);
   }
 }
 

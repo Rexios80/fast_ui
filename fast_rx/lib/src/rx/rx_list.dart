@@ -34,7 +34,7 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   void operator []=(int index, E value) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(this.value);
     this.value[index] = value;
     notifyIfChanged(old);
   }
@@ -47,7 +47,7 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   void addAll(Iterable<E> iterable) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.addAll(iterable);
     notifyIfChanged(old);
   }
@@ -59,21 +59,21 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   void clear() {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.clear();
     notifyIfChanged(old);
   }
 
   @override
   void fillRange(int start, int end, [E? fillValue]) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.fillRange(start, end, fillValue);
     notifyIfChanged(old);
   }
 
   @override
   set first(E value) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(this.value);
     this.value.first = value;
     notifyIfChanged(old);
   }
@@ -95,21 +95,21 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   void insert(int index, E element) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.insert(index, element);
     notifyIfChanged(old);
   }
 
   @override
   void insertAll(int index, Iterable<E> iterable) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.insertAll(index, iterable);
     notifyIfChanged(old);
   }
 
   @override
   set last(E value) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(this.value);
     this.value.last = value;
     notifyIfChanged(old);
   }
@@ -126,14 +126,14 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   set length(int newLength) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.length = newLength;
     notifyIfChanged(old);
   }
 
   @override
   bool remove(Object? value) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(this.value);
     final result = this.value.remove(value);
     notifyIfChanged(old);
     return result;
@@ -141,7 +141,7 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   E removeAt(int index) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     final result = value.removeAt(index);
     notifyIfChanged(old);
     return result;
@@ -156,28 +156,28 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   void removeRange(int start, int end) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.removeRange(start, end);
     notifyIfChanged(old);
   }
 
   @override
   void removeWhere(bool Function(E element) test) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.removeWhere(test);
     notifyIfChanged(old);
   }
 
   @override
   void replaceRange(int start, int end, Iterable<E> replacements) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.replaceRange(start, end, replacements);
     notifyIfChanged(old);
   }
 
   @override
   void retainWhere(bool Function(E element) test) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.retainWhere(test);
     notifyIfChanged(old);
   }
@@ -189,14 +189,14 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   void setAll(int index, Iterable<E> iterable) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.setAll(index, iterable);
     notifyIfChanged(old);
   }
 
   @override
   void setRange(int start, int end, Iterable<E> iterable, [int skipCount = 0]) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.setRange(start, end, iterable, skipCount);
     notifyIfChanged(old);
   }
@@ -209,7 +209,7 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   void sort([int Function(E a, E b)? compare]) {
-    final old = List<E>.from(this);
+    final old = List<E>.from(value);
     value.sort(compare);
     notifyIfChanged(old);
   }
