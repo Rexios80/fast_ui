@@ -6,7 +6,9 @@ abstract class RxIterable<E> with Rx<Iterable<E>> implements Iterable<E> {
   /// Unused for RxIterable
   @protected
   @override
-  set value(Iterable<E> value) {}
+  set value(Iterable<E> value) {
+    throw UnimplementedError();
+  }
 
   @override
   bool any(bool Function(E element) test) {
