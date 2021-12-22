@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 
 /// Contextless navigator
 class FastNav {
+  FastNav._();
+
   static const _rootNavigatorName = '_rootNavigator';
   static final _navigatorKeys = <String, GlobalKey<NavigatorState>>{};
 
   /// Register the root navigator with [FastNav]
   ///
-  /// Must be called before calling any navigation methods
-  static GlobalKey<NavigatorState> setRootNavigator(
-    GlobalKey<NavigatorState> key,
-  ) {
+  /// Call in the [MaterialApp] constructor
+  static GlobalKey<NavigatorState> init(GlobalKey<NavigatorState> key) {
     return _navigatorKeys[_rootNavigatorName] = key;
   }
 
   /// Register a nested navigator with [FastNav]
-  static GlobalKey<NavigatorState> addNavigator(
-    String name,
-    GlobalKey<NavigatorState> key,
-  ) {
+  static GlobalKey<NavigatorState> registerNestedNavigator({
+    required GlobalKey<NavigatorState> key,
+    required String name,
+  }) {
     return _navigatorKeys[name] = key;
   }
 

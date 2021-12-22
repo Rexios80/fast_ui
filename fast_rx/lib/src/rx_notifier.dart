@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 
 /// Class to deal with setting up [RxObserver]s
 class RxNotifier {
+  RxNotifier._();
+
   /// Holds the working [RxObserver]
   static RxObserver? _observerIntermediate;
 

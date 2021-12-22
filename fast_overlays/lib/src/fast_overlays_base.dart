@@ -3,9 +3,13 @@ import 'package:flutter/material.dart' as material;
 
 /// Contextless overlays
 class FastOverlays {
+  FastOverlays._();
+
   static late GlobalKey<NavigatorState> _navigatorKey;
 
   /// Initialize [FastOverlays] with a [NavigatorState] key
+  ///
+  /// Call in the [MaterialApp] constructor
   static GlobalKey<NavigatorState> init(
     GlobalKey<NavigatorState> key,
   ) {
