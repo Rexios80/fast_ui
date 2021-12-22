@@ -35,19 +35,15 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            RaisedButton(
-              child: const Text('show snackbar'),
+            ElevatedButton(
+              child: const Text('Show snackbar'),
               onPressed: () {
                 FastOverlays.showSnackbar(
-                  context,
-                  const SnackBar(
-                    content: Text('Hello World!'),
-                  ),
-                );
+                    const SnackBar(content: Text('I am a snackbar')));
               },
             ),
-            RaisedButton(
-              child: const Text('show dialog'),
+            ElevatedButton(
+              child: const Text('Show dialog'),
               onPressed: () {
                 FastOverlays.showDialog(
                   context,
@@ -57,18 +53,6 @@ class MyHomePage extends StatelessWidget {
                 );
               },
             ),
-            RaisedButton(
-              child: const Text('show bottom sheet'),
-              onPressed: () {
-                FastOverlays.showBottomSheet(
-                  context,
-                  const BottomSheet(
-                    content: Text('Hello World!'),
-                  ),
-                );
-              },
-            ),
-          ],
           ],
         ),
       ),
