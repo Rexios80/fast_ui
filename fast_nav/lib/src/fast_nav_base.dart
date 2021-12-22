@@ -28,12 +28,12 @@ class FastNav {
       if (navigatorName == null) {
         throw Exception(
           'Root navigator not registered.'
-          ' Call FastNav.setRootNavigator() first.',
+          ' Call FastNav.init() first.',
         );
       } else {
         throw Exception(
           'Navigator with name $navigatorName not registered.'
-          ' Call FastNav.addNavigator() first.',
+          ' Call FastNav.registerNavigator() first.',
         );
       }
     }
