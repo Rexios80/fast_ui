@@ -3,19 +3,19 @@ import 'package:flutter/material.dart' as material;
 
 /// Contextless overlays
 class FastOverlays {
-  static late final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey;
+  static late final GlobalKey<NavigatorState> _navigatorKey;
 
-  /// Initialize [FastOverlays] with a [ScaffoldMessengerState] key
-  static GlobalKey<ScaffoldMessengerState> init(
-    GlobalKey<ScaffoldMessengerState> key,
+  /// Initialize [FastOverlays] with a [NavigatorState] key
+  static GlobalKey<NavigatorState> init(
+    GlobalKey<NavigatorState> key,
   ) {
-    return _scaffoldMessengerKey = key;
+    return _navigatorKey = key;
   }
 
-  /// Check if [_scaffoldMessengerKey] has been initialized
+  /// Check if [_navigatorKey] has been initialized
   static void _checkInit() {
     try {
-      _scaffoldMessengerKey.currentState;
+      _navigatorKey.currentState!;
     } catch (e) {
       throw Exception(
         'FastOverlays must be initialized before use.'
@@ -24,14 +24,36 @@ class FastOverlays {
     }
   }
 
-  //* Snackbars
+  static ScaffoldMessengerState _getScaffoldMessenger() {
+    return ScaffoldMessenger.of(_navigatorKey.currentContext!);
+  }
+
+  //* SnackBars
 
   /// Show a [SnackBar]
-  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackbar(
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
     SnackBar snackBar,
   ) {
     _checkInit();
-    return _scaffoldMessengerKey.currentState!.showSnackBar(snackBar);
+    return _getScaffoldMessenger().showSnackBar(snackBar);
+  }
+
+  /// Hide the current snackbar
+  static void hideCurrentSnackBar() {
+    _checkInit();
+    _getScaffoldMessenger().hideCurrentSnackBar();
+  }
+
+  /// Remove the current snackbar
+  static void removeCurrentSnackBar() {
+    _checkInit();
+    _getScaffoldMessenger().removeCurrentSnackBar();
+  }
+
+  /// Clear all snackbars
+  static void clearSnackBars() {
+    _checkInit();
+    _getScaffoldMessenger().clearSnackBars();
   }
 
   //* Material banners
@@ -42,8 +64,25 @@ class FastOverlays {
     MaterialBanner materialBanner,
   ) {
     _checkInit();
-    return _scaffoldMessengerKey.currentState!
-        .showMaterialBanner(materialBanner);
+    return _getScaffoldMessenger().showMaterialBanner(materialBanner);
+  }
+
+  /// Hide the current material banner
+  static void hideCurrentMaterialBanner() {
+    _checkInit();
+    _getScaffoldMessenger().hideCurrentMaterialBanner();
+  }
+
+  /// Remove the current material banner
+  static void removeCurrentMaterialBanner() {
+    _checkInit();
+    _getScaffoldMessenger().removeCurrentMaterialBanner();
+  }
+
+  /// Clear all material banners
+  static void clearMaterialBanners() {
+    _checkInit();
+    _getScaffoldMessenger().clearMaterialBanners();
   }
 
   //* Bottom sheets
@@ -60,7 +99,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showBottomSheet(
-      context: _scaffoldMessengerKey.currentContext!,
+      context: _navigatorKey.currentContext!,
       builder: builder,
       backgroundColor: backgroundColor,
       elevation: elevation,
@@ -89,7 +128,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showModalBottomSheet(
-      context: _scaffoldMessengerKey.currentContext!,
+      context: _navigatorKey.currentContext!,
       builder: builder,
       backgroundColor: backgroundColor,
       elevation: elevation,
@@ -132,7 +171,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showDatePicker(
-      context: _scaffoldMessengerKey.currentContext!,
+      context: _navigatorKey.currentContext!,
       initialDate: initialDate,
       firstDate: firstDate,
       lastDate: lastDate,
@@ -181,7 +220,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showDateRangePicker(
-      context: _scaffoldMessengerKey.currentContext!,
+      context: _navigatorKey.currentContext!,
       initialDateRange: initialDateRange,
       firstDate: firstDate,
       lastDate: lastDate,
@@ -223,7 +262,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showTimePicker(
-      context: _scaffoldMessengerKey.currentContext!,
+      context: _navigatorKey.currentContext!,
       initialTime: initialTime,
       builder: builder,
       useRootNavigator: useRootNavigator,
@@ -251,7 +290,7 @@ class FastOverlays {
   }) {
     _checkInit();
     material.showLicensePage(
-      context: _scaffoldMessengerKey.currentContext!,
+      context: _navigatorKey.currentContext!,
       applicationName: applicationName,
       applicationVersion: applicationVersion,
       applicationIcon: applicationIcon,
@@ -268,7 +307,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showSearch(
-      context: _scaffoldMessengerKey.currentContext!,
+      context: _navigatorKey.currentContext!,
       delegate: delegate,
       query: query,
       useRootNavigator: useRootNavigator,
@@ -290,7 +329,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showMenu(
-      context: _scaffoldMessengerKey.currentContext!,
+      context: _navigatorKey.currentContext!,
       position: position,
       items: items,
       initialValue: initialValue,
@@ -316,7 +355,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showDialog<T>(
-      context: _scaffoldMessengerKey.currentContext!,
+      context: _navigatorKey.currentContext!,
       builder: builder,
       barrierDismissible: barrierDismissible,
       barrierColor: barrierColor,
@@ -339,7 +378,7 @@ class FastOverlays {
   }) {
     _checkInit();
     material.showAboutDialog(
-      context: _scaffoldMessengerKey.currentContext!,
+      context: _navigatorKey.currentContext!,
       applicationName: applicationName,
       applicationVersion: applicationVersion,
       applicationIcon: applicationIcon,
@@ -363,7 +402,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showGeneralDialog<T>(
-      context: _scaffoldMessengerKey.currentContext!,
+      context: _navigatorKey.currentContext!,
       pageBuilder: pageBuilder,
       barrierDismissible: barrierDismissible,
       barrierLabel: barrierLabel,

@@ -11,8 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      scaffoldMessengerKey:
-          FastOverlays.init(GlobalKey<ScaffoldMessengerState>()),
+      navigatorKey: FastOverlays.init(GlobalKey<NavigatorState>()),
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -38,17 +37,17 @@ class MyHomePage extends StatelessWidget {
             ElevatedButton(
               child: const Text('Show snackbar'),
               onPressed: () {
-                FastOverlays.showSnackbar(
-                    const SnackBar(content: Text('I am a snackbar')));
+                FastOverlays.showSnackBar(
+                  const SnackBar(content: Text('I am a snackbar')),
+                );
               },
             ),
             ElevatedButton(
               child: const Text('Show dialog'),
               onPressed: () {
                 FastOverlays.showDialog(
-                  context,
-                  const AlertDialog(
-                    title: Text('Hello World!'),
+                  builder: (context) => const AlertDialog(
+                    title: Text('I am a dialog'),
                   ),
                 );
               },
