@@ -13,7 +13,7 @@ class RxNotifier {
   }
 
   /// Set up the given [observer] with the given [builder]
-  static T setupObserver<T>(RxObserver observer, T Function() builder) {
+  static T setupObserver<T>(RxObserver observer, ValueGetter<T> builder) {
     _observerIntermediate = observer;
     // Calling the builder will add any relevant streams to the observer
     final built = builder();
