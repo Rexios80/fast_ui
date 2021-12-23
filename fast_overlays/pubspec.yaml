@@ -1,10 +1,10 @@
 name: fast_overlays
 description: Show overlays, dialogs, snackbars, and more without a context
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_overlays
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
+  sdk: ">=2.15.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
