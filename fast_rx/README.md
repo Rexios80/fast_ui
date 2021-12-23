@@ -34,3 +34,6 @@ FastBuilder(() => Text('$count'));
 // Will print the value and trigger a rebuild of the FastBuilder
 count.value = 1;
 ```
+
+## Additional information
+See [fast_ui](https://pub.dev/packages/fast_ui) for more information

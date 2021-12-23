@@ -32,3 +32,6 @@ FastOverlays.showSnackBar(
   const SnackBar(content: Text('I am a snackbar')),
 );
 ```
+
+## Additional information
+See [fast_ui](https://pub.dev/packages/fast_ui) for more information
