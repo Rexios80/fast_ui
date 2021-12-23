@@ -1,5 +1,5 @@
 name: fast_nav
-description: A new Flutter package project.
+description: Navigate without context. Call navigation methods from your business logic.
 version: 0.0.1
 homepage: https://github.com/Rexios80/fast_ui
 
