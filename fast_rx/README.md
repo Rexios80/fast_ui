@@ -1,4 +1,4 @@
-fast_ui is a reactive state management solution for Flutter
+fast_rx is a reactive state management solution for Flutter
 
 Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.dev/packages/observable_ish), and similar packages
 
