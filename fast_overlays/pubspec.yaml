@@ -1,5 +1,5 @@
 name: fast_overlays
-description: A new Flutter package project.
+description: Show overlays, dialogs, snackbars, and more without a context
 version: 0.0.1
 homepage: https://github.com/Rexios80/fast_ui
 
