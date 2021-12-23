@@ -1,3 +1,4 @@
+/// fast_ui
 library fast_ui;
 
 export 'package:fast_nav/fast_nav.dart';
