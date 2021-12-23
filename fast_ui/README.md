@@ -2,11 +2,11 @@ fast_ui is a collection of Flutter packages aimed to make UI development faster
 
 ## Features
 
-| Package                           | Description                                     |
-| --------------------------------- | ----------------------------------------------- |
-| [fast_rx](../fast_rx)             | Reactive state management                       |
-| [fast_nav](../fast_nav)           | Contextless navigation                          |
-| [fast_overlays](../fast_overlays) | Contextless overlays (snackbars, dialogs, etc.) |
+| Package                                                 | Description                                     |
+| ------------------------------------------------------- | ----------------------------------------------- |
+| [fast_rx](https://pub.dev/packages/fast_rx)             | Reactive state management                       |
+| [fast_nav](https://pub.dev/packages/fast_nav)           | Contextless navigation                          |
+| [fast_overlays](https://pub.dev/packages/fast_overlays) | Contextless overlays (snackbars, dialogs, etc.) |
 
 For service location, I recommend [GetIt](https://pub.dev/packages/get_it)
 

@@ -6,3 +6,6 @@
 
 ## 0.0.3
 - Trying to fix pub points
+
+## 0.0.4
+- Fixed package links
