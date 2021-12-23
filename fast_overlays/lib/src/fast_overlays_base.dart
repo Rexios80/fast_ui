@@ -28,7 +28,7 @@ class FastOverlays {
     }
   }
 
-  static ScaffoldMessengerState _getScaffoldMessenger() {
+  static ScaffoldMessengerState get _scaffoldMessenger {
     return ScaffoldMessenger.of(_navigatorKey.currentContext!);
   }
 
@@ -39,25 +39,25 @@ class FastOverlays {
     SnackBar snackBar,
   ) {
     _checkInit();
-    return _getScaffoldMessenger().showSnackBar(snackBar);
+    return _scaffoldMessenger.showSnackBar(snackBar);
   }
 
   /// Hide the current snackbar
   static void hideCurrentSnackBar() {
     _checkInit();
-    _getScaffoldMessenger().hideCurrentSnackBar();
+    _scaffoldMessenger.hideCurrentSnackBar();
   }
 
   /// Remove the current snackbar
   static void removeCurrentSnackBar() {
     _checkInit();
-    _getScaffoldMessenger().removeCurrentSnackBar();
+    _scaffoldMessenger.removeCurrentSnackBar();
   }
 
   /// Clear all snackbars
   static void clearSnackBars() {
     _checkInit();
-    _getScaffoldMessenger().clearSnackBars();
+    _scaffoldMessenger.clearSnackBars();
   }
 
   //* Material banners
@@ -68,25 +68,25 @@ class FastOverlays {
     MaterialBanner materialBanner,
   ) {
     _checkInit();
-    return _getScaffoldMessenger().showMaterialBanner(materialBanner);
+    return _scaffoldMessenger.showMaterialBanner(materialBanner);
   }
 
   /// Hide the current material banner
   static void hideCurrentMaterialBanner() {
     _checkInit();
-    _getScaffoldMessenger().hideCurrentMaterialBanner();
+    _scaffoldMessenger.hideCurrentMaterialBanner();
   }
 
   /// Remove the current material banner
   static void removeCurrentMaterialBanner() {
     _checkInit();
-    _getScaffoldMessenger().removeCurrentMaterialBanner();
+    _scaffoldMessenger.removeCurrentMaterialBanner();
   }
 
   /// Clear all material banners
   static void clearMaterialBanners() {
     _checkInit();
-    _getScaffoldMessenger().clearMaterialBanners();
+    _scaffoldMessenger.clearMaterialBanners();
   }
 
   //* Bottom sheets
