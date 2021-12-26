@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+
   fast_extensions: any
   fast_nav: any
   fast_overlays: any
