@@ -1,3 +1,6 @@
+## 0.0.6
+- Why did dartdoc generation fail
+
 ## 0.0.5
 - Added fast_extensions
 
