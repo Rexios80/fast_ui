@@ -6,6 +6,7 @@ Convenience extensions to make common Flutter tasks less annoying
 | FastThemeExtension        | Theme.of(context)                 |
 | FastLocaleExtension       | Localizations.localeOf(context)   |
 | FastLocalizationExtension | MaterialLocalizations.of(context) |
+| FastMediaExtension        | MediaQuery.of(context)            |
 
 
 ## Usage
@@ -13,11 +14,22 @@ Convenience extensions to make common Flutter tasks less annoying
 ```dart
 import 'package:fast_extensions/fast_extensions.dart';
 
+// FastThemeExtension
 context.theme;
 context.textTheme;
 context.isDarkMode;
+
+// FastLocaleExtension
 context.countryCode;
+context.languageCode;
+
+// FastLocalizationExtension
 context.backButtonTooltip;
+
+// FastMediaExtension
+context.screenWidth;
+context.screenHeight;
+context.windowViewInsets;
 ...
 ```
 

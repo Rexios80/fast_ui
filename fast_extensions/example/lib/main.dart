@@ -41,6 +41,8 @@ class MyHomePage extends StatelessWidget {
             Text('Country code: ${context.countryCode}'),
             Text('Language code: ${context.languageCode}'),
             Text('Is dark mode: ${context.isDarkMode}'),
+            Text('Screen width: ${context.screenWidth}'),
+            Text('Screen height: ${context.screenHeight}'),
           ],
         ),
       ),
