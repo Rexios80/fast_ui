@@ -7,7 +7,8 @@ class ExampleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('TextTheme example', style: context.textTheme.headline4),
+      child:
+          Text(context.backButtonTooltip, style: context.textTheme.headline4),
     );
   }
 }
