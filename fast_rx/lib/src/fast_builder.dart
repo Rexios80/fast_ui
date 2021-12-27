@@ -6,8 +6,13 @@ class FastBuilder extends StatefulWidget {
   /// A Widget builder containing reactive objects
   final ValueGetter<Widget> builder;
 
+  /// Rebuild if the [condition] is true
+  ///
+  /// Defaults to always rebuild
+  final ValueGetter<bool>? condition;
+
   /// A [FastBuilder] updates when reactive properties within change
-  const FastBuilder(this.builder, {Key? key}) : super(key: key);
+  const FastBuilder(this.builder, {Key? key, this.condition}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -22,7 +27,7 @@ class _FastBuilderState extends State<FastBuilder> {
   void initState() {
     super.initState();
     _observer.listen(() {
-      if (!mounted) return;
+      if (!mounted || !(widget.condition?.call() ?? true)) return;
       setState(() {});
     });
   }

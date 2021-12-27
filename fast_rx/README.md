@@ -28,10 +28,13 @@ count.stream.listen((value) => print(value));
 ...
 
 FastBuilder(() => Text('$count'));
-
+FastBuilder(
+  () => Text('$count'),
+  condition: () => true,
+),
 ...
 
-// Will print the value and trigger a rebuild of the FastBuilder
+// Will print the value and trigger a rebuild of FastBuilders
 count.value = 1;
 ```
 

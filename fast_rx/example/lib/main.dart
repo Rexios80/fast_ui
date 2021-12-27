@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final _rebuild = true.rx;
   final _int = 0.rx;
   final _list = [0].rx;
   final _set = {0}.rx;
@@ -43,6 +44,7 @@ class MyHomePage extends StatelessWidget {
                 '$_int',
                 style: Theme.of(context).textTheme.headline4,
               ),
+              condition: () => _rebuild.value,
             ),
             const Text('Reactive list:'),
             FastBuilder(
@@ -50,6 +52,7 @@ class MyHomePage extends StatelessWidget {
                 '$_list',
                 style: Theme.of(context).textTheme.headline4,
               ),
+              condition: () => _rebuild.value,
             ),
             const Text('Reactive set:'),
             FastBuilder(
@@ -57,12 +60,22 @@ class MyHomePage extends StatelessWidget {
                 '$_set',
                 style: Theme.of(context).textTheme.headline4,
               ),
+              condition: () => _rebuild.value,
             ),
             const Text('Reactive map:'),
             FastBuilder(
               () => Text(
                 '$_map',
                 style: Theme.of(context).textTheme.headline4,
+              ),
+              condition: () => _rebuild.value,
+            ),
+            const SizedBox(height: 32),
+            FastBuilder(
+              () => ElevatedButton(
+                child:
+                    Text((_rebuild.value ? 'Disable' : 'Enable') + ' rebuild'),
+                onPressed: () => _rebuild.value = !_rebuild.value,
               ),
             ),
           ],
