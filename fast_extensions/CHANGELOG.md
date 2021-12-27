@@ -1,5 +1,6 @@
 ## 0.0.3
 - Added FastLocaleExtension and FastLocalizationExtension
+- Added a new example
 
 ## 0.0.2
 - Decreased Dart version constraint
