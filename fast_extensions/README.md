@@ -15,6 +15,7 @@ import 'package:fast_extensions/fast_extensions.dart';
 
 context.theme;
 context.textTheme;
+context.isDarkMode;
 context.countryCode;
 context.backButtonTooltip;
 ...

@@ -5,6 +5,9 @@ extension FastThemeExtension on BuildContext {
   /// The [ThemeData] of the current [BuildContext]
   ThemeData get theme => Theme.of(this);
 
+  /// If the [ThemeData] of the current [BuildContext] is dark
+  bool get isDarkMode => theme.brightness == Brightness.dark;
+
   /// The [ButtonThemeData] of the current [BuildContext]
   ButtonThemeData get buttonTheme => theme.buttonTheme;
 
