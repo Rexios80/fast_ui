@@ -15,6 +15,11 @@ fast_overlays supports the following overlays:
 - About dialog
 - General dialog
 
+### Convenience classes:
+| Class            | Use-case                    |
+| ---------------- | --------------------------- |
+| SnackBarDuration | SnackBar duration constants |
+
 ## Getting started
 ```dart
 import 'package:fast_overlays/fast_overlays.dart';
@@ -29,7 +34,10 @@ MaterialApp(
 ## Usage
 ```dart
 FastOverlays.showSnackBar(
-  const SnackBar(content: Text('I am a snackbar')),
+  const SnackBar(
+    content: Text('I am a snackbar'),
+    duration: SnackBarDuration.indefinite,
+  ),
 );
 ```
 

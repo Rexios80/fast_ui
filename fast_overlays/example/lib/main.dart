@@ -37,7 +37,10 @@ class MyHomePage extends StatelessWidget {
             child: const Text('Snackbar'),
             onPressed: () {
               FastOverlays.showSnackBar(
-                const SnackBar(content: Text('I am a snackbar')),
+                const SnackBar(
+                  content: Text('I am a snackbar'),
+                  duration: SnackBarDuration.short,
+                ),
               );
             },
           ),
