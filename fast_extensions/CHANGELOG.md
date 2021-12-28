@@ -1,3 +1,6 @@
+## 0.0.5
+- Added FastMaterialColor
+
 ## 0.0.4
 - Added FastMediaExtension
 
