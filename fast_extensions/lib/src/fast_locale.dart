@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Extension on [BuildContext] to read [Locale] information
-extension FastLocaleExtension on BuildContext {
+extension FastLocale on BuildContext {
   /// The [Locale] of the current [BuildContext]
   Locale get locale => Localizations.localeOf(this);
 

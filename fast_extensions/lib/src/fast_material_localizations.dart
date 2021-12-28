@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Extension on [BuildContext] to read [MaterialLocalizations] information
-extension FastLocalizationExtension on BuildContext {
+extension FastMaterialLocalizations on BuildContext {
   /// The [MaterialLocalizations] of the current [BuildContext]
   MaterialLocalizations get materialLocalizations =>
       MaterialLocalizations.of(this);

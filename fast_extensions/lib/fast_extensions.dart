@@ -1,6 +1,7 @@
 library fast_extensions;
 
-export 'src/locale_extension.dart';
-export 'src/localization_extension.dart';
-export 'src/media_extension.dart';
-export 'src/theme_extension.dart';
+export 'src/fast_locale.dart';
+export 'src/fast_material_color.dart';
+export 'src/fast_material_localizations.dart';
+export 'src/fast_media_query.dart';
+export 'src/fast_theme.dart';

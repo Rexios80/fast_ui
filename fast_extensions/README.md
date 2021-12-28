@@ -1,12 +1,13 @@
 Convenience extensions to make common Flutter tasks less annoying
 
 ## Features
-| Extension                 | Use-case                          |
-| ------------------------- | --------------------------------- |
-| FastThemeExtension        | Theme.of(context)                 |
-| FastLocaleExtension       | Localizations.localeOf(context)   |
-| FastLocalizationExtension | MaterialLocalizations.of(context) |
-| FastMediaExtension        | MediaQuery.of(context)            |
+| Extension                 | Use-case                           |
+| ------------------------- | ---------------------------------- |
+| FastLocale                | Localizations.localeOf(context)    |
+| FastMaterialColor         | FastMaterialColor.fromColor(color) |
+| FastMaterialLocalizations | MaterialLocalizations.of(context)  |
+| FastMediaQuery            | MediaQuery.of(context)             |
+| FastTheme                 | Theme.of(context)                  |
 
 
 ## Usage
@@ -14,22 +15,25 @@ Convenience extensions to make common Flutter tasks less annoying
 ```dart
 import 'package:fast_extensions/fast_extensions.dart';
 
-// FastThemeExtension
-context.theme;
-context.textTheme;
-context.isDarkMode;
-
-// FastLocaleExtension
+// FastLocale
 context.countryCode;
 context.languageCode;
 
-// FastLocalizationExtension
+// FastMaterialColor
+final primarySwatch = FastMaterialColor.fromColor(Color(0xFFBC52CC));
+
+// FastMaterialLocalizations
 context.backButtonTooltip;
 
-// FastMediaExtension
+// FastMediaQuery
 context.screenWidth;
 context.screenHeight;
 context.windowViewInsets;
+
+// FastTheme
+context.theme;
+context.textTheme;
+context.isDarkMode;
 ...
 ```
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Extension on [BuildContext] to read [ThemeData] information
-extension FastThemeExtension on BuildContext {
+extension FastTheme on BuildContext {
   /// The [ThemeData] of the current [BuildContext]
   ThemeData get theme => Theme.of(this);
 

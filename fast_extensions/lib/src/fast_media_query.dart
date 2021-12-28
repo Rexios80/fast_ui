@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 /// Extension on [BuildContext] to read [MediaQueryData] information
-extension FastMediaExtension on BuildContext {
+extension FastMediaQuery on BuildContext {
   /// The [MediaQueryData] of the current [BuildContext]
   MediaQueryData get mediaQuery => MediaQuery.of(this);
 
