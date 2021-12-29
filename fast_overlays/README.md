@@ -1,6 +1,8 @@
 Show overlays without context
 
 ## Features
+Unlike other contextless overlay solutions, fast_overlays uses Flutter's default overlay implementations
+
 fast_overlays supports the following overlays:
 - Snackbar
 - Material banner
