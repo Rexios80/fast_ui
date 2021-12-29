@@ -65,6 +65,5 @@ class RxObserver {
     for (final subscription in _streamSubscriptions) {
       subscription.cancel();
     }
-    _streamSubscriptions.clear();
   }
 }
