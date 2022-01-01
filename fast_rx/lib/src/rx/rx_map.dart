@@ -19,7 +19,7 @@ class RxMap<K, V> with Rx<Map<K, V>> implements Map<K, V> {
   @protected
   @override
   set value(Map<K, V> value) {
-    throw UnimplementedError();
+    throw UnimplementedError('Cannot set value of RxMap');
   }
 
   @override

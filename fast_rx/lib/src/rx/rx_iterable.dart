@@ -7,7 +7,7 @@ abstract class RxIterable<E> with Rx<Iterable<E>> implements Iterable<E> {
   @protected
   @override
   set value(Iterable<E> value) {
-    throw UnimplementedError();
+    throw UnimplementedError('RxIterable.value is not supported');
   }
 
   @override
