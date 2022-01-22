@@ -22,7 +22,7 @@ What fast_ui is not:
 - An excuse to write bad code
 - A custom implementation of existing Flutter functionality
 
-[Hosted sample project](https://fast_ui.rexios.dev)
+[Hosted sample project](https://fast-ui.rexios.dev)
 
 ## Getting started
 There are two options to use fast_ui:
