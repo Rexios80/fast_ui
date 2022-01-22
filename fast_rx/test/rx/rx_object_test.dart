@@ -21,11 +21,12 @@ void main() {
     rx.notify();
 
     // Update the value
-    rx.value = TestObject(1);
-    // Should not notify
-    rx.value = TestObject(1);
-    rx.value = TestObject(2);
-    rx.value = TestObject(3);
+    rx.value.count = 1;
+    rx.notify();
+    rx.value.count = 2;
+    rx.notify();
+    rx.value.count = 3;
+    rx.notify();
   });
 }
 
