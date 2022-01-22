@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:fast_rx/src/rx/rx_object.dart';
 import 'package:fast_rx/src/rx_notifier.dart';
 import 'package:flutter/foundation.dart';
 
@@ -29,21 +30,25 @@ abstract class Rx<T> {
   ///
   /// Useful if using custom objects
   void notify() {
-    _controller.add(value);
-  }
-
-  /// Notify listeners with the given value
-  ///
-  /// This is used so that object reference reactives can emit updates properly
-  @protected
-  void notifyWithValue(T value) {
-    _controller.add(value);
+    if (this is RxObject) {
+      _controller.add((this as RxObject).copyValue() as T);
+    } else if (value is RxObject) {
+      _controller.add((value as RxObject).copyValue() as T);
+    } else {
+      _controller.add(value);
+    }
   }
 
   /// Notify if the value has changed
   @protected
   void notifyIfChanged(T old) {
-    if (old != value) {
+    if (this is RxObject) {
+      if (!(this as RxObject).shouldNotify(old)) return;
+      notify();
+    } else if (value is RxObject) {
+      if (!(value as RxObject).shouldNotify(old)) return;
+      notify();
+    } else if (old != value) {
       notify();
     }
   }

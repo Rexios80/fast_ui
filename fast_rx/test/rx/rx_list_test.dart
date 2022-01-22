@@ -16,6 +16,8 @@ void main() {
     );
 
     list.add(4);
+    // Should not notify
+    list.removeWhere((e) => false);
     list.removeLast();
     list.removeAt(0);
     list.notify();

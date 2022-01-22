@@ -1,8 +1,11 @@
 import 'package:fast_rx/src/rx/rx.dart';
+import 'package:fast_rx/src/rx/rx_object.dart';
 import 'package:flutter/foundation.dart';
 
 /// A reactive iterable
-abstract class RxIterable<E> with Rx<Iterable<E>> implements Iterable<E> {
+abstract class RxIterable<E>
+    with Rx<Iterable<E>>, RxObject<Iterable<E>>
+    implements Iterable<E> {
   /// Unused for RxIterable
   @protected
   @override

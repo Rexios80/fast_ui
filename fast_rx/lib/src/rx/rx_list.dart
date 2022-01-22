@@ -18,9 +18,11 @@ class RxList<E> extends RxIterable<E> implements List<E> {
   }
 
   @override
-  void notify() {
-    notifyWithValue(List.from(value));
-  }
+  List<E> copyValue() => List.from(value);
+
+  @override
+  bool shouldNotify(Iterable<E> otherValue) =>
+      otherValue is List<E> && !listEquals(value, otherValue);
 
   @override
   List<R> cast<R>() {

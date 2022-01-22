@@ -1,8 +1,9 @@
 import 'package:fast_rx/src/rx/rx.dart';
+import 'package:fast_rx/src/rx/rx_object.dart';
 import 'package:flutter/foundation.dart';
 
 /// A reactive map
-class RxMap<K, V> with Rx<Map<K, V>> implements Map<K, V> {
+class RxMap<K, V> with Rx<Map<K, V>>, RxObject<Map<K, V>> implements Map<K, V> {
   final Map<K, V> _value;
 
   /// Create a reactive map
@@ -23,9 +24,10 @@ class RxMap<K, V> with Rx<Map<K, V>> implements Map<K, V> {
   }
 
   @override
-  void notify() {
-    notifyWithValue(Map.from(value));
-  }
+  Map<K, V> copyValue() => Map.from(value);
+
+  @override
+  bool shouldNotify(Map<K, V> otherValue) => !mapEquals(value, otherValue);
 
   @override
   V? operator [](Object? key) {

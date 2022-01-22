@@ -14,6 +14,8 @@ void main() {
     );
 
     map['a'] = 10;
+    // Should not notify
+    map.removeWhere((a, b) => false);
     map.remove('b');
   });
 }

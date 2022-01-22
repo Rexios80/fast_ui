@@ -15,6 +15,8 @@ void main() {
     );
 
     set.add(4);
+    // Should not notify
+    set.removeWhere((e) => false);
     set.remove(2);
     set.notify();
   });
