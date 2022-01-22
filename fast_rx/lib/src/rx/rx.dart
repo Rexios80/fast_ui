@@ -27,7 +27,8 @@ abstract class Rx<T> {
 
   /// Notify listeners with the current value
   ///
-  /// Useful if using custom objects
+  /// Useful if using objects that are out of your control. Consider wrapping
+  /// the object in an RxObject if used frequently.
   void notify() {
     _controller.add(value);
   }

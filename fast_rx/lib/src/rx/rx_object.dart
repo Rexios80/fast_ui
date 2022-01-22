@@ -2,6 +2,10 @@ import 'package:fast_rx/src/rx/rx.dart';
 import 'package:flutter/foundation.dart';
 
 /// An object that will properly emit updates when calling notify
+/// 
+/// Useful for creating reactive versions of objects you don't control. If an
+/// object is in your control, consider making fields that need to be updated
+/// reactive instead.
 abstract class RxObject<T> with Rx<T> {
   final T _value;
 

@@ -1,4 +1,3 @@
-import 'package:fast_rx/src/rx/rx.dart';
 import 'package:fast_rx/src/rx/rx_object.dart';
 import 'package:flutter/foundation.dart';
 
