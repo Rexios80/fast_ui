@@ -3,24 +3,21 @@ import 'package:flutter/foundation.dart';
 
 /// A reactive set
 class RxSet<E> extends RxIterable<E> implements Set<E> {
-  final Set<E> _value;
-
   /// Create a reactive set
-  RxSet(this._value);
+  RxSet(Set<E> value) : super(value);
 
-  @protected
   @override
+  @protected
   Set<E> get value {
-    register();
-    return _value;
+    return super.value as Set<E>;
   }
 
   @override
   Set<E> copyValue() => Set.from(value);
 
   @override
-  bool shouldNotify(Iterable<E> otherValue) =>
-      otherValue is Set<E> && !setEquals(value, otherValue);
+  bool shouldNotify(Iterable<E> oldValue) =>
+      oldValue is Set<E> && !setEquals(value, oldValue);
 
   @override
   Set<R> cast<R>() {
@@ -36,16 +33,12 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
 
   @override
   void addAll(Iterable<E> elements) {
-    final old = Set<E>.from(value);
-    value.addAll(elements);
-    notifyIfChanged(old);
+    notifyIfChanged(() => value.addAll(elements));
   }
 
   @override
   void clear() {
-    final old = Set<E>.from(value);
-    value.clear();
-    notifyIfChanged(old);
+    notifyIfChanged(() => value.clear());
   }
 
   @override
@@ -70,38 +63,27 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
 
   @override
   bool remove(Object? value) {
-    final old = Set<E>.from(this.value);
-    final result = this.value.remove(value);
-    notifyIfChanged(old);
-    return result;
+    return notifyIfChanged(() => this.value.remove(value));
   }
 
   @override
   void removeAll(Iterable<Object?> elements) {
-    final old = Set<E>.from(value);
-    value.removeAll(elements);
-    notifyIfChanged(old);
+    notifyIfChanged(() => value.removeAll(elements));
   }
 
   @override
   void removeWhere(bool Function(E element) test) {
-    final old = Set<E>.from(value);
-    value.removeWhere(test);
-    notifyIfChanged(old);
+    notifyIfChanged(() => value.removeWhere(test));
   }
 
   @override
   void retainAll(Iterable<Object?> elements) {
-    final old = Set<E>.from(value);
-    value.retainAll(elements);
-    notifyIfChanged(old);
+    notifyIfChanged(() => value.retainAll(elements));
   }
 
   @override
   void retainWhere(bool Function(E element) test) {
-    final old = Set<E>.from(value);
-    value.retainWhere(test);
-    notifyIfChanged(old);
+    notifyIfChanged(() => value.retainWhere(test));
   }
 
   @override

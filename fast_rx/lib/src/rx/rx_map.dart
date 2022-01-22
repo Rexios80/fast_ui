@@ -3,31 +3,15 @@ import 'package:fast_rx/src/rx/rx_object.dart';
 import 'package:flutter/foundation.dart';
 
 /// A reactive map
-class RxMap<K, V> with Rx<Map<K, V>>, RxObject<Map<K, V>> implements Map<K, V> {
-  final Map<K, V> _value;
-
+class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
   /// Create a reactive map
-  RxMap(this._value);
-
-  @protected
-  @override
-  Map<K, V> get value {
-    register();
-    return _value;
-  }
-
-  /// Unused for RxMap
-  @protected
-  @override
-  set value(Map<K, V> value) {
-    throw UnimplementedError('RxMap.value is read only');
-  }
+  RxMap(Map<K, V> value) : super(value);
 
   @override
   Map<K, V> copyValue() => Map.from(value);
 
   @override
-  bool shouldNotify(Map<K, V> otherValue) => !mapEquals(value, otherValue);
+  bool shouldNotify(Map<K, V> oldValue) => !mapEquals(value, oldValue);
 
   @override
   V? operator [](Object? key) {
@@ -36,23 +20,17 @@ class RxMap<K, V> with Rx<Map<K, V>>, RxObject<Map<K, V>> implements Map<K, V> {
 
   @override
   void operator []=(K key, V value) {
-    final old = Map<K, V>.from(this.value);
-    this.value[key] = value;
-    notifyIfChanged(old);
+    notifyIfChanged(() => this.value[key] = value);
   }
 
   @override
   void addAll(Map<K, V> other) {
-    final old = Map<K, V>.from(value);
-    value.addAll(other);
-    notifyIfChanged(old);
+    notifyIfChanged(() => value.addAll(other));
   }
 
   @override
   void addEntries(Iterable<MapEntry<K, V>> newEntries) {
-    final old = Map<K, V>.from(value);
-    value.addEntries(newEntries);
-    notifyIfChanged(old);
+    notifyIfChanged(() => value.addEntries(newEntries));
   }
 
   @override
@@ -62,9 +40,7 @@ class RxMap<K, V> with Rx<Map<K, V>>, RxObject<Map<K, V>> implements Map<K, V> {
 
   @override
   void clear() {
-    final old = Map<K, V>.from(value);
-    value.clear();
-    notifyIfChanged(old);
+    notifyIfChanged(() => value.clear());
   }
 
   @override
@@ -114,40 +90,27 @@ class RxMap<K, V> with Rx<Map<K, V>>, RxObject<Map<K, V>> implements Map<K, V> {
 
   @override
   V putIfAbsent(K key, V Function() ifAbsent) {
-    final old = Map<K, V>.from(value);
-    final v = value.putIfAbsent(key, ifAbsent);
-    notifyIfChanged(old);
-    return v;
+    return notifyIfChanged(() => value.putIfAbsent(key, ifAbsent));
   }
 
   @override
   V? remove(Object? key) {
-    final old = Map<K, V>.from(value);
-    final v = value.remove(key);
-    notifyIfChanged(old);
-    return v;
+    return notifyIfChanged(() => value.remove(key));
   }
 
   @override
   void removeWhere(bool Function(K key, V value) test) {
-    final old = Map<K, V>.from(value);
-    value.removeWhere(test);
-    notifyIfChanged(old);
+    notifyIfChanged(() => value.removeWhere(test));
   }
 
   @override
   V update(K key, V Function(V value) update, {V Function()? ifAbsent}) {
-    final old = Map<K, V>.from(value);
-    final v = value.update(key, update, ifAbsent: ifAbsent);
-    notifyIfChanged(old);
-    return v;
+    return notifyIfChanged(() => value.update(key, update, ifAbsent: ifAbsent));
   }
 
   @override
   void updateAll(V Function(K key, V value) update) {
-    final old = Map<K, V>.from(value);
-    value.updateAll(update);
-    notifyIfChanged(old);
+    notifyIfChanged(() => value.updateAll(update));
   }
 
   @override

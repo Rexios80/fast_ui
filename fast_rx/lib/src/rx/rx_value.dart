@@ -24,7 +24,7 @@ class RxValue<T> with Rx<T> {
 }
 
 /// Extension to allow creating reactive values
-extension RxExtension<T> on T {
+extension RxValueExtension<T> on T {
   /// Create a reactive value
   RxValue<T> get rx => RxValue<T>(this);
 }
