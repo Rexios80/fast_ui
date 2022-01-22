@@ -1,34 +1,14 @@
 import 'package:fast_overlays/fast_overlays.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: FastOverlays.init(GlobalKey<NavigatorState>()),
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class FastOverlaysExample extends StatelessWidget {
+  const FastOverlaysExample({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('fast_overlays_example'),
+        title: const Text('fast_overlays Example'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(8),
@@ -44,6 +24,7 @@ class MyHomePage extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('Material Banner'),
             onPressed: () {
@@ -60,6 +41,7 @@ class MyHomePage extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('Modal Bottom Sheet'),
             onPressed: () {
@@ -71,6 +53,7 @@ class MyHomePage extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('Date Picker'),
             onPressed: () {
@@ -81,6 +64,7 @@ class MyHomePage extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('Date Range Picker'),
             onPressed: () {
@@ -90,24 +74,28 @@ class MyHomePage extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('Time Picker'),
             onPressed: () {
               FastOverlays.showTimePicker(initialTime: TimeOfDay.now());
             },
           ),
+          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('License Page'),
             onPressed: () {
               FastOverlays.showLicensePage();
             },
           ),
+          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('Search'),
             onPressed: () {
               FastOverlays.showSearch(delegate: SearchDelegateImpl());
             },
           ),
+          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('Menu'),
             onPressed: () {
@@ -121,6 +109,7 @@ class MyHomePage extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('Dialog'),
             onPressed: () {
@@ -131,12 +120,14 @@ class MyHomePage extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('About Dialog'),
             onPressed: () {
               FastOverlays.showAboutDialog();
             },
           ),
+          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('General Dialog'),
             onPressed: () {

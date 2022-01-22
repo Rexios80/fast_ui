@@ -1,5 +1,8 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:fast_ui/fast_ui.dart';
+import 'package:fast_ui_example/examples/fast_extensions_example.dart';
+import 'package:fast_ui_example/examples/fast_nav_example.dart';
+import 'package:fast_ui_example/examples/fast_overlays_example.dart';
 import 'package:fast_ui_example/examples/fast_rx_example.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +38,7 @@ class FastUiExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('fast_nav Example')),
+      appBar: AppBar(title: const Text('fast_ui Example')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -43,6 +46,21 @@ class FastUiExample extends StatelessWidget {
             ElevatedButton(
               child: const Text('fast_rx Example'),
               onPressed: () => FastNav.push(FastRxExample()),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              child: const Text('fast_nav Example'),
+              onPressed: () => FastNav.push(const FastNavExample()),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              child: const Text('fast_overlays Example'),
+              onPressed: () => FastNav.push(const FastOverlaysExample()),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              child: const Text('fast_extensions Example'),
+              onPressed: () => FastNav.push(const FastExtensionsExample()),
             ),
           ],
         ),
