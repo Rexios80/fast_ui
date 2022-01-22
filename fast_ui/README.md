@@ -20,6 +20,7 @@ What fast_ui is:
 What fast_ui is not:
 - Magic
 - An excuse to write bad code
+- A custom implementation of existing Flutter functionality
 
 ## Getting started
 There are two options to use fast_ui:
