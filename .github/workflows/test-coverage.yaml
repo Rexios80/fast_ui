@@ -9,7 +9,7 @@ jobs:
   test-coverage:
     strategy:
       matrix:
-        project: ["fast_extensions", "fast_nav", "fast_overlays", "fast_rx"]
+        project: ["fast_nav", "fast_overlays", "fast_rx"]
     defaults:
       run:
         working-directory: ${{ matrix.project }}
