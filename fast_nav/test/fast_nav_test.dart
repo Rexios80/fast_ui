@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final key = GlobalKey<NavigatorState>();
   buildBaseWidget() => MaterialApp(
-        navigatorKey: FastNav.init(key),
+        navigatorKey: FastNav.init(GlobalKey<NavigatorState>()),
         home: const Text('home'),
         routes: {
           'test_page': (context) => const Text('test_page'),
@@ -24,7 +23,7 @@ void main() {
 
   testWidgets('Anonymous routes', (tester) async {
     await tester.pumpWidget(buildBaseWidget());
-    expect(key.currentState!.canPop(), false);
+    expect(FastNav.canPop(), false);
 
     push([String name = 'test_page']) async {
       unawaited(FastNav.push(Text(name)));
@@ -33,7 +32,7 @@ void main() {
 
     await push();
     expect(find.text('test_page'), findsOneWidget);
-    expect(key.currentState!.canPop(), true);
+    expect(FastNav.canPop(), true);
 
     FastNav.pop();
     await tester.pumpAndSettle();
@@ -42,7 +41,7 @@ void main() {
     unawaited(FastNav.pushReplacement(const Text('test_page')));
     await tester.pumpAndSettle();
     expect(find.text('test_page'), findsOneWidget);
-    expect(key.currentState!.canPop(), false);
+    expect(FastNav.canPop(), false);
 
     // pushAndRemoveUntil
     await push('test_page_2');
@@ -56,11 +55,11 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('test_page_4'), findsOneWidget);
     // There should be one page left under test_page_4
-    expect(key.currentState!.canPop(), true);
+    expect(FastNav.canPop(), true);
     FastNav.pop();
     await tester.pumpAndSettle();
     expect(find.text('test_page'), findsOneWidget);
-    expect(key.currentState!.canPop(), false);
+    expect(FastNav.canPop(), false);
 
     // pushAndRemoveAll
     await push('test_page_2');
@@ -68,12 +67,12 @@ void main() {
     unawaited(FastNav.pushAndRemoveAll(const Text('test_page_4')));
     await tester.pumpAndSettle();
     expect(find.text('test_page_4'), findsOneWidget);
-    expect(key.currentState!.canPop(), false);
+    expect(FastNav.canPop(), false);
   });
 
   testWidgets('Named routes', (tester) async {
     await tester.pumpWidget(buildBaseWidget());
-    expect(key.currentState!.canPop(), false);
+    expect(FastNav.canPop(), false);
 
     pushNamed([String name = 'test_page']) async {
       unawaited(FastNav.pushNamed(name));
@@ -82,7 +81,7 @@ void main() {
 
     await pushNamed();
     expect(find.text('test_page'), findsOneWidget);
-    expect(key.currentState!.canPop(), true);
+    expect(FastNav.canPop(), true);
 
     FastNav.pop();
     await tester.pumpAndSettle();
@@ -91,7 +90,7 @@ void main() {
     unawaited(FastNav.pushReplacementNamed('test_page'));
     await tester.pumpAndSettle();
     expect(find.text('test_page'), findsOneWidget);
-    expect(key.currentState!.canPop(), false);
+    expect(FastNav.canPop(), false);
 
     // pushNamedAndRemoveUntil
     await pushNamed('test_page_2');
@@ -102,11 +101,11 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('test_page_4'), findsOneWidget);
     // There should be one page left under test_page_4
-    expect(key.currentState!.canPop(), true);
+    expect(FastNav.canPop(), true);
     FastNav.pop();
     await tester.pumpAndSettle();
     expect(find.text('test_page'), findsOneWidget);
-    expect(key.currentState!.canPop(), false);
+    expect(FastNav.canPop(), false);
 
     // pushNamedAndRemoveAll
     await pushNamed('test_page_2');
@@ -114,6 +113,34 @@ void main() {
     unawaited(FastNav.pushNamedAndRemoveAll('test_page_4'));
     await tester.pumpAndSettle();
     expect(find.text('test_page_4'), findsOneWidget);
-    expect(key.currentState!.canPop(), false);
+    expect(FastNav.canPop(), false);
+  });
+
+  testWidgets('NestedNavigator', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: NestedNavigator(
+          navigatorKey: GlobalKey<NavigatorState>(),
+          name: 'nested',
+          home: const Text('home'),
+        ),
+      ),
+    );
+    expect(find.text('home'), findsOneWidget);
+    expect(FastNav.canPop(navigatorName: 'nested'), false);
+
+    push({String name = 'test_page'}) async {
+      unawaited(FastNav.push(Text(name), navigatorName: 'nested'));
+      await tester.pumpAndSettle();
+    }
+
+    await push();
+    expect(find.text('test_page'), findsOneWidget);
+    expect(FastNav.canPop(navigatorName: 'nested'), true);
+
+    FastNav.pop(navigatorName: 'nested');
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
+    expect(FastNav.canPop(navigatorName: 'nested'), false);
   });
 }

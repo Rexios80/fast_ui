@@ -47,6 +47,11 @@ class FastNav {
     return _getNavigatorState(navigatorName).pop<T>(result);
   }
 
+  /// Whether the navigator can be popped
+  static bool canPop({String? navigatorName}) {
+    return _getNavigatorState(navigatorName).canPop();
+  }
+
   //* Anonymous navigation
 
   /// Navigate to an anonymous page route
