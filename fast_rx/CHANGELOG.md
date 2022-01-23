@@ -1,3 +1,9 @@
+## 0.1.0
+- Full test coverage
+- Updated documentation
+- Added RxObject and cleaned up iterable implementations
+- Prevented unnecessary registration
+
 ## 0.0.4
 - Added conditional rebuild
 

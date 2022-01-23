@@ -1,3 +1,7 @@
+## 0.1.0
+- Full test coverage
+- Updated documentation
+
 ## 0.0.5
 - Added FastMaterialColor
 

@@ -1,3 +1,6 @@
+## 0.1.0
+- Updated documentation
+
 ## 0.0.7
 - If `flutter create` could stop generating packages with a Dart version constraint that's newer than the version pub.dev is using that would be nice
 

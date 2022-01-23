@@ -10,6 +10,7 @@ Navigate without context
 ## Features
 fast_nav supports the following navigation methods:
 - pop
+- canPop
 - push
 - pushReplacement
 - pushAndRemoveUntil
@@ -33,6 +34,22 @@ MaterialApp(
 import 'package:fast_nav/fast_nav.dart';
 
 FastNav.push(const NewPage());
+```
+
+```dart
+import 'package:fast_nav/fast_nav.dart';
+
+...
+
+NestedNavigator(
+  navigatorKey: GlobalKey<NavigatorState>(),
+  name: 'nested',
+  home: const Text('home'),
+);
+
+...
+
+FastNav.push(const NewPage(), navigatorName: 'nested');
 ```
 
 ## Additional information
