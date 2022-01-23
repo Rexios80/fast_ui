@@ -15,3 +15,5 @@ jobs:
           puby get
           flutter format . --set-exit-if-changed
           flutter analyze
+          flutter pub global activate pana
+          pana --no-warning --exit-code-threshold 0
