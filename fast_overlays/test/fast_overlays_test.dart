@@ -5,21 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final base = MaterialApp(
-    navigatorKey: FastOverlays.init(GlobalKey<NavigatorState>()),
-    home: const Scaffold(),
-  );
+  buildBaseWidget() => MaterialApp(
+        navigatorKey: FastOverlays.init(GlobalKey<NavigatorState>()),
+        home: const Scaffold(),
+      );
 
   test('Check init', () {
-    expect(
-      () =>
-          FastOverlays.showSnackBar(const SnackBar(content: SizedBox.shrink())),
-      throwsException,
-    );
+    expect(() => FastOverlays.hideCurrentSnackBar(), throwsException);
   });
 
   testWidgets('Snackbar', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     showSnackbar([String name = 'test_snackbar']) async {
       FastOverlays.showSnackBar(SnackBar(content: Text(name)));
@@ -47,7 +43,7 @@ void main() {
   });
 
   testWidgets('MaterialBanner', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     showMaterialBanner([String name = 'test_banner']) async {
       FastOverlays.showMaterialBanner(
@@ -80,7 +76,7 @@ void main() {
   });
 
   testWidgets('ModalBottomSheet', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     unawaited(
       FastOverlays.showModalBottomSheet(
@@ -92,7 +88,7 @@ void main() {
   });
 
   testWidgets('DatePicker', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     unawaited(
       FastOverlays.showDatePicker(
@@ -107,7 +103,7 @@ void main() {
   });
 
   testWidgets('DateRangePicker', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     unawaited(
       FastOverlays.showDateRangePicker(
@@ -121,7 +117,7 @@ void main() {
   });
 
   testWidgets('TimePicker', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     unawaited(
       FastOverlays.showTimePicker(
@@ -134,7 +130,7 @@ void main() {
   });
 
   testWidgets('LicensePage', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     FastOverlays.showLicensePage(
       applicationName: 'test_license_page',
@@ -144,7 +140,7 @@ void main() {
   });
 
   testWidgets('Search', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     unawaited(
       FastOverlays.showSearch(
@@ -157,7 +153,7 @@ void main() {
   });
 
   testWidgets('Menu', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     unawaited(
       FastOverlays.showMenu(
@@ -170,7 +166,7 @@ void main() {
   });
 
   testWidgets('Dialog', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     unawaited(
       FastOverlays.showDialog(
@@ -182,7 +178,7 @@ void main() {
   });
 
   testWidgets('AboutDialog', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     FastOverlays.showAboutDialog(
       applicationName: 'test_about_dialog',
@@ -192,7 +188,7 @@ void main() {
   });
 
   testWidgets('GeneralDialog', (tester) async {
-    await tester.pumpWidget(base);
+    await tester.pumpWidget(buildBaseWidget());
 
     unawaited(
       FastOverlays.showGeneralDialog(
