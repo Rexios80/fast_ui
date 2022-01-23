@@ -11,6 +11,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: subosito/flutter-action@v2
       - run: |
-          flutter pub get
+          flutter pub global activate puby
+          puby get
           flutter format . --set-exit-if-changed
           flutter analyze
