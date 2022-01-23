@@ -70,35 +70,35 @@ packages:
       name: fast_extensions
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.5"
+    version: "0.1.0"
   fast_nav:
     dependency: transitive
     description:
       name: fast_nav
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2"
+    version: "0.1.0"
   fast_overlays:
     dependency: transitive
     description:
       name: fast_overlays
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.3"
+    version: "0.1.0"
   fast_rx:
     dependency: transitive
     description:
       name: fast_rx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.4"
+    version: "0.1.0"
   fast_ui:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "0.0.7"
+    version: "0.1.0"
   ffi:
     dependency: transitive
     description:
