@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('FastBuilder', (WidgetTester tester) async {
+  testWidgets('FastBuilder', (tester) async {
     final reactive = 0.rx;
     await tester.pumpWidget(
       FastBuilder(
