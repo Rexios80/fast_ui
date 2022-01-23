@@ -1,18 +1,11 @@
-// ignore_for_file: avoid_print
-
 import 'package:fast_rx/fast_rx.dart';
-import 'package:fast_rx/src/rx_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-import '../rx_notifier_test.mocks.dart';
+import 'rx_registration_test_utils.dart';
 
 void main() {
   test('RxIterable registration', () {
-    final notifier = MockRxNotifier();
-    RxNotifier.instance = notifier;
-
     final rx = [1].rx;
-    final calls = [
+    testRegistration(rx, [
       () => rx.any((e) => false),
       // Can't actually call this on the Iterable class because it's abstract
       // () => rx.cast<int>(),
@@ -24,7 +17,8 @@ void main() {
       () => rx.firstWhere((i) => i > 0),
       () => rx.fold(0, (a, b) => a),
       () => rx.followedBy([6, 7, 8]),
-      () => rx.forEach(print),
+      // ignore: avoid_returning_null_for_void, avoid_function_literals_in_foreach_calls
+      () => rx.forEach((e) => null),
       () => rx.isEmpty,
       () => rx.isNotEmpty,
       () => rx.iterator,
@@ -44,12 +38,6 @@ void main() {
       () => rx.toSet(),
       () => rx.where((i) => i > 0),
       () => rx.whereType<int>(),
-    ];
-
-    for (final call in calls) {
-      call();
-    }
-
-    verify(notifier.addStream(rx.stream)).called(calls.length);
+    ]);
   });
 }

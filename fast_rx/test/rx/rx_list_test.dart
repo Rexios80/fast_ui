@@ -1,8 +1,6 @@
 import 'package:fast_rx/fast_rx.dart';
-import 'package:fast_rx/src/rx_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-import '../rx_notifier_test.mocks.dart';
+import 'rx_registration_test_utils.dart';
 
 void main() {
   test('RxList notifications', () {
@@ -27,11 +25,8 @@ void main() {
   });
 
   test('RxList registration', () {
-    final notifier = MockRxNotifier();
-    RxNotifier.instance = notifier;
-
     final rx = [0, 1, 2, 3, 5, 6, 3].rx;
-    final calls = [
+    testRegistration(rx, [
       () => rx.cast<int>(),
       () => rx + [4],
       () => rx[0],
@@ -64,12 +59,6 @@ void main() {
       () => rx.sort(),
       () => rx.sublist(0, 4),
       () => rx.clear(),
-    ];
-
-    for (final call in calls) {
-      call();
-    }
-
-    verify(notifier.addStream(rx.stream)).called(calls.length);
+    ]);
   });
 }

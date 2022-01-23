@@ -1,5 +1,6 @@
 import 'package:fast_rx/fast_rx.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'rx_registration_test_utils.dart';
 
 void main() {
   test('RxMap notifications', () {
@@ -17,5 +18,33 @@ void main() {
     // Should not notify
     map.removeWhere((a, b) => false);
     map.remove('b');
+  });
+
+  test('RxMap registration', () {
+    final rx = {'a': 1, 'b': 2, 'c': 3}.rx;
+    testRegistration(rx, [
+      () => rx['a'],
+      () => rx['1'] = 2,
+      () => rx.addAll({'d': 4, 'e': 5}),
+      () => rx.addEntries(const [MapEntry('f', 6)]),
+      () => rx.cast<String, int>(),
+      () => rx.containsKey('a'),
+      () => rx.containsValue(1),
+      () => rx.entries,
+      // ignore: avoid_returning_null_for_void
+      () => rx.forEach((a, b) => null),
+      () => rx.isEmpty,
+      () => rx.isNotEmpty,
+      () => rx.keys,
+      () => rx.length,
+      () => rx.map((a, b) => MapEntry(a, b)),
+      () => rx.putIfAbsent('a', () => 4),
+      () => rx.remove('a'),
+      () => rx.removeWhere((a, b) => false),
+      () => rx.update('a', (a) => a + 1, ifAbsent: () => 4),
+      () => rx.updateAll((a, b) => b + 1),
+      () => rx.values,
+      () => rx.clear(),
+    ]);
   });
 }
