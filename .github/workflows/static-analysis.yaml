@@ -5,14 +5,20 @@ on:
 
 jobs:
   static-analysis:
+    strategy:
+      matrix:
+        project:
+          ["fast_extensions", "fast_nav", "fast_overlays", "fast_rx", "fast_ui"]
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@master
       - uses: subosito/flutter-action@v2
       - run: |
-          flutter pub global activate puby
-          puby get
+          flutter pub get
           flutter format . --set-exit-if-changed
           flutter analyze
           flutter pub global activate pana
