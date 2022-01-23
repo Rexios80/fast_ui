@@ -64,11 +64,12 @@ class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
   set item2(T2 value) => notifyIfChanged(() => this.value.item2 = value);
 
   @override
-  Tuple<T1, T2> copyValue() => Tuple.from(value);
+  Tuple<T1, T2> copyValue() => Tuple.from(unregisteredValue);
 
   @override
   bool shouldNotify(Tuple<T1, T2> oldValue) =>
-      oldValue.item1 != value.item1 || oldValue.item2 != value.item2;
+      oldValue.item1 != unregisteredValue.item1 ||
+      oldValue.item2 != unregisteredValue.item2;
 }
 
 extension RxTupleExtension<T1, T2> on Tuple<T1, T2> {

@@ -15,11 +15,12 @@ class RxList<E> extends RxIterable<E> implements List<E> {
   }
 
   @override
-  List<E> copyValue() => List.from(value);
+  List<E> copyValue() => List.from(unregisteredValue);
 
   @override
   bool shouldNotify(Iterable<E> oldValue) =>
-      oldValue is List<E> && !listEquals(value, oldValue);
+      oldValue is List<E> &&
+      !listEquals(unregisteredValue as List<E>, oldValue);
 
   @override
   List<R> cast<R>() {

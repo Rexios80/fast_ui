@@ -7,10 +7,11 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
   RxMap(Map<K, V> value) : super(value);
 
   @override
-  Map<K, V> copyValue() => Map.from(value);
+  Map<K, V> copyValue() => Map.from(unregisteredValue);
 
   @override
-  bool shouldNotify(Map<K, V> oldValue) => !mapEquals(value, oldValue);
+  bool shouldNotify(Map<K, V> oldValue) =>
+      !mapEquals(unregisteredValue, oldValue);
 
   @override
   V? operator [](Object? key) {

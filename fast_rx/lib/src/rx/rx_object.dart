@@ -20,6 +20,13 @@ abstract class RxObject<T> with Rx<T> {
     return _value;
   }
 
+  /// Read [_value] without calling [register]
+  /// 
+  /// Used to prevent unnecessary calls to [register] in internal methods such
+  /// as [copyValue] and [shouldNotify]
+  @protected
+  T get unregisteredValue => _value;
+
   /// Unused for RxObject
   @override
   @protected

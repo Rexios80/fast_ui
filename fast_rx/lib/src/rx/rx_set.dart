@@ -13,11 +13,11 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
   }
 
   @override
-  Set<E> copyValue() => Set.from(value);
+  Set<E> copyValue() => Set.from(unregisteredValue);
 
   @override
   bool shouldNotify(Iterable<E> oldValue) =>
-      oldValue is Set<E> && !setEquals(value, oldValue);
+      oldValue is Set<E> && !setEquals(unregisteredValue as Set<E>, oldValue);
 
   @override
   Set<R> cast<R>() {
