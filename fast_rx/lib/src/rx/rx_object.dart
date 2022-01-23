@@ -2,7 +2,7 @@ import 'package:fast_rx/src/rx/rx.dart';
 import 'package:flutter/foundation.dart';
 
 /// An object that will properly emit updates when calling notify
-/// 
+///
 /// Useful for creating reactive versions of objects you don't control. If an
 /// object is in your control, consider making fields that need to be updated
 /// reactive instead.
@@ -21,7 +21,7 @@ abstract class RxObject<T> with Rx<T> {
   }
 
   /// Read [_value] without calling [register]
-  /// 
+  ///
   /// Used to prevent unnecessary calls to [register] in internal methods such
   /// as [copyValue] and [shouldNotify]
   @protected

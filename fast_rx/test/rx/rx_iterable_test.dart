@@ -15,7 +15,7 @@ void main() {
       () => rx.expand((i) => [i]),
       () => rx.first,
       () => rx.firstWhere((i) => i > 0),
-      () => rx.fold(0, (a, b) => a),
+      () => rx.fold<int>(0, (a, b) => a),
       () => rx.followedBy([6, 7, 8]),
       // ignore: avoid_returning_null_for_void, avoid_function_literals_in_foreach_calls
       () => rx.forEach((e) => null),
