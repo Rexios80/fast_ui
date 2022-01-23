@@ -44,8 +44,10 @@ abstract class RxObject<T> with Rx<T> {
   }
 
   /// Copy the value for update emission
+  @protected
   T copyValue();
 
   /// Check if the value has changed
+  @protected
   bool shouldNotify(T oldValue);
 }

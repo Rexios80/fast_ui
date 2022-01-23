@@ -12,7 +12,7 @@ abstract class Rx<T> {
   /// Register with the [RxNotifier] for UI updates
   @protected
   void register() {
-    RxNotifier.addStream(stream);
+    RxNotifier.instance.addStream(stream);
   }
 
   /// The current value

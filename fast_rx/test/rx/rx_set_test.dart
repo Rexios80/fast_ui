@@ -2,7 +2,7 @@ import 'package:fast_rx/fast_rx.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('RxSet', () {
+  test('RxSet notifications', () {
     final set = {0, 1, 2, 3}.rx;
 
     expect(

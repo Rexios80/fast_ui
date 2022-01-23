@@ -2,7 +2,7 @@ import 'package:fast_rx/fast_rx.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('RxMap', () {
+  test('RxMap notifications', () {
     final map = {'a': 1, 'b': 2, 'c': 3}.rx;
 
     expect(

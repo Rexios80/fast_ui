@@ -4,24 +4,37 @@ import 'package:flutter/foundation.dart';
 
 /// Class to deal with setting up [RxObserver]s
 class RxNotifier {
-  RxNotifier._();
+  static RxNotifier _instance = RxNotifier();
+
+  /// The active [RxNotifier] instance
+  static RxNotifier get instance => _instance;
+
+  /// Set the active [RxNotifier] instance
+  @visibleForTesting
+  static set instance(RxNotifier value) => _instance = value;
+
+  /// Create a new [RxNotifier] instance
+  @visibleForTesting
+  RxNotifier();
 
   /// Holds the working [RxObserver]
-  static RxObserver? _observerIntermediate;
+  RxObserver? _observerIntermediate;
 
   /// Add a stream to the working [RxObserver]
-  static void addStream(Stream stream) {
+  void addStream(Stream stream) {
     _observerIntermediate?.addStream(stream);
   }
 
   /// Set up the given [observer] with the given [builder]
-  static T setupObserver<T>(RxObserver observer, ValueGetter<T> builder) {
+  T setupObserver<T>(RxObserver observer, ValueGetter<T> builder) {
     _observerIntermediate = observer;
     // Calling the builder will add any relevant streams to the observer
     final built = builder();
     if (!observer.listenable) {
-      throw 'No reactive values found in the given FastBuilder.'
-          ' Rx values must be used in the root widget of a FastBuilder.';
+      throw Exception(
+        'No reactive values found in the given FastBuilder.'
+        ' Rx values must be used in the root widget of a FastBuilder.',
+      );
     }
     _observerIntermediate = null;
     return built;

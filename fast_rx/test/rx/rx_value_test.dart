@@ -2,7 +2,7 @@ import 'package:fast_rx/fast_rx.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('RxValue<int>', () {
+  test('RxValue<int> notifications', () {
     final rx = 0.rx;
 
     expect(rx.stream, emitsInOrder([0, 1, 2, 3]));
@@ -18,7 +18,7 @@ void main() {
     rx.value = 3;
   });
 
-  test('RxValue<Object>', () {
+  test('RxValue<Object> notifications', () {
     final rx = TestObject(0).rx;
 
     expect(

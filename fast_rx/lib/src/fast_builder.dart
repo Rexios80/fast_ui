@@ -34,7 +34,7 @@ class _FastBuilderState extends State<FastBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return RxNotifier.setupObserver(_observer, widget.builder);
+    return RxNotifier.instance.setupObserver(_observer, widget.builder);
   }
 
   @override
