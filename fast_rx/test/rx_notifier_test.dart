@@ -2,22 +2,9 @@ import 'package:fast_rx/src/rx_notifier.dart';
 import 'package:fast_rx/fast_rx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'rx_notifier_test.mocks.dart';
+import 'package:fast_rx/testing/expect_rx.mocks.dart';
 
-T? setupObserverShim<T>(RxObserver? observer, ValueGetter<T>? builder) {
-  return null;
-}
-
-@GenerateMocks(
-  [],
-  customMocks: [
-    MockSpec<RxNotifier>(
-      fallbackGenerators: {#setupObserver: setupObserverShim},
-    )
-  ],
-)
 void main() {
   test('RxNotifier should add stream', () {
     final notifier = MockRxNotifier();
@@ -33,6 +20,7 @@ void main() {
   });
 
   test('RxNotifier should throw', () {
+    // Make sure that the RxNotifier instance is not a mock
     RxNotifier.instance = RxNotifier();
 
     final observer = RxObserver();
