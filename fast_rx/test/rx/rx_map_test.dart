@@ -26,15 +26,10 @@ void main() {
       rx,
       shouldRegister: [
         () => rx['a'],
-        () => rx['1'] = 2,
-        () => rx.addAll({'d': 4, 'e': 5}),
-        () => rx.addEntries(const [MapEntry('f', 6)]),
         () => rx.cast<String, int>(),
         () => rx.containsKey('a'),
         () => rx.containsValue(1),
         () => rx.entries,
-        // ignore: avoid_returning_null_for_void
-        () => rx.forEach((a, b) => null),
         () => rx.isEmpty,
         () => rx.isNotEmpty,
         () => rx.keys,
@@ -42,14 +37,18 @@ void main() {
         () => rx.map((a, b) => MapEntry(a, b)),
         () => rx.putIfAbsent('a', () => 4),
         () => rx.remove('a'),
-        () => rx.removeWhere((a, b) => false),
         () => rx.update('a', (a) => a + 1, ifAbsent: () => 4),
-        () => rx.updateAll((a, b) => b + 1),
         () => rx.values,
-        () => rx.clear(),
       ],
       shouldNotRegister: [
-        // TODO
+        () => rx['1'] = 2,
+        () => rx.addAll({'d': 4, 'e': 5}),
+        () => rx.addEntries(const [MapEntry('f', 6)]),
+        // ignore: avoid_returning_null_for_void
+        () => rx.forEach((a, b) => null),
+        () => rx.removeWhere((a, b) => false),
+        () => rx.updateAll((a, b) => b + 1),
+        () => rx.clear(),
       ],
     );
   });

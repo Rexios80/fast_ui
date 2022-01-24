@@ -20,17 +20,17 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
 
   @override
   void operator []=(K key, V value) {
-    notifyIfChanged(() => this.value[key] = value);
+    notifyIfChanged(() => unregisteredValue[key] = value);
   }
 
   @override
   void addAll(Map<K, V> other) {
-    notifyIfChanged(() => value.addAll(other));
+    notifyIfChanged(() => unregisteredValue.addAll(other));
   }
 
   @override
   void addEntries(Iterable<MapEntry<K, V>> newEntries) {
-    notifyIfChanged(() => value.addEntries(newEntries));
+    notifyIfChanged(() => unregisteredValue.addEntries(newEntries));
   }
 
   @override
@@ -40,7 +40,7 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
 
   @override
   void clear() {
-    notifyIfChanged(() => value.clear());
+    notifyIfChanged(() => unregisteredValue.clear());
   }
 
   @override
@@ -60,7 +60,7 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
 
   @override
   void forEach(void Function(K key, V value) action) {
-    value.forEach(action);
+    unregisteredValue.forEach(action);
   }
 
   @override
@@ -100,7 +100,7 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
 
   @override
   void removeWhere(bool Function(K key, V value) test) {
-    notifyIfChanged(() => value.removeWhere(test));
+    notifyIfChanged(() => unregisteredValue.removeWhere(test));
   }
 
   @override
@@ -110,7 +110,7 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
 
   @override
   void updateAll(V Function(K key, V value) update) {
-    notifyIfChanged(() => value.updateAll(update));
+    notifyIfChanged(() => unregisteredValue.updateAll(update));
   }
 
   @override
