@@ -23,33 +23,52 @@ fast_nav supports the following navigation methods:
 fast_nav supports nested navigation and provides a NestedNavigator class for simple setup
 
 ## Getting started
+Register a GlobalKey with FastNav and your MaterialApp
+
+<!-- embedme readme/getting_started.dart -->
 ```dart
-MaterialApp(
-  navigatorKey: FastNav.init(GlobalKey<NavigatorState>()),
-);
+import 'package:fast_nav/fast_nav.dart';
+import 'package:flutter/material.dart';
+
+void example() {
+  MaterialApp(
+    navigatorKey: FastNav.init(GlobalKey<NavigatorState>()),
+  );
+}
+
 ```
 
 ## Usage
+<!-- embedme readme/usage.dart -->
 ```dart
 import 'package:fast_nav/fast_nav.dart';
+import 'package:flutter/material.dart';
 
-FastNav.push(const NewPage());
+void example() {
+  FastNav.push(const Text('New page'));
+}
+
 ```
 
+<!-- embedme readme/nested_navigator.dart -->
 ```dart
 import 'package:fast_nav/fast_nav.dart';
+import 'package:flutter/material.dart';
 
-...
+void example() {
+  // ...
 
-NestedNavigator(
-  navigatorKey: GlobalKey<NavigatorState>(),
-  name: 'nested',
-  home: const Text('home'),
-);
+  NestedNavigator(
+    navigatorKey: GlobalKey<NavigatorState>(),
+    name: 'nested',
+    home: const Text('home'),
+  );
 
-...
+  // ...
 
-FastNav.push(const NewPage(), navigatorName: 'nested');
+  FastNav.push(const Text('New page'), navigatorName: 'nested');
+}
+
 ```
 
 ## Additional information

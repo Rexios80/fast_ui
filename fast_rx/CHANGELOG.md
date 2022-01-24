@@ -1,3 +1,10 @@
+## 0.1.1
+- Updated license
+- Updated documentation
+- Use unregisteredValue for RxObject methods that do not return a value
+- Added expectRxRegistration for testing RxObject registration
+- Updated tests
+
 ## 0.1.0
 - Full test coverage
 - Updated documentation

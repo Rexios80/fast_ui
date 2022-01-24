@@ -13,11 +13,17 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
   }
 
   @override
+  @protected
+  Set<E> get unregisteredValue {
+    return super.unregisteredValue as Set<E>;
+  }
+
+  @override
   Set<E> copyValue() => Set.from(unregisteredValue);
 
   @override
   bool shouldNotify(Iterable<E> oldValue) =>
-      oldValue is Set<E> && !setEquals(unregisteredValue as Set<E>, oldValue);
+      oldValue is Set<E> && !setEquals(unregisteredValue, oldValue);
 
   @override
   Set<R> cast<R>() {
@@ -33,12 +39,12 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
 
   @override
   void addAll(Iterable<E> elements) {
-    notifyIfChanged(() => value.addAll(elements));
+    notifyIfChanged(() => unregisteredValue.addAll(elements));
   }
 
   @override
   void clear() {
-    notifyIfChanged(() => value.clear());
+    notifyIfChanged(() => unregisteredValue.clear());
   }
 
   @override
@@ -68,22 +74,22 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
 
   @override
   void removeAll(Iterable<Object?> elements) {
-    notifyIfChanged(() => value.removeAll(elements));
+    notifyIfChanged(() => unregisteredValue.removeAll(elements));
   }
 
   @override
   void removeWhere(bool Function(E element) test) {
-    notifyIfChanged(() => value.removeWhere(test));
+    notifyIfChanged(() => unregisteredValue.removeWhere(test));
   }
 
   @override
   void retainAll(Iterable<Object?> elements) {
-    notifyIfChanged(() => value.retainAll(elements));
+    notifyIfChanged(() => unregisteredValue.retainAll(elements));
   }
 
   @override
   void retainWhere(bool Function(E element) test) {
-    notifyIfChanged(() => value.retainWhere(test));
+    notifyIfChanged(() => unregisteredValue.retainWhere(test));
   }
 
   @override

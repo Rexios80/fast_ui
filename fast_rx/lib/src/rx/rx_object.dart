@@ -12,6 +12,10 @@ abstract class RxObject<T> with Rx<T> {
   /// Create a reactive object
   RxObject(this._value);
 
+  /// Get the current value and register with the RxNotifier
+  ///
+  /// Should only be used in methods that return a value.
+  /// Otherwise, use [unregisteredValue].
   @override
   @protected
   @mustCallSuper
@@ -20,10 +24,10 @@ abstract class RxObject<T> with Rx<T> {
     return _value;
   }
 
-  /// Read [_value] without calling [register]
+  /// Read the current value without calling [register]
   ///
   /// Used to prevent unnecessary calls to [register] in internal methods such
-  /// as [copyValue] and [shouldNotify]
+  /// as [copyValue], [shouldNotify], or methods that do not return a value
   @protected
   T get unregisteredValue => _value;
 
@@ -40,6 +44,8 @@ abstract class RxObject<T> with Rx<T> {
   }
 
   /// Notify if [transform] changed the value such that [shouldNotify] returns true
+  ///
+  /// If the value is guaranteed to change, use [notify] instead
   @protected
   U notifyIfChanged<U>(U Function() transform) {
     final old = copyValue();

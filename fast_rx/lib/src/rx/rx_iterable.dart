@@ -58,7 +58,7 @@ abstract class RxIterable<E> extends RxObject<Iterable<E>>
 
   @override
   void forEach(void Function(E element) action) {
-    value.forEach(action);
+    unregisteredValue.forEach(action);
   }
 
   @override

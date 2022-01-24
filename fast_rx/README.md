@@ -22,32 +22,47 @@ Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.d
 There are convenience typedefs for RxBool, RxInt, RxDouble, and RxString
 
 ## Usage
+<!-- embedme readme/usage.dart -->
 ```dart
 import 'package:fast_rx/fast_rx.dart';
+import 'package:flutter/material.dart';
 
-...
+void example() {
+  // ...
 
-final count = 0.rx;
+  final count = 0.rx;
 
-...
+  // ...
 
-count.stream.listen((value) => print(value));
+  count.stream.listen((value) {
+    // Do something
+  });
 
-...
+  // ...
 
-FastBuilder(() => Text('$count'));
-FastBuilder(
-  () => Text('$count'),
-  condition: () => true,
-),
-...
+  FastBuilder(() => Text('$count'));
+  FastBuilder(
+    () => Text('$count'),
+    condition: () => true,
+  );
 
-// Will print the value and trigger a rebuild of FastBuilders
-count.value = 1;
+  // ...
+
+  // Will print the value and trigger a rebuild of FastBuilders
+  count.value = 1;
+}
+
 ```
 
-RxObject is used to make reactive versions of existing classes
+### Custom RxObjects
+RxObject can be used to create reactive objects of classes outside of your control.
+If an object is within your control, consider making fields reactive instead.
+
+<!-- embedme test/rx/rx_tuple.dart -->
 ```dart
+import 'package:fast_rx/fast_rx.dart';
+import 'package:flutter/material.dart';
+
 class Tuple<T1, T2> {
   T1 item1;
   T2 item2;
@@ -71,13 +86,13 @@ class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
   T1 get item1 => value.item1;
 
   @override
-  set item1(T1 value) => notifyIfChanged(() => this.value.item1 = value);
+  set item1(T1 value) => notifyIfChanged(() => unregisteredValue.item1 = value);
 
   @override
   T2 get item2 => value.item2;
 
   @override
-  set item2(T2 value) => notifyIfChanged(() => this.value.item2 = value);
+  set item2(T2 value) => notifyIfChanged(() => unregisteredValue.item2 = value);
 
   @override
   Tuple<T1, T2> copyValue() => Tuple.from(unregisteredValue);
@@ -91,6 +106,63 @@ class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
 extension RxTupleExtension<T1, T2> on Tuple<T1, T2> {
   RxTuple<T1, T2> get rx => RxTuple<T1, T2>(this);
 }
+
+```
+
+### Testing custom RxObjects
+Custom RxObjects can be tested for valid registration and notifications
+
+<!-- embedme test/rx/rx_object_test.dart -->
+```dart
+import 'package:fast_rx/testing.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'rx_tuple.dart';
+
+void main() {
+  test('RxObject notifications', () {
+    final rx = Tuple(1, 2).rx;
+
+    expect(
+      rx.stream,
+      emitsInOrder(
+        [
+          Tuple(1, 2),
+          Tuple(2, 2),
+          Tuple(2, 3),
+        ],
+      ),
+    );
+
+    // Notify of the initial value
+    rx.notify();
+
+    // Update the value
+    rx.item1 = 2;
+    // Should not notify
+    rx.item2 = 2;
+    rx.item2 = 3;
+
+    // RxObject.value setter should throw if used
+    // ignore: invalid_use_of_protected_member
+    expect(() => rx.value = Tuple(0, 0), throwsUnimplementedError);
+  });
+
+  test('RxObject registration', () {
+    final rx = Tuple(1, 2).rx;
+    expectRxRegistration(
+      rx,
+      shouldRegister: [
+        () => rx.item1,
+        () => rx.item2,
+      ],
+      shouldNotRegister: [
+        () => rx.item1 = 3,
+        () => rx.item2 = 3,
+      ],
+    );
+  });
+}
+
 ```
 
 ## Additional information
