@@ -1,6 +1,5 @@
 flag_management:
   default_rules:
-    carryforward: true
     statuses:
       - name_prefix: project-
         type: project
