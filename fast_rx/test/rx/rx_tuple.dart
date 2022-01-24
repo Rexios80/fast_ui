@@ -1,4 +1,5 @@
 import 'package:fast_rx/fast_rx.dart';
+import 'package:flutter/material.dart';
 
 class Tuple<T1, T2> {
   T1 item1;
@@ -7,6 +8,13 @@ class Tuple<T1, T2> {
   Tuple(this.item1, this.item2);
 
   Tuple.from(Tuple<T1, T2> other) : this(other.item1, other.item2);
+
+  @override
+  operator ==(Object other) =>
+      other is Tuple<T1, T2> && other.item1 == item1 && other.item2 == item2;
+
+  @override
+  int get hashCode => hashValues(item1, item2);
 }
 
 class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
@@ -16,13 +24,13 @@ class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
   T1 get item1 => value.item1;
 
   @override
-  set item1(T1 value) => notifyIfChanged(() => this.value.item1 = value);
+  set item1(T1 value) => notifyIfChanged(() => unregisteredValue.item1 = value);
 
   @override
   T2 get item2 => value.item2;
 
   @override
-  set item2(T2 value) => notifyIfChanged(() => this.value.item2 = value);
+  set item2(T2 value) => notifyIfChanged(() => unregisteredValue.item2 = value);
 
   @override
   Tuple<T1, T2> copyValue() => Tuple.from(unregisteredValue);

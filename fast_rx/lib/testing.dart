@@ -1,1 +1,1 @@
-export 'testing/expect_rx.dart';
+export 'testing/expect_rx_registration.dart';

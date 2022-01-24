@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('RxIterable registration', () {
     final rx = [1].rx;
-    expectRx(
+    expectRxRegistration(
       rx,
       shouldRegister: [
         () => rx.any((e) => false),
@@ -19,8 +19,6 @@ void main() {
         () => rx.firstWhere((i) => i > 0),
         () => rx.fold<int>(0, (a, b) => a),
         () => rx.followedBy([6, 7, 8]),
-        // ignore: avoid_returning_null_for_void, avoid_function_literals_in_foreach_calls
-        () => rx.forEach((e) => null),
         () => rx.isEmpty,
         () => rx.isNotEmpty,
         () => rx.iterator,
@@ -40,6 +38,10 @@ void main() {
         () => rx.toSet(),
         () => rx.where((i) => i > 0),
         () => rx.whereType<int>(),
+      ],
+      shouldNotRegister: [
+        // ignore: avoid_returning_null_for_void, avoid_function_literals_in_foreach_calls
+        () => rx.forEach((e) => null),
       ],
     );
   });

@@ -24,7 +24,7 @@ void main() {
 
   test('RxSet registration', () {
     final rx = {0, 1, 2, 3, 5, 6}.rx;
-    expectRx(
+    expectRxRegistration(
       rx,
       shouldRegister: [
         () => rx.cast<int>(),
@@ -41,6 +41,9 @@ void main() {
         () => rx.retainWhere((e) => true),
         () => rx.union({0, 1, 4, 6}),
         () => rx.clear(),
+      ],
+      shouldNotRegister: [
+        // TODO
       ],
     );
   });

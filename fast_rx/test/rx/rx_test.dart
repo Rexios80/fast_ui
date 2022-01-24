@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('Rx registration', () {
     final rx = ''.rx;
-    expectRx(
+    expectRxRegistration(
       rx,
       shouldRegister: [
         // ignore: unrelated_type_equality_checks

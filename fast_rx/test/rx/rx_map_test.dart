@@ -22,7 +22,7 @@ void main() {
 
   test('RxMap registration', () {
     final rx = {'a': 1, 'b': 2, 'c': 3}.rx;
-    expectRx(
+    expectRxRegistration(
       rx,
       shouldRegister: [
         () => rx['a'],
@@ -47,6 +47,9 @@ void main() {
         () => rx.updateAll((a, b) => b + 1),
         () => rx.values,
         () => rx.clear(),
+      ],
+      shouldNotRegister: [
+        // TODO
       ],
     );
   });
