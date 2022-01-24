@@ -34,9 +34,8 @@ void example() {
 
   // ...
 
-  count.stream.listen((value) {
-    // Do something
-  });
+  // ignore: avoid_print
+  count.stream.listen(print);
 
   // ...
 

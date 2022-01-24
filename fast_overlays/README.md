@@ -8,7 +8,7 @@ Show overlays without context
 [![pub points](https://badges.bar/fast_overlays/pub%20points)](https://pub.dev/packages/fast_overlays/score)
 
 ## Features
-Unlike other contextless overlay solutions, fast_overlays uses Flutter's default overlay implementations
+Unlike other contextless overlay solutions, fast_overlays uses Flutter's built-in overlay implementations
 
 fast_overlays supports the following overlays:
 - Snackbar
