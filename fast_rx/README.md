@@ -22,32 +22,46 @@ Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.d
 There are convenience typedefs for RxBool, RxInt, RxDouble, and RxString
 
 ## Usage
+<!-- embedme readme/usage.dart -->
+```dart
+import 'package:fast_rx/fast_rx.dart';
+import 'package:flutter/material.dart';
+
+void example() {
+  // ...
+
+  final count = 0.rx;
+
+  // ...
+
+  count.stream.listen((value) {
+    // Do something
+  });
+
+  // ...
+
+  FastBuilder(() => Text('$count'));
+  FastBuilder(
+    () => Text('$count'),
+    condition: () => true,
+  );
+
+  // ...
+
+  // Will print the value and trigger a rebuild of FastBuilders
+  count.value = 1;
+}
+
+```
+
+### Custom RxObjects
+RxObject can be used to create reactive objects of classes outside of your control.
+If an object is within your control, consider making fields reactive instead.
+
+<!-- embedme readme/custom_rx_object.dart -->
 ```dart
 import 'package:fast_rx/fast_rx.dart';
 
-...
-
-final count = 0.rx;
-
-...
-
-count.stream.listen((value) => print(value));
-
-...
-
-FastBuilder(() => Text('$count'));
-FastBuilder(
-  () => Text('$count'),
-  condition: () => true,
-),
-...
-
-// Will print the value and trigger a rebuild of FastBuilders
-count.value = 1;
-```
-
-RxObject is used to make reactive versions of existing classes
-```dart
 class Tuple<T1, T2> {
   T1 item1;
   T2 item2;
@@ -55,13 +69,6 @@ class Tuple<T1, T2> {
   Tuple(this.item1, this.item2);
 
   Tuple.from(Tuple<T1, T2> other) : this(other.item1, other.item2);
-
-  @override
-  operator ==(Object other) =>
-      other is Tuple<T1, T2> && other.item1 == item1 && other.item2 == item2;
-
-  @override
-  int get hashCode => hashValues(item1, item2);
 }
 
 class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
@@ -91,6 +98,14 @@ class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
 extension RxTupleExtension<T1, T2> on Tuple<T1, T2> {
   RxTuple<T1, T2> get rx => RxTuple<T1, T2>(this);
 }
+
+```
+
+### Testing custom RxObjects
+Custom RxObjects can be tested for valid registration and notifications
+<!-- embedme readme/custom_rx_object_test.dart -->
+```dart
+// TODO
 ```
 
 ## Additional information

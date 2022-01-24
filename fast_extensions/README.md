@@ -18,30 +18,35 @@ Convenience extensions to make common Flutter tasks less annoying
 
 
 ## Usage
-
+<!-- embedme readme/usage.dart -->
 ```dart
 import 'package:fast_extensions/fast_extensions.dart';
+import 'package:flutter/material.dart';
 
-// FastLocale
-context.countryCode;
-context.languageCode;
+void example(BuildContext context) {
+  // FastLocale
+  context.countryCode;
+  context.languageCode;
 
-// FastMaterialColor
-final primarySwatch = FastMaterialColor.fromColor(Color(0xFFBC52CC));
+  // FastMaterialColor
+  final primarySwatch = FastMaterialColor.fromColor(const Color(0xFFBC52CC));
+  ThemeData(primarySwatch: primarySwatch);
 
-// FastMaterialLocalizations
-context.backButtonTooltip;
+  // FastMaterialLocalizations
+  context.backButtonTooltip;
 
-// FastMediaQuery
-context.screenWidth;
-context.screenHeight;
-context.windowViewInsets;
+  // FastMediaQuery
+  context.screenWidth;
+  context.screenHeight;
+  context.windowViewInsets;
 
-// FastTheme
-context.theme;
-context.textTheme;
-context.isDarkMode;
-...
+  // FastTheme
+  context.theme;
+  context.textTheme;
+  context.isDarkMode;
+  // ...
+}
+
 ```
 
 ## Additional information

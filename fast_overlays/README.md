@@ -30,24 +30,38 @@ fast_overlays supports the following overlays:
 | SnackBarDuration | SnackBar duration constants |
 
 ## Getting started
+Register a GlobalKey with FastOverlays and your MaterialApp
+
+<!-- embedme readme/getting_started.dart -->
 ```dart
 import 'package:fast_overlays/fast_overlays.dart';
+import 'package:flutter/material.dart';
 
-...
+void example() {
+  // ...
 
-MaterialApp(
-  navigatorKey: FastOverlays.init(GlobalKey<NavigatorState>()),
-);
+  MaterialApp(
+    navigatorKey: FastOverlays.init(GlobalKey<NavigatorState>()),
+  );
+}
+
 ```
 
 ## Usage
+<!-- embedme readme/usage.dart -->
 ```dart
-FastOverlays.showSnackBar(
-  const SnackBar(
-    content: Text('I am a snackbar'),
-    duration: SnackBarDuration.indefinite,
-  ),
-);
+import 'package:fast_overlays/fast_overlays.dart';
+import 'package:flutter/material.dart';
+
+void showSnackbar() {
+  FastOverlays.showSnackBar(
+    const SnackBar(
+      content: Text('I am a snackbar'),
+      duration: SnackBarDuration.indefinite,
+    ),
+  );
+}
+
 ```
 
 ## Additional information
