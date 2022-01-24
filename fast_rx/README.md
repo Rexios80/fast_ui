@@ -158,7 +158,7 @@ void main() {
       shouldNotRegister: [
         () => rx.item1 = 3,
         () => rx.item2 = 3,
-      ]
+      ],
     );
   });
 }
