@@ -1,7 +1,7 @@
 Show overlays without context
 
 [![pub package](https://img.shields.io/pub/v/fast_overlays.svg?label=fast_overlays)](https://pub.dev/packages/fast_overlays)
-[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg?flag=project-fast_overlays)](https://codecov.io/gh/Rexios80/fast_ui)
+[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg?flag=fast_overlays)](https://codecov.io/gh/Rexios80/fast_ui)
 ![checks](https://img.shields.io/github/checks-status/Rexios80/fast_ui/master)
 [![popularity](https://badges.bar/fast_overlays/popularity)](https://pub.dev/packages/fast_overlays/score)
 [![likes](https://badges.bar/fast_overlays/likes)](https://pub.dev/packages/fast_overlays/score)
