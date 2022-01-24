@@ -13,7 +13,7 @@ abstract class RxObject<T> with Rx<T> {
   RxObject(this._value);
 
   /// Get the current value and register with the RxNotifier
-  /// 
+  ///
   /// Should only be used in methods that return a value.
   /// Otherwise, use [unregisteredValue].
   @override
@@ -44,7 +44,7 @@ abstract class RxObject<T> with Rx<T> {
   }
 
   /// Notify if [transform] changed the value such that [shouldNotify] returns true
-  /// 
+  ///
   /// If the value is guaranteed to change, use [notify] instead
   @protected
   U notifyIfChanged<U>(U Function() transform) {

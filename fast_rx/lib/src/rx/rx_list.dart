@@ -25,8 +25,7 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   bool shouldNotify(Iterable<E> oldValue) =>
-      oldValue is List<E> &&
-      !listEquals(unregisteredValue, oldValue);
+      oldValue is List<E> && !listEquals(unregisteredValue, oldValue);
 
   @override
   List<R> cast<R>() {
@@ -153,7 +152,9 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   void replaceRange(int start, int end, Iterable<E> replacements) {
-    notifyIfChanged(() => unregisteredValue.replaceRange(start, end, replacements));
+    notifyIfChanged(
+      () => unregisteredValue.replaceRange(start, end, replacements),
+    );
   }
 
   @override
@@ -173,7 +174,9 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   void setRange(int start, int end, Iterable<E> iterable, [int skipCount = 0]) {
-    notifyIfChanged(() => unregisteredValue.setRange(start, end, iterable, skipCount));
+    notifyIfChanged(
+      () => unregisteredValue.setRange(start, end, iterable, skipCount),
+    );
   }
 
   @override
