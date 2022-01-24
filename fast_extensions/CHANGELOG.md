@@ -1,3 +1,7 @@
+## 0.1.1
+- Updated license
+- Updated documentation
+
 ## 0.1.0
 - Full test coverage
 - Updated documentation
