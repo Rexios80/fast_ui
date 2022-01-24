@@ -3,7 +3,7 @@ fast_rx is a reactive state management solution for Flutter
 Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.dev/packages/observable_ish), and similar packages
 
 [![pub package](https://img.shields.io/pub/v/fast_rx.svg?label=fast_rx)](https://pub.dev/packages/fast_rx)
-[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg?flag=project-fast_rx)](https://codecov.io/gh/Rexios80/fast_ui)
+[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg?flag=fast_rx)](https://codecov.io/gh/Rexios80/fast_ui)
 ![checks](https://img.shields.io/github/checks-status/Rexios80/fast_ui/master)
 [![popularity](https://badges.bar/fast_rx/popularity)](https://pub.dev/packages/fast_rx/score)
 [![likes](https://badges.bar/fast_rx/likes)](https://pub.dev/packages/fast_rx/score)
@@ -34,9 +34,8 @@ void example() {
 
   // ...
 
-  count.stream.listen((value) {
-    // Do something
-  });
+  // ignore: avoid_print
+  count.stream.listen(print);
 
   // ...
 

@@ -1,7 +1,7 @@
 Convenience extensions to make common Flutter tasks less annoying
 
 [![pub package](https://img.shields.io/pub/v/fast_extensions.svg?label=fast_extensions)](https://pub.dev/packages/fast_extensions)
-[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg?flag=project-fast_extensions)](https://codecov.io/gh/Rexios80/fast_ui)
+[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg?flag=fast_extensions)](https://codecov.io/gh/Rexios80/fast_ui)
 ![checks](https://img.shields.io/github/checks-status/Rexios80/fast_ui/master)
 [![popularity](https://badges.bar/fast_extensions/popularity)](https://pub.dev/packages/fast_extensions/score)
 [![likes](https://badges.bar/fast_extensions/likes)](https://pub.dev/packages/fast_extensions/score)
