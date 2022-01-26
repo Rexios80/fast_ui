@@ -20,12 +20,3 @@ class NavigatorNotRegisteredException implements FastNavException {
     }
   }
 }
-
-/// Exception thrown when navigation methods are called and the root navigator
-/// has not been registered with FastNav
-class RootNavigatorNotRegisteredException
-    implements NavigatorNotRegisteredException {
-  @override
-  String toString() => 'Root navigator not registered.'
-      ' Call FastNav.init() first.';
-}
