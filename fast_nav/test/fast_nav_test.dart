@@ -17,14 +17,15 @@ void main() {
       );
 
   test('Check init', () {
-    expect(
-      () => FastNav.pop(),
-      throwsA(isA<RootNavigatorNotRegisteredException>()),
-    );
+    try {
+      FastNav.pop();
+    } catch (e) {
+      expect((e as NavigatorNotRegisteredException).navigatorName, isNull);
+    }
     try {
       FastNav.pop(navigatorName: 'test');
     } catch (e) {
-      expect((e as NamedNavigatorNotRegisteredException).navigatorName, 'test');
+      expect((e as NavigatorNotRegisteredException).navigatorName, 'test');
     }
   });
 

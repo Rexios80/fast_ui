@@ -22,6 +22,17 @@ dev_dependencies:
 
   rexios_lints: ^1.0.0
 
+# Override fast packages so we can import fast_ui and use the local versions
+dependency_overrides:
+  fast_extensions:
+    path: ../../fast_extensions
+  fast_nav:
+    path: ../../fast_nav
+  fast_overlays:
+    path: ../../fast_overlays
+  fast_rx:
+    path: ../../fast_rx
+
 flutter:
   uses-material-design: true
 

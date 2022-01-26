@@ -26,9 +26,9 @@ class FastNav {
   static void _checkInit(String navigatorName) {
     if (!_navigatorKeys.containsKey(navigatorName)) {
       if (navigatorName == _rootNavigatorName) {
-        throw RootNavigatorNotRegisteredException();
+        throw NavigatorNotRegisteredException();
       } else {
-        throw NamedNavigatorNotRegisteredException(navigatorName);
+        throw NavigatorNotRegisteredException(navigatorName: navigatorName);
       }
     }
   }
