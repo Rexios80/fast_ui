@@ -113,6 +113,7 @@ Custom RxObjects can be tested for valid registration and notifications
 
 <!-- embedme test/rx/rx_object_test.dart -->
 ```dart
+import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx/testing.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'rx_tuple.dart';
@@ -142,8 +143,11 @@ void main() {
     rx.item2 = 3;
 
     // RxObject.value setter should throw if used
-    // ignore: invalid_use_of_protected_member
-    expect(() => rx.value = Tuple(0, 0), throwsUnimplementedError);
+    expect(
+      // ignore: invalid_use_of_protected_member
+      () => rx.value = Tuple(0, 0),
+      throwsA(isA<RxObjectValueIsReadOnlyException>()),
+    );
   });
 
   test('RxObject registration', () {

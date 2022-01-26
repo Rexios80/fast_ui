@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fast_rx/src/exceptions.dart';
 import 'package:flutter/foundation.dart';
 
 /// Class to deal with setting up [RxObserver]s
@@ -31,10 +32,7 @@ class RxNotifier {
     // Calling the builder will add any relevant streams to the observer
     final built = builder();
     if (!observer.listenable) {
-      throw Exception(
-        'No reactive values found in the given FastBuilder.'
-        ' Rx values must be used in the root widget of a FastBuilder.',
-      );
+      throw FastBuilderNoRxValuesException();
     }
     _observerIntermediate = null;
     return built;

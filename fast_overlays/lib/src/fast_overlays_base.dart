@@ -1,3 +1,4 @@
+import 'package:fast_overlays/src/exceptions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as material;
 
@@ -21,10 +22,7 @@ class FastOverlays {
     try {
       _navigatorKey.currentState!;
     } catch (e) {
-      throw Exception(
-        'FastOverlays must be initialized before use.'
-        ' Call FastOverlays.init() first.',
-      );
+      throw FastOverlaysNotInitializedException();
     }
   }
 

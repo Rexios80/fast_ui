@@ -17,8 +17,15 @@ void main() {
       );
 
   test('Check init', () {
-    expect(() => FastNav.pop(), throwsException);
-    expect(() => FastNav.pop(navigatorName: 'test'), throwsException);
+    expect(
+      () => FastNav.pop(),
+      throwsA(isA<RootNavigatorNotRegisteredException>()),
+    );
+    try {
+      FastNav.pop(navigatorName: 'test');
+    } catch (e) {
+      expect((e as NamedNavigatorNotRegisteredException).navigatorName, 'test');
+    }
   });
 
   testWidgets('Anonymous routes', (tester) async {

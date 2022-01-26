@@ -1,3 +1,4 @@
+import 'package:fast_nav/src/exceptions.dart';
 import 'package:flutter/material.dart';
 
 /// Contextless navigator
@@ -22,33 +23,34 @@ class FastNav {
     return _navigatorKeys[name] = key;
   }
 
-  static NavigatorState _getNavigatorState(String? navigatorName) {
-    final navigatorKey = _navigatorKeys[navigatorName ?? _rootNavigatorName];
-    if (navigatorKey == null) {
-      if (navigatorName == null) {
-        throw Exception(
-          'Root navigator not registered.'
-          ' Call FastNav.init() first.',
-        );
+  static void _checkInit(String navigatorName) {
+    if (!_navigatorKeys.containsKey(navigatorName)) {
+      if (navigatorName == _rootNavigatorName) {
+        throw RootNavigatorNotRegisteredException();
       } else {
-        throw Exception(
-          'Navigator with name $navigatorName not registered.'
-          ' Call FastNav.registerNavigator() first.',
-        );
+        throw NamedNavigatorNotRegisteredException(navigatorName);
       }
     }
-    return navigatorKey.currentState!;
+  }
+
+  static NavigatorState _getNavigatorState(String navigatorName) {
+    return _navigatorKeys[navigatorName]!.currentState!;
   }
 
   //* Common navigation methods
 
   /// Pop the current page
-  static void pop<T extends Object?>({String? navigatorName, T? result}) {
+  static void pop<T extends Object?>({
+    String navigatorName = _rootNavigatorName,
+    T? result,
+  }) {
+    _checkInit(navigatorName);
     return _getNavigatorState(navigatorName).pop<T>(result);
   }
 
   /// Whether the navigator can be popped
-  static bool canPop({String? navigatorName}) {
+  static bool canPop({String navigatorName = _rootNavigatorName}) {
+    _checkInit(navigatorName);
     return _getNavigatorState(navigatorName).canPop();
   }
 
@@ -57,11 +59,12 @@ class FastNav {
   /// Navigate to an anonymous page route
   static Future<T?> push<T extends Object?>(
     Widget page, {
-    String? navigatorName,
+    String navigatorName = _rootNavigatorName,
     RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) {
+    _checkInit(navigatorName);
     return _getNavigatorState(navigatorName).push<T>(
       MaterialPageRoute<T>(
         builder: (_) => page,
@@ -75,12 +78,13 @@ class FastNav {
   /// Replace the current page with a new anonymous page route
   static Future<T?> pushReplacement<T extends Object?, TO extends Object?>(
     Widget page, {
-    String? navigatorName,
+    String navigatorName = _rootNavigatorName,
     RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
     TO? result,
   }) {
+    _checkInit(navigatorName);
     return _getNavigatorState(navigatorName).pushReplacement<T, TO>(
       MaterialPageRoute<T>(
         builder: (_) => page,
@@ -96,11 +100,12 @@ class FastNav {
   static Future<T?> pushAndRemoveUntil<T extends Object?>(
     Widget page,
     bool Function(Route<dynamic> route) predicate, {
-    String? navigatorName,
+    String navigatorName = _rootNavigatorName,
     RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) {
+    _checkInit(navigatorName);
     return _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
       MaterialPageRoute<T>(
         builder: (_) => page,
@@ -115,11 +120,12 @@ class FastNav {
   /// Remove all pages and push a new anonymous page route
   static Future<T?> pushAndRemoveAll<T extends Object?>(
     Widget page, {
-    String? navigatorName,
+    String navigatorName = _rootNavigatorName,
     RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) {
+    _checkInit(navigatorName);
     return _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
       MaterialPageRoute<T>(
         builder: (_) => page,
@@ -136,9 +142,10 @@ class FastNav {
   /// Navigate to a named page route
   static Future<T?> pushNamed<T extends Object?>(
     String routeName, {
-    String? navigatorName,
+    String navigatorName = _rootNavigatorName,
     Object? arguments,
   }) {
+    _checkInit(navigatorName);
     return _getNavigatorState(navigatorName).pushNamed<T>(
       routeName,
       arguments: arguments,
@@ -148,10 +155,11 @@ class FastNav {
   /// Replace the current page with a named page route
   static Future<T?> pushReplacementNamed<T extends Object?, TO extends Object?>(
     String routeName, {
-    String? navigatorName,
+    String navigatorName = _rootNavigatorName,
     TO? result,
     Object? arguments,
   }) {
+    _checkInit(navigatorName);
     return _getNavigatorState(navigatorName).pushReplacementNamed<T, TO>(
       routeName,
       result: result,
@@ -163,9 +171,10 @@ class FastNav {
   static Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
     String newRouteName,
     bool Function(Route<dynamic> route) predicate, {
-    String? navigatorName,
+    String navigatorName = _rootNavigatorName,
     Object? arguments,
   }) {
+    _checkInit(navigatorName);
     return _getNavigatorState(navigatorName).pushNamedAndRemoveUntil<T>(
       newRouteName,
       predicate,
@@ -176,9 +185,10 @@ class FastNav {
   /// Remove all pages and push a named page route
   static Future<T?> pushNamedAndRemoveAll<T extends Object?>(
     String newRouteName, {
-    String? navigatorName,
+    String navigatorName = _rootNavigatorName,
     Object? arguments,
   }) {
+    _checkInit(navigatorName);
     return _getNavigatorState(navigatorName).pushNamedAndRemoveUntil<T>(
       newRouteName,
       (_) => false,

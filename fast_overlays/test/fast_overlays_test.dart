@@ -11,7 +11,10 @@ void main() {
       );
 
   test('Check init', () {
-    expect(() => FastOverlays.hideCurrentSnackBar(), throwsException);
+    expect(
+      () => FastOverlays.hideCurrentSnackBar(),
+      throwsA(isA<FastOverlaysNotInitializedException>()),
+    );
   });
 
   testWidgets('Snackbar', (tester) async {
