@@ -28,7 +28,7 @@ void main() {
 
     expect(
       () => RxNotifier.instance.setupObserver(observer, builder),
-      throwsA(isA<FastBuilderNoRxValuesException>()),
+      throwsA(isA<NoRxValuesInFastBuilder>()),
     );
   });
 }

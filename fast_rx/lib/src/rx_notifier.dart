@@ -32,7 +32,7 @@ class RxNotifier {
     // Calling the builder will add any relevant streams to the observer
     final built = builder();
     if (!observer.listenable) {
-      throw FastBuilderNoRxValuesException();
+      throw NoRxValuesInFastBuilder();
     }
     _observerIntermediate = null;
     return built;

@@ -13,7 +13,7 @@ void main() {
   test('Check init', () {
     expect(
       () => FastOverlays.hideCurrentSnackBar(),
-      throwsA(isA<FastOverlaysNotInitializedException>()),
+      throwsA(isA<FastOverlaysNotInitialized>()),
     );
   });
 

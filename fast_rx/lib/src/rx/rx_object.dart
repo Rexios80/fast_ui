@@ -36,7 +36,7 @@ abstract class RxObject<T> with Rx<T> {
   @override
   @protected
   set value(T value) {
-    throw RxObjectValueIsReadOnlyException();
+    throw RxObjectValueIsReadOnly();
   }
 
   @override

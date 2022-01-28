@@ -20,12 +20,12 @@ void main() {
     try {
       FastNav.pop();
     } catch (e) {
-      expect((e as NavigatorNotRegisteredException).navigatorName, isNull);
+      expect((e as NavigatorNotRegistered).navigatorName, isNull);
     }
     try {
       FastNav.pop(navigatorName: 'test');
     } catch (e) {
-      expect((e as NavigatorNotRegisteredException).navigatorName, 'test');
+      expect((e as NavigatorNotRegistered).navigatorName, 'test');
     }
   });
 

@@ -3,12 +3,12 @@ abstract class FastNavException implements Exception {}
 
 /// Exception thrown when navigation methods are called for a navigator that
 /// has not been registered with FastNav
-class NavigatorNotRegisteredException implements FastNavException {
+class NavigatorNotRegistered implements FastNavException {
   /// The name of the navigator that was not registered
   final String? navigatorName;
 
   /// Creates a NavigatorNotRegisteredException with the given [navigatorName]
-  NavigatorNotRegisteredException({this.navigatorName});
+  NavigatorNotRegistered({this.navigatorName});
 
   @override
   String toString() {

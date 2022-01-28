@@ -22,7 +22,7 @@ class FastOverlays {
     try {
       _navigatorKey.currentState!;
     } catch (e) {
-      throw FastOverlaysNotInitializedException();
+      throw FastOverlaysNotInitialized();
     }
   }
 
