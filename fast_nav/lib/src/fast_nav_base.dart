@@ -66,6 +66,8 @@ class FastNav {
   //* Anonymous navigation
 
   /// Navigate to an anonymous page route
+  /// 
+  /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> push<T extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
@@ -78,7 +80,7 @@ class FastNav {
       navigatorName: navigatorName,
       preventDuplicates: preventDuplicates,
     );
-    settings = _patchRouteSettings(settings, page);
+    settings = _patchAnonymousRouteSettings(settings, page);
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
       return Future.value();
@@ -94,6 +96,8 @@ class FastNav {
   }
 
   /// Replace the current page with a new anonymous page route
+  /// 
+  /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> pushReplacement<T extends Object?, TO extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
@@ -107,7 +111,7 @@ class FastNav {
       navigatorName: navigatorName,
       preventDuplicates: preventDuplicates,
     );
-    settings = _patchRouteSettings(settings, page);
+    settings = _patchAnonymousRouteSettings(settings, page);
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
       return Future.value();
@@ -124,6 +128,8 @@ class FastNav {
   }
 
   /// Remove pages until [predicate] returns true and push a new anonymous page route
+  /// 
+  /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> pushAndRemoveUntil<T extends Object?>(
     Widget page,
     bool Function(Route<dynamic> route) predicate, {
@@ -137,7 +143,7 @@ class FastNav {
       navigatorName: navigatorName,
       preventDuplicates: preventDuplicates,
     );
-    settings = _patchRouteSettings(settings, page);
+    settings = _patchAnonymousRouteSettings(settings, page);
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
       return Future.value();
@@ -154,6 +160,8 @@ class FastNav {
   }
 
   /// Remove all pages and push a new anonymous page route
+  /// 
+  /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> pushAndRemoveAll<T extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
@@ -166,7 +174,7 @@ class FastNav {
       navigatorName: navigatorName,
       preventDuplicates: preventDuplicates,
     );
-    settings = _patchRouteSettings(settings, page);
+    settings = _patchAnonymousRouteSettings(settings, page);
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
       return Future.value();
@@ -276,7 +284,7 @@ class FastNav {
   //* Internal convenience methods
 
   /// Patch anonymous page [RouteSettings] to always have a name
-  static RouteSettings _patchRouteSettings(
+  static RouteSettings _patchAnonymousRouteSettings(
     RouteSettings settings,
     Widget page,
   ) {
@@ -302,21 +310,18 @@ class FastNavObserver extends NavigatorObserver {
   void didPop(Route route, Route? previousRoute) {
     print('$navigatorName didPop: $route');
     FastNav._navigationStacks[navigatorName]!.removeLast();
-    print(FastNav._navigationStacks.toString());
   }
 
   @override
   void didPush(Route route, Route? previousRoute) {
     print('$navigatorName didPush: $route');
     FastNav._navigationStacks[navigatorName]!.add(route);
-    print(FastNav._navigationStacks.toString());
   }
 
   @override
   void didRemove(Route route, Route? previousRoute) {
     print('$navigatorName didRemove: $route');
     FastNav._navigationStacks[navigatorName]!.remove(route);
-    print(FastNav._navigationStacks.toString());
   }
 
   @override
@@ -332,6 +337,5 @@ class FastNavObserver extends NavigatorObserver {
     } else if (newRoute != null) {
       FastNav._navigationStacks[navigatorName]!.add(newRoute);
     }
-    print(FastNav._navigationStacks.toString());
   }
 }

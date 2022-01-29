@@ -107,6 +107,38 @@ void main() {
     expect(FastNav.canPop(), false);
   });
 
+  testWidgets('Anonymous duplicate prevention', (tester) async {
+    await tester.pumpWidget(buildBaseWidget());
+
+    // Duplicate prevention will not work for an anonymous home page
+    unawaited(FastNav.push(const Text('home')));
+    await tester.pumpAndSettle();
+
+    unawaited(FastNav.push(const Text(''), preventDuplicates: true));
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
+
+    unawaited(FastNav.pushReplacement(const Text(''), preventDuplicates: true));
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
+
+    unawaited(
+      FastNav.pushAndRemoveUntil(
+        const Text(''),
+        (e) => false,
+        preventDuplicates: true,
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
+
+    unawaited(
+      FastNav.pushAndRemoveAll(const Text(''), preventDuplicates: true),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
+  });
+
   testWidgets('Named routes', (tester) async {
     await tester.pumpWidget(buildBaseWidget());
     expect(FastNav.canPop(), false);
@@ -151,6 +183,40 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('test_page_4'), findsOneWidget);
     expect(FastNav.canPop(), false);
+  });
+
+  testWidgets('Named duplicate prevention', (tester) async {
+    await tester.pumpWidget(buildBaseWidget());
+
+    // Push a named route
+    unawaited(FastNav.pushNamed('test_page_2'));
+    await tester.pumpAndSettle();
+
+    unawaited(FastNav.pushNamed('test_page_2'));
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
+
+    unawaited(
+      FastNav.pushReplacementNamed('test_page_2', preventDuplicates: true),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
+
+    unawaited(
+      FastNav.pushNamedAndRemoveUntil(
+        'test_page_2',
+        (e) => false,
+        preventDuplicates: true,
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
+
+    unawaited(
+      FastNav.pushNamedAndRemoveAll('test_page_2', preventDuplicates: true),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
   });
 
   testWidgets('NestedNavigator', (tester) async {
