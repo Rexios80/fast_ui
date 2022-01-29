@@ -8,7 +8,7 @@ class NoRxValuesInFastBuilder implements FastRxException {
       ' Rx values must be used in the root widget of a FastBuilder.';
 }
 
-/// Exception thrown when attemptin to set RxObject.value
+/// Exception thrown when attempting to set RxObject.value
 class RxObjectValueIsReadOnly implements FastRxException {
   @override
   String toString() => 'RxObject.value is read-only.';
