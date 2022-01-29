@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:fast_nav/fast_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'observer_tester.dart';
 
 Widget buildBaseWidget() => MaterialApp(
       navigatorKey: FastNav.init(GlobalKey<NavigatorState>()),
@@ -185,38 +186,49 @@ void main() {
     expect(FastNav.canPop(), false);
   });
 
+  // Based on official Flutter navigation tests
   testWidgets('Named duplicate prevention', (tester) async {
-    await tester.pumpWidget(buildBaseWidget());
+    final testObserver = TestObserver();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: const Text('home'),
+        navigatorKey: FastNav.init(GlobalKey<NavigatorState>()),
+        routes: {'test_page': (context) => const Text('test_page')},
+        navigatorObservers: [FastNavObserver(), testObserver],
+      ),
+    );
 
     // Push a named route
-    unawaited(FastNav.pushNamed('test_page_2'));
+    unawaited(FastNav.pushNamed('test_page'));
     await tester.pumpAndSettle();
 
-    unawaited(FastNav.pushNamed('test_page_2'));
+    var isPushed = false;
+    testObserver.onPushed = (route, previousRoute) => isPushed = true;
+
+    unawaited(FastNav.pushNamed('test_page', preventDuplicates: true));
     await tester.pumpAndSettle();
-    expect(find.text('home'), findsOneWidget);
 
     unawaited(
-      FastNav.pushReplacementNamed('test_page_2', preventDuplicates: true),
+      FastNav.pushReplacementNamed('test_page', preventDuplicates: true),
     );
     await tester.pumpAndSettle();
-    expect(find.text('home'), findsOneWidget);
 
     unawaited(
       FastNav.pushNamedAndRemoveUntil(
-        'test_page_2',
+        'test_page',
         (e) => false,
         preventDuplicates: true,
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('home'), findsOneWidget);
 
     unawaited(
-      FastNav.pushNamedAndRemoveAll('test_page_2', preventDuplicates: true),
+      FastNav.pushNamedAndRemoveAll('test_page', preventDuplicates: true),
     );
     await tester.pumpAndSettle();
-    expect(find.text('home'), findsOneWidget);
+
+    expect(isPushed, isFalse);
   });
 
   testWidgets('NestedNavigator', (tester) async {
