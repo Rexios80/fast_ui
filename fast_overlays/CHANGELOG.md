@@ -1,3 +1,7 @@
+## 0.1.3
+- Named exceptions
+- Improved init
+
 ## 0.1.2
 - Updated documentation
 
