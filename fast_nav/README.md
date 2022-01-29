@@ -34,7 +34,7 @@ import 'package:flutter/material.dart';
 
 void example() {
   MaterialApp(
-    navigatorKey: FastNav.init(GlobalKey<NavigatorState>()),
+    navigatorKey: FastNav.init(),
   );
 }
 

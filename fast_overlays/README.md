@@ -41,7 +41,7 @@ void example() {
   // ...
 
   MaterialApp(
-    navigatorKey: FastOverlays.init(GlobalKey<NavigatorState>()),
+    navigatorKey: FastOverlays.init(),
   );
 }
 

@@ -6,7 +6,10 @@
 
 import 'package:flutter/material.dart';
 
-typedef OnObservation = void Function(Route<dynamic>? route, Route<dynamic>? previousRoute);
+typedef OnObservation = void Function(
+  Route<dynamic>? route,
+  Route<dynamic>? previousRoute,
+);
 
 /// A trivial observer for testing the navigator.
 class TestObserver extends NavigatorObserver {
@@ -32,12 +35,15 @@ class TestObserver extends NavigatorObserver {
   }
 
   @override
-  void didReplace({ Route<dynamic>? oldRoute, Route<dynamic>? newRoute }) {
+  void didReplace({Route<dynamic>? oldRoute, Route<dynamic>? newRoute}) {
     onReplaced?.call(newRoute, oldRoute);
   }
 
   @override
-  void didStartUserGesture(Route<dynamic> route, Route<dynamic>? previousRoute) {
+  void didStartUserGesture(
+    Route<dynamic> route,
+    Route<dynamic>? previousRoute,
+  ) {
     onStartUserGesture?.call(route, previousRoute);
   }
 }

@@ -146,7 +146,7 @@ void main() {
     expect(
       // ignore: invalid_use_of_protected_member
       () => rx.value = Tuple(0, 0),
-      throwsA(isA<RxObjectValueIsReadOnlyException>()),
+      throwsA(isA<RxObjectValueIsReadOnly>()),
     );
   });
 
