@@ -1,3 +1,8 @@
+## 0.2.0
+- Named exceptions
+- Duplicate prevention
+- Simpler init
+
 ## 0.1.2
 - Updated documentation
 

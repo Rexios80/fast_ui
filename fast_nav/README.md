@@ -61,7 +61,6 @@ void example() {
   // ...
 
   NestedNavigator(
-    navigatorKey: GlobalKey<NavigatorState>(),
     name: 'nestedNavigator',
     home: const Text('home'),
   );

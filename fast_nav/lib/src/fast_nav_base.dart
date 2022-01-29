@@ -13,12 +13,12 @@ class FastNav {
   ///
   /// Call in the [MaterialApp] constructor
   static GlobalKey<NavigatorState> init([GlobalKey<NavigatorState>? key]) {
-    return registerNavigator(name: _rootNavigatorName, key: key);
+    return registerNavigator(_rootNavigatorName, key: key);
   }
 
   /// Register a nested navigator with [FastNav]
-  static GlobalKey<NavigatorState> registerNavigator({
-    required String name,
+  static GlobalKey<NavigatorState> registerNavigator(
+    String name, {
     GlobalKey<NavigatorState>? key,
   }) {
     return _navigatorKeys[name] = key ?? GlobalKey<NavigatorState>();
