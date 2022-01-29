@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:fast_nav/src/exceptions.dart';
 import 'package:flutter/material.dart';
 
@@ -68,7 +66,7 @@ class FastNav {
   //* Anonymous navigation
 
   /// Navigate to an anonymous page route
-  static FutureOr<T?> push<T extends Object?>(
+  static Future<T?> push<T extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
     bool preventDuplicates = false,
@@ -83,7 +81,7 @@ class FastNav {
     settings = _patchRouteSettings(settings, page);
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
-      return null;
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).push<T>(
       MaterialPageRoute<T>(
@@ -96,7 +94,7 @@ class FastNav {
   }
 
   /// Replace the current page with a new anonymous page route
-  static FutureOr<T?> pushReplacement<T extends Object?, TO extends Object?>(
+  static Future<T?> pushReplacement<T extends Object?, TO extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
     bool preventDuplicates = false,
@@ -112,7 +110,7 @@ class FastNav {
     settings = _patchRouteSettings(settings, page);
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
-      return null;
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).pushReplacement<T, TO>(
       MaterialPageRoute<T>(
@@ -126,7 +124,7 @@ class FastNav {
   }
 
   /// Remove pages until [predicate] returns true and push a new anonymous page route
-  static FutureOr<T?> pushAndRemoveUntil<T extends Object?>(
+  static Future<T?> pushAndRemoveUntil<T extends Object?>(
     Widget page,
     bool Function(Route<dynamic> route) predicate, {
     String navigatorName = _rootNavigatorName,
@@ -142,7 +140,7 @@ class FastNav {
     settings = _patchRouteSettings(settings, page);
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
-      return null;
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
       MaterialPageRoute<T>(
@@ -156,7 +154,7 @@ class FastNav {
   }
 
   /// Remove all pages and push a new anonymous page route
-  static FutureOr<T?> pushAndRemoveAll<T extends Object?>(
+  static Future<T?> pushAndRemoveAll<T extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
     bool preventDuplicates = false,
@@ -171,7 +169,7 @@ class FastNav {
     settings = _patchRouteSettings(settings, page);
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
-      return null;
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
       MaterialPageRoute<T>(
@@ -187,7 +185,7 @@ class FastNav {
   //* Named navigation
 
   /// Navigate to a named page route
-  static FutureOr<T?> pushNamed<T extends Object?>(
+  static Future<T?> pushNamed<T extends Object?>(
     String routeName, {
     String navigatorName = _rootNavigatorName,
     bool preventDuplicates = false,
@@ -199,7 +197,7 @@ class FastNav {
     );
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == routeName) {
-      return null;
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).pushNamed<T>(
       routeName,
@@ -208,8 +206,7 @@ class FastNav {
   }
 
   /// Replace the current page with a named page route
-  static FutureOr<T?>
-      pushReplacementNamed<T extends Object?, TO extends Object?>(
+  static Future<T?> pushReplacementNamed<T extends Object?, TO extends Object?>(
     String routeName, {
     String navigatorName = _rootNavigatorName,
     bool preventDuplicates = false,
@@ -222,7 +219,7 @@ class FastNav {
     );
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == routeName) {
-      return null;
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).pushReplacementNamed<T, TO>(
       routeName,
@@ -232,7 +229,7 @@ class FastNav {
   }
 
   /// Remove pages until [predicate] returns true and push a named page route
-  static FutureOr<T?> pushNamedAndRemoveUntil<T extends Object?>(
+  static Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
     String newRouteName,
     bool Function(Route<dynamic> route) predicate, {
     String navigatorName = _rootNavigatorName,
@@ -245,7 +242,7 @@ class FastNav {
     );
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == newRouteName) {
-      return null;
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).pushNamedAndRemoveUntil<T>(
       newRouteName,
@@ -255,7 +252,7 @@ class FastNav {
   }
 
   /// Remove all pages and push a named page route
-  static FutureOr<T?> pushNamedAndRemoveAll<T extends Object?>(
+  static Future<T?> pushNamedAndRemoveAll<T extends Object?>(
     String newRouteName, {
     String navigatorName = _rootNavigatorName,
     bool preventDuplicates = false,
@@ -267,7 +264,7 @@ class FastNav {
     );
     if (preventDuplicates &&
         _navigationStacks[navigatorName]!.last.settings.name == newRouteName) {
-      return null;
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).pushNamedAndRemoveUntil<T>(
       newRouteName,
