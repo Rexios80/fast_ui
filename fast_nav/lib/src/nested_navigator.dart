@@ -12,7 +12,7 @@ class NestedNavigator extends StatelessWidget {
   /// The home page of the navigator
   final Widget home;
 
-  /// [NavigatorObserver]s to be added to the nested navigator`
+  /// [NavigatorObserver]s to be added to the nested navigator
   final Iterable<NavigatorObserver> observers;
 
   /// Create a nested navigator
