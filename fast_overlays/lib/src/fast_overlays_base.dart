@@ -11,10 +11,8 @@ class FastOverlays {
   /// Initialize [FastOverlays] with a [NavigatorState] key
   ///
   /// Call in the [MaterialApp] constructor
-  static GlobalKey<NavigatorState> init(
-    GlobalKey<NavigatorState> key,
-  ) {
-    return _navigatorKey = key;
+  static GlobalKey<NavigatorState> init([GlobalKey<NavigatorState>? key]) {
+    return _navigatorKey = key ?? GlobalKey<NavigatorState>();
   }
 
   /// Check if [_navigatorKey] has been initialized

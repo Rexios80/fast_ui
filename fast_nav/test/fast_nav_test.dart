@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'observer_tester.dart';
 
 Widget buildBaseWidget() => MaterialApp(
-      navigatorKey: FastNav.init(GlobalKey<NavigatorState>()),
+      navigatorKey: FastNav.init(),
       navigatorObservers: [FastNavObserver()],
       home: const Text('home'),
       routes: {
@@ -19,7 +19,6 @@ Widget buildBaseWidget() => MaterialApp(
 
 Widget buildNestedNavigatorWidget() => MaterialApp(
       home: NestedNavigator(
-        navigatorKey: GlobalKey<NavigatorState>(),
         name: 'nestedNavigator',
         home: const Text('home'),
       ),
@@ -40,7 +39,12 @@ void main() {
       expect((e as NavigatorNotRegistered).navigatorName, 'test');
     }
 
-    await tester.pumpWidget(buildBaseWidget());
+    await tester.pumpWidget(
+      MaterialApp(
+        navigatorKey: FastNav.init(),
+        home: const Text('home'),
+      ),
+    );
     try {
       unawaited(FastNav.push(const SizedBox.shrink(), preventDuplicates: true));
       throw 'Did not throw';
@@ -48,7 +52,14 @@ void main() {
       expect((e as NavigatorObserverNotRegistered).navigatorName, isNull);
     }
 
-    await tester.pumpWidget(buildNestedNavigatorWidget());
+    await tester.pumpWidget(
+      MaterialApp(
+        home: NestedNavigator(
+          name: 'nestedNavigator',
+          home: const SizedBox.shrink(),
+        ),
+      ),
+    );
     // Should not throw
     unawaited(
       FastNav.push(
@@ -193,15 +204,17 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: const Text('home'),
-        navigatorKey: FastNav.init(GlobalKey<NavigatorState>()),
+        navigatorKey: FastNav.init(),
         routes: {'test_page': (context) => const Text('test_page')},
         navigatorObservers: [FastNavObserver(), testObserver],
       ),
     );
+    expect(find.text('home'), findsOneWidget);
 
     // Push a named route
     unawaited(FastNav.pushNamed('test_page'));
     await tester.pumpAndSettle();
+    expect(find.text('test_page'), findsOneWidget);
 
     var isPushed = false;
     testObserver.onPushed = (route, previousRoute) => isPushed = true;
@@ -249,5 +262,57 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('home'), findsOneWidget);
     expect(FastNav.canPop(navigatorName: 'nestedNavigator'), false);
+  });
+
+  testWidgets('NestedNavigator duplicate prevention', (tester) async {
+    await tester.pumpWidget(buildNestedNavigatorWidget());
+    expect(find.text('home'), findsOneWidget);
+
+    // Duplicate prevention will not work for an anonymous home page
+    unawaited(
+      FastNav.push(const Text('home'), navigatorName: 'nestedNavigator'),
+    );
+    await tester.pumpAndSettle();
+
+    unawaited(
+      FastNav.push(
+        const Text(''),
+        navigatorName: 'nestedNavigator',
+        preventDuplicates: true,
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
+
+    unawaited(
+      FastNav.pushReplacement(
+        const Text(''),
+        navigatorName: 'nestedNavigator',
+        preventDuplicates: true,
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
+
+    unawaited(
+      FastNav.pushAndRemoveUntil(
+        const Text(''),
+        (e) => false,
+        navigatorName: 'nestedNavigator',
+        preventDuplicates: true,
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
+
+    unawaited(
+      FastNav.pushAndRemoveAll(
+        const Text(''),
+        navigatorName: 'nestedNavigator',
+        preventDuplicates: true,
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('home'), findsOneWidget);
   });
 }

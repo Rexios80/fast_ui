@@ -12,16 +12,16 @@ class FastNav {
   /// Register the root navigator with [FastNav]
   ///
   /// Call in the [MaterialApp] constructor
-  static GlobalKey<NavigatorState> init(GlobalKey<NavigatorState> key) {
-    return registerNavigator(key: key, name: _rootNavigatorName);
+  static GlobalKey<NavigatorState> init([GlobalKey<NavigatorState>? key]) {
+    return registerNavigator(name: _rootNavigatorName, key: key);
   }
 
   /// Register a nested navigator with [FastNav]
   static GlobalKey<NavigatorState> registerNavigator({
-    required GlobalKey<NavigatorState> key,
     required String name,
+    GlobalKey<NavigatorState>? key,
   }) {
-    return _navigatorKeys[name] = key;
+    return _navigatorKeys[name] = key ?? GlobalKey<NavigatorState>();
   }
 
   static void _checkInit({
@@ -66,7 +66,7 @@ class FastNav {
   //* Anonymous navigation
 
   /// Navigate to an anonymous page route
-  /// 
+  ///
   /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> push<T extends Object?>(
     Widget page, {
@@ -96,7 +96,7 @@ class FastNav {
   }
 
   /// Replace the current page with a new anonymous page route
-  /// 
+  ///
   /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> pushReplacement<T extends Object?, TO extends Object?>(
     Widget page, {
@@ -128,7 +128,7 @@ class FastNav {
   }
 
   /// Remove pages until [predicate] returns true and push a new anonymous page route
-  /// 
+  ///
   /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> pushAndRemoveUntil<T extends Object?>(
     Widget page,
@@ -160,7 +160,7 @@ class FastNav {
   }
 
   /// Remove all pages and push a new anonymous page route
-  /// 
+  ///
   /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> pushAndRemoveAll<T extends Object?>(
     Widget page, {
@@ -308,25 +308,21 @@ class FastNavObserver extends NavigatorObserver {
 
   @override
   void didPop(Route route, Route? previousRoute) {
-    print('$navigatorName didPop: $route');
     FastNav._navigationStacks[navigatorName]!.removeLast();
   }
 
   @override
   void didPush(Route route, Route? previousRoute) {
-    print('$navigatorName didPush: $route');
     FastNav._navigationStacks[navigatorName]!.add(route);
   }
 
   @override
   void didRemove(Route route, Route? previousRoute) {
-    print('$navigatorName didRemove: $route');
     FastNav._navigationStacks[navigatorName]!.remove(route);
   }
 
   @override
   void didReplace({Route? newRoute, Route? oldRoute}) {
-    print('$navigatorName didReplace: $oldRoute with $newRoute');
     if (oldRoute != null) {
       final index = FastNav._navigationStacks[navigatorName]!.indexOf(oldRoute);
       if (newRoute != null) {

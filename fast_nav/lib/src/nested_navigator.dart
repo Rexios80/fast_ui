@@ -18,18 +18,19 @@ class NestedNavigator extends StatelessWidget {
   /// Create a nested navigator
   ///
   /// Automatically registered with [FastNav]
-  const NestedNavigator({
+  NestedNavigator({
     Key? key,
-    required this.navigatorKey,
+    GlobalKey<NavigatorState>? navigatorKey,
     required this.name,
     required this.home,
     this.observers = const [],
-  }) : super(key: key);
+  })  : navigatorKey = navigatorKey ?? GlobalKey<NavigatorState>(),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      key: FastNav.registerNavigator(key: navigatorKey, name: name),
+      key: FastNav.registerNavigator(name: name, key: navigatorKey),
       observers: [FastNavObserver(navigatorName: name), ...observers],
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute(

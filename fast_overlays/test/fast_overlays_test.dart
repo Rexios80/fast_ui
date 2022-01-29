@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   buildBaseWidget() => MaterialApp(
-        navigatorKey: FastOverlays.init(GlobalKey<NavigatorState>()),
+        navigatorKey: FastOverlays.init(),
         home: const Scaffold(),
       );
 
