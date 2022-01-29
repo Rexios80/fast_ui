@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fast_nav/src/exceptions.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,7 @@ class FastNav {
 
   static const _rootNavigatorName = '_rootNavigator';
   static final _navigatorKeys = <String, GlobalKey<NavigatorState>>{};
+  static final _navigationStacks = <String, List<Route>>{};
 
   /// Register the root navigator with [FastNav]
   ///
@@ -23,13 +26,21 @@ class FastNav {
     return _navigatorKeys[name] = key;
   }
 
-  static void _checkInit(String navigatorName) {
+  static void _checkInit({
+    required String navigatorName,
+    required bool preventDuplicates,
+  }) {
     if (!_navigatorKeys.containsKey(navigatorName)) {
-      if (navigatorName == _rootNavigatorName) {
-        throw NavigatorNotRegistered();
-      } else {
-        throw NavigatorNotRegistered(navigatorName: navigatorName);
-      }
+      throw NavigatorNotRegistered(
+        navigatorName:
+            navigatorName == _rootNavigatorName ? null : navigatorName,
+      );
+    }
+    if (preventDuplicates && !_navigationStacks.containsKey(navigatorName)) {
+      throw NavigatorObserverNotRegistered(
+        navigatorName:
+            navigatorName == _rootNavigatorName ? null : navigatorName,
+      );
     }
   }
 
@@ -44,27 +55,36 @@ class FastNav {
     String navigatorName = _rootNavigatorName,
     T? result,
   }) {
-    _checkInit(navigatorName);
+    _checkInit(navigatorName: navigatorName, preventDuplicates: false);
     return _getNavigatorState(navigatorName).pop<T>(result);
   }
 
   /// Whether the navigator can be popped
   static bool canPop({String navigatorName = _rootNavigatorName}) {
-    _checkInit(navigatorName);
+    _checkInit(navigatorName: navigatorName, preventDuplicates: false);
     return _getNavigatorState(navigatorName).canPop();
   }
 
   //* Anonymous navigation
 
   /// Navigate to an anonymous page route
-  static Future<T?> push<T extends Object?>(
+  static FutureOr<T?> push<T extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
-    RouteSettings? settings,
+    bool preventDuplicates = false,
+    RouteSettings settings = const RouteSettings(),
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) {
-    _checkInit(navigatorName);
+    _checkInit(
+      navigatorName: navigatorName,
+      preventDuplicates: preventDuplicates,
+    );
+    settings = _patchRouteSettings(settings, page);
+    if (preventDuplicates &&
+        _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
+      return null;
+    }
     return _getNavigatorState(navigatorName).push<T>(
       MaterialPageRoute<T>(
         builder: (_) => page,
@@ -76,15 +96,24 @@ class FastNav {
   }
 
   /// Replace the current page with a new anonymous page route
-  static Future<T?> pushReplacement<T extends Object?, TO extends Object?>(
+  static FutureOr<T?> pushReplacement<T extends Object?, TO extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
-    RouteSettings? settings,
+    bool preventDuplicates = false,
+    RouteSettings settings = const RouteSettings(),
     bool maintainState = true,
     bool fullscreenDialog = false,
     TO? result,
   }) {
-    _checkInit(navigatorName);
+    _checkInit(
+      navigatorName: navigatorName,
+      preventDuplicates: preventDuplicates,
+    );
+    settings = _patchRouteSettings(settings, page);
+    if (preventDuplicates &&
+        _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
+      return null;
+    }
     return _getNavigatorState(navigatorName).pushReplacement<T, TO>(
       MaterialPageRoute<T>(
         builder: (_) => page,
@@ -96,16 +125,25 @@ class FastNav {
     );
   }
 
-  /// Remove pages unitl [predicate] returns true and push a new anonymous page route
-  static Future<T?> pushAndRemoveUntil<T extends Object?>(
+  /// Remove pages until [predicate] returns true and push a new anonymous page route
+  static FutureOr<T?> pushAndRemoveUntil<T extends Object?>(
     Widget page,
     bool Function(Route<dynamic> route) predicate, {
     String navigatorName = _rootNavigatorName,
-    RouteSettings? settings,
+    bool preventDuplicates = false,
+    RouteSettings settings = const RouteSettings(),
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) {
-    _checkInit(navigatorName);
+    _checkInit(
+      navigatorName: navigatorName,
+      preventDuplicates: preventDuplicates,
+    );
+    settings = _patchRouteSettings(settings, page);
+    if (preventDuplicates &&
+        _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
+      return null;
+    }
     return _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
       MaterialPageRoute<T>(
         builder: (_) => page,
@@ -118,14 +156,23 @@ class FastNav {
   }
 
   /// Remove all pages and push a new anonymous page route
-  static Future<T?> pushAndRemoveAll<T extends Object?>(
+  static FutureOr<T?> pushAndRemoveAll<T extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
-    RouteSettings? settings,
+    bool preventDuplicates = false,
+    RouteSettings settings = const RouteSettings(),
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) {
-    _checkInit(navigatorName);
+    _checkInit(
+      navigatorName: navigatorName,
+      preventDuplicates: preventDuplicates,
+    );
+    settings = _patchRouteSettings(settings, page);
+    if (preventDuplicates &&
+        _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
+      return null;
+    }
     return _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
       MaterialPageRoute<T>(
         builder: (_) => page,
@@ -140,12 +187,20 @@ class FastNav {
   //* Named navigation
 
   /// Navigate to a named page route
-  static Future<T?> pushNamed<T extends Object?>(
+  static FutureOr<T?> pushNamed<T extends Object?>(
     String routeName, {
     String navigatorName = _rootNavigatorName,
+    bool preventDuplicates = false,
     Object? arguments,
   }) {
-    _checkInit(navigatorName);
+    _checkInit(
+      navigatorName: navigatorName,
+      preventDuplicates: preventDuplicates,
+    );
+    if (preventDuplicates &&
+        _navigationStacks[navigatorName]!.last.settings.name == routeName) {
+      return null;
+    }
     return _getNavigatorState(navigatorName).pushNamed<T>(
       routeName,
       arguments: arguments,
@@ -153,13 +208,22 @@ class FastNav {
   }
 
   /// Replace the current page with a named page route
-  static Future<T?> pushReplacementNamed<T extends Object?, TO extends Object?>(
+  static FutureOr<T?>
+      pushReplacementNamed<T extends Object?, TO extends Object?>(
     String routeName, {
     String navigatorName = _rootNavigatorName,
+    bool preventDuplicates = false,
     TO? result,
     Object? arguments,
   }) {
-    _checkInit(navigatorName);
+    _checkInit(
+      navigatorName: navigatorName,
+      preventDuplicates: preventDuplicates,
+    );
+    if (preventDuplicates &&
+        _navigationStacks[navigatorName]!.last.settings.name == routeName) {
+      return null;
+    }
     return _getNavigatorState(navigatorName).pushReplacementNamed<T, TO>(
       routeName,
       result: result,
@@ -167,14 +231,22 @@ class FastNav {
     );
   }
 
-  /// Remove pages unitl [predicate] returns true and push a named page route
-  static Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
+  /// Remove pages until [predicate] returns true and push a named page route
+  static FutureOr<T?> pushNamedAndRemoveUntil<T extends Object?>(
     String newRouteName,
     bool Function(Route<dynamic> route) predicate, {
     String navigatorName = _rootNavigatorName,
+    bool preventDuplicates = false,
     Object? arguments,
   }) {
-    _checkInit(navigatorName);
+    _checkInit(
+      navigatorName: navigatorName,
+      preventDuplicates: preventDuplicates,
+    );
+    if (preventDuplicates &&
+        _navigationStacks[navigatorName]!.last.settings.name == newRouteName) {
+      return null;
+    }
     return _getNavigatorState(navigatorName).pushNamedAndRemoveUntil<T>(
       newRouteName,
       predicate,
@@ -183,16 +255,86 @@ class FastNav {
   }
 
   /// Remove all pages and push a named page route
-  static Future<T?> pushNamedAndRemoveAll<T extends Object?>(
+  static FutureOr<T?> pushNamedAndRemoveAll<T extends Object?>(
     String newRouteName, {
     String navigatorName = _rootNavigatorName,
+    bool preventDuplicates = false,
     Object? arguments,
   }) {
-    _checkInit(navigatorName);
+    _checkInit(
+      navigatorName: navigatorName,
+      preventDuplicates: preventDuplicates,
+    );
+    if (preventDuplicates &&
+        _navigationStacks[navigatorName]!.last.settings.name == newRouteName) {
+      return null;
+    }
     return _getNavigatorState(navigatorName).pushNamedAndRemoveUntil<T>(
       newRouteName,
       (_) => false,
       arguments: arguments,
     );
+  }
+
+  //* Internal convenience methods
+
+  /// Patch anonymous page [RouteSettings] to always have a name
+  static RouteSettings _patchRouteSettings(
+    RouteSettings settings,
+    Widget page,
+  ) {
+    if (settings.name == null) {
+      return settings.copyWith(name: page.runtimeType.toString());
+    } else {
+      return settings;
+    }
+  }
+}
+
+/// A [NavigatorObserver] that informs [FastNav] of navigation events
+class FastNavObserver extends NavigatorObserver {
+  /// The name of the navigator to observe
+  final String navigatorName;
+
+  /// Create a new [FastNavObserver] for the given [navigatorName]
+  FastNavObserver({this.navigatorName = FastNav._rootNavigatorName}) {
+    FastNav._navigationStacks[navigatorName] = [];
+  }
+
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    print('$navigatorName didPop: $route');
+    FastNav._navigationStacks[navigatorName]!.removeLast();
+    print(FastNav._navigationStacks.toString());
+  }
+
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    print('$navigatorName didPush: $route');
+    FastNav._navigationStacks[navigatorName]!.add(route);
+    print(FastNav._navigationStacks.toString());
+  }
+
+  @override
+  void didRemove(Route route, Route? previousRoute) {
+    print('$navigatorName didRemove: $route');
+    FastNav._navigationStacks[navigatorName]!.remove(route);
+    print(FastNav._navigationStacks.toString());
+  }
+
+  @override
+  void didReplace({Route? newRoute, Route? oldRoute}) {
+    print('$navigatorName didReplace: $oldRoute with $newRoute');
+    if (oldRoute != null) {
+      final index = FastNav._navigationStacks[navigatorName]!.indexOf(oldRoute);
+      if (newRoute != null) {
+        FastNav._navigationStacks[navigatorName]![index] = newRoute;
+      } else {
+        FastNav._navigationStacks[navigatorName]!.removeAt(index);
+      }
+    } else if (newRoute != null) {
+      FastNav._navigationStacks[navigatorName]!.add(newRoute);
+    }
+    print(FastNav._navigationStacks.toString());
   }
 }

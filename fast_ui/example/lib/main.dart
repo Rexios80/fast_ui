@@ -26,6 +26,7 @@ class FastUiExampleApp extends StatelessWidget {
         // Initialize both FastNav and FastOverlays in one line
         navigatorKey:
             FastNav.init(FastOverlays.init(GlobalKey<NavigatorState>())),
+        navigatorObservers: [FastNavObserver()],
         title: 'fast_ui Example',
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),

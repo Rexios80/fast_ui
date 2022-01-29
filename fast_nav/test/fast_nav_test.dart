@@ -129,26 +129,26 @@ void main() {
       MaterialApp(
         home: NestedNavigator(
           navigatorKey: GlobalKey<NavigatorState>(),
-          name: 'nested',
+          name: 'nestedNavigator',
           home: const Text('home'),
         ),
       ),
     );
     expect(find.text('home'), findsOneWidget);
-    expect(FastNav.canPop(navigatorName: 'nested'), false);
+    expect(FastNav.canPop(navigatorName: 'nestedNavigator'), false);
 
     push({String name = 'test_page'}) async {
-      unawaited(FastNav.push(Text(name), navigatorName: 'nested'));
+      unawaited(FastNav.push(Text(name), navigatorName: 'nestedNavigator'));
       await tester.pumpAndSettle();
     }
 
     await push();
     expect(find.text('test_page'), findsOneWidget);
-    expect(FastNav.canPop(navigatorName: 'nested'), true);
+    expect(FastNav.canPop(navigatorName: 'nestedNavigator'), true);
 
-    FastNav.pop(navigatorName: 'nested');
+    FastNav.pop(navigatorName: 'nestedNavigator');
     await tester.pumpAndSettle();
     expect(find.text('home'), findsOneWidget);
-    expect(FastNav.canPop(navigatorName: 'nested'), false);
+    expect(FastNav.canPop(navigatorName: 'nestedNavigator'), false);
   });
 }

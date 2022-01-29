@@ -18,6 +18,19 @@ class FastNavExample extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
+              child: const Text('Push duplicate with prevention'),
+              onPressed: () => FastNav.push(
+                const FastNavExample(),
+                preventDuplicates: true,
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              child: const Text('Push duplicate without prevention'),
+              onPressed: () => FastNav.push(const FastNavExample()),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
               child: const Text('Push nested navigator'),
               onPressed: () => FastNav.push(const NestedPage1()),
             ),
@@ -36,8 +49,35 @@ class Page2 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Page 2')),
       body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              child: const Text('Pop page 2'),
+              onPressed: () => FastNav.pop(),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              child: const Text('Replace with page 3'),
+              onPressed: () => FastNav.pushReplacement(const Page3()),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Page3 extends StatelessWidget {
+  const Page3({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Page 3')),
+      body: Center(
         child: ElevatedButton(
-          child: const Text('Pop page 2'),
+          child: const Text('Pop page 3'),
           onPressed: () => FastNav.pop(),
         ),
       ),
@@ -52,7 +92,7 @@ class NestedPage1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return NestedNavigator(
       navigatorKey: GlobalKey<NavigatorState>(),
-      name: 'nested',
+      name: 'nestedNavigator',
       home: Scaffold(
         appBar: AppBar(title: const Text('Nested Page 1')),
         body: Center(
@@ -61,8 +101,10 @@ class NestedPage1 extends StatelessWidget {
             children: [
               ElevatedButton(
                 child: const Text('Push nested page 2'),
-                onPressed: () =>
-                    FastNav.push(const NestedPage2(), navigatorName: 'nested'),
+                onPressed: () => FastNav.push(
+                  const NestedPage2(),
+                  navigatorName: 'nestedNavigator',
+                ),
               ),
               const SizedBox(height: 16),
               ElevatedButton(
@@ -87,7 +129,7 @@ class NestedPage2 extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           child: const Text('Pop nested page 2'),
-          onPressed: () => FastNav.pop(navigatorName: 'nested'),
+          onPressed: () => FastNav.pop(navigatorName: 'nestedNavigator'),
         ),
       ),
     );

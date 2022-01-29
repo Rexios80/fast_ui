@@ -6,11 +6,11 @@ void example() {
 
   NestedNavigator(
     navigatorKey: GlobalKey<NavigatorState>(),
-    name: 'nested',
+    name: 'nestedNavigator',
     home: const Text('home'),
   );
 
   // ...
 
-  FastNav.push(const Text('New page'), navigatorName: 'nested');
+  FastNav.push(const Text('New page'), navigatorName: 'nestedNavigator');
 }
