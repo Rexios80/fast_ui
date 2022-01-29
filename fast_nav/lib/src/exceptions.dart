@@ -33,10 +33,10 @@ class NavigatorObserverNotRegistered implements FastNavException {
   @override
   String toString() {
     if (navigatorName == null) {
-      return 'Root navigator has no registered observer.'
+      return 'Observer not registered for root navigator.'
           ' Add a FastNavObserver to the root navigator first.';
     } else {
-      return 'Navigator with name $navigatorName has no registered observer.'
+      return 'Observer not registered for navigator with name $navigatorName.'
           ' Add a FastNavObserver to the navigator first.';
     }
   }

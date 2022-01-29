@@ -4,29 +4,58 @@ import 'package:fast_nav/fast_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void main() {
-  buildBaseWidget() => MaterialApp(
-        navigatorKey: FastNav.init(GlobalKey<NavigatorState>()),
-        home: const Text('home'),
-        routes: {
-          'test_page': (context) => const Text('test_page'),
-          'test_page_2': (context) => const Text('test_page_2'),
-          'test_page_3': (context) => const Text('test_page_3'),
-          'test_page_4': (context) => const Text('test_page_4'),
-        },
-      );
+Widget buildBaseWidget() => MaterialApp(
+      navigatorKey: FastNav.init(GlobalKey<NavigatorState>()),
+      navigatorObservers: [FastNavObserver()],
+      home: const Text('home'),
+      routes: {
+        'test_page': (context) => const Text('test_page'),
+        'test_page_2': (context) => const Text('test_page_2'),
+        'test_page_3': (context) => const Text('test_page_3'),
+        'test_page_4': (context) => const Text('test_page_4'),
+      },
+    );
 
-  test('Check init', () {
+Widget buildNestedNavigatorWidget() => MaterialApp(
+      home: NestedNavigator(
+        navigatorKey: GlobalKey<NavigatorState>(),
+        name: 'nestedNavigator',
+        home: const Text('home'),
+      ),
+    );
+
+void main() {
+  testWidgets('Check init', (tester) async {
     try {
       FastNav.pop();
+      throw 'Did not throw';
     } catch (e) {
       expect((e as NavigatorNotRegistered).navigatorName, isNull);
     }
     try {
       FastNav.pop(navigatorName: 'test');
+      throw 'Did not throw';
     } catch (e) {
       expect((e as NavigatorNotRegistered).navigatorName, 'test');
     }
+
+    await tester.pumpWidget(buildBaseWidget());
+    try {
+      unawaited(FastNav.push(const SizedBox.shrink(), preventDuplicates: true));
+      throw 'Did not throw';
+    } catch (e) {
+      expect((e as NavigatorObserverNotRegistered).navigatorName, isNull);
+    }
+
+    await tester.pumpWidget(buildNestedNavigatorWidget());
+    // Should not throw
+    unawaited(
+      FastNav.push(
+        const SizedBox.shrink(),
+        navigatorName: 'nestedNavigator',
+        preventDuplicates: true,
+      ),
+    );
   });
 
   testWidgets('Anonymous routes', (tester) async {
@@ -125,15 +154,7 @@ void main() {
   });
 
   testWidgets('NestedNavigator', (tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: NestedNavigator(
-          navigatorKey: GlobalKey<NavigatorState>(),
-          name: 'nestedNavigator',
-          home: const Text('home'),
-        ),
-      ),
-    );
+    await tester.pumpWidget(buildNestedNavigatorWidget());
     expect(find.text('home'), findsOneWidget);
     expect(FastNav.canPop(navigatorName: 'nestedNavigator'), false);
 
