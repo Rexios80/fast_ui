@@ -20,7 +20,9 @@ fast_nav supports the following navigation methods:
 - pushNamedAndRemoveUntil
 - pushNamedAndRemoveAll
 
-fast_nav supports nested navigation and provides a NestedNavigator class for simple setup
+Convenience features:
+- Nested navigation with a NestedNavigator class for simple setup
+- Optional duplicate page prevention
 
 ## Getting started
 Register a GlobalKey with FastNav and your MaterialApp
@@ -32,7 +34,9 @@ import 'package:flutter/material.dart';
 
 void example() {
   MaterialApp(
-    navigatorKey: FastNav.init(GlobalKey<NavigatorState>()),
+    navigatorKey: FastNav.init(),
+    // Required for duplicate prevention
+    navigatorObservers: [FastNavObserver()],
   );
 }
 
@@ -59,14 +63,13 @@ void example() {
   // ...
 
   NestedNavigator(
-    navigatorKey: GlobalKey<NavigatorState>(),
-    name: 'nested',
+    name: 'nestedNavigator',
     home: const Text('home'),
   );
 
   // ...
 
-  FastNav.push(const Text('New page'), navigatorName: 'nested');
+  FastNav.push(const Text('New page'), navigatorName: 'nestedNavigator');
 }
 
 ```

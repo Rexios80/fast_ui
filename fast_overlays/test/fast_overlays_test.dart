@@ -6,12 +6,15 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   buildBaseWidget() => MaterialApp(
-        navigatorKey: FastOverlays.init(GlobalKey<NavigatorState>()),
+        navigatorKey: FastOverlays.init(),
         home: const Scaffold(),
       );
 
   test('Check init', () {
-    expect(() => FastOverlays.hideCurrentSnackBar(), throwsException);
+    expect(
+      () => FastOverlays.hideCurrentSnackBar(),
+      throwsA(isA<FastOverlaysNotInitialized>()),
+    );
   });
 
   testWidgets('Snackbar', (tester) async {

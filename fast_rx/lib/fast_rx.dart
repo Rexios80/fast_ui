@@ -1,5 +1,6 @@
 library fast_rx;
 
+export 'src/exceptions.dart';
 export 'src/fast_builder.dart';
 
 // rx

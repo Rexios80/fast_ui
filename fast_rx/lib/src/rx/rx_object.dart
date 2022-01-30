@@ -1,3 +1,4 @@
+import 'package:fast_rx/src/exceptions.dart';
 import 'package:fast_rx/src/rx/rx.dart';
 import 'package:flutter/foundation.dart';
 
@@ -35,7 +36,7 @@ abstract class RxObject<T> with Rx<T> {
   @override
   @protected
   set value(T value) {
-    throw UnimplementedError('RxObject.value is read only');
+    throw RxObjectValueIsReadOnly();
   }
 
   @override

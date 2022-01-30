@@ -1,3 +1,4 @@
+import 'package:fast_overlays/src/exceptions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as material;
 
@@ -10,10 +11,8 @@ class FastOverlays {
   /// Initialize [FastOverlays] with a [NavigatorState] key
   ///
   /// Call in the [MaterialApp] constructor
-  static GlobalKey<NavigatorState> init(
-    GlobalKey<NavigatorState> key,
-  ) {
-    return _navigatorKey = key;
+  static GlobalKey<NavigatorState> init([GlobalKey<NavigatorState>? key]) {
+    return _navigatorKey = key ?? GlobalKey<NavigatorState>();
   }
 
   /// Check if [_navigatorKey] has been initialized
@@ -21,10 +20,7 @@ class FastOverlays {
     try {
       _navigatorKey.currentState!;
     } catch (e) {
-      throw Exception(
-        'FastOverlays must be initialized before use.'
-        ' Call FastOverlays.init() first.',
-      );
+      throw FastOverlaysNotInitialized();
     }
   }
 

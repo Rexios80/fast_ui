@@ -24,7 +24,7 @@ fast_overlays supports the following overlays:
 - About dialog
 - General dialog
 
-### Convenience classes:
+### Convenience classes
 | Class            | Use-case                    |
 | ---------------- | --------------------------- |
 | SnackBarDuration | SnackBar duration constants |
@@ -41,7 +41,7 @@ void example() {
   // ...
 
   MaterialApp(
-    navigatorKey: FastOverlays.init(GlobalKey<NavigatorState>()),
+    navigatorKey: FastOverlays.init(),
   );
 }
 
