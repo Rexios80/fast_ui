@@ -4,7 +4,13 @@ coverage:
       default:
         target: auto
         threshold: 5%
-        base: auto 
+        base: auto
+    patch:
+      default:
+        target: auto
+        threshold: 5%
+        base: auto
+      
 
 flag_management:
   default_rules:
