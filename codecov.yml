@@ -19,7 +19,7 @@ flag_management:
       - name_prefix: project-
         type: project
         target: auto
-        threshold: 1%
+        threshold: 5%
       - name_prefix: patch-
         type: patch
         target: 90%
