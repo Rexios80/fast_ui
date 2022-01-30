@@ -8,7 +8,10 @@ import 'observer_tester.dart';
 Widget buildBaseWidget() => MaterialApp(
       navigatorKey: FastNav.init(),
       navigatorObservers: [FastNavObserver()],
-      home: const Text('home'),
+      onGenerateRoute: (settings) => FastNav.generateAnonymousRoute(
+        settings: settings,
+        page: const Text('home'),
+      ),
       routes: {
         'test_page': (context) => const Text('test_page'),
         'test_page_2': (context) => const Text('test_page_2'),
@@ -18,9 +21,12 @@ Widget buildBaseWidget() => MaterialApp(
     );
 
 Widget buildNestedNavigatorWidget() => MaterialApp(
-      home: NestedNavigator(
-        name: 'nestedNavigator',
-        home: const Text('home'),
+      onGenerateRoute: (settings) => FastNav.generateAnonymousRoute(
+        settings: settings,
+        page: NestedNavigator(
+          name: 'nestedNavigator',
+          home: const Text('home'),
+        ),
       ),
     );
 
@@ -50,6 +56,21 @@ void main() {
       throw 'Did not throw';
     } catch (e) {
       expect((e as NavigatorObserverNotRegistered).navigatorName, isNull);
+    }
+
+    await tester.pumpWidget(
+      MaterialApp(
+        navigatorKey: FastNav.init(),
+        home: const Text('home'),
+        navigatorObservers: [FastNavObserver()],
+      ),
+    );
+
+    try {
+      unawaited(FastNav.push(const SizedBox.shrink(), preventDuplicates: true));
+      throw 'Did not throw';
+    } catch (e) {
+      expect((e as AnonymousRouteNotPatched).navigatorName, isNull);
     }
 
     await tester.pumpWidget(
@@ -121,11 +142,6 @@ void main() {
 
   testWidgets('Anonymous duplicate prevention', (tester) async {
     await tester.pumpWidget(buildBaseWidget());
-
-    // Duplicate prevention will not work for an anonymous home page
-    // Should print a warning message in debug mode
-    unawaited(FastNav.push(const Text('home'), preventDuplicates: true));
-    await tester.pumpAndSettle();
 
     unawaited(FastNav.push(const Text(''), preventDuplicates: true));
     await tester.pumpAndSettle();
@@ -268,12 +284,6 @@ void main() {
   testWidgets('NestedNavigator duplicate prevention', (tester) async {
     await tester.pumpWidget(buildNestedNavigatorWidget());
     expect(find.text('home'), findsOneWidget);
-
-    // Duplicate prevention will not work for an anonymous home page
-    unawaited(
-      FastNav.push(const Text('home'), navigatorName: 'nestedNavigator'),
-    );
-    await tester.pumpAndSettle();
 
     unawaited(
       FastNav.push(

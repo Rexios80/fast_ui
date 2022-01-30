@@ -29,7 +29,10 @@ class FastUiExampleApp extends StatelessWidget {
         title: 'fast_ui Example',
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
-        home: const FastUiExample(),
+        onGenerateRoute: (settings) => FastNav.generateAnonymousRoute(
+          settings: settings,
+          page: const FastUiExample(),
+        ),
       ),
       tools: [
         ToolPanelSection(

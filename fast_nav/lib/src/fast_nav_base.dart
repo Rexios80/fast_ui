@@ -1,4 +1,3 @@
-import 'dart:developer' as developer;
 import 'package:fast_nav/src/exceptions.dart';
 import 'package:flutter/material.dart';
 
@@ -43,11 +42,14 @@ class FastNav {
     }
   }
 
-  static void _anonymousDuplicatePreventionCheck(String? lastRouteName) {
-    if (lastRouteName == '/') {
-      developer.log(
-        'Anonymous duplicate page prevention will not work for root page',
-        name: 'FastNav',
+  static void _anonymousRoutePatchCheck({
+    required String navigatorName,
+    required String? routeName,
+  }) {
+    if (routeName == null || routeName == '/') {
+      throw AnonymousRouteNotPatched(
+        navigatorName:
+            navigatorName == _rootNavigatorName ? null : navigatorName,
       );
     }
   }
@@ -76,8 +78,6 @@ class FastNav {
   //* Anonymous navigation
 
   /// Navigate to an anonymous page route
-  ///
-  /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> push<T extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
@@ -90,14 +90,14 @@ class FastNav {
       navigatorName: navigatorName,
       preventDuplicates: preventDuplicates,
     );
-    settings = _patchAnonymousRouteSettings(settings, page);
-    if (preventDuplicates) {
-      final lastRouteName =
-          _navigationStacks[navigatorName]!.last.settings.name;
-      _anonymousDuplicatePreventionCheck(lastRouteName);
-      if (lastRouteName == settings.name) {
-        return Future.value();
-      }
+    settings = generateAnonymousRoute(settings: settings, page: page).settings;
+    if (preventDuplicates &&
+        _isDuplicatePage(
+          navigatorName: navigatorName,
+          routeName: settings.name,
+          anonymous: true,
+        )) {
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).push<T>(
       MaterialPageRoute<T>(
@@ -110,8 +110,6 @@ class FastNav {
   }
 
   /// Replace the current page with a new anonymous page route
-  ///
-  /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> pushReplacement<T extends Object?, TO extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
@@ -125,14 +123,14 @@ class FastNav {
       navigatorName: navigatorName,
       preventDuplicates: preventDuplicates,
     );
-    settings = _patchAnonymousRouteSettings(settings, page);
-    if (preventDuplicates) {
-      final lastRouteName =
-          _navigationStacks[navigatorName]!.last.settings.name;
-      _anonymousDuplicatePreventionCheck(lastRouteName);
-      if (lastRouteName == settings.name) {
-        return Future.value();
-      }
+    settings = generateAnonymousRoute(settings: settings, page: page).settings;
+    if (preventDuplicates &&
+        _isDuplicatePage(
+          navigatorName: navigatorName,
+          routeName: settings.name,
+          anonymous: true,
+        )) {
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).pushReplacement<T, TO>(
       MaterialPageRoute<T>(
@@ -146,8 +144,6 @@ class FastNav {
   }
 
   /// Remove pages until [predicate] returns true and push a new anonymous page route
-  ///
-  /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> pushAndRemoveUntil<T extends Object?>(
     Widget page,
     bool Function(Route<dynamic> route) predicate, {
@@ -161,14 +157,14 @@ class FastNav {
       navigatorName: navigatorName,
       preventDuplicates: preventDuplicates,
     );
-    settings = _patchAnonymousRouteSettings(settings, page);
-    if (preventDuplicates) {
-      final lastRouteName =
-          _navigationStacks[navigatorName]!.last.settings.name;
-      _anonymousDuplicatePreventionCheck(lastRouteName);
-      if (lastRouteName == settings.name) {
-        return Future.value();
-      }
+    settings = generateAnonymousRoute(settings: settings, page: page).settings;
+    if (preventDuplicates &&
+        _isDuplicatePage(
+          navigatorName: navigatorName,
+          routeName: settings.name,
+          anonymous: true,
+        )) {
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
       MaterialPageRoute<T>(
@@ -182,8 +178,6 @@ class FastNav {
   }
 
   /// Remove all pages and push a new anonymous page route
-  ///
-  /// [preventDuplicates] will not work for [MaterialApp.home]
   static Future<T?> pushAndRemoveAll<T extends Object?>(
     Widget page, {
     String navigatorName = _rootNavigatorName,
@@ -196,14 +190,14 @@ class FastNav {
       navigatorName: navigatorName,
       preventDuplicates: preventDuplicates,
     );
-    settings = _patchAnonymousRouteSettings(settings, page);
-    if (preventDuplicates) {
-      final lastRouteName =
-          _navigationStacks[navigatorName]!.last.settings.name;
-      _anonymousDuplicatePreventionCheck(lastRouteName);
-      if (lastRouteName == settings.name) {
-        return Future.value();
-      }
+    settings = generateAnonymousRoute(settings: settings, page: page).settings;
+    if (preventDuplicates &&
+        _isDuplicatePage(
+          navigatorName: navigatorName,
+          routeName: settings.name,
+          anonymous: true,
+        )) {
+      return Future.value();
     }
     return _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
       MaterialPageRoute<T>(
@@ -230,7 +224,10 @@ class FastNav {
       preventDuplicates: preventDuplicates,
     );
     if (preventDuplicates &&
-        _navigationStacks[navigatorName]!.last.settings.name == routeName) {
+        _isDuplicatePage(
+          navigatorName: navigatorName,
+          routeName: routeName,
+        )) {
       return Future.value();
     }
     return _getNavigatorState(navigatorName).pushNamed<T>(
@@ -252,7 +249,10 @@ class FastNav {
       preventDuplicates: preventDuplicates,
     );
     if (preventDuplicates &&
-        _navigationStacks[navigatorName]!.last.settings.name == routeName) {
+        _isDuplicatePage(
+          navigatorName: navigatorName,
+          routeName: routeName,
+        )) {
       return Future.value();
     }
     return _getNavigatorState(navigatorName).pushReplacementNamed<T, TO>(
@@ -275,7 +275,10 @@ class FastNav {
       preventDuplicates: preventDuplicates,
     );
     if (preventDuplicates &&
-        _navigationStacks[navigatorName]!.last.settings.name == newRouteName) {
+        _isDuplicatePage(
+          navigatorName: navigatorName,
+          routeName: newRouteName,
+        )) {
       return Future.value();
     }
     return _getNavigatorState(navigatorName).pushNamedAndRemoveUntil<T>(
@@ -297,7 +300,10 @@ class FastNav {
       preventDuplicates: preventDuplicates,
     );
     if (preventDuplicates &&
-        _navigationStacks[navigatorName]!.last.settings.name == newRouteName) {
+        _isDuplicatePage(
+          navigatorName: navigatorName,
+          routeName: newRouteName,
+        )) {
       return Future.value();
     }
     return _getNavigatorState(navigatorName).pushNamedAndRemoveUntil<T>(
@@ -307,18 +313,41 @@ class FastNav {
     );
   }
 
+  //* Convenience methods
+
+  /// Patch anonymous page [RouteSettings] to always have a name.
+  /// Required for duplicate prevention to work for anonymous page routes.
+  /// If using named routes, don't use this.
+  static MaterialPageRoute generateAnonymousRoute({
+    required RouteSettings settings,
+    required Widget page,
+  }) {
+    if (settings.name == null || settings.name == '/') {
+      settings = settings.copyWith(name: page.runtimeType.toString());
+    }
+
+    return MaterialPageRoute(
+      settings: settings,
+      builder: (context) => page,
+    );
+  }
+
   //* Internal convenience methods
 
-  /// Patch anonymous page [RouteSettings] to always have a name
-  static RouteSettings _patchAnonymousRouteSettings(
-    RouteSettings settings,
-    Widget page,
-  ) {
-    if (settings.name == null) {
-      return settings.copyWith(name: page.runtimeType.toString());
-    } else {
-      return settings;
+  /// Check if a page route is a duplicate
+  static bool _isDuplicatePage({
+    required String navigatorName,
+    required String? routeName,
+    bool anonymous = false,
+  }) {
+    final lastRouteName = _navigationStacks[navigatorName]!.last.settings.name;
+    if (anonymous) {
+      _anonymousRoutePatchCheck(
+        navigatorName: navigatorName,
+        routeName: lastRouteName,
+      );
     }
+    return lastRouteName == routeName;
   }
 }
 
