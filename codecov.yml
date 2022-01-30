@@ -1,0 +1,10 @@
+flag_management:
+  default_rules:
+    statuses:
+      - name_prefix: project
+        type: project
+        target: auto
+        threshold: 1%
+      - name_prefix: patch
+        type: patch
+        target: 90%
