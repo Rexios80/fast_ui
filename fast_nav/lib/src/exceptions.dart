@@ -48,7 +48,7 @@ class AnonymousRouteNotPatched implements FastNavException {
   /// The name of the navigator with an unpatched page route
   final String? navigatorName;
 
-  /// Creates a [AnonymousRouteNotPatched] with the given [navigatorName]
+  /// Creates an [AnonymousRouteNotPatched] with the given [navigatorName]
   AnonymousRouteNotPatched({this.navigatorName});
 
   @override

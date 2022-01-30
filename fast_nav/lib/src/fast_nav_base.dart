@@ -333,6 +333,8 @@ class FastNav {
   }
 
   //* Internal convenience methods
+
+  /// Check if a page route is a duplicate
   static bool _isDuplicatePage({
     required String navigatorName,
     required String? routeName,

@@ -1,3 +1,6 @@
+## 0.2.1
+- Anonymous route duplicate prevention works for root page
+
 ## 0.2.0
 - Named exceptions
 - Duplicate page prevention

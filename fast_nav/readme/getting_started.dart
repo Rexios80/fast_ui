@@ -7,7 +7,9 @@ void example() {
     // Required for duplicate prevention
     navigatorObservers: [FastNavObserver()],
     // Required for anonymous page route duplicate prevention to work on root page
-    onGenerateRoute: (settings) =>
-        FastNav.generateAnonymousRoute(settings: settings, page: const Text('home')),
+    onGenerateRoute: (settings) => FastNav.generateAnonymousRoute(
+      settings: settings,
+      page: const Text('home'),
+    ),
   );
 }
