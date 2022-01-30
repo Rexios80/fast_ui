@@ -1,3 +1,6 @@
+## 0.2.2
+- Added slash to anonymous route name for web
+
 ## 0.2.1
 - Anonymous route duplicate prevention works for root page
 

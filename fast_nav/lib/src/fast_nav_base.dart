@@ -323,7 +323,7 @@ class FastNav {
     required Widget page,
   }) {
     if (settings.name == null || settings.name == '/') {
-      settings = settings.copyWith(name: page.runtimeType.toString());
+      settings = settings.copyWith(name: '/' + page.runtimeType.toString());
     }
 
     return MaterialPageRoute(
