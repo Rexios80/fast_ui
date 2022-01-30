@@ -1,10 +1,19 @@
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 5%
+        base: auto 
+
 flag_management:
   default_rules:
+    carryforward: false
     statuses:
-      - name_prefix: project
+      - name_prefix: project-
         type: project
         target: auto
         threshold: 1%
-      - name_prefix: patch
+      - name_prefix: patch-
         type: patch
         target: 90%
