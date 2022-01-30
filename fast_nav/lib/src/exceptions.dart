@@ -41,3 +41,24 @@ class NavigatorObserverNotRegistered implements FastNavException {
     }
   }
 }
+
+/// Exception thrown when attempting to prevent duplicates for an anonymous
+/// page route without a name
+class AnonymousRouteNotPatched implements FastNavException {
+  /// The name of the navigator with an unpatched page route
+  final String? navigatorName;
+
+  /// Creates a [AnonymousRouteNotPatched] with the given [navigatorName]
+  AnonymousRouteNotPatched({this.navigatorName});
+
+  @override
+  String toString() {
+    if (navigatorName == null) {
+      return 'Anonymous page route not patched for root navigator.'
+          ' Add FastNav.generateAnonymousRoute to the navigator.';
+    } else {
+      return 'Anonymous page route not patched for navigator with name $navigatorName.'
+          ' Add FastNav.generateAnonymousRoute to the navigator.';
+    }
+  }
+}

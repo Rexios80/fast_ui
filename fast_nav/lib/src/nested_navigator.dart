@@ -15,6 +15,9 @@ class NestedNavigator extends StatelessWidget {
   /// [NavigatorObserver]s to be added to the nested navigator
   final Iterable<NavigatorObserver> observers;
 
+  /// Called to generate a route for a given [RouteSettings].
+  final RouteFactory? onGenerateRoute;
+
   /// Create a nested navigator
   ///
   /// Automatically registered with [FastNav]
@@ -24,6 +27,7 @@ class NestedNavigator extends StatelessWidget {
     required this.name,
     required this.home,
     this.observers = const [],
+    this.onGenerateRoute,
   })  : navigatorKey = navigatorKey ?? GlobalKey<NavigatorState>(),
         super(key: key);
 
@@ -32,12 +36,9 @@ class NestedNavigator extends StatelessWidget {
     return Navigator(
       key: FastNav.registerNavigator(name, key: navigatorKey),
       observers: [FastNavObserver(name), ...observers],
-      onGenerateRoute: (RouteSettings settings) {
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (context) => home,
-        );
-      },
+      onGenerateRoute: (settings) =>
+          onGenerateRoute?.call(settings) ??
+          FastNav.generateAnonymousRoute(settings: settings, page: home),
     );
   }
 }
