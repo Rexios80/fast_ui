@@ -154,21 +154,21 @@ packages:
       path: "../../fast_nav"
       relative: true
     source: path
-    version: "0.1.2"
+    version: "0.2.0"
   fast_overlays:
     dependency: "direct overridden"
     description:
       path: "../../fast_overlays"
       relative: true
     source: path
-    version: "0.1.2"
+    version: "0.1.3"
   fast_rx:
     dependency: "direct overridden"
     description:
       path: "../../fast_rx"
       relative: true
     source: path
-    version: "0.1.2"
+    version: "0.1.3"
   fast_ui:
     dependency: "direct main"
     description:
