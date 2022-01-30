@@ -4,7 +4,13 @@ coverage:
       default:
         target: auto
         threshold: 5%
-        base: auto 
+        base: auto
+    patch:
+      default:
+        target: auto
+        threshold: 5%
+        base: auto
+      
 
 flag_management:
   default_rules:
@@ -13,7 +19,7 @@ flag_management:
       - name_prefix: project-
         type: project
         target: auto
-        threshold: 1%
+        threshold: 5%
       - name_prefix: patch-
         type: patch
         target: 90%
