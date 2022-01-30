@@ -31,7 +31,7 @@ class NestedNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Navigator(
       key: FastNav.registerNavigator(name, key: navigatorKey),
-      observers: [FastNavObserver(navigatorName: name), ...observers],
+      observers: [FastNavObserver(name), ...observers],
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute(
           settings: settings,

@@ -123,7 +123,8 @@ void main() {
     await tester.pumpWidget(buildBaseWidget());
 
     // Duplicate prevention will not work for an anonymous home page
-    unawaited(FastNav.push(const Text('home')));
+    // Should print a warning message in debug mode
+    unawaited(FastNav.push(const Text('home'), preventDuplicates: true));
     await tester.pumpAndSettle();
 
     unawaited(FastNav.push(const Text(''), preventDuplicates: true));

@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:fast_nav/src/exceptions.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +43,15 @@ class FastNav {
     }
   }
 
+  static void _anonymousDuplicatePreventionCheck(String? lastRouteName) {
+    if (lastRouteName == '/') {
+      developer.log(
+        'Anonymous duplicate page prevention will not work for root page',
+        name: 'FastNav',
+      );
+    }
+  }
+
   static NavigatorState _getNavigatorState(String navigatorName) {
     return _navigatorKeys[navigatorName]!.currentState!;
   }
@@ -81,9 +91,13 @@ class FastNav {
       preventDuplicates: preventDuplicates,
     );
     settings = _patchAnonymousRouteSettings(settings, page);
-    if (preventDuplicates &&
-        _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
-      return Future.value();
+    if (preventDuplicates) {
+      final lastRouteName =
+          _navigationStacks[navigatorName]!.last.settings.name;
+      _anonymousDuplicatePreventionCheck(lastRouteName);
+      if (lastRouteName == settings.name) {
+        return Future.value();
+      }
     }
     return _getNavigatorState(navigatorName).push<T>(
       MaterialPageRoute<T>(
@@ -112,9 +126,13 @@ class FastNav {
       preventDuplicates: preventDuplicates,
     );
     settings = _patchAnonymousRouteSettings(settings, page);
-    if (preventDuplicates &&
-        _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
-      return Future.value();
+    if (preventDuplicates) {
+      final lastRouteName =
+          _navigationStacks[navigatorName]!.last.settings.name;
+      _anonymousDuplicatePreventionCheck(lastRouteName);
+      if (lastRouteName == settings.name) {
+        return Future.value();
+      }
     }
     return _getNavigatorState(navigatorName).pushReplacement<T, TO>(
       MaterialPageRoute<T>(
@@ -144,9 +162,13 @@ class FastNav {
       preventDuplicates: preventDuplicates,
     );
     settings = _patchAnonymousRouteSettings(settings, page);
-    if (preventDuplicates &&
-        _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
-      return Future.value();
+    if (preventDuplicates) {
+      final lastRouteName =
+          _navigationStacks[navigatorName]!.last.settings.name;
+      _anonymousDuplicatePreventionCheck(lastRouteName);
+      if (lastRouteName == settings.name) {
+        return Future.value();
+      }
     }
     return _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
       MaterialPageRoute<T>(
@@ -175,9 +197,13 @@ class FastNav {
       preventDuplicates: preventDuplicates,
     );
     settings = _patchAnonymousRouteSettings(settings, page);
-    if (preventDuplicates &&
-        _navigationStacks[navigatorName]!.last.settings.name == settings.name) {
-      return Future.value();
+    if (preventDuplicates) {
+      final lastRouteName =
+          _navigationStacks[navigatorName]!.last.settings.name;
+      _anonymousDuplicatePreventionCheck(lastRouteName);
+      if (lastRouteName == settings.name) {
+        return Future.value();
+      }
     }
     return _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
       MaterialPageRoute<T>(
@@ -302,7 +328,7 @@ class FastNavObserver extends NavigatorObserver {
   final String navigatorName;
 
   /// Create a new [FastNavObserver] for the given [navigatorName]
-  FastNavObserver({this.navigatorName = FastNav._rootNavigatorName}) {
+  FastNavObserver([this.navigatorName = FastNav._rootNavigatorName]) {
     FastNav._navigationStacks[navigatorName] = [];
   }
 

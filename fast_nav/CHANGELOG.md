@@ -1,6 +1,6 @@
 ## 0.2.0
 - Named exceptions
-- Duplicate prevention
+- Duplicate page prevention
 - Simpler init
 
 ## 0.1.2
