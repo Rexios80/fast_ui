@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 /// A reactive set
 class RxSet<E> extends RxIterable<E> implements Set<E> {
   /// Create a reactive set
-  RxSet(Set<E> value) : super(value);
+  RxSet([Set<E> value = const {}]) : super(value);
 
   @override
   @protected

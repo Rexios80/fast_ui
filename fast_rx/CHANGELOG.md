@@ -1,3 +1,6 @@
+## 0.1.4
+- RxList, RxMap, and RxSet no longer require an initial value to be passed in to the constructor
+
 ## 0.1.3
 - Named exceptions
 

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 /// A reactive map
 class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
   /// Create a reactive map
-  RxMap(Map<K, V> value) : super(value);
+  RxMap([Map<K, V> value = const {}]) : super(value);
 
   @override
   Map<K, V> copyValue() => Map.from(unregisteredValue);

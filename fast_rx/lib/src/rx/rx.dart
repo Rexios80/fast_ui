@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:fast_rx/src/rx_notifier.dart';
 import 'package:flutter/foundation.dart';
 
-/// Reactive object
+/// Base class for reactives
 abstract class Rx<T> {
   final StreamController<T> _controller = StreamController.broadcast();
 

@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 /// A reactive list
 class RxList<E> extends RxIterable<E> implements List<E> {
   /// Create a reactive list
-  RxList(List<E> value) : super(value);
+  RxList([List<E> value = const []]) : super(value);
 
   @override
   @protected
