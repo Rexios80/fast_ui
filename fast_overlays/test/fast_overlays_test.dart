@@ -206,10 +206,14 @@ void main() {
 
 class TestSearchDelegate extends SearchDelegate {
   @override
-  List<Widget>? buildActions(BuildContext context) {}
+  List<Widget>? buildActions(BuildContext context) {
+    return null;
+  }
 
   @override
-  Widget? buildLeading(BuildContext context) {}
+  Widget? buildLeading(BuildContext context) {
+    return null;
+  }
 
   @override
   Widget buildResults(BuildContext context) {

@@ -1,3 +1,6 @@
+## 0.1.4
+- Fixed analysis issue
+
 ## 0.1.3
 - Named exceptions
 - Improved init
