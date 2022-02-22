@@ -45,6 +45,8 @@ class NestedNavigator extends StatelessWidget {
             settings: settings,
             page: home!,
           );
+        } else {
+          return null;
         }
       },
     );

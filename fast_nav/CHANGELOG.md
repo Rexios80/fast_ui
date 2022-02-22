@@ -1,3 +1,6 @@
+## 0.2.3
+- Fixed analysis issue
+
 ## 0.2.2
 - Added slash to anonymous route name for web
 
