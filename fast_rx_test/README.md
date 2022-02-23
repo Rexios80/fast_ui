@@ -18,7 +18,7 @@ See [fast_rx](https://pub.dev/packages/fast_rx)
 
 ## Usage
 
-<!-- embedme test/rx/rx_object_test.dart -->
+<!-- embedme ../fast_rx/test/rx/rx_object_test.dart -->
 ```dart
 import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
