@@ -1,0 +1,1 @@
+See the [fast_rx tests](https://github.com/Rexios80/fast_ui/tree/master/fast_rx/test/rx)

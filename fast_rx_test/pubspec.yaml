@@ -1,5 +1,5 @@
 name: fast_rx_test
-description: Testing utilities for fast_rx
+description: Testing utilities for fast_rx. Check for valid RxObject registration.
 version: 0.1.0
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx_test
 

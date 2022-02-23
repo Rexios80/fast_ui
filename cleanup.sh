@@ -1,2 +1,2 @@
 flutter format .
-npx embedme **/README.md
+npx embedme **/*.md
