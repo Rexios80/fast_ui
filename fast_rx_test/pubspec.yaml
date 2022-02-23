@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  fast_rx: ^0.1.0
+  fast_rx: ^0.2.0
   mockito: ^5.0.17
 
 dev_dependencies:
