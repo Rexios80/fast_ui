@@ -1,3 +1,6 @@
+## 0.2.2
+- Fixed RxList, RxMap, and RxSet being unmodifiable
+
 ## 0.2.1
 - Added mockito to dev dependencies
 
