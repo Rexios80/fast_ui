@@ -1,4 +1,4 @@
-## 0.1.4
+## 0.2.0
 - RxList, RxMap, and RxSet no longer require an initial value to be passed in to the constructor
 - Moved testing utilities to fast_rx_test
 
