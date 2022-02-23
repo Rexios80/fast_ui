@@ -8,7 +8,14 @@ jobs:
     strategy:
       matrix:
         project:
-          ["fast_extensions", "fast_nav", "fast_overlays", "fast_rx", "fast_ui"]
+          [
+            "fast_extensions",
+            "fast_nav",
+            "fast_overlays",
+            "fast_rx",
+            "fast_rx_test",
+            "fast_ui",
+          ]
     defaults:
       run:
         working-directory: ${{ matrix.project }}
@@ -23,11 +30,16 @@ jobs:
         run: flutter format . --set-exit-if-changed
       - name: Analyze
         run: flutter analyze
-      - name: Pana
-        run: |
-          flutter pub global activate pana
-          pana --no-warning --exit-code-threshold 0
       - name: Embedme
         run: |
           npm install embedme
           npx embedme README.md --verify
+      - name: Build runner
+        if: ${{ matrix.project == "fast_rx_test" }}
+        run: |
+          flutter pub run build_runner build --delete-conflicting-outputs
+          git diff --exit-code
+      - name: Pana
+        run: |
+          flutter pub global activate pana
+          pana --no-warning --exit-code-threshold 0

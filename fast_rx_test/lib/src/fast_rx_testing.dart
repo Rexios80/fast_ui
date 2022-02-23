@@ -1,3 +1,5 @@
+// ignore_for_file: implementation_imports
+
 import 'package:fast_rx/src/rx_notifier.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mockito/annotations.dart';

@@ -3,7 +3,7 @@ import 'package:fast_rx/fast_rx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:fast_rx/testing/fast_rx_testing.mocks.dart';
+import 'package:fast_rx_test/src/fast_rx_testing.mocks.dart';
 
 void main() {
   test('RxNotifier should add stream', () {

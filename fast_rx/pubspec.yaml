@@ -11,11 +11,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  mockito: ^5.0.17
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   rexios_lints: ^1.0.0
-  build_runner: ^2.1.7
+
+  # In a real application, depend on fast_rx_test from pub
+  fast_rx_test:
+    path: ../fast_rx_test

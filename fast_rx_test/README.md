@@ -1,3 +1,25 @@
+Testing utilities for [fast_rx](https://pub.dev/packages/fast_rx)
+
+[![pub package](https://img.shields.io/pub/v/fast_rx_test.svg?label=fast_rx_test)](https://pub.dev/packages/fast_rx_test)
+![checks](https://img.shields.io/github/checks-status/Rexios80/fast_ui/master)
+[![popularity](https://badges.bar/fast_rx_test/popularity)](https://pub.dev/packages/fast_rx_test/score)
+[![likes](https://badges.bar/fast_rx_test/likes)](https://pub.dev/packages/fast_rx_test/score)
+[![pub points](https://badges.bar/fast_rx_test/pub%20points)](https://pub.dev/packages/fast_rx_test/score)
+
+## Features
+
+| Method               | Use-case                                         |
+| -------------------- | ------------------------------------------------ |
+| expectRxRegistration | Check for valid registration with the RxNotifier |
+
+## Getting started
+
+See [fast_rx](https://pub.dev/packages/fast_rx)
+
+## Usage
+
+<!-- embedme test/rx/rx_object_test.dart -->
+```dart
 import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -50,3 +72,9 @@ void main() {
     );
   });
 }
+
+```
+
+## Additional information
+
+See [fast_ui](https://pub.dev/packages/fast_ui) for more information

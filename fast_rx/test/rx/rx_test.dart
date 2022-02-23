@@ -1,5 +1,5 @@
 import 'package:fast_rx/src/rx/rx_value.dart';
-import 'package:fast_rx/testing.dart';
+import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
