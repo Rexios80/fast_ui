@@ -2,8 +2,8 @@
 
 import 'package:fast_rx/src/rx/rx.dart';
 import 'package:fast_rx/src/rx_notifier.dart';
+import 'package:fast_rx_test/src/fast_rx_testing.mocks.dart';
 import 'package:mockito/mockito.dart';
-import 'package:fast_rx/testing/fast_rx_testing.mocks.dart';
 
 /// Expect that every call in [shouldRegister] registers exactly once, and that
 /// every call in [shouldNotRegister] does not register
