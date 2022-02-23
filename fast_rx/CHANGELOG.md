@@ -1,3 +1,6 @@
+## 0.2.3
+- Depend on fast_rx_test from pub
+
 ## 0.2.2
 - Fixed RxList, RxMap, and RxSet being unmodifiable
 

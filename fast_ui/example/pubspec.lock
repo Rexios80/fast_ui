@@ -91,7 +91,7 @@ packages:
       path: "../../fast_rx"
       relative: true
     source: path
-    version: "0.2.2"
+    version: "0.2.3"
   fast_ui:
     dependency: "direct main"
     description:
