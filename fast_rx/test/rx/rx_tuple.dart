@@ -33,9 +33,11 @@ class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
   set item2(T2 value) => notifyIfChanged(() => unregisteredValue.item2 = value);
 
   @override
+  @protected
   Tuple<T1, T2> copyValue() => Tuple.from(unregisteredValue);
 
   @override
+  @protected
   bool shouldNotify(Tuple<T1, T2> oldValue) =>
       oldValue.item1 != unregisteredValue.item1 ||
       oldValue.item2 != unregisteredValue.item2;

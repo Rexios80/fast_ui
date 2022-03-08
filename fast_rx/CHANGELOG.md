@@ -1,3 +1,6 @@
+## 0.2.4
+- Added missing annotations
+
 ## 0.2.3
 - Depend on fast_rx_test from pub
 
