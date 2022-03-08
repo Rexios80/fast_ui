@@ -17,7 +17,7 @@ abstract class RxObject<T> with Rx<T> {
   ///
   /// Should only be used in methods that return a value.
   /// Otherwise, use [unregisteredValue].
-  /// 
+  ///
   /// Overrides should be annotated with `@protected`
   @override
   @protected
@@ -31,7 +31,7 @@ abstract class RxObject<T> with Rx<T> {
   ///
   /// Used to prevent unnecessary calls to [register] in internal methods such
   /// as [copyValue], [shouldNotify], or methods that do not return a value
-  /// 
+  ///
   /// Overrides should be annotated with `@protected`
   @protected
   T get unregisteredValue => _value;
@@ -62,13 +62,13 @@ abstract class RxObject<T> with Rx<T> {
   }
 
   /// Copy the value for update emission
-  /// 
+  ///
   /// Overrides should be annotated with `@protected`
   @protected
   T copyValue();
 
   /// Check if the value has changed
-  /// 
+  ///
   /// Overrides should be annotated with `@protected`
   @protected
   bool shouldNotify(T oldValue);
