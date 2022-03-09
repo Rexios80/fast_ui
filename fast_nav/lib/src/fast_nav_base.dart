@@ -17,11 +17,14 @@ class FastNav {
   }
 
   /// Register a nested navigator with [FastNav]
+  ///
+  /// Each navigator [name] can only be registered once. Subsequent
+  /// registrations will return the existing [GlobalKey].
   static GlobalKey<NavigatorState> registerNavigator(
     String name, {
     GlobalKey<NavigatorState>? key,
   }) {
-    return _navigatorKeys[name] = key ?? GlobalKey<NavigatorState>();
+    return _navigatorKeys[name] ??= key ?? GlobalKey<NavigatorState>();
   }
 
   static void _checkInit({
@@ -34,7 +37,11 @@ class FastNav {
             navigatorName == _rootNavigatorName ? null : navigatorName,
       );
     }
-    if (preventDuplicates && !_navigationStacks.containsKey(navigatorName)) {
+    // The navigation stack can be empty if the observer was added between hot
+    // reloads
+    if (preventDuplicates &&
+        !(_navigationStacks.containsKey(navigatorName) &&
+            _navigationStacks[navigatorName]!.isNotEmpty)) {
       throw NavigatorObserverNotRegistered(
         navigatorName:
             navigatorName == _rootNavigatorName ? null : navigatorName,
@@ -56,6 +63,13 @@ class FastNav {
 
   static NavigatorState _getNavigatorState(String navigatorName) {
     return _navigatorKeys[navigatorName]!.currentState!;
+  }
+
+  /// Reset [FastNav] for testing
+  @visibleForTesting
+  static void reset() {
+    _navigatorKeys.clear();
+    _navigationStacks.clear();
   }
 
   //* Common navigation methods

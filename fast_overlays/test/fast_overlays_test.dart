@@ -15,6 +15,11 @@ void main() {
       () => FastOverlays.hideCurrentSnackBar(),
       throwsA(isA<FastOverlaysNotInitialized>()),
     );
+
+    // Multiple init calls should return the same GlobalKey
+    final key1 = FastOverlays.init();
+    final key2 = FastOverlays.init();
+    expect(key1, key2);
   });
 
   testWidgets('Snackbar', (tester) async {

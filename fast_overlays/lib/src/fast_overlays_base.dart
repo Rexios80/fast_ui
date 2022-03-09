@@ -6,26 +6,31 @@ import 'package:flutter/material.dart' as material;
 class FastOverlays {
   FastOverlays._();
 
-  static late GlobalKey<NavigatorState> _navigatorKey;
+  static GlobalKey<NavigatorState>? _navigatorKey;
 
   /// Initialize [FastOverlays] with a [NavigatorState] key
   ///
   /// Call in the [MaterialApp] constructor
+  ///
+  /// A [GlobalKey] can only be registered once. Subsequent calls will return
+  /// the existing [GlobalKey].
   static GlobalKey<NavigatorState> init([GlobalKey<NavigatorState>? key]) {
-    return _navigatorKey = key ?? GlobalKey<NavigatorState>();
+    return _navigatorKey ??= key ?? GlobalKey<NavigatorState>();
   }
 
   /// Check if [_navigatorKey] has been initialized
   static void _checkInit() {
     try {
-      _navigatorKey.currentState!;
+      _navigatorKey!.currentContext!;
     } catch (e) {
       throw FastOverlaysNotInitialized();
     }
   }
 
+  static BuildContext get _context => _navigatorKey!.currentContext!;
+
   static ScaffoldMessengerState get _scaffoldMessenger {
-    return ScaffoldMessenger.of(_navigatorKey.currentContext!);
+    return ScaffoldMessenger.of(_navigatorKey!.currentContext!);
   }
 
   //* SnackBars
@@ -129,7 +134,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showModalBottomSheet(
-      context: _navigatorKey.currentContext!,
+      context: _context,
       builder: builder,
       backgroundColor: backgroundColor,
       elevation: elevation,
@@ -172,7 +177,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showDatePicker(
-      context: _navigatorKey.currentContext!,
+      context: _context,
       initialDate: initialDate,
       firstDate: firstDate,
       lastDate: lastDate,
@@ -221,7 +226,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showDateRangePicker(
-      context: _navigatorKey.currentContext!,
+      context: _context,
       initialDateRange: initialDateRange,
       firstDate: firstDate,
       lastDate: lastDate,
@@ -263,7 +268,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showTimePicker(
-      context: _navigatorKey.currentContext!,
+      context: _context,
       initialTime: initialTime,
       builder: builder,
       useRootNavigator: useRootNavigator,
@@ -291,7 +296,7 @@ class FastOverlays {
   }) {
     _checkInit();
     material.showLicensePage(
-      context: _navigatorKey.currentContext!,
+      context: _context,
       applicationName: applicationName,
       applicationVersion: applicationVersion,
       applicationIcon: applicationIcon,
@@ -308,7 +313,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showSearch(
-      context: _navigatorKey.currentContext!,
+      context: _context,
       delegate: delegate,
       query: query,
       useRootNavigator: useRootNavigator,
@@ -330,7 +335,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showMenu(
-      context: _navigatorKey.currentContext!,
+      context: _context,
       position: position,
       items: items,
       initialValue: initialValue,
@@ -356,7 +361,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showDialog<T>(
-      context: _navigatorKey.currentContext!,
+      context: _context,
       builder: builder,
       barrierDismissible: barrierDismissible,
       barrierColor: barrierColor,
@@ -379,7 +384,7 @@ class FastOverlays {
   }) {
     _checkInit();
     material.showAboutDialog(
-      context: _navigatorKey.currentContext!,
+      context: _context,
       applicationName: applicationName,
       applicationVersion: applicationVersion,
       applicationIcon: applicationIcon,
@@ -403,7 +408,7 @@ class FastOverlays {
   }) {
     _checkInit();
     return material.showGeneralDialog<T>(
-      context: _navigatorKey.currentContext!,
+      context: _context,
       pageBuilder: pageBuilder,
       barrierDismissible: barrierDismissible,
       barrierLabel: barrierLabel,
