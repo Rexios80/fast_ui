@@ -39,8 +39,9 @@ class FastNav {
     }
     // The navigation stack can be empty if the observer was added between hot
     // reloads
-    if (preventDuplicates && (!_navigationStacks.containsKey(navigatorName)) ||
-        _navigationStacks[navigatorName]!.isEmpty) {
+    if (preventDuplicates &&
+        !(_navigationStacks.containsKey(navigatorName) &&
+        _navigationStacks[navigatorName]!.isNotEmpty)) {
       throw NavigatorObserverNotRegistered(
         navigatorName:
             navigatorName == _rootNavigatorName ? null : navigatorName,
