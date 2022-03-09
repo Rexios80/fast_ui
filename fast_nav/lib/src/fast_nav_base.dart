@@ -17,11 +17,14 @@ class FastNav {
   }
 
   /// Register a nested navigator with [FastNav]
+  /// 
+  /// Each navigator [name] can only be registered once. Subsequent
+  /// registrations will return the existing [GlobalKey].
   static GlobalKey<NavigatorState> registerNavigator(
     String name, {
     GlobalKey<NavigatorState>? key,
   }) {
-    return _navigatorKeys[name] = key ?? GlobalKey<NavigatorState>();
+    return _navigatorKeys[name] ??= key ?? GlobalKey<NavigatorState>();
   }
 
   static void _checkInit({
