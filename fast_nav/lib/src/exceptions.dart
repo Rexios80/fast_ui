@@ -23,6 +23,8 @@ class NavigatorNotRegistered implements FastNavException {
 
 /// Exception thrown when navigation history is required for a navigator that
 /// that has not registered an observer with FastNav
+///
+/// This can also be thrown if the observer was added between hot reloads
 class NavigatorObserverNotRegistered implements FastNavException {
   /// The name of the navigator without a registered observer
   final String? navigatorName;

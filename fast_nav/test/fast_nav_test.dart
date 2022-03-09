@@ -58,6 +58,7 @@ void main() {
       expect((e as NavigatorObserverNotRegistered).navigatorName, isNull);
     }
 
+    // Not using FastNav.reset() simulates a hot reload
     await tester.pumpWidget(
       MaterialApp(
         navigatorKey: FastNav.init(),
@@ -65,13 +66,30 @@ void main() {
         navigatorObservers: [FastNavObserver()],
       ),
     );
+    try {
+      unawaited(FastNav.push(const SizedBox.shrink(), preventDuplicates: true));
+      throw 'Did not throw';
+    } catch (e) {
+      expect((e as NavigatorObserverNotRegistered).navigatorName, isNull);
+    }
 
+    FastNav.reset();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        navigatorKey: FastNav.init(),
+        home: const Text('home'),
+        navigatorObservers: [FastNavObserver()],
+      ),
+    );
     try {
       unawaited(FastNav.push(const SizedBox.shrink(), preventDuplicates: true));
       throw 'Did not throw';
     } catch (e) {
       expect((e as AnonymousRouteNotPatched).navigatorName, isNull);
     }
+
+    FastNav.reset();
 
     await tester.pumpWidget(
       MaterialApp(
@@ -89,6 +107,11 @@ void main() {
         preventDuplicates: true,
       ),
     );
+
+    // Multiple init calls should return the same GlobalKey
+    final key1 = FastNav.init();
+    final key2 = FastNav.init();
+    expect(key1, key2);
   });
 
   testWidgets('Anonymous routes', (tester) async {
