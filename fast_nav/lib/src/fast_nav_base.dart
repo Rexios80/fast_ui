@@ -41,7 +41,7 @@ class FastNav {
     // reloads
     if (preventDuplicates &&
         !(_navigationStacks.containsKey(navigatorName) &&
-        _navigationStacks[navigatorName]!.isNotEmpty)) {
+            _navigationStacks[navigatorName]!.isNotEmpty)) {
       throw NavigatorObserverNotRegistered(
         navigatorName:
             navigatorName == _rootNavigatorName ? null : navigatorName,
