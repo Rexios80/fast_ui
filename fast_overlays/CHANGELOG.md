@@ -1,3 +1,6 @@
+## 0.1.5
+- Fixed hot reload
+
 ## 0.1.4
 - Fixed analysis issue
 

@@ -77,14 +77,14 @@ packages:
       path: "../../fast_nav"
       relative: true
     source: path
-    version: "0.2.3"
+    version: "0.2.4"
   fast_overlays:
     dependency: "direct overridden"
     description:
       path: "../../fast_overlays"
       relative: true
     source: path
-    version: "0.1.4"
+    version: "0.1.5"
   fast_rx:
     dependency: "direct overridden"
     description:
@@ -459,7 +459,7 @@ packages:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.8"
+    version: "2.0.9"
   url_launcher_windows:
     dependency: transitive
     description:
