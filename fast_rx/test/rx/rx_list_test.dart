@@ -3,91 +3,59 @@ import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  final shouldNotify = <RxTest<RxList<int>>>[
+    RxTest([0, 1, 2].rx, (rx) => rx.replaceAll([0, 1, 2, 3])),
+    RxTest([0, 1, 2].rx, (rx) => rx[1] = 2),
+    RxTest([0, 1, 2].rx, (rx) => rx.add(5)),
+    RxTest([0, 1, 2].rx, (rx) => rx.addAll([6, 7, 8])),
+    RxTest([0, 1, 2].rx, (rx) => rx.clear()),
+    RxTest([0, 1, 2].rx, (rx) => rx.fillRange(0, 3, 9)),
+    RxTest([0, 1, 2].rx, (rx) => rx.first = -1),
+    RxTest([0, 1, 2].rx, (rx) => rx.insert(2, 2)),
+    RxTest([0, 1, 2].rx, (rx) => rx.insertAll(0, [3, 4])),
+    RxTest([0, 1, 2].rx, (rx) => rx.last = 4),
+    RxTest([0, 1, 2].rx, (rx) => rx.length = 2),
+    RxTest([0, 1, 2].rx, (rx) => rx.removeRange(0, 1)),
+    RxTest([0, 1, 2].rx, (rx) => rx.removeWhere((e) => e == 1)),
+    RxTest([0, 1, 2].rx, (rx) => rx.replaceRange(0, 1, [1, 2, 3, 4])),
+    RxTest([0, 1, 2].rx, (rx) => rx.retainWhere((e) => e != 2)),
+    RxTest([0, 1, 2].rx, (rx) => rx.setAll(0, [1, 2])),
+    RxTest([0, 1, 2].rx, (rx) => rx.setRange(0, 2, [1, 2, 3])),
+    RxTest([0, 1, 2].rx, (rx) => rx.shuffle()),
+    RxTest([0, 2, 1].rx, (rx) => rx.sort()),
+  ];
+
+  final shouldRegister = <RxTest<RxList<int>>>[
+    RxTest([0, 1, 2].rx, (rx) => rx.cast<int>()),
+    RxTest([0, 1, 2].rx, (rx) => rx + [4]),
+    RxTest([0, 1, 2].rx, (rx) => rx[0]),
+    RxTest([0, 1, 2].rx, (rx) => rx.asMap()),
+    RxTest([0, 1, 2].rx, (rx) => rx.getRange(0, 1)),
+    RxTest([0, 1, 2].rx, (rx) => rx.indexOf(1)),
+    RxTest([0, 1, 2].rx, (rx) => rx.indexWhere((e) => true)),
+    RxTest([0, 1, 2].rx, (rx) => rx.lastIndexOf(4)),
+    RxTest([0, 1, 2].rx, (rx) => rx.lastIndexWhere((e) => true)),
+    RxTest([0, 1, 2].rx, (rx) => rx.reversed),
+    RxTest([0, 1, 2].rx, (rx) => rx.sublist(0, 1)),
+  ];
+
+  final shouldNotifyAndRegister = <RxTest<RxList<int>>>[
+    RxTest([0, 1, 2].rx, (rx) => rx.remove(1)),
+    RxTest([0, 1, 2].rx, (rx) => rx.removeAt(0)),
+    RxTest([0, 1, 2].rx, (rx) => rx.removeLast()),
+  ];
+
   test('RxList notifications', () {
-    final rx = [0, 1, 2, 3, 5, 6, 3].rx;
-    expectRxNotification(
-      rx,
-      shouldNotify: [
-        () => rx[1] = 2,
-        () => rx.add(5),
-        () => rx.addAll([6, 7, 8]),
-        () => rx.fillRange(0, 3, 9),
-        () => rx.first = -1,
-        () => rx.insert(4, 2),
-        () => rx.insertAll(0, [3, 4]),
-        () => rx.last = 4,
-        () => rx.length = 8,
-        () => rx.remove(4),
-        () => rx.removeAt(0),
-        () => rx.removeLast(),
-        () => rx.removeRange(0, 1),
-        () => rx.removeWhere((e) => e == 9),
-        () => rx.replaceRange(0, 0, [1, 2, 3, 4]),
-        () => rx.retainWhere((e) => e != 2),
-        () => rx.setAll(0, [1, 2]),
-        () => rx.setRange(0, 4, [1, 2, 3, 4]),
-        () => rx.shuffle(),
-        () => rx.sort(),
-        () => rx.clear(),
-        () => rx.replaceAll([0, 1, 2, 3, 4, 5, 6, 7, 8]),
-      ],
-      shouldNotNotify: [
-        () => rx.cast<int>(),
-        () => rx + [4],
-        () => rx[0],
-        () => rx.asMap(),
-        () => rx.getRange(0, 4),
-        () => rx.indexOf(1),
-        () => rx.indexWhere((e) => true),
-        () => rx.lastIndexOf(4),
-        () => rx.lastIndexWhere((e) => true),
-        () => rx.reversed,
-        () => rx.sublist(0, 4),
-      ],
+    expectRxNotification<RxList<int>>(
+      shouldNotify: shouldNotify + shouldNotifyAndRegister,
+      shouldNotNotify: shouldRegister,
     );
   });
 
   test('RxList registration', () {
-    final rx = [0, 1, 2, 3, 5, 6, 3].rx;
-    expectRxRegistration(
-      rx,
-      shouldRegister: [
-        () => rx.cast<int>(),
-        () => rx + [4],
-        () => rx[0],
-        () => rx.asMap(),
-        () => rx.getRange(0, 4),
-        () => rx.indexOf(1),
-        () => rx.indexWhere((e) => true),
-        () => rx.lastIndexOf(4),
-        () => rx.lastIndexWhere((e) => true),
-        () => rx.remove(0),
-        () => rx.removeAt(0),
-        () => rx.removeLast(),
-        () => rx.reversed,
-        () => rx.sublist(0, 4),
-        () => rx.replaceAll([0, 1, 2, 3, 4, 5, 6, 7, 8]),
-      ],
-      shouldNotRegister: [
-        () => rx[1] = 2,
-        () => rx.add(5),
-        () => rx.addAll([6, 7, 8]),
-        () => rx.fillRange(0, 3, 9),
-        () => rx.first = -1,
-        () => rx.insert(4, 2),
-        () => rx.insertAll(0, [3, 4]),
-        () => rx.last = 4,
-        () => rx.length = 4,
-        () => rx.removeRange(0, 0),
-        () => rx.removeWhere((e) => true),
-        () => rx.replaceRange(0, 0, [1, 2, 3, 4]),
-        () => rx.retainWhere((e) => true),
-        () => rx.setAll(0, [1, 2]),
-        () => rx.setRange(0, 4, [1, 2, 3, 4]),
-        () => rx.shuffle(),
-        () => rx.sort(),
-        () => rx.clear(),
-      ],
+    expectRxRegistration<RxList<int>>(
+      shouldRegister: shouldRegister + shouldNotifyAndRegister,
+      shouldNotRegister: shouldNotify,
     );
   });
 }
