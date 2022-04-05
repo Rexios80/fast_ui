@@ -25,6 +25,14 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
     notifyIfChanged(() => unregisteredValue[key] = value);
   }
 
+  /// Convenience method to replace all current elements with [elements]
+  void replaceAll(Map<K, V> elements) {
+    notifyIfChanged(() {
+      unregisteredValue.clear();
+      unregisteredValue.addAll(elements);
+    });
+  }
+
   @override
   void addAll(Map<K, V> other) {
     notifyIfChanged(() => unregisteredValue.addAll(other));
