@@ -1,6 +1,6 @@
 name: fast_rx_test
-description: Test RxObject registration, notifications, and value parity.
-version: 0.1.1
+description: Testing utilities for fast_rx. Check for valid RxObject registration and notifications.
+version: 0.2.0
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx_test
 
 environment:
@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  fast_rx: ^0.2.0
+  fast_rx: ^0.2.4
   test: ^1.19.0
   mockito: ^5.0.17
 
