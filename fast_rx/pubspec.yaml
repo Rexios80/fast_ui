@@ -17,5 +17,4 @@ dev_dependencies:
 
   rexios_lints: ^1.0.0
   mockito: ^5.0.17
-  fast_rx_test:
-    path: ../fast_rx_test
+  fast_rx_test: ^0.2.0
