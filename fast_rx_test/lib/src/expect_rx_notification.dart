@@ -12,6 +12,7 @@ expectRxNotification<T extends Rx>({
   required List<RxTest<T>> shouldNotify,
   List<RxTest<T>> shouldNotNotify = const [],
 }) {
+  // ignore: close_sinks
   final controller = StreamController<void>();
 
   controller.stream
