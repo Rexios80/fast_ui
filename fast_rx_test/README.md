@@ -10,6 +10,7 @@ Testing utilities for [fast_rx](https://pub.dev/packages/fast_rx)
 
 | Method               | Use-case                                         |
 | -------------------- | ------------------------------------------------ |
+| expectRxNotification | Check for valid rx stream notifications          |
 | expectRxRegistration | Check for valid registration with the RxNotifier |
 
 ## Getting started
@@ -20,55 +21,35 @@ See [fast_rx](https://pub.dev/packages/fast_rx)
 
 <!-- embedme ../fast_rx/test/rx/rx_object_test.dart -->
 ```dart
-import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'rx_tuple.dart';
 
 void main() {
+  final shouldNotify = <RxTest<RxTuple<int, int>>>[
+    RxTest(Tuple(1, 2).rx, (rx) => rx.item1 = 3),
+    RxTest(Tuple(1, 2).rx, (rx) => rx.item2 = 3),
+  ];
+  final shouldRegister = <RxTest<RxTuple<int, int>>>[
+    RxTest(Tuple(1, 2).rx, (rx) => rx.item1),
+    RxTest(Tuple(1, 2).rx, (rx) => rx.item2),
+  ];
+  final shouldNotNotifyOrRegister = <RxTest<RxTuple<int, int>>>[
+    RxTest(Tuple(1, 2).rx, (rx) => rx.copyValue()),
+    RxTest(Tuple(1, 2).rx, (rx) => rx.shouldNotify(Tuple(2, 2))),
+  ];
+
   test('RxObject notifications', () {
-    final rx = Tuple(1, 2).rx;
-
-    expect(
-      rx.stream,
-      emitsInOrder(
-        [
-          Tuple(1, 2),
-          Tuple(2, 2),
-          Tuple(2, 3),
-        ],
-      ),
-    );
-
-    // Notify of the initial value
-    rx.notify();
-
-    // Update the value
-    rx.item1 = 2;
-    // Should not notify
-    rx.item2 = 2;
-    rx.item2 = 3;
-
-    // RxObject.value setter should throw if used
-    expect(
-      // ignore: invalid_use_of_protected_member
-      () => rx.value = Tuple(0, 0),
-      throwsA(isA<RxObjectValueIsReadOnly>()),
+    expectRxNotification(
+      shouldNotify: shouldNotify,
+      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
     );
   });
 
   test('RxObject registration', () {
-    final rx = Tuple(1, 2).rx;
     expectRxRegistration(
-      rx,
-      shouldRegister: [
-        () => rx.item1,
-        () => rx.item2,
-      ],
-      shouldNotRegister: [
-        () => rx.item1 = 3,
-        () => rx.item2 = 3,
-      ],
+      shouldRegister: shouldRegister,
+      shouldNotRegister: shouldNotify + shouldNotNotifyOrRegister,
     );
   });
 }

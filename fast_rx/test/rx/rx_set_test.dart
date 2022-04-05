@@ -3,47 +3,43 @@ import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  final shouldNotify = <RxTest<RxSet<int>>>[
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.replaceAll({9, 8, 7})),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.addAll([0, 4])),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.clear()),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.removeAll([3])),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.removeWhere((e) => true)),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.retainAll([0, 1, 2])),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.retainWhere((e) => false)),
+  ];
+  final shouldRegister = <RxTest<RxSet<int>>>[
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.cast<int>()),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.containsAll([0, 3])),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.difference({0, 1, 4})),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.intersection({0, 2, 5})),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.lookup(4)),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.union({0, 1, 4, 6})),
+  ];
+  final shouldNotifyAndRegister = <RxTest<RxSet<int>>>[
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.add(4)),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.remove(1)),
+  ];
+  final shouldNotNotifyOrRegister = <RxTest<RxSet<int>>>[
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.copyValue()),
+    RxTest({0, 1, 2, 3, 5, 6}.rx, (rx) => rx.shouldNotify({})),
+  ];
+
   test('RxSet notifications', () {
-    final set = {0, 1, 2, 3}.rx;
-
-    expect(
-      set.stream,
-      emitsInOrder([
-        {0, 1, 2, 3, 4},
-        {0, 1, 3, 4},
-        {0, 1, 3, 4},
-      ]),
+    expectRxNotification(
+      shouldNotify: shouldNotify + shouldNotifyAndRegister,
+      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
     );
-
-    set.add(4);
-    // Should not notify
-    set.removeWhere((e) => false);
-    set.remove(2);
-    set.notify();
   });
 
   test('RxSet registration', () {
-    final rx = {0, 1, 2, 3, 5, 6}.rx;
     expectRxRegistration(
-      rx,
-      shouldRegister: [
-        () => rx.cast<int>(),
-        () => rx.add(3),
-        () => rx.containsAll([0, 3]),
-        () => rx.difference({0, 1, 4}),
-        () => rx.intersection({0, 2, 5}),
-        () => rx.lookup(4),
-        () => rx.remove(1),
-        () => rx.union({0, 1, 4, 6}),
-      ],
-      shouldNotRegister: [
-        () => rx.addAll([0, 3]),
-        () => rx.removeAll([3]),
-        () => rx.removeWhere((e) => false),
-        () => rx.retainAll([0, 1, 2]),
-        () => rx.retainWhere((e) => true),
-        () => rx.clear(),
-      ],
+      shouldRegister: shouldRegister + shouldNotifyAndRegister,
+      shouldNotRegister: shouldNotify + shouldNotNotifyOrRegister,
     );
   });
 }

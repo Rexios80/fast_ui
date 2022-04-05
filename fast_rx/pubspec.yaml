@@ -1,6 +1,6 @@
 name: fast_rx
 description: An easy to understand reactive state management solution for Flutter
-version: 0.2.4
+version: 0.2.5
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx
 
 environment:
@@ -17,4 +17,5 @@ dev_dependencies:
 
   rexios_lints: ^1.0.0
   mockito: ^5.0.17
-  fast_rx_test: ^0.1.0
+  fast_rx_test:
+    path: ../fast_rx_test

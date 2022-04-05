@@ -6,15 +6,20 @@ abstract class RxIterable<E> extends RxObject<Iterable<E>>
   /// Create a reactive iterable
   RxIterable(Iterable<E> initialValue) : super(initialValue);
 
+  /// Convenience method to replace all current elements with [elements]
+  void replaceAll(Iterable<E> elements);
+
   @override
   bool any(bool Function(E element) test) {
     return value.any(test);
   }
 
+  // coverage:ignore-start
   @override
   Iterable<R> cast<R>() {
     return value.cast<R>();
   }
+  // coverage:ignore-end
 
   @override
   bool contains(Object? element) {

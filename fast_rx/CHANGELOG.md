@@ -1,3 +1,8 @@
+## 0.2.5
+- Fixed notifications for `RxList[x] = value`
+- Improved tests to make bugs like that less likely to happen in the future
+- Added `replaceAll` convenience method to `RxList`, `RxSet`, and `RxMap`
+
 ## 0.2.4
 - Added missing annotations
 

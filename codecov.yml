@@ -22,4 +22,4 @@ flag_management:
         threshold: 5%
       - name_prefix: patch-
         type: patch
-        target: 90%
+        target: 0%
