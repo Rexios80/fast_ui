@@ -12,15 +12,15 @@ expectRxNotification<T extends Rx>({
   required List<RxTest<T>> shouldNotify,
   List<RxTest<T>> shouldNotNotify = const [],
 }) {
-  // ignore: close_sinks
-  final controller = StreamController<void>();
-
-  controller.stream
-      .listen(expectAsync1((value) {}, count: shouldNotify.length));
-
-  for (final test in (shouldNotify + shouldNotNotify)) {
+  for (final test in shouldNotify) {
     final rx = test.rx;
-    rx.stream.first.then(controller.add);
+    rx.stream.first.then(expectAsync1((value) {}, count: 1));
+    test.transform(rx);
+  }
+
+  for (final test in shouldNotNotify) {
+    final rx = test.rx;
+    rx.stream.first.then(expectAsync1((value) {}, count: 0));
     test.transform(rx);
   }
 }

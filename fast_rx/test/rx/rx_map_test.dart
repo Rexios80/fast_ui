@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   final shouldNotify = <RxTest<RxMap<String, int>>>[
     RxTest({'a': 0, 'b': 1, 'c': 2}.rx, (rx) => rx.replaceAll({'z': 7})),
-    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx['a']),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx['1'] = 2),
     RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.addAll({'d': 4, 'e': 5})),
     RxTest({'a': 1}.rx, (rx) => rx.addEntries(const [MapEntry('f', 6)])),
     RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.clear()),
@@ -13,7 +13,7 @@ void main() {
     RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.updateAll((a, b) => b + 1)),
   ];
   final shouldRegister = <RxTest<RxMap<String, int>>>[
-    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx['1'] = 2),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx['a']),
     RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.cast<String, int>()),
     RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.containsKey('a')),
     RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.containsValue(1)),

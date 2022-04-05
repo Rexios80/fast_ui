@@ -15,9 +15,15 @@ expectRxRegistration<T extends Rx>({
   final notifier = MockRxNotifier();
   RxNotifier.instance = notifier;
 
-  for (final test in (shouldRegister + shouldNotRegister)) {
+  for (final test in shouldRegister) {
     test.transform(test.rx);
   }
 
   verify(notifier.addStream(any)).called(shouldRegister.length);
+
+  for (final test in shouldNotRegister) {
+    test.transform(test.rx);
+  }
+
+  verifyNoMoreInteractions(notifier);
 }
