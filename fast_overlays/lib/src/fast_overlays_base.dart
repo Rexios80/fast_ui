@@ -4,7 +4,7 @@ import 'package:flutter/material.dart' as material;
 
 /// Contextless overlays
 class FastOverlays {
-  FastOverlays._();
+  FastOverlays._(); // coverage:ignore-line
 
   static GlobalKey<NavigatorState>? _navigatorKey;
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 /// Contextless navigator
 class FastNav {
-  FastNav._();
+  FastNav._(); // coverage:ignore-line
 
   static const _rootNavigatorName = '_rootNavigator';
   static final _navigatorKeys = <String, GlobalKey<NavigatorState>>{};

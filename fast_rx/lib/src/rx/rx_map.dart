@@ -8,12 +8,22 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
 
   @override
   @protected
+  @visibleForTesting
   Map<K, V> copyValue() => Map.from(unregisteredValue);
 
   @override
   @protected
+  @visibleForTesting
   bool shouldNotify(Map<K, V> oldValue) =>
       !mapEquals(unregisteredValue, oldValue);
+
+  /// Convenience method to replace all current elements with [elements]
+  void replaceAll(Map<K, V> elements) {
+    notifyIfChanged(() {
+      unregisteredValue.clear();
+      unregisteredValue.addAll(elements);
+    });
+  }
 
   @override
   V? operator [](Object? key) {
