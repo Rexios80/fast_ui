@@ -46,14 +46,14 @@ void main() {
   ];
 
   test('RxList notifications', () {
-    expectRxNotification<RxList<int>>(
+    expectRxNotification(
       shouldNotify: shouldNotify + shouldNotifyAndRegister,
       shouldNotNotify: shouldRegister,
     );
   });
 
   test('RxList registration', () {
-    expectRxRegistration<RxList<int>>(
+    expectRxRegistration(
       shouldRegister: shouldRegister + shouldNotifyAndRegister,
       shouldNotRegister: shouldNotify,
     );

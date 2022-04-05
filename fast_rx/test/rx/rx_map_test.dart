@@ -3,53 +3,49 @@ import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  final shouldNotify = <RxTest<RxMap<String, int>>>[
+    RxTest({'a': 0, 'b': 1, 'c': 2}.rx, (rx) => rx.replaceAll({'z': 7})),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx['a']),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.addAll({'d': 4, 'e': 5})),
+    RxTest({'a': 1}.rx, (rx) => rx.addEntries(const [MapEntry('f', 6)])),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.clear()),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.removeWhere((a, b) => true)),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.updateAll((a, b) => b + 1)),
+  ];
+  final shouldRegister = <RxTest<RxMap<String, int>>>[
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx['1'] = 2),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.cast<String, int>()),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.containsKey('a')),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.containsValue(1)),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.entries),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.isEmpty),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.isNotEmpty),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.keys),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.length),
+    RxTest({'a': 1, 'b': 2}.rx, (rx) => rx.map((a, b) => MapEntry(a, b))),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.values),
+  ];
+  final shouldNotifyAndRegister = <RxTest<RxMap<String, int>>>[
+    RxTest({'a': 1, 'b': 2}.rx, (rx) => rx.putIfAbsent('f', () => 4)),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.remove('a')),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.update('a', (a) => 3)),
+  ];
+  final shouldNotNotifyOrRegister = <RxTest<RxMap<String, int>>>[
+    // ignore: avoid_returning_null_for_void
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.forEach((a, b) => null)),
+  ];
+
   test('RxMap notifications', () {
-    final map = {'a': 1, 'b': 2, 'c': 3}.rx;
-
-    expect(
-      map.stream,
-      emitsInOrder([
-        {'a': 10, 'b': 2, 'c': 3},
-        {'a': 10, 'c': 3}
-      ]),
+    expectRxNotification(
+      shouldNotify: shouldNotify + shouldNotifyAndRegister,
+      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
     );
-
-    map['a'] = 10;
-    // Should not notify
-    map.removeWhere((a, b) => false);
-    map.remove('b');
   });
 
   test('RxMap registration', () {
-    final rx = {'a': 1, 'b': 2, 'c': 3}.rx;
     expectRxRegistration(
-      rx,
-      shouldRegister: [
-        () => rx['a'],
-        () => rx.cast<String, int>(),
-        () => rx.containsKey('a'),
-        () => rx.containsValue(1),
-        () => rx.entries,
-        () => rx.isEmpty,
-        () => rx.isNotEmpty,
-        () => rx.keys,
-        () => rx.length,
-        () => rx.map((a, b) => MapEntry(a, b)),
-        () => rx.putIfAbsent('a', () => 4),
-        () => rx.remove('a'),
-        () => rx.update('a', (a) => a + 1, ifAbsent: () => 4),
-        () => rx.values,
-      ],
-      shouldNotRegister: [
-        () => rx['1'] = 2,
-        () => rx.addAll({'d': 4, 'e': 5}),
-        () => rx.addEntries(const [MapEntry('f', 6)]),
-        // ignore: avoid_returning_null_for_void
-        () => rx.forEach((a, b) => null),
-        () => rx.removeWhere((a, b) => false),
-        () => rx.updateAll((a, b) => b + 1),
-        () => rx.clear(),
-      ],
+      shouldRegister: shouldRegister + shouldNotifyAndRegister,
+      shouldNotRegister: shouldNotify + shouldNotNotifyOrRegister,
     );
   });
 }

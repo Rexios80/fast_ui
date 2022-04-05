@@ -15,6 +15,14 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
   bool shouldNotify(Map<K, V> oldValue) =>
       !mapEquals(unregisteredValue, oldValue);
 
+  /// Convenience method to replace all current elements with [elements]
+  void replaceAll(Map<K, V> elements) {
+    notifyIfChanged(() {
+      unregisteredValue.clear();
+      unregisteredValue.addAll(elements);
+    });
+  }
+
   @override
   V? operator [](Object? key) {
     return value[key];
@@ -23,14 +31,6 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
   @override
   void operator []=(K key, V value) {
     notifyIfChanged(() => unregisteredValue[key] = value);
-  }
-
-  /// Convenience method to replace all current elements with [elements]
-  void replaceAll(Map<K, V> elements) {
-    notifyIfChanged(() {
-      unregisteredValue.clear();
-      unregisteredValue.addAll(elements);
-    });
   }
 
   @override

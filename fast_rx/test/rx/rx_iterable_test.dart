@@ -48,7 +48,7 @@ void main() {
   });
 
   test('RxIterable registration', () {
-    expectRxRegistration<RxIterable<int>>(
+    expectRxRegistration(
       shouldRegister: shouldRegister,
       shouldNotRegister: shouldNotRegisterOrNotify,
     );
