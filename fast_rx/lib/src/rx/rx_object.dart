@@ -36,12 +36,14 @@ abstract class RxObject<T> with Rx<T> {
   @protected
   T get unregisteredValue => _value;
 
+  // coverage:ignore-start
   /// Unused for RxObject
   @override
   @nonVirtual
   set value(T value) {
     throw RxObjectValueIsReadOnly();
   }
+  // coverage:ignore-end
 
   @override
   void notify() {

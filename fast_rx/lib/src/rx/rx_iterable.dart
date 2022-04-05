@@ -14,10 +14,12 @@ abstract class RxIterable<E> extends RxObject<Iterable<E>>
     return value.any(test);
   }
 
+  // coverage:ignore-start
   @override
   Iterable<R> cast<R>() {
     return value.cast<R>();
   }
+  // coverage:ignore-end
 
   @override
   bool contains(Object? element) {
