@@ -10,6 +10,7 @@ Testing utilities for [fast_rx](https://pub.dev/packages/fast_rx)
 
 | Method               | Use-case                                         |
 | -------------------- | ------------------------------------------------ |
+| expectRxNotification | Check for valid rx stream notifications          |
 | expectRxRegistration | Check for valid registration with the RxNotifier |
 
 ## Getting started
@@ -26,8 +27,8 @@ import 'rx_tuple.dart';
 
 void main() {
   final shouldNotify = <RxTest<RxTuple<int, int>>>[
-    RxTest(Tuple(1, 2).rx, (rx) => rx.item2 = 3),
     RxTest(Tuple(1, 2).rx, (rx) => rx.item1 = 3),
+    RxTest(Tuple(1, 2).rx, (rx) => rx.item2 = 3),
   ];
   final shouldRegister = <RxTest<RxTuple<int, int>>>[
     RxTest(Tuple(1, 2).rx, (rx) => rx.item1),

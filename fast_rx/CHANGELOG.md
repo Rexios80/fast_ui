@@ -1,3 +1,7 @@
+## 0.2.5
+- Fixed notifications for `RxList[x] = value`
+- Improved tests to make bugs like that less likely to happen in the future
+
 ## 0.2.4
 - Added missing annotations
 
