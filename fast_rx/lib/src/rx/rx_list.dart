@@ -22,10 +22,12 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   @protected
+  @visibleForTesting
   List<E> copyValue() => List.from(unregisteredValue);
 
   @override
   @protected
+  @visibleForTesting
   bool shouldNotify(Iterable<E> oldValue) =>
       !listEquals(unregisteredValue, oldValue as List<E>);
 

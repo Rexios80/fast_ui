@@ -8,10 +8,12 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
 
   @override
   @protected
+  @visibleForTesting
   Map<K, V> copyValue() => Map.from(unregisteredValue);
 
   @override
   @protected
+  @visibleForTesting
   bool shouldNotify(Map<K, V> oldValue) =>
       !mapEquals(unregisteredValue, oldValue);
 

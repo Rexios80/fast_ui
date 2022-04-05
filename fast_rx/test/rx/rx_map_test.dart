@@ -31,6 +31,8 @@ void main() {
     RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.update('a', (a) => 3)),
   ];
   final shouldNotNotifyOrRegister = <RxTest<RxMap<String, int>>>[
+    RxTest({'a': 0, 'b': 1, 'c': 2}.rx, (rx) => rx.copyValue()),
+    RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.shouldNotify({})),
     // ignore: avoid_returning_null_for_void
     RxTest({'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.forEach((a, b) => null)),
   ];

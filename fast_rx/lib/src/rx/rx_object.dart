@@ -65,11 +65,13 @@ abstract class RxObject<T> with Rx<T> {
   ///
   /// Overrides should be annotated with `@protected`
   @protected
+  @visibleForTesting
   T copyValue();
 
   /// Check if the value has changed
   ///
   /// Overrides should be annotated with `@protected`
   @protected
+  @visibleForTesting
   bool shouldNotify(T oldValue);
 }

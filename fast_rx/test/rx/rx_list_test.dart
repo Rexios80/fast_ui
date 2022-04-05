@@ -45,17 +45,22 @@ void main() {
     RxTest([0, 1, 2].rx, (rx) => rx.removeLast()),
   ];
 
+  final shouldNotNotifyOrRegister = <RxTest<RxList<int>>>[
+    RxTest([0, 1, 2].rx, (rx) => rx.copyValue()),
+    RxTest([0, 1, 2].rx, (rx) => rx.shouldNotify([0, 1, 2, 3])),
+  ];
+
   test('RxList notifications', () {
     expectRxNotification(
       shouldNotify: shouldNotify + shouldNotifyAndRegister,
-      shouldNotNotify: shouldRegister,
+      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
     );
   });
 
   test('RxList registration', () {
     expectRxRegistration(
       shouldRegister: shouldRegister + shouldNotifyAndRegister,
-      shouldNotRegister: shouldNotify,
+      shouldNotRegister: shouldNotify + shouldNotNotifyOrRegister,
     );
   });
 }
