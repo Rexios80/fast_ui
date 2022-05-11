@@ -1,5 +1,5 @@
+import 'package:fast_ui/fast_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:fast_extensions/fast_extensions.dart';
 
 class FastExtensionsExample extends StatelessWidget {
   const FastExtensionsExample({Key? key}) : super(key: key);

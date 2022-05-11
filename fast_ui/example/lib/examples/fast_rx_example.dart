@@ -1,4 +1,4 @@
-import 'package:fast_rx/fast_rx.dart';
+import 'package:fast_ui/fast_ui.dart';
 import 'package:flutter/material.dart';
 
 class FastRxExample extends StatelessWidget {
@@ -59,7 +59,7 @@ class FastRxExample extends StatelessWidget {
             FastBuilder(
               () => ElevatedButton(
                 child:
-                    Text((_rebuild.value ? 'Disable' : 'Enable') + ' rebuild'),
+                    Text('${_rebuild.value ? 'Disable' : 'Enable'} rebuild'),
                 onPressed: () => _rebuild.value = !_rebuild.value,
               ),
             ),
