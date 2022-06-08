@@ -1,7 +1,7 @@
-name: fast_rx_prefs
-description: A fast_rx implementation of shared preferences
+name: fast_rx_persistence
+description: An interface for implementing fast_rx key/value store persistence
 version: 0.1.0
-homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx_prefs
+homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx_persistence
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
@@ -12,7 +12,6 @@ dependencies:
     sdk: flutter
   
   fast_rx: ^0.2.4
-  shared_preferences: ^2.0.15
 
 dev_dependencies:
   test: ^1.19.0

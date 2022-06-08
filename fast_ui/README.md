@@ -9,23 +9,22 @@ fast_ui is a collection of Flutter packages aimed to make UI development faster
 
 ## Packages
 
-| Package                                                     | Description                                     |
-| ----------------------------------------------------------- | ----------------------------------------------- |
-| [fast_rx](https://pub.dev/packages/fast_rx)                 | Reactive state management                       |
-| [fast_nav](https://pub.dev/packages/fast_nav)               | Contextless navigation                          |
-| [fast_overlays](https://pub.dev/packages/fast_overlays)     | Contextless overlays (snackbars, dialogs, etc.) |
-| [fast_extensions](https://pub.dev/packages/fast_extensions) | Convenience extensions                          |
+| Package                                                             | Description                                                      |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| [fast_rx](https://pub.dev/packages/fast_rx)                         | Reactive state management                                        |
+| [fast_rx_persistence](https://pub.dev/packages/fast_rx_persistence) | Interface for creating key/value store persistence for Rx values |
+| [fast_nav](https://pub.dev/packages/fast_nav)                       | Contextless navigation                                           |
+| [fast_overlays](https://pub.dev/packages/fast_overlays)             | Contextless overlays (snackbars, dialogs, etc.)                  |
+| [fast_extensions](https://pub.dev/packages/fast_extensions)         | Convenience extensions                                           |
 
 ## Add-on Packages
 
 These package come with additional dependencies
 
-| Package                                                 | Description                 |
-| ------------------------------------------------------- | --------------------------- |
-| [fast_rx_prefs](https://pub.dev/packages/fast_rx_prefs) | Reactive Shared Preferences |
+| Package                                                                           | Description                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [fast_rx_shared_preferences](https://pub.dev/packages/fast_rx_shared_preferences) | Implementation of fast_rx_persistence for use with Shared Preferences |
 
-
-For service location, I recommend [GetIt](https://pub.dev/packages/get_it)
 
 ## About
 What fast_ui is:

@@ -1,11 +1,11 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:fast_rx_prefs/fast_rx_prefs.dart';
+import 'package:fast_rx_persistence/fast_rx_persistence.dart';
 import 'package:fast_ui/fast_ui.dart';
 import 'package:fast_ui_example/examples/fast_extensions_example.dart';
 import 'package:fast_ui_example/examples/fast_nav_example.dart';
 import 'package:fast_ui_example/examples/fast_overlays_example.dart';
 import 'package:fast_ui_example/examples/fast_rx_example.dart';
-import 'package:fast_ui_example/examples/fast_rx_prefs_example.dart';
+import 'package:fast_ui_example/examples/fast_rx_persistence_example.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -83,7 +83,7 @@ class FastUiExample extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              child: const Text('fast_rx_prefs Example'),
+              child: const Text('fast_rx_persistence Example'),
               onPressed: () => FastNav.push(FastRxPrefsExample()),
             ),
             const SizedBox(height: 16),

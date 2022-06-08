@@ -92,10 +92,10 @@ packages:
       relative: true
     source: path
     version: "0.2.5"
-  fast_rx_prefs:
+  fast_rx_persistence:
     dependency: "direct main"
     description:
-      path: "../../fast_rx_prefs"
+      path: "../../fast_rx_persistence"
       relative: true
     source: path
     version: "0.1.0"

@@ -10,3 +10,4 @@ export 'src/rx/rx_object.dart';
 export 'src/rx/rx_set.dart';
 export 'src/rx/rx_typedef.dart';
 export 'src/rx/rx_value.dart';
+export 'src/rx/rx.dart';

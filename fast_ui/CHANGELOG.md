@@ -1,3 +1,7 @@
+## 0.1.1
+- Added fast_rx_persistence to default packages
+- Added fast_rx_shared_preferences to add-on packages
+
 ## 0.1.0
 - Updated documentation
 

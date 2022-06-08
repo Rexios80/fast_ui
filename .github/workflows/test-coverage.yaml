@@ -13,7 +13,7 @@ jobs:
             "fast_nav",
             "fast_overlays",
             "fast_rx",
-            "fast_rx_prefs",
+            "fast_rx_persistence",
           ]
     defaults:
       run:
