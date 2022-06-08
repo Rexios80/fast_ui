@@ -1,15 +1,21 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:fast_rx_prefs/fast_rx_prefs.dart';
 import 'package:fast_ui/fast_ui.dart';
 import 'package:fast_ui_example/examples/fast_extensions_example.dart';
 import 'package:fast_ui_example/examples/fast_nav_example.dart';
 import 'package:fast_ui_example/examples/fast_overlays_example.dart';
 import 'package:fast_ui_example/examples/fast_rx_example.dart';
+import 'package:fast_ui_example/examples/fast_rx_prefs_example.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await FastRxPrefs.init();
+
   runApp(const FastUiExampleApp());
 }
 
@@ -44,12 +50,13 @@ class FastUiExampleApp extends StatelessWidget {
                 height: 24,
               ),
               title: const Text('Package'),
-              onTap: () => launch('https://pub.dev/packages/fast_ui'),
+              onTap: () => launchUrlString('https://pub.dev/packages/fast_ui'),
             ),
             ListTile(
               leading: const FaIcon(FontAwesomeIcons.github),
               title: const Text('Source'),
-              onTap: () => launch('https://github.com/Rexios80/fast_ui'),
+              onTap: () =>
+                  launchUrlString('https://github.com/Rexios80/fast_ui'),
             ),
           ],
         ),
@@ -73,6 +80,11 @@ class FastUiExample extends StatelessWidget {
             ElevatedButton(
               child: const Text('fast_rx Example'),
               onPressed: () => FastNav.push(FastRxExample()),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              child: const Text('fast_rx_prefs Example'),
+              onPressed: () => FastNav.push(FastRxPrefsExample()),
             ),
             const SizedBox(height: 16),
             ElevatedButton(

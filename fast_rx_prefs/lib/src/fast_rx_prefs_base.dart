@@ -8,6 +8,8 @@ class FastRxPrefs {
   static SharedPreferences? _prefs;
 
   /// The [SharedPreferences] instance
+  ///
+  /// Must call [init] before accessing
   static SharedPreferences get prefs {
     _checkInit();
     return _prefs!;

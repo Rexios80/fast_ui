@@ -58,8 +58,7 @@ class FastRxExample extends StatelessWidget {
             const SizedBox(height: 32),
             FastBuilder(
               () => ElevatedButton(
-                child:
-                    Text('${_rebuild.value ? 'Disable' : 'Enable'} rebuild'),
+                child: Text('${_rebuild.value ? 'Disable' : 'Enable'} rebuild'),
                 onPressed: () => _rebuild.value = !_rebuild.value,
               ),
             ),

@@ -177,7 +177,7 @@ void main() {
     expect(() => pref.value = [1, 2, 3], throwsA(isA<UnsupportedError>()));
   });
 
-  test('Object of unsupported type', ()async {
+  test('Object of unsupported type', () async {
     await FastRxPrefs.init();
     unawaited(FastRxPrefs.prefs.clear());
 
