@@ -1,7 +1,5 @@
 library fast_rx_prefs;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/exceptions.dart';
+export 'src/fast_rx_prefs_base.dart';
+export 'src/rx_pref.dart';

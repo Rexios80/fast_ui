@@ -15,7 +15,5 @@ dependencies:
   shared_preferences: ^2.0.15
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
+  test: ^1.19.0
   rexios_lints: ^2.0.0
