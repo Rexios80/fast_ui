@@ -97,18 +97,6 @@ void main() {
     expect(listEquals(pref.value, ['a', 'b', 'c']), isTrue);
   });
 
-  test('Preference removal', () async {
-    await FastRxPrefs.init();
-    unawaited(FastRxPrefs.prefs.clear());
-
-    final pref = RxPref('key', defaultValue: false);
-    // The default value isn't stored in Shared Preferences
-    expect(FastRxPrefs.prefs.get('key'), null);
-    expect(pref.value, false);
-
-    
-  });
-
   test('Tranformation test', () async {
     await FastRxPrefs.init();
     unawaited(FastRxPrefs.prefs.clear());
@@ -152,5 +140,49 @@ void main() {
     );
     // Ensure the value is transformed properly on first read
     expect(listEquals(pref2.value, [1, 2, 3]), isTrue);
+  });
+
+  test('Preference removal', () async {
+    await FastRxPrefs.init();
+    unawaited(FastRxPrefs.prefs.clear());
+
+    final pref = RxPref('key', defaultValue: false);
+
+    pref.value = true;
+    pref.remove();
+    // Ensure that the value is removed from Shared Preferences
+    expect(FastRxPrefs.prefs.get('key'), null);
+    // The value should revert to the defaultValue
+    expect(pref.value, false);
+  });
+
+  test('Nullable preference removal', () async {
+    await FastRxPrefs.init();
+    unawaited(FastRxPrefs.prefs.clear());
+
+    final pref = RxPref<String?, dynamic>('key', defaultValue: 'defaultValue');
+    pref.value = 'newValue';
+    pref.value = null;
+    // Ensure that the value is removed from Shared Preferences
+    expect(FastRxPrefs.prefs.get('key'), null);
+    expect(pref.value, null);
+  });
+
+  test('List of unsupported type', () async {
+    await FastRxPrefs.init();
+    unawaited(FastRxPrefs.prefs.clear());
+
+    // Lists of types besides string are not supported
+    final pref = RxPref('key', defaultValue: [1, 2, 3]);
+    expect(() => pref.value = [1, 2, 3], throwsA(isA<UnsupportedError>()));
+  });
+
+  test('Object of unsupported type', ()async {
+    await FastRxPrefs.init();
+    unawaited(FastRxPrefs.prefs.clear());
+
+    // Sets are not supported
+    final pref = RxPref('key', defaultValue: {});
+    expect(() => pref.value = {}, throwsA(isA<UnsupportedError>()));
   });
 }

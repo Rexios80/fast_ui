@@ -10,6 +10,9 @@ class RxPref<T, I> extends RxValue<T> {
   /// The key of the preference
   final String key;
 
+  /// The default value of the preference
+  final T defaultValue;
+
   /// Function to transform the internal preference value from type
   /// [I] to type [T]
   final T Function(I value)? fromPref;
@@ -19,11 +22,9 @@ class RxPref<T, I> extends RxValue<T> {
   final I Function(T value)? toPref;
 
   /// Create a new [RxPref]
-  ///
-  /// [defaultValue] is the value to use if the preference is not set
   RxPref(
     this.key, {
-    required T defaultValue,
+    required this.defaultValue,
     this.fromPref,
     this.toPref,
   })  : assert(
@@ -44,7 +45,7 @@ class RxPref<T, I> extends RxValue<T> {
   /// Saves the value in Shared Preferences and notifies all observers if the
   /// value has changed.
   ///
-  /// Setting the value to null with remove it from Shared Preferences.
+  /// Setting the value to null will remove it from Shared Preferences.
   @override
   set value(T value) {
     final prefValue = toPref?.call(value) ?? value as I;
@@ -61,7 +62,7 @@ class RxPref<T, I> extends RxValue<T> {
       try {
         FastRxPrefs.prefs.setStringList(key, prefValue.cast<String>());
       } catch (e) {
-        throw ArgumentError(
+        throw UnsupportedError(
           'List must be of type String for storage in Shared Preferences',
         );
       }
@@ -74,5 +75,12 @@ class RxPref<T, I> extends RxValue<T> {
     }
 
     super.value = value;
+  }
+
+  /// Removes the value from Shared Preferences and sets the value to
+  /// [defaultValue]
+  void remove() {
+    FastRxPrefs.prefs.remove(key);
+    super.value = defaultValue;
   }
 }
