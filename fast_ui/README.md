@@ -7,7 +7,7 @@ fast_ui is a collection of Flutter packages aimed to make UI development faster
 [![likes](https://badges.bar/fast_ui/likes)](https://pub.dev/packages/fast_ui/score)
 [![pub points](https://badges.bar/fast_ui/pub%20points)](https://pub.dev/packages/fast_ui/score)
 
-## Features
+## Packages
 
 | Package                                                     | Description                                     |
 | ----------------------------------------------------------- | ----------------------------------------------- |
@@ -16,8 +16,18 @@ fast_ui is a collection of Flutter packages aimed to make UI development faster
 | [fast_overlays](https://pub.dev/packages/fast_overlays)     | Contextless overlays (snackbars, dialogs, etc.) |
 | [fast_extensions](https://pub.dev/packages/fast_extensions) | Convenience extensions                          |
 
+## Add-on Packages
+
+These package come with additional dependencies
+
+| Package                                                 | Description                 |
+| ------------------------------------------------------- | --------------------------- |
+| [fast_rx_prefs](https://pub.dev/packages/fast_rx_prefs) | Reactive Shared Preferences |
+
+
 For service location, I recommend [GetIt](https://pub.dev/packages/get_it)
 
+## About
 What fast_ui is:
 - Modular
 - Easy to understand
@@ -33,7 +43,7 @@ What fast_ui is not:
 
 ## Getting started
 There are two options to use fast_ui:
-- Add fast_ui to your pubspec.yaml to include all the packages
+- Add fast_ui to your pubspec.yaml to include all the default packages
 - Add only the desired packages to your pubspec.yaml
 
 ## Usage
