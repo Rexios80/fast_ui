@@ -1,6 +1,7 @@
 import 'package:fast_rx_persistence/src/exceptions.dart';
 import 'package:fast_rx_persistence/src/fast_rx_persistence_interface.dart';
-import 'package:fast_rx/src/rx/rx.dart';
+import 'package:fast_rx/fast_rx.dart';
+import 'package:flutter/foundation.dart';
 
 /// A fast_rx implementation of key/value store persistence
 class FastRxPersistence {
@@ -18,8 +19,14 @@ class FastRxPersistence {
 
   /// Initialize the internal [interface] instance. Must be called
   /// before using any other features. Subsequent calls will have no effect.
-  static Future<void> init(FastRxPersistenceInterface interface) async {
+  static void init(FastRxPersistenceInterface interface) async {
     _interface ??= interface;
+  }
+
+  /// Reset the [interface] to null for testing
+  @visibleForTesting
+  static void reset() {
+    _interface = null;
   }
 
   static void _checkInit() {
