@@ -50,6 +50,10 @@ extension RxPrefsExtension<T> on Rx<T> {
   /// - [encode] - A function to transform the value from type [T] to type
   /// [I] for storage in the store
   ///
+  /// On initialization, the store is asked for an existing value for the [key].
+  /// If one exists, the current [value] is replaced and listeners are notified.
+  /// If no value exists, then the given [value] is left as the default.
+  ///
   /// The value is saved through the [interface] when the notification [stream]
   /// emits an update
   void persist<I>(
@@ -58,6 +62,10 @@ extension RxPrefsExtension<T> on Rx<T> {
     T Function(I value)? decode,
     I Function(T value)? encode,
   }) {
+    assert(
+      (decode == null && encode == null) || (decode != null && encode != null),
+    );
+
     FastRxPersistence._checkInit();
 
     final store = interface ?? FastRxPersistence.interface;

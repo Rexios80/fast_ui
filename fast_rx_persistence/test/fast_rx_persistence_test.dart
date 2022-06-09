@@ -37,13 +37,23 @@ void main() {
     FastRxPersistence.reset();
     FastRxPersistence.init(Store(values: {'key': '17'}));
 
+    // Both decode and encode must be specified if one of them is
+    expect(
+      () => 0.rx.persist<String>('key', decode: (value) => int.parse(value)),
+      throwsA(isA<AssertionError>()),
+    );
+    expect(
+      () => 0.rx.persist<String>('key', encode: (value) => value.toString()),
+      throwsA(isA<AssertionError>()),
+    );
+
     final rx = 0.rx
       ..persist<String>(
         'key',
         decode: (value) => int.parse(value),
         encode: (value) => value.toString(),
       );
-    
+
     expect(rx.value, 17);
 
     rx.value = 12;
