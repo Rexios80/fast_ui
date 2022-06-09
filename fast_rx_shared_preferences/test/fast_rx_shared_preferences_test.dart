@@ -10,74 +10,69 @@ import 'package:fast_rx/fast_rx.dart';
 void main() async {
   SharedPreferences.setMockInitialValues({});
   await FastRxSharedPreferences.init();
+  final prefs = await SharedPreferences.getInstance();
 
-  setUp(() async {
-    final prefs = await SharedPreferences.getInstance();
-    unawaited(prefs.clear());
+  setUp(() {
+    prefs.clear();
   });
 
   test('Integer preference', () async {
-    final pref = 0.rx..persist('key');
-    // The default value isn't stored in Shared Preferences
-    expect(FastRxPersistence.store.get('key'), null);
-    expect(pref.value, 0);
+    unawaited(prefs.setInt('key', 1));
 
-    pref.value = 1;
+    final pref = 0.rx..persist('key');
+    expect(pref.value, 1);
+
+    pref.value = 2;
     // Wait for the stream to emit the update
     await Future.delayed(Duration.zero);
-    // Ensure that the value is stored in Shared Preferences
-    expect(FastRxPersistence.store.get('key'), 1);
-    expect(pref.value, 1);
+    expect(FastRxPersistence.store.get('key'), 2);
+    expect(pref.value, 2);
   });
 
   test('Double preference', () async {
-    final pref = 0.0.rx..persist('key');
-    // The default value isn't stored in Shared Preferences
-    expect(FastRxPersistence.store.get('key'), null);
-    expect(pref.value, 0.0);
+    unawaited(prefs.setDouble('key', 1.0));
 
-    pref.value = 1.0;
+    final pref = 0.0.rx..persist('key');
+    expect(pref.value, 1.0);
+
+    pref.value = 2.0;
     // Wait for the stream to emit the update
     await Future.delayed(Duration.zero);
-    // Ensure that the value is stored in Shared Preferences
-    expect(FastRxPersistence.store.get('key'), 1.0);
-    expect(pref.value, 1.0);
+    expect(FastRxPersistence.store.get('key'), 2.0);
+    expect(pref.value, 2.0);
   });
 
   test('Boolean preference', () async {
-    final pref = false.rx..persist('key');
-    // The default value isn't stored in Shared Preferences
-    expect(FastRxPersistence.store.get('key'), null);
-    expect(pref.value, false);
+    unawaited(prefs.setBool('key', true));
 
-    pref.value = true;
+    final pref = false.rx..persist('key');
+    expect(pref.value, true);
+
+    pref.value = false;
     // Wait for the stream to emit the update
     await Future.delayed(Duration.zero);
-    // Ensure that the value is stored in Shared Preferences
-    expect(FastRxPersistence.store.get('key'), true);
-    expect(pref.value, true);
+    expect(FastRxPersistence.store.get('key'), false);
+    expect(pref.value, false);
   });
 
   test('String preference', () async {
-    final pref = 'value'.rx..persist('key');
-    // The default value isn't stored in Shared Preferences
-    expect(FastRxPersistence.store.get('key'), null);
-    expect(pref.value, 'value');
+    unawaited(prefs.setString('key', 'value2'));
 
-    pref.value = 'newValue';
+    final pref = 'value'.rx..persist('key');
+    expect(pref.value, 'value2');
+
+    pref.value = 'value3';
     // Wait for the stream to emit the update
     await Future.delayed(Duration.zero);
-    // Ensure that the value is stored in Shared Preferences
-    expect(FastRxPersistence.store.get('key'), 'newValue');
-    expect(pref.value, 'newValue');
+    expect(FastRxPersistence.store.get('key'), 'value3');
+    expect(pref.value, 'value3');
   });
 
   test('String list preference', () async {
-    // Since we aren't transforming the value, [I] can be whatever
-    final pref = [].rx..persist('key');
-    // The default value isn't stored in Shared Preferences
-    expect(FastRxPersistence.store.get('key'), null);
-    expect(listEquals(pref, []), isTrue);
+    unawaited(prefs.setStringList('key', ['']));
+
+    final pref = <String>[].rx..persist('key');
+    expect(listEquals(pref, ['']), isTrue);
 
     pref.replaceAll(['a', 'b', 'c']);
     // Wait for the stream to emit the update
