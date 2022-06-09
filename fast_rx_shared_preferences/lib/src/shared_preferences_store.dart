@@ -12,7 +12,7 @@ class SharedPreferencesStore extends FastRxPersistenceInterface {
   Object? get(String key) {
     final value = _prefs.get(key);
     // String lists from Shared Preferences need casted
-    if (value is List) return value.cast<String>();
+    if (value is List && value is! List<String>) return value.cast<String>();
     return value;
   }
 
