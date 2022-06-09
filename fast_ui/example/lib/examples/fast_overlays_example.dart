@@ -1,4 +1,4 @@
-import 'package:fast_overlays/fast_overlays.dart';
+import 'package:fast_ui/fast_ui.dart';
 import 'package:flutter/material.dart';
 
 class FastOverlaysExample extends StatelessWidget {

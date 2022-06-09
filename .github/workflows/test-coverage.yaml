@@ -7,7 +7,15 @@ jobs:
   test-coverage:
     strategy:
       matrix:
-        project: ["fast_extensions", "fast_nav", "fast_overlays", "fast_rx"]
+        project:
+          [
+            "fast_extensions",
+            "fast_nav",
+            "fast_overlays",
+            "fast_rx",
+            "fast_rx_persistence",
+            "fast_rx_shared_preferences",
+          ]
     defaults:
       run:
         working-directory: ${{ matrix.project }}

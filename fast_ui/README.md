@@ -7,17 +7,26 @@ fast_ui is a collection of Flutter packages aimed to make UI development faster
 [![likes](https://badges.bar/fast_ui/likes)](https://pub.dev/packages/fast_ui/score)
 [![pub points](https://badges.bar/fast_ui/pub%20points)](https://pub.dev/packages/fast_ui/score)
 
-## Features
+## Packages
 
-| Package                                                     | Description                                     |
-| ----------------------------------------------------------- | ----------------------------------------------- |
-| [fast_rx](https://pub.dev/packages/fast_rx)                 | Reactive state management                       |
-| [fast_nav](https://pub.dev/packages/fast_nav)               | Contextless navigation                          |
-| [fast_overlays](https://pub.dev/packages/fast_overlays)     | Contextless overlays (snackbars, dialogs, etc.) |
-| [fast_extensions](https://pub.dev/packages/fast_extensions) | Convenience extensions                          |
+| Package                                                             | Description                                                      |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| [fast_rx](https://pub.dev/packages/fast_rx)                         | Reactive state management                                        |
+| [fast_rx_persistence](https://pub.dev/packages/fast_rx_persistence) | Interface for creating key/value store persistence for Rx values |
+| [fast_nav](https://pub.dev/packages/fast_nav)                       | Contextless navigation                                           |
+| [fast_overlays](https://pub.dev/packages/fast_overlays)             | Contextless overlays (snackbars, dialogs, etc.)                  |
+| [fast_extensions](https://pub.dev/packages/fast_extensions)         | Convenience extensions                                           |
 
-For service location, I recommend [GetIt](https://pub.dev/packages/get_it)
+## Add-on Packages
 
+These package come with additional dependencies
+
+| Package                                                                           | Description                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [fast_rx_shared_preferences](https://pub.dev/packages/fast_rx_shared_preferences) | Implementation of fast_rx_persistence for use with Shared Preferences |
+
+
+## About
 What fast_ui is:
 - Modular
 - Easy to understand
@@ -33,7 +42,7 @@ What fast_ui is not:
 
 ## Getting started
 There are two options to use fast_ui:
-- Add fast_ui to your pubspec.yaml to include all the packages
+- Add fast_ui to your pubspec.yaml to include all the default packages
 - Add only the desired packages to your pubspec.yaml
 
 ## Usage

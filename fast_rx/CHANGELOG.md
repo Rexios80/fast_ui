@@ -1,3 +1,9 @@
+## 0.2.7
+- Added internal RxObject.value setter for use in Rx extensions
+
+## 0.2.6
+- Export rx.dart to allow for custom extensions in other packages
+
 ## 0.2.5
 - Fixed notifications for `RxList[x] = value`
 - Improved tests to make bugs like that less likely to happen in the future
