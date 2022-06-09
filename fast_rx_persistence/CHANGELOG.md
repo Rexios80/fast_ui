@@ -1,3 +1,6 @@
+## 0.1.2
+- Removed unnecessary init check
+
 ## 0.1.1
 - Version bump to rerun pana
 
