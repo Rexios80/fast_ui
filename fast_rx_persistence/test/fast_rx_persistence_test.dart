@@ -3,15 +3,18 @@ import 'package:test/test.dart';
 import 'package:fast_rx/fast_rx.dart';
 
 void main() {
+  setUp(() {
+    FastRxPersistence.reset();
+  });
+
   test('Check init', () {
     expect(
-      () => FastRxPersistence.interface,
+      () => FastRxPersistence.store,
       throwsA(isA<FastRxPersistenceNotInitialized>()),
     );
   });
 
   test('Saving', () async {
-    FastRxPersistence.reset();
     FastRxPersistence.init(Store());
 
     final rx = 0.rx..persist('key');
@@ -22,19 +25,17 @@ void main() {
 
     // Wait for the stream to emit the update
     await Future.delayed(Duration.zero);
-    expect(FastRxPersistence.interface.get('key'), 12);
+    expect(FastRxPersistence.store.get('key'), 12);
   });
 
   test('Reading', () {
-    FastRxPersistence.reset();
     FastRxPersistence.init(Store(values: {'key': 17}));
 
     final rx = 0.rx..persist('key');
     expect(rx.value, 17);
   });
 
-  test('Transforming', () async {
-    FastRxPersistence.reset();
+  test('Transformation', () async {
     FastRxPersistence.init(Store(values: {'key': '17'}));
 
     // Both decode and encode must be specified if one of them is
@@ -59,7 +60,7 @@ void main() {
     rx.value = 12;
     // Wait for the stream to emit the update
     await Future.delayed(Duration.zero);
-    expect(FastRxPersistence.interface.get('key'), '12');
+    expect(FastRxPersistence.store.get('key'), '12');
   });
 }
 

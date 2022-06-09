@@ -17,10 +17,10 @@ void example() {
     // The type here is [String] since that is the type stored in the store
     ..persist<String>(
       'key',
-      // The interface can optionally be overridden on a per-value basis.
-      // Otherwise the interface passed into [FastRxPersistence.init] will be
+      // The store can optionally be overridden on a per-value basis.
+      // Otherwise the store passed into [FastRxPersistence.init] will be
       // used.
-      interface: Store(),
+      store: Store(),
       decode: (value) => int.parse(value),
       encode: (value) => value.toString(),
     );

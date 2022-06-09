@@ -7,31 +7,31 @@ import 'package:flutter/foundation.dart';
 class FastRxPersistence {
   FastRxPersistence._(); // coverage:ignore-line
 
-  static FastRxPersistenceInterface? _interface;
+  static FastRxPersistenceInterface? _store;
 
   /// The [FastRxPersistenceInterface] instance
   ///
   /// Must call [init] before accessing
-  static FastRxPersistenceInterface get interface {
+  static FastRxPersistenceInterface get store {
     _checkInit();
-    return _interface!;
+    return _store!;
   }
 
-  /// Initialize the internal [interface] instance. Must be called
+  /// Initialize the internal [store] instance. Must be called
   /// before using any other features. Subsequent calls will have no effect.
-  static void init(FastRxPersistenceInterface interface) async {
-    _interface ??= interface;
+  static void init(FastRxPersistenceInterface store) async {
+    _store ??= store;
   }
 
-  /// Reset the [interface] to null for testing
+  /// Reset the [store] to null for testing
   @visibleForTesting
   static void reset() {
-    _interface = null;
+    _store = null;
   }
 
   static void _checkInit() {
     try {
-      _interface!;
+      _store!;
     } catch (e) {
       throw FastRxPersistenceNotInitialized();
     }
@@ -40,10 +40,10 @@ class FastRxPersistence {
 
 /// Extension on [Rx] to persist the value to a key/value store
 extension RxPrefsExtension<T> on Rx<T> {
-  /// Persist the value though the [interface]
+  /// Persist the value though the [store]
   /// - [I] - The internal type of the value stored in the store
   /// - [key] - The key used to store the value
-  /// - [interface] - An optional override of the default
+  /// - [store] - An optional override of the default
   /// [FastRxPersistenceInterface] given with [FastRxPersistence.init]
   /// - [decode] - A function to transform the internal store value
   /// from type [I] to type [T]
@@ -54,11 +54,11 @@ extension RxPrefsExtension<T> on Rx<T> {
   /// If one exists, the current [value] is replaced and listeners are notified.
   /// If no value exists, then the given [value] is left as the default.
   ///
-  /// The value is saved through the [interface] when the notification [stream]
+  /// The value is saved through the [store] when the notification [stream]
   /// emits an update
   void persist<I>(
     String key, {
-    FastRxPersistenceInterface? interface,
+    FastRxPersistenceInterface? store,
     T Function(I value)? decode,
     I Function(T value)? encode,
   }) {
@@ -68,16 +68,16 @@ extension RxPrefsExtension<T> on Rx<T> {
 
     FastRxPersistence._checkInit();
 
-    final store = interface ?? FastRxPersistence.interface;
+    final interface = store ?? FastRxPersistence.store;
 
-    final prefValue = store.get(key);
+    final prefValue = interface.get(key);
     if (prefValue != null) {
       value = decode?.call(prefValue as I) ?? prefValue as T;
     }
 
     stream.listen((value) {
       final prefValue = encode?.call(value) ?? value as I;
-      store.set(key, prefValue);
+      interface.set(key, prefValue);
     });
   }
 }

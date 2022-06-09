@@ -11,7 +11,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  fast_rx_persistence:
+    path: ../fast_rx_persistence
   shared_preferences: ^2.0.15
 
 dev_dependencies:
+  test: ^1.21.1
   rexios_lints: ^2.0.0
+  fast_rx: ^0.2.6
