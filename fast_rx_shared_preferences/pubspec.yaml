@@ -1,6 +1,6 @@
 name: fast_rx_shared_preferences
 description: A Shared Preferences implementation of fast_rx_persistence storage
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx_shared_preferences
 
 environment:
