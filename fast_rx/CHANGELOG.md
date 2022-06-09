@@ -1,3 +1,6 @@
+## 0.2.7
+- Added internal RxObject.value setter for use in Rx extensions
+
 ## 0.2.6
 - Export rx.dart to allow for custom extensions in other packages
 
