@@ -1,4 +1,5 @@
 import 'package:fast_rx_persistence/fast_rx_persistence.dart';
+import 'package:flutter/foundation.dart';
 import 'package:test/test.dart';
 import 'package:fast_rx/fast_rx.dart';
 
@@ -36,7 +37,7 @@ void main() {
   });
 
   test('Transformation', () async {
-    FastRxPersistence.init(Store(values: {'key': '17'}));
+    FastRxPersistence.init(Store(values: {'key': ['17']}));
 
     // Both decode and encode must be specified if one of them is
     expect(
@@ -48,19 +49,22 @@ void main() {
       throwsA(isA<AssertionError>()),
     );
 
-    final rx = 0.rx
-      ..persist<String>(
+    final rx = <int>[].rx
+      ..persist<List<String>>(
         'key',
-        decode: (value) => int.parse(value),
-        encode: (value) => value.toString(),
+        decode: (value) => value.map(int.parse).toList(),
+        encode: (value) => value.map((e) => e.toString()).toList(),
       );
 
-    expect(rx.value, 17);
+    expect(listEquals(rx, [17]), isTrue);
 
-    rx.value = 12;
+    rx.add(12);
     // Wait for the stream to emit the update
     await Future.delayed(Duration.zero);
-    expect(FastRxPersistence.store.get('key'), '12');
+    expect(
+      listEquals(FastRxPersistence.store.get('key') as List, ['17', '12']),
+      isTrue,
+    );
   });
 }
 
