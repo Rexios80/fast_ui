@@ -1,4 +1,3 @@
-import 'package:fast_rx_persistence/fast_rx_persistence.dart';
 import 'package:fast_ui/fast_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +7,12 @@ class FastRxPersistenceExample extends StatelessWidget {
   final boolPref = false.rx..persist('bool');
   final stringPref = ''.rx..persist('string');
   final stringListPref = <String>[].rx..persist('stringList');
-  final transformedPref = <int>[].rx..persist<List<String>>(
-    'transformed',
-    decode: (value) => value.map(int.parse).toList(),
-    encode: (value) => value.map((e) => e.toString()).toList(),
-  );
+  final transformedPref = <int>[].rx
+    ..persist<List<String>>(
+      'transformed',
+      decode: (value) => value.map(int.parse).toList(),
+      encode: (value) => value.map((e) => e.toString()).toList(),
+    );
 
   FastRxPersistenceExample({Key? key}) : super(key: key);
 
