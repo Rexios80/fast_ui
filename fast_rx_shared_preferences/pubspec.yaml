@@ -18,6 +18,4 @@ dependencies:
 dev_dependencies:
   test: ^1.21.1
   rexios_lints: ^2.0.0
-  # TODO: Hosted
-  fast_rx: 
-    path: ../fast_rx
+  fast_rx: ^0.2.7

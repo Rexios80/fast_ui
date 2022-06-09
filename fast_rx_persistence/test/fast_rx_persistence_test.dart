@@ -37,7 +37,13 @@ void main() {
   });
 
   test('Transformation', () async {
-    FastRxPersistence.init(Store(values: {'key': ['17']}));
+    FastRxPersistence.init(
+      Store(
+        values: {
+          'key': ['17'],
+        },
+      ),
+    );
 
     // Both decode and encode must be specified if one of them is
     expect(

@@ -11,8 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   
-  fast_rx:
-    path: ../fast_rx
+  fast_rx: ^0.2.7
 
 dev_dependencies:
   test: ^1.19.0

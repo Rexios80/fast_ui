@@ -41,7 +41,7 @@ void example() {
       // Otherwise the store passed into [FastRxPersistence.init] will be
       // used.
       store: Store(),
-      decode: (value) => int.parse(value),
+      decode: int.parse,
       encode: (value) => value.toString(),
     );
 
