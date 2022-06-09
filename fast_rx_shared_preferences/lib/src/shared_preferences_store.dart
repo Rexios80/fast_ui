@@ -28,7 +28,7 @@ class SharedPreferencesStore extends FastRxPersistenceInterface {
       _prefs.setString(key, value);
     } else if (value is List) {
       try {
-        _prefs.setStringList(key, value.cast<String>());
+        _prefs.setStringList(key, value as List<String>);
       } catch (e) {
         throw UnsupportedError(
           'List must be of type String for storage in Shared Preferences',
