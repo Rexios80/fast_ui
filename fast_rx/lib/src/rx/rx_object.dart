@@ -8,7 +8,9 @@ import 'package:flutter/foundation.dart';
 /// object is in your control, consider making fields that need to be updated
 /// reactive instead.
 abstract class RxObject<T> with Rx<T> {
-  final T _value;
+  /// This value should only ever be set by the constructor or
+  /// [internalSetValue]
+  T _value;
 
   /// Create a reactive object
   RxObject(this._value);
@@ -39,11 +41,24 @@ abstract class RxObject<T> with Rx<T> {
   // coverage:ignore-start
   /// Unused for RxObject
   @override
+  @protected
   @nonVirtual
   set value(T value) {
     throw RxObjectValueIsReadOnly();
   }
   // coverage:ignore-end
+
+  /// Internal setter for [_value]. Should only be used in Rx extensions and
+  /// never externally. Does not notify. If used properly, the warning for
+  /// using a protected member can be safely ignored.
+  ///
+  /// Example: Used by fast_rx_persistence to set [_value] from a key/value
+  /// store after initialization
+  @protected
+  @nonVirtual
+  void internalSetValue(T value) {
+    _value = value;
+  }
 
   @override
   void notify() {

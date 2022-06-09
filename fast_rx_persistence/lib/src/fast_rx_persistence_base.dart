@@ -72,7 +72,15 @@ extension RxPrefsExtension<T> on Rx<T> {
 
     final prefValue = interface.get(key);
     if (prefValue != null) {
-      value = decode?.call(prefValue as I) ?? prefValue as T;
+      final transformedValue = decode?.call(prefValue as I) ?? prefValue as T;
+
+      if (this is RxObject) {
+        // ignore: invalid_use_of_protected_member
+        (this as RxObject).internalSetValue(transformedValue);
+        notify();
+      } else {
+        value = transformedValue;
+      }
     }
 
     stream.listen((value) {
