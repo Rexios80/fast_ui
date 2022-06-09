@@ -91,11 +91,18 @@ packages:
       path: "../../fast_rx"
       relative: true
     source: path
-    version: "0.2.5"
+    version: "0.2.6"
   fast_rx_persistence:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
       path: "../../fast_rx_persistence"
+      relative: true
+    source: path
+    version: "0.1.0"
+  fast_rx_shared_preferences:
+    dependency: "direct main"
+    description:
+      path: "../../fast_rx_shared_preferences"
       relative: true
     source: path
     version: "0.1.0"

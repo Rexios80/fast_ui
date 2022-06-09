@@ -2,20 +2,19 @@ import 'package:fast_rx_persistence/fast_rx_persistence.dart';
 import 'package:fast_ui/fast_ui.dart';
 import 'package:flutter/material.dart';
 
-class FastRxPrefsExample extends StatelessWidget {
-  final intPref = RxPref('int', defaultValue: 0);
-  final doublePref = RxPref('double', defaultValue: 0.0);
-  final boolPref = RxPref('bool', defaultValue: false);
-  final stringPref = RxPref('string', defaultValue: '');
-  final stringListPref = RxPref('stringList', defaultValue: []);
-  final transformedPref = RxPref<List<int>, List<String>>(
+class FastRxPersistenceExample extends StatelessWidget {
+  final intPref = 0.rx..persist('int');
+  final doublePref = 0.0.rx..persist('double');
+  final boolPref = false.rx..persist('bool');
+  final stringPref = ''.rx..persist('string');
+  final stringListPref = <String>[].rx..persist('stringList');
+  final transformedPref = <int>[].rx..persist<List<String>>(
     'transformed',
-    defaultValue: [],
-    fromPref: (value) => value.map((e) => int.parse(e)).toList(),
-    toPref: (value) => value.map((e) => e.toString()).toList(),
+    decode: (value) => value.map((e) => int.parse(e)).toList(),
+    encode: (value) => value.map((e) => e.toString()).toList(),
   );
 
-  FastRxPrefsExample({Key? key}) : super(key: key);
+  FastRxPersistenceExample({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +89,7 @@ class FastRxPrefsExample extends StatelessWidget {
     doublePref.value++;
     boolPref.value = !boolPref.value;
     stringPref.value = '$stringPref${intPref.value}';
-    stringListPref.value.add(intPref.value.toString());
-    transformedPref.value.add(intPref.value);
+    stringListPref.add(intPref.value.toString());
+    transformedPref.add(intPref.value);
   }
 }

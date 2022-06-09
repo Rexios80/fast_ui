@@ -1,5 +1,5 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:fast_rx_persistence/fast_rx_persistence.dart';
+import 'package:fast_rx_shared_preferences/fast_rx_shared_preferences.dart';
 import 'package:fast_ui/fast_ui.dart';
 import 'package:fast_ui_example/examples/fast_extensions_example.dart';
 import 'package:fast_ui_example/examples/fast_nav_example.dart';
@@ -14,7 +14,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await FastRxPrefs.init();
+  await FastRxSharedPreferences.init();
 
   runApp(const FastUiExampleApp());
 }
@@ -84,7 +84,7 @@ class FastUiExample extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               child: const Text('fast_rx_persistence Example'),
-              onPressed: () => FastNav.push(FastRxPrefsExample()),
+              onPressed: () => FastNav.push(FastRxPersistenceExample()),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
