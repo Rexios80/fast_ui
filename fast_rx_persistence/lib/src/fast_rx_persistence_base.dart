@@ -66,8 +66,6 @@ extension RxPrefsExtension<T> on Rx<T> {
       (decode == null && encode == null) || (decode != null && encode != null),
     );
 
-    FastRxPersistence._checkInit();
-
     final interface = store ?? FastRxPersistence.store;
 
     final prefValue = interface.get(key);
