@@ -1,6 +1,6 @@
 name: fast_ui
 description: A collection of Flutter packages aimed to make UI development faster
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_ui
 
 environment:
@@ -15,8 +15,7 @@ dependencies:
   fast_nav: any
   fast_overlays: any
   fast_rx: any
-  # TODO
-  # fast_rx_persistence: any
+  fast_rx_persistence: any
 
 dev_dependencies:
   flutter_test:
