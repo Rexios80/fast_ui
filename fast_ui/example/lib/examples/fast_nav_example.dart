@@ -2,7 +2,7 @@ import 'package:fast_ui/fast_ui.dart';
 import 'package:flutter/material.dart';
 
 class FastNavExample extends StatelessWidget {
-  const FastNavExample({Key? key}) : super(key: key);
+  const FastNavExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class FastNavExample extends StatelessWidget {
 }
 
 class Page2 extends StatelessWidget {
-  const Page2({Key? key}) : super(key: key);
+  const Page2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class Page2 extends StatelessWidget {
 }
 
 class Page3 extends StatelessWidget {
-  const Page3({Key? key}) : super(key: key);
+  const Page3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +86,7 @@ class Page3 extends StatelessWidget {
 }
 
 class NestedPage1 extends StatelessWidget {
-  const NestedPage1({Key? key}) : super(key: key);
+  const NestedPage1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +120,7 @@ class NestedPage1 extends StatelessWidget {
 }
 
 class NestedPage2 extends StatelessWidget {
-  const NestedPage2({Key? key}) : super(key: key);
+  const NestedPage2({super.key});
 
   @override
   Widget build(BuildContext context) {

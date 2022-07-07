@@ -8,7 +8,7 @@ class FastRxExample extends StatelessWidget {
   final _set = {0}.rx;
   final _map = {0: 0}.rx;
 
-  FastRxExample({Key? key}) : super(key: key);
+  FastRxExample({super.key});
 
   @override
   Widget build(BuildContext context) {

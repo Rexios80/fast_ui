@@ -2,7 +2,7 @@ import 'package:fast_ui/fast_ui.dart';
 import 'package:flutter/material.dart';
 
 class FastOverlaysExample extends StatelessWidget {
-  const FastOverlaysExample({Key? key}) : super(key: key);
+  const FastOverlaysExample({super.key});
 
   @override
   Widget build(BuildContext context) {

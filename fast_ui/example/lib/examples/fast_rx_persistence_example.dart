@@ -14,7 +14,7 @@ class FastRxPersistenceExample extends StatelessWidget {
       encode: (value) => value.map((e) => e.toString()).toList(),
     );
 
-  FastRxPersistenceExample({Key? key}) : super(key: key);
+  FastRxPersistenceExample({super.key});
 
   @override
   Widget build(BuildContext context) {
