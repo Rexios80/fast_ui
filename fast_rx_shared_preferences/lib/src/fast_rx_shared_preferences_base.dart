@@ -19,7 +19,7 @@ class FastRxSharedPreferences {
   }
 
   /// Initializes [FastRxPersistence] with a [SharedPreferencesStore]
-  /// 
+  ///
   /// Subsequent calls will have no effect
   static Future<void> init() async {
     _prefs ??= await SharedPreferences.getInstance();

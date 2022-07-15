@@ -105,7 +105,7 @@ packages:
       path: "../../fast_rx_shared_preferences"
       relative: true
     source: path
-    version: "0.1.1"
+    version: "0.1.2"
   fast_ui:
     dependency: "direct main"
     description:
