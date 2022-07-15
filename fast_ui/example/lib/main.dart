@@ -20,7 +20,7 @@ void main() async {
 }
 
 class FastUiExampleApp extends StatelessWidget {
-  const FastUiExampleApp({Key? key}) : super(key: key);
+  const FastUiExampleApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class FastUiExampleApp extends StatelessWidget {
 }
 
 class FastUiExample extends StatelessWidget {
-  const FastUiExample({Key? key}) : super(key: key);
+  const FastUiExample({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -68,9 +68,9 @@ extension RxPersistenceExtension<T> on Rx<T> {
 
     final interface = store ?? FastRxPersistence.store;
 
-    final prefValue = interface.get(key);
-    if (prefValue != null) {
-      final transformedValue = decode?.call(prefValue as I) ?? prefValue as T;
+    final storeValue = interface.get(key);
+    if (storeValue != null) {
+      final transformedValue = decode?.call(storeValue as I) ?? storeValue as T;
 
       if (this is RxObject) {
         // ignore: invalid_use_of_protected_member
@@ -82,8 +82,8 @@ extension RxPersistenceExtension<T> on Rx<T> {
     }
 
     stream.listen((value) {
-      final prefValue = encode?.call(value) ?? value as I;
-      interface.set(key, prefValue);
+      final storeValue = encode?.call(value) ?? value as I;
+      interface.set(key, storeValue);
     });
   }
 }

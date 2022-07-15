@@ -16,5 +16,5 @@ dependencies:
   mockito: ^5.0.17
 
 dev_dependencies:
-  rexios_lints: ^2.0.1
+  rexios_lints: ^3.0.0
   build_runner: ^2.1.7

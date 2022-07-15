@@ -1,6 +1,6 @@
 name: fast_rx_shared_preferences
 description: A Shared Preferences implementation of fast_rx_persistence storage
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx_shared_preferences
 
 environment:
@@ -16,5 +16,5 @@ dependencies:
 
 dev_dependencies:
   test: ^1.21.1
-  rexios_lints: ^2.0.0
+  rexios_lints: ^3.0.0
   fast_rx: ^0.2.7
