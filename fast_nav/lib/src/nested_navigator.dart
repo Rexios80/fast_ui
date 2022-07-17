@@ -22,14 +22,13 @@ class NestedNavigator extends StatelessWidget {
   ///
   /// Automatically registered with [FastNav]
   NestedNavigator({
-    Key? key,
+    super.key,
     GlobalKey<NavigatorState>? navigatorKey,
     required this.name,
     this.observers = const [],
     this.onGenerateRoute,
     this.home,
-  })  : navigatorKey = navigatorKey ?? GlobalKey<NavigatorState>(),
-        super(key: key);
+  }) : navigatorKey = navigatorKey ?? GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {

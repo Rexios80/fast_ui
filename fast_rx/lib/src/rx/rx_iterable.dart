@@ -4,7 +4,7 @@ import 'package:fast_rx/src/rx/rx_object.dart';
 abstract class RxIterable<E> extends RxObject<Iterable<E>>
     implements Iterable<E> {
   /// Create a reactive iterable
-  RxIterable(Iterable<E> initialValue) : super(initialValue);
+  RxIterable(super.initialValue);
 
   /// Convenience method to replace all current elements with [elements]
   void replaceAll(Iterable<E> elements);

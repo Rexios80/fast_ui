@@ -79,7 +79,7 @@ class Tuple<T1, T2> {
 }
 
 class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
-  RxTuple(Tuple<T1, T2> value) : super(value);
+  RxTuple(super.value);
 
   @override
   T1 get item1 => value.item1;

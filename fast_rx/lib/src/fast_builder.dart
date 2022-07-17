@@ -12,7 +12,7 @@ class FastBuilder extends StatefulWidget {
   final ValueGetter<bool>? condition;
 
   /// A [FastBuilder] updates when reactive properties within change
-  const FastBuilder(this.builder, {Key? key, this.condition}) : super(key: key);
+  const FastBuilder(this.builder, {super.key, this.condition});
 
   @override
   State<StatefulWidget> createState() {
