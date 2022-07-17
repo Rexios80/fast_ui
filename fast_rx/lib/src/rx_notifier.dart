@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:fast_rx/src/exceptions.dart';
 import 'package:flutter/foundation.dart';
@@ -42,7 +43,7 @@ class RxNotifier {
 /// Listen to multiple Rx streams
 class RxObserver {
   /// The [Stream]s this observer is listening to
-  final _streams = <Stream, bool>{};
+  final _streams = HashSet<Stream>();
 
   /// The subscriptions to the [_streams]
   final _streamSubscriptions = <StreamSubscription>[];
@@ -59,8 +60,8 @@ class RxObserver {
   /// Add a stream to the observer
   void addStream(Stream stream) {
     // Don't add duplicate streams
-    if (_streams[stream] != null) return;
-    _streams[stream] = true;
+    if (_streams.contains(stream)) return;
+    _streams.add(stream);
     final subscription = stream.listen((_) => _controller.add(null));
     _streamSubscriptions.add(subscription);
   }
