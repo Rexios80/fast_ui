@@ -8,15 +8,14 @@ import 'package:test/test.dart';
 import 'package:fast_rx/fast_rx.dart';
 
 void main() async {
-  SharedPreferences.setMockInitialValues({});
-  await FastRxSharedPreferences.init();
-
-  setUp(() {
-    FastRxSharedPreferences.prefs.clear();
-  });
+  Future<void> setup([Map<String, Object>? values]) async {
+    FastRxSharedPreferences.reset();
+    SharedPreferences.setMockInitialValues(values ?? {});
+    await FastRxSharedPreferences.init();
+  }
 
   test('Integer preference', () async {
-    unawaited(FastRxSharedPreferences.prefs.setInt('key', 1));
+    await setup({'key': 1});
 
     final pref = 0.rx..persist('key');
     expect(pref.value, 1);
@@ -29,7 +28,7 @@ void main() async {
   });
 
   test('Double preference', () async {
-    unawaited(FastRxSharedPreferences.prefs.setDouble('key', 1.0));
+    await setup({'key': 1.0});
 
     final pref = 0.0.rx..persist('key');
     expect(pref.value, 1.0);
@@ -42,7 +41,7 @@ void main() async {
   });
 
   test('Boolean preference', () async {
-    unawaited(FastRxSharedPreferences.prefs.setBool('key', true));
+    await setup({'key': true});
 
     final pref = false.rx..persist('key');
     expect(pref.value, true);
@@ -55,7 +54,7 @@ void main() async {
   });
 
   test('String preference', () async {
-    unawaited(FastRxSharedPreferences.prefs.setString('key', 'value2'));
+    await setup({'key': 'value2'});
 
     final pref = 'value'.rx..persist('key');
     expect(pref.value, 'value2');
@@ -68,7 +67,9 @@ void main() async {
   });
 
   test('String list preference', () async {
-    unawaited(FastRxSharedPreferences.prefs.setStringList('key', ['']));
+    await setup({
+      'key': <dynamic>['']
+    });
 
     final pref = <String>[].rx..persist('key');
     expect(listEquals(pref, ['']), isTrue);
@@ -85,6 +86,8 @@ void main() async {
   });
 
   test('Nullable preference removal', () async {
+    await setup();
+
     final pref = RxValue<String?>('value')..persist('key');
     pref.value = 'newValue';
     // Wait for the stream to emit the update
@@ -99,7 +102,9 @@ void main() async {
     expect(pref.value, null);
   });
 
-  test('List of unsupported type', () {
+  test('List of unsupported type', () async {
+    await setup();
+
     // Lists of types besides string are not supported
     expect(
       () => FastRxPersistence.store.set('key', [1, 2, 3]),
@@ -107,7 +112,9 @@ void main() async {
     );
   });
 
-  test('Object of unsupported type', () {
+  test('Object of unsupported type', () async {
+    await setup();
+
     // Sets are not supported
     expect(
       () => FastRxPersistence.store.set('key', {}),
