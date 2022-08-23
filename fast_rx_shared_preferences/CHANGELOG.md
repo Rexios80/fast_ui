@@ -1,3 +1,6 @@
+## 0.1.3
+- Fixes string list casting issue
+
 ## 0.1.2
 - Exposes the `SharedPreferences` instance for convenience
 
