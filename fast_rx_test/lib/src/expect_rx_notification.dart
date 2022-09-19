@@ -12,13 +12,13 @@ expectRxNotification<T extends Rx>({
 }) {
   for (final test in shouldNotify) {
     final rx = test.rx;
-    rx.stream.first.then(expectAsync1((value) {}, count: 1));
+    rx.stream.listen(expectAsync1((value) {}, count: 1));
     test.transform(rx);
   }
 
   for (final test in shouldNotNotify) {
     final rx = test.rx;
-    rx.stream.first.then(expectAsync1((value) {}, count: 0));
+    rx.stream.listen(expectAsync1((value) {}, count: 0));
     test.transform(rx);
   }
 }

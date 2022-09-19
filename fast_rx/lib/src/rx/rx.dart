@@ -34,7 +34,7 @@ abstract class Rx<T> {
   /// Run [action] with registration and notifications disabled
   @protected
   void run(VoidCallback action) {
-    runZoned(action, zoneValues: {_zonedKey: false});
+    runZoned(action, zoneValues: {_zonedKey: true});
   }
 
   /// Notify listeners with the current value
