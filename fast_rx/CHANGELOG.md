@@ -1,3 +1,6 @@
+## 0.2.9
+- Safer zoned key string
+
 ## 0.2.8
 - Adds `Rx.run` for performing multiple transformations with only one notification
 - Adds `Rx.close` method for testing
