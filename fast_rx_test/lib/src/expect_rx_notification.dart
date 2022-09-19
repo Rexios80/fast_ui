@@ -5,8 +5,7 @@ import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:test/test.dart';
 
 /// Expect that every test in [shouldNotify] notifies exactly once, and that
-/// every test in [shouldNotNotify] does not notify. Set [verbose] to true for
-/// more debug information.
+/// every test in [shouldNotNotify] does not notify.
 expectRxNotification<T extends Rx>({
   List<RxTest<T>> shouldNotify = const [],
   List<RxTest<T>> shouldNotNotify = const [],

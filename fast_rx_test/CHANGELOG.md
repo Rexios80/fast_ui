@@ -1,3 +1,6 @@
+## 0.3.1
+- Documentation fixes
+
 ## 0.3.0
 - `RxTest` now takes an Rx generator function so that tests can be reused
 - `expectRxNotification` improvements
