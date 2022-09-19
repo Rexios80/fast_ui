@@ -1,4 +1,5 @@
-## 0.2.1
+## 0.3.0
+- `RxTest` now takes an Rx generator function so that tests can be reused
 - `expectRxNotification` improvements
 - `shouldNotify` and `shouldRegister` fields are now optional
 
