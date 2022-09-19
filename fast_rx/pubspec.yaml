@@ -21,4 +21,7 @@ dev_dependencies:
 
 dependency_overrides:
   fast_rx_test:
-    path: ../fast_rx_test
+    git:
+      url: https://github.com/Rexios80/fast_ui
+      path: fast_rx_test
+      ref: 182b1823ea057da205c7725062a1fafbdee6ca04
