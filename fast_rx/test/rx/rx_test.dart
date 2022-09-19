@@ -33,4 +33,11 @@ void main() {
       ],
     );
   });
+
+  test('Rx.run async exception', () {
+    expect(
+      () => ''.rx.run(() async {}),
+      throwsA(isA<RxRunActionWasAsync>()),
+    );
+  });
 }

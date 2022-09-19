@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx/src/rx_notifier.dart';
 import 'package:flutter/foundation.dart';
 
@@ -40,7 +41,15 @@ abstract class Rx<T> {
   @protected
   @visibleForTesting
   void run(VoidCallback action) {
-    runZoned(action, zoneValues: {_zonedKey: true});
+    runZoned(
+      () {
+        final result = action() as dynamic;
+        if (result is Future) {
+          throw RxRunActionWasAsync();
+        }
+      },
+      zoneValues: {_zonedKey: true},
+    );
   }
 
   /// Notify listeners with the current value
