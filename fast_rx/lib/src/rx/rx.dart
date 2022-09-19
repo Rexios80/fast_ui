@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 /// Base class for reactives
 abstract class Rx<T> {
-  static const _zonedKey = 'zoned';
+  static const _zonedKey = 'fast_rx_zoned_key';
 
   bool get _zoned => Zone.current[_zonedKey] ?? false;
 
