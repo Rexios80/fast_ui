@@ -13,6 +13,12 @@ abstract class Rx<T> {
   /// Stream of value changes
   Stream<T> get stream => _controller.stream;
 
+  /// Close the [stream] for testing
+  @visibleForTesting
+  void close() {
+    _controller.close();
+  }
+
   /// Register with the [RxNotifier] for UI updates
   @protected
   void register() {

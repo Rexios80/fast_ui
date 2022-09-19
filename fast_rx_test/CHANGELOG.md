@@ -1,7 +1,6 @@
 ## 0.2.1
-- `expectRxNotification` no longer passes when stream emits more times than it should
+- `expectRxNotification` improvements
 - `shouldNotify` and `shouldRegister` fields are now optional
-- Adds `id` and `verbose` fields to `RxTest` for debugging rx notifications
 
 ## 0.2.0
 - Made tests much more convenient to write
