@@ -6,6 +6,13 @@ void main() {
   final shouldNotify = <RxTest<RxTuple<int, int>>>[
     RxTest(Tuple(1, 2).rx, (rx) => rx.item1 = 3),
     RxTest(Tuple(1, 2).rx, (rx) => rx.item2 = 3),
+    RxTest(
+      Tuple(1, 2).rx,
+      (rx) => rx.run(() {
+        rx.item1 = 3;
+        rx.item2 = 3;
+      }),
+    ),
   ];
   final shouldRegister = <RxTest<RxTuple<int, int>>>[
     RxTest(Tuple(1, 2).rx, (rx) => rx.item1),
