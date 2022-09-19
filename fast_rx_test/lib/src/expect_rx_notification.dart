@@ -7,12 +7,12 @@ import 'package:test/test.dart';
 /// Expect that every test in [shouldNotify] notifies exactly once, and that
 /// every test in [shouldNotNotify] does not notify
 expectRxNotification<T extends Rx>({
-  required List<RxTest<T>> shouldNotify,
+  List<RxTest<T>> shouldNotify = const [],
   List<RxTest<T>> shouldNotNotify = const [],
 }) {
   for (final test in shouldNotify) {
     final rx = test.rx;
-    rx.stream.listen(expectAsync1((value) {}, count: 1));
+    rx.stream.listen(expectAsync1((value) {}));
     test.transform(rx);
   }
 

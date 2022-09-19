@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 
 /// Base class for reactives
 abstract class Rx<T> {
-  /// Key for getting the [_zonedKey] value from the current [Zone]
   static const _zonedKey = 'zoned';
 
   bool get _zoned => Zone.current[_zonedKey] ?? false;
@@ -33,6 +32,7 @@ abstract class Rx<T> {
 
   /// Run [action] with registration and notifications disabled
   @protected
+  @visibleForTesting
   void run(VoidCallback action) {
     runZoned(action, zoneValues: {_zonedKey: true});
   }
