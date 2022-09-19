@@ -23,4 +23,11 @@ void example() {
 
   // Will print the value and trigger a rebuild of FastBuilders
   count.value = 1;
+
+  final list = <int>[].rx;
+  // Will only notify after the run block completes
+  list.run(() {
+    list.add(1);
+    list.add(2);
+  });
 }

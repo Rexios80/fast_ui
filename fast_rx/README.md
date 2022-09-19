@@ -49,6 +49,13 @@ void example() {
 
   // Will print the value and trigger a rebuild of FastBuilders
   count.value = 1;
+
+  final list = <int>[].rx;
+  // Will only notify after the run block completes
+  list.run(() {
+    list.add(1);
+    list.add(2);
+  });
 }
 
 ```
@@ -75,7 +82,7 @@ class Tuple<T1, T2> {
       other is Tuple<T1, T2> && other.item1 == item1 && other.item2 == item2;
 
   @override
-  int get hashCode => hashValues(item1, item2);
+  int get hashCode => Object.hash(item1, item2);
 }
 
 class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
