@@ -12,7 +12,7 @@ expectRxNotification<T extends Rx>({
   List<RxTest<T>> shouldNotNotify = const [],
 }) {
   runTest(RxTest<T> test, int count) {
-    final rx = test.rx;
+    final rx = test.generate();
     expect(
       rx.stream,
       emitsInOrder([

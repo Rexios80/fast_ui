@@ -16,13 +16,13 @@ expectRxRegistration<T extends Rx>({
   RxNotifier.instance = notifier;
 
   for (final test in shouldRegister) {
-    test.transform(test.rx);
+    test.transform(test.generate());
   }
 
   verify(notifier.addStream(any)).called(shouldRegister.length);
 
   for (final test in shouldNotRegister) {
-    test.transform(test.rx);
+    test.transform(test.generate());
   }
 
   verifyNoMoreInteractions(notifier);

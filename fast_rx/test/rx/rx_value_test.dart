@@ -6,7 +6,7 @@ void main() {
   test('RxValue registration', () {
     expectRxRegistration<RxString>(
       shouldRegister: [
-        RxTest(''.rx, (rx) => rx.value),
+        RxTest(() => ''.rx, (rx) => rx.value),
       ],
     );
   });

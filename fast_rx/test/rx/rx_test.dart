@@ -6,19 +6,19 @@ void main() {
   test('Rx notifications', () {
     expectRxNotification(
       shouldNotify: <RxTest<Rx<String>>>[
-        RxTest(''.rx, (rx) => rx.value = 'a'),
+        RxTest(() => ''.rx, (rx) => rx.value = 'a'),
       ],
       shouldNotNotify: <RxTest<Rx<String>>>[
-        RxTest(''.rx, (rx) => rx.run(() => rx.value = 'a')),
+        RxTest(() => ''.rx, (rx) => rx.run(() => rx.value = 'a')),
       ],
     );
 
     expectRxRegistration(
       shouldRegister: <RxTest<Rx<String>>>[
-        RxTest(''.rx, (rx) => rx.value),
+        RxTest(() => ''.rx, (rx) => rx.value),
       ],
       shouldNotRegister: <RxTest<Rx<String>>>[
-        RxTest(''.rx, (rx) => rx.run(() => rx.value)),
+        RxTest(() => ''.rx, (rx) => rx.run(() => rx.value)),
       ],
     );
   });
@@ -26,10 +26,10 @@ void main() {
   test('Rx registration', () {
     expectRxRegistration(
       shouldRegister: [
-        RxTest(''.rx, (rx) => rx == ''),
-        RxTest(''.rx, (rx) => rx.hashCode),
-        RxTest(''.rx, (rx) => rx.toString()),
-        RxTest(''.rx, (rx) => rx.runtimeType),
+        RxTest(() => ''.rx, (rx) => rx == ''),
+        RxTest(() => ''.rx, (rx) => rx.hashCode),
+        RxTest(() => ''.rx, (rx) => rx.toString()),
+        RxTest(() => ''.rx, (rx) => rx.runtimeType),
       ],
     );
   });
