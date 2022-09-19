@@ -2,6 +2,7 @@
 
 import 'package:fast_rx/src/rx/rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
+import 'package:flutter/foundation.dart';
 import 'package:test/test.dart';
 
 /// Expect that every test in [shouldNotify] notifies exactly once, and that
@@ -10,15 +11,30 @@ expectRxNotification<T extends Rx>({
   List<RxTest<T>> shouldNotify = const [],
   List<RxTest<T>> shouldNotNotify = const [],
 }) {
-  for (final test in shouldNotify) {
+  runTest(RxTest<T> test, int count) {
     final rx = test.rx;
-    rx.stream.listen(expectAsync1((value) {}));
+    rx.stream.map((value) {
+      // The callback in [expectAsync1] does not get called after [test.count]
+      // number of calls, so we need to print debug information before that
+      if (test.verbose) {
+        debugPrint('${test.id}: $value');
+      }
+      return value;
+    }).listen(
+      expectAsync1(
+        (value) {},
+        count: count,
+        id: test.id,
+      ),
+    );
     test.transform(rx);
   }
 
+  for (final test in shouldNotify) {
+    runTest(test, 1);
+  }
+
   for (final test in shouldNotNotify) {
-    final rx = test.rx;
-    rx.stream.listen(expectAsync1((value) {}, count: 0));
-    test.transform(rx);
+    runTest(test, 0);
   }
 }

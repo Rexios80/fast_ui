@@ -122,7 +122,9 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
 
   @override
   void updateAll(V Function(K key, V value) update) {
-    notifyIfChanged(() => unregisteredValue.updateAll(update));
+    // updateAll causes notify to be called more than necessary, so wrap it in
+    // run to prevent that
+    run(() => unregisteredValue.updateAll(update));
   }
 
   @override
