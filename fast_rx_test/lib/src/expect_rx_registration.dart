@@ -9,20 +9,20 @@ import 'package:mockito/mockito.dart';
 /// Expect that every test in [shouldRegister] registers exactly once, and that
 /// every test in [shouldNotRegister] does not register
 expectRxRegistration<T extends Rx>({
-  required List<RxTest<T>> shouldRegister,
+  List<RxTest<T>> shouldRegister = const [],
   List<RxTest<T>> shouldNotRegister = const [],
 }) {
   final notifier = MockRxNotifier();
   RxNotifier.instance = notifier;
 
   for (final test in shouldRegister) {
-    test.transform(test.rx);
+    test.transform(test.generate());
   }
 
   verify(notifier.addStream(any)).called(shouldRegister.length);
 
   for (final test in shouldNotRegister) {
-    test.transform(test.rx);
+    test.transform(test.generate());
   }
 
   verifyNoMoreInteractions(notifier);

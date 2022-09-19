@@ -5,20 +5,30 @@ import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:test/test.dart';
 
 /// Expect that every test in [shouldNotify] notifies exactly once, and that
-/// every test in [shouldNotNotify] does not notify
+/// every test in [shouldNotNotify] does not notify. Set [verbose] to true for
+/// more debug information.
 expectRxNotification<T extends Rx>({
-  required List<RxTest<T>> shouldNotify,
+  List<RxTest<T>> shouldNotify = const [],
   List<RxTest<T>> shouldNotNotify = const [],
 }) {
-  for (final test in shouldNotify) {
-    final rx = test.rx;
-    rx.stream.first.then(expectAsync1((value) {}, count: 1));
+  runTest(RxTest<T> test, int count) {
+    final rx = test.generate();
+    expect(
+      rx.stream,
+      emitsInOrder([
+        ...List.generate(count, (_) => anything),
+        emitsDone,
+      ]),
+    );
     test.transform(rx);
+    rx.close();
+  }
+
+  for (final test in shouldNotify) {
+    runTest(test, 1);
   }
 
   for (final test in shouldNotNotify) {
-    final rx = test.rx;
-    rx.stream.first.then(expectAsync1((value) {}, count: 0));
-    test.transform(rx);
+    runTest(test, 0);
   }
 }
