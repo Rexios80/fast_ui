@@ -60,6 +60,12 @@ abstract class RxObject<T> with Rx<T> {
     _value = value;
   }
 
+  /// Notify only if [action] changes the value
+  @override
+  void run(VoidCallback action) {
+    notifyIfChanged(() => super.run(action));
+  }
+
   @override
   void notify() {
     notifyWithValue(copyValue());

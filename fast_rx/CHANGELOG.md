@@ -1,3 +1,7 @@
+## 0.2.8
+- Adds `Rx.run` for performing multiple transformations with only one notification
+- Adds `Rx.close` method for testing
+
 ## 0.2.7
 - Added internal RxObject.value setter for use in Rx extensions
 
