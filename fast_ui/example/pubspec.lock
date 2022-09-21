@@ -84,7 +84,7 @@ packages:
       path: "../../fast_rx"
       relative: true
     source: path
-    version: "0.2.9"
+    version: "0.2.10"
   fast_rx_persistence:
     dependency: "direct overridden"
     description:
