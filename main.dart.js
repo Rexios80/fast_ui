@@ -49944,8 +49944,8 @@ this.d.uh(new A.atp(this))},
 H(a){var s,r=$.aGg(),q=this.d,p=this.a.c
 r.a=q
 s=p.$0()
-if(q.a.a===0)A.M(new A.S4())
 r.a=null
+if(q.a.a===0)A.M(new A.S4())
 return s},
 p(){this.d.p()
 this.aX()}}
