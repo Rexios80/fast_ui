@@ -1,3 +1,6 @@
+## 0.2.10
+- Fixes an edge case where registration could occur outside of a `FastBuilder` builder
+
 ## 0.2.9
 - Safer zoned key string
 
