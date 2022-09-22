@@ -137,7 +137,9 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   bool remove(Object? value) {
-    return notifyIfChanged(() => this.value.remove(value));
+    final result = this.value.remove(value);
+    if (result) notify();
+    return result;
   }
 
   @override
