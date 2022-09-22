@@ -5,9 +5,14 @@ import 'package:flutter/foundation.dart';
 
 /// Base class for reactives
 abstract class Rx<T> {
-  static const _zonedKey = 'fast_rx_zoned_key';
+  static const _zonedKey = '_fast_rx_zoned_key';
+  static const _zonedObjectKey = '_fast_rx_zoned_object_key';
 
-  bool get _zoned => Zone.current[_zonedKey] ?? false;
+  bool get _zoned {
+    final isThis = Zone.current[_zonedObjectKey] == this;
+    final zoned = Zone.current[_zonedKey] ?? false;
+    return isThis && zoned;
+  }
 
   final StreamController<T> _controller = StreamController.broadcast();
 
@@ -38,7 +43,10 @@ abstract class Rx<T> {
           throw RxRunActionWasAsync();
         }
       },
-      zoneValues: {_zonedKey: true},
+      zoneValues: {
+        _zonedKey: true,
+        _zonedObjectKey: this,
+      },
     );
   }
 
