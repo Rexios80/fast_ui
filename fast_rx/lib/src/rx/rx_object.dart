@@ -1,5 +1,5 @@
 import 'package:fast_rx/src/exceptions.dart';
-import 'package:fast_rx/src/rx/rx.dart';
+import 'package:fast_rx/src/rx/rx_value_base.dart';
 import 'package:flutter/foundation.dart';
 
 /// An object that will properly emit updates when calling notify
@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 /// Useful for creating reactive versions of objects you don't control. If an
 /// object is in your control, consider making fields that need to be updated
 /// reactive instead.
-abstract class RxObject<T> with Rx<T> {
+abstract class RxObject<T> extends RxValueBase<T> {
   /// This value should only ever be set by the constructor or
   /// [internalSetValue]
   T _value;

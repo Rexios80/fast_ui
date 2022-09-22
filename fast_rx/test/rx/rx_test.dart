@@ -5,19 +5,19 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('Rx notifications', () {
     expectRxNotification(
-      shouldNotify: <RxTest<Rx<String>>>[
+      shouldNotify: <RxTest<RxValue<String>>>[
         RxTest(() => ''.rx, (rx) => rx.value = 'a'),
       ],
-      shouldNotNotify: <RxTest<Rx<String>>>[
+      shouldNotNotify: <RxTest<RxValue<String>>>[
         RxTest(() => ''.rx, (rx) => rx.run(() => rx.value = 'a')),
       ],
     );
 
     expectRxRegistration(
-      shouldRegister: <RxTest<Rx<String>>>[
+      shouldRegister: <RxTest<RxValue<String>>>[
         RxTest(() => ''.rx, (rx) => rx.value),
       ],
-      shouldNotRegister: <RxTest<Rx<String>>>[
+      shouldNotRegister: <RxTest<RxValue<String>>>[
         RxTest(() => ''.rx, (rx) => rx.run(() => rx.value)),
       ],
     );

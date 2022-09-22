@@ -1,7 +1,7 @@
-import 'package:fast_rx/src/rx/rx.dart';
+import 'package:fast_rx/src/rx/rx_value_base.dart';
 
 /// A reactive value
-class RxValue<T> with Rx<T> {
+class RxValue<T> extends RxValueBase<T> {
   T _value;
 
   /// Create a reactive value
@@ -20,6 +20,11 @@ class RxValue<T> with Rx<T> {
       _value = value;
       notify();
     }
+  }
+
+  @override
+  void notify() {
+    notifyWithValue(_value);
   }
 }
 
