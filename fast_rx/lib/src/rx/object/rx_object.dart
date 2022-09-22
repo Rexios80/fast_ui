@@ -1,5 +1,5 @@
 import 'package:fast_rx/src/exceptions.dart';
-import 'package:fast_rx/src/rx/rx_value_base.dart';
+import 'package:fast_rx/src/rx/value/rx_value_base.dart';
 import 'package:flutter/foundation.dart';
 
 /// An object that will properly emit updates when calling notify

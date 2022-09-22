@@ -1,4 +1,4 @@
-import 'package:fast_rx/src/rx/rx_value_base.dart';
+import 'package:fast_rx/src/rx/value/rx_value_base.dart';
 
 /// A reactive value
 class RxValue<T> extends RxValueBase<T> {

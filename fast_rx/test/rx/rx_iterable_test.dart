@@ -1,5 +1,5 @@
 import 'package:fast_rx/fast_rx.dart';
-import 'package:fast_rx/src/rx/rx_iterable.dart';
+import 'package:fast_rx/src/rx/object/rx_iterable.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
