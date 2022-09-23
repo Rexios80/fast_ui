@@ -180,9 +180,9 @@ abstract class RxObject<T> extends RxValue<T> {
 
   @override
   bool run(VoidCallback action, {bool notify = true}) {
-    var notified = false;
+    final bool notified;
     if (notify) {
-      notifyIfChanged(() => notified = super.run(action, notify: notify));
+      notified = notifyIfChanged(() => super.run(action, notify: notify));
     } else {
       notified = super.run(action);
     }
