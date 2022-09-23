@@ -18,3 +18,7 @@ dependencies:
 dev_dependencies:
   rexios_lints: ^3.0.0
   build_runner: ^2.1.7
+
+dependency_overrides:
+  fast_rx:
+    path: ../fast_rx

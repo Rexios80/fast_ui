@@ -6,23 +6,21 @@ import 'package:flutter/foundation.dart';
 /// Base class for reactives
 abstract class Rx<T> {
   static const _zonedKey = '_fast_rx_zoned_key';
-  static const _zonedObjectKey = '_fast_rx_zoned_object_key';
+  static const _zoneNotifierKey = '_fast_rx_zone_notifier_key';
 
-  bool get _zoned {
-    final isThis = Zone.current[_zonedObjectKey] == identityHashCode(this);
-    final zoned = Zone.current[_zonedKey] ?? false;
-    return isThis && zoned;
-  }
+  bool get _zoned => Zone.current[_zonedKey] ?? false;
 
   final StreamController<T> _controller = StreamController.broadcast();
 
   /// Stream of value changes
+  @nonVirtual
   Stream<T> get stream => _controller.stream;
 
   /// Close the [stream] for testing
+  @protected
   @visibleForTesting
-  void close() {
-    _controller.close();
+  Future<void> close() {
+    return _controller.close();
   }
 
   /// Register with the [RxNotifier] for UI updates
@@ -33,9 +31,12 @@ abstract class Rx<T> {
   }
 
   /// Run [action] with registration and notifications disabled
+  ///
+  /// Returns true if a notification was attempted during [action]
   @protected
   @visibleForTesting
-  void run(VoidCallback action) {
+  bool run(VoidCallback action) {
+    var notified = false;
     runZoned(
       () {
         final result = action() as dynamic;
@@ -45,23 +46,27 @@ abstract class Rx<T> {
       },
       zoneValues: {
         _zonedKey: true,
-        _zonedObjectKey: identityHashCode(this),
+        _zoneNotifierKey: () => notified = true,
       },
     );
+    return notified;
   }
 
   /// Notify listeners with the current value
   ///
   /// Useful if using objects that are out of your control. Consider wrapping
   /// the object in an [RxObject] if used frequently.
+  ///
+  /// Child classes should implement a call to [notifyWithValue]
   void notify();
 
   /// Notify listeners with the given value
-  ///
-  /// This is used so that object reference reactives can emit updates properly
   @protected
   void notifyWithValue(T value) {
-    if (_zoned) return;
+    if (_zoned) {
+      Zone.current[_zoneNotifierKey].call();
+      return;
+    }
     _controller.add(value);
   }
 }
@@ -81,6 +86,15 @@ class RxValue<T> extends Rx<T> {
     register();
     return _value;
   }
+
+  /// Read the current value without calling [register]
+  ///
+  /// Used to prevent unnecessary calls to [register] in internal methods such
+  /// as [copyValue], [shouldNotify], or methods that do not return a value
+  ///
+  /// Overrides should be annotated with `@protected`
+  @protected
+  T get unregisteredValue => _value;
 
   /// Set the current value
   ///
@@ -105,7 +119,8 @@ class RxValue<T> extends Rx<T> {
 
   @override
   int get hashCode {
-    return value.hashCode;
+    // This can't change, so we don't need to register here
+    return unregisteredValue.hashCode;
   }
 
   @override
@@ -115,7 +130,8 @@ class RxValue<T> extends Rx<T> {
 
   @override
   Type get runtimeType {
-    return value.runtimeType;
+    // This can't change, so we don't need to register here
+    return unregisteredValue.runtimeType;
   }
 }
 
@@ -147,15 +163,6 @@ abstract class RxObject<T> extends RxValue<T> {
     return super.value;
   }
 
-  /// Read the current value without calling [register]
-  ///
-  /// Used to prevent unnecessary calls to [register] in internal methods such
-  /// as [copyValue], [shouldNotify], or methods that do not return a value
-  ///
-  /// Overrides should be annotated with `@protected`
-  @protected
-  T get unregisteredValue => _value;
-
   // coverage:ignore-start
   /// Unused for RxObject
   @override
@@ -180,8 +187,10 @@ abstract class RxObject<T> extends RxValue<T> {
 
   /// Notify only if [action] changes the value
   @override
-  void run(VoidCallback action) {
-    notifyIfChanged(() => super.run(action));
+  bool run(VoidCallback action) {
+    var notified = false;
+    notifyIfChanged(() => notified = super.run(action));
+    return notified;
   }
 
   @override

@@ -20,6 +20,7 @@ expectRxNotification<T extends Rx>({
       ]),
     );
     test.transform(rx);
+    // ignore: invalid_use_of_protected_member
     rx.close();
   }
 

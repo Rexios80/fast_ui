@@ -19,7 +19,9 @@ expectRxRegistration<T extends Rx>({
     test.transform(test.generate());
   }
 
-  verify(notifier.addStream(any)).called(shouldRegister.length);
+  if (shouldRegister.isNotEmpty) {
+    verify(notifier.addStream(any)).called(shouldRegister.length);
+  }
 
   for (final test in shouldNotRegister) {
     test.transform(test.generate());
