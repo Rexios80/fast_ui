@@ -38,7 +38,8 @@ abstract class Rx<T> {
       },
       zoneValues: {
         RxZoneKeys.zonedKey: true,
-        RxZoneKeys.notifierKey: () => notified = true,
+        // Pass the id of the object for use in testing
+        RxZoneKeys.notifierKey: (int id) => notified = true,
       },
     );
     return notified;
@@ -57,7 +58,7 @@ abstract class Rx<T> {
   @nonVirtual
   void notifyWithValue(T value) {
     if (_zoned) {
-      Zone.current[RxZoneKeys.notifierKey].call();
+      Zone.current[RxZoneKeys.notifierKey].call(identityHashCode(this));
       return;
     }
     _controller.add(value);

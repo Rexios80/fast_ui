@@ -18,7 +18,7 @@ mixin RxCompositeMixin<T> on Rx<T> {
   /// Remove an [Rx] from this composite
   @protected
   void removeRx(Rx rx) {
-    final sub = _subs.remove(rx);
+    final sub = _subs.remove(rx.stream);
     sub?.cancel();
   }
 

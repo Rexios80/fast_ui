@@ -13,18 +13,29 @@ expectRxNotification<T extends Rx>({
   List<RxTest<T>> shouldNotify = const [],
   List<RxTest<T>> shouldNotNotify = const [],
 }) {
-  var notifications = 0;
-  runZoned(
-    () {
-      for (final test in shouldNotify + shouldNotNotify) {
-        final rx = test.generate();
+  void runTest(RxTest<T> test, int count) {
+    var notifications = 0;
+    final rx = test.generate();
+    runZoned(
+      () {
         test.transform(rx);
-      }
-    },
-    zoneValues: {
-      RxZoneKeys.zonedKey: true,
-      RxZoneKeys.notifierKey: () => notifications++,
-    },
-  );
-  expect(notifications, shouldNotify.length);
+      },
+      zoneValues: {
+        RxZoneKeys.zonedKey: true,
+        RxZoneKeys.notifierKey: (int id) {
+          if (id == identityHashCode(rx)) {
+            notifications++;
+          }
+        },
+      },
+    );
+    expect(notifications, count);
+  }
+
+  for (final test in shouldNotify) {
+    runTest(test, 1);
+  }
+  for (final test in shouldNotNotify) {
+    runTest(test, 0);
+  }
 }
