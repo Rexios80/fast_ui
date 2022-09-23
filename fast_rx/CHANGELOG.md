@@ -1,3 +1,6 @@
+## 0.3.0
+- Removes `Rx.close`
+
 ## 0.2.10
 - Fixes an edge case where registration could occur outside of a `FastBuilder` builder
 
