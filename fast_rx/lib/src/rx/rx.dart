@@ -104,7 +104,7 @@ class RxValue<T> extends Rx<T> {
   // Override [Object] methods so that they call [register]
   @override
   bool operator ==(Object other) {
-    return value == other;
+    return other is RxValue && value == other.value;
   }
 
   @override
