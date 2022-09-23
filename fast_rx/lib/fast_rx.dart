@@ -12,12 +12,7 @@ export 'src/rx/composite/rx_composite.dart';
 // rx/object
 export 'src/rx/object/rx_list.dart';
 export 'src/rx/object/rx_map.dart';
-export 'src/rx/object/rx_object.dart';
 export 'src/rx/object/rx_set.dart';
-
-// rx/value
-export 'src/rx/value/rx_value_base.dart';
-export 'src/rx/rx_value.dart';
 
 export 'src/rx/rx_typedef.dart';
 export 'src/rx/rx.dart';

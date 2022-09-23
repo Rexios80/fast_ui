@@ -39,7 +39,7 @@ class FastRxPersistence {
 }
 
 /// Extension on [Rx] to persist the value to a key/value store
-extension RxPersistenceExtension<T> on RxValueBase<T> {
+extension RxPersistenceExtension<T> on RxValue<T> {
   /// Persist the value though the [store]
   /// - [I] - The internal type of the value stored in the store
   /// - [key] - The key used to store the value
