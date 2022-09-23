@@ -2,14 +2,16 @@ import 'package:fast_rx/src/rx/composite/rx_composite.dart';
 import 'package:fast_rx/src/rx/object/rx_list.dart';
 import 'package:fast_rx/src/rx/rx.dart';
 
-/// Composite version of [RxList] that notifies when list items do
+/// Composite version of [RxList] that notifies when elements do
 ///
 /// Note that keeping track of element streams is not free, and a lot of
-/// operations are done twice.
+/// operations are done multiple times
 class RxCompositeList<E extends Rx> extends RxList<E>
     with RxCompositeMixin<Iterable<E>> {
   /// Constructor
-  RxCompositeList([List<E>? value]) : super(value ?? []);
+  RxCompositeList([List<E>? value]) : super(value ?? []) {
+    unregisteredValue.forEach(addRx);
+  }
 
   @override
   void replaceAll(Iterable<E> elements) {
@@ -127,8 +129,8 @@ class RxCompositeList<E extends Rx> extends RxList<E>
 }
 
 /// Extension to allow creating composite [RxList]s
-extension RxCompositeListExtension<T extends Rx> on RxList<T> {
+extension RxCompositeListExtension<E extends Rx> on RxList<E> {
   /// Create a composite version of this [RxList]
   // ignore: invalid_use_of_protected_member
-  RxCompositeList<T> get composite => RxCompositeList<T>(unregisteredValue);
+  RxCompositeList<E> get composite => RxCompositeList<E>(unregisteredValue);
 }
