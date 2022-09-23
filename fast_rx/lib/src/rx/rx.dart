@@ -1,27 +1,18 @@
 import 'dart:async';
 import 'package:fast_rx/fast_rx.dart';
+import 'package:fast_rx/src/rx/rx_zone_keys.dart';
 import 'package:fast_rx/src/rx_notifier.dart';
 import 'package:flutter/foundation.dart';
 
 /// Base class for reactives
 abstract class Rx<T> {
-  static const _zonedKey = '_fast_rx_zoned_key';
-  static const _zoneNotifierKey = '_fast_rx_zone_notifier_key';
-
-  bool get _zoned => Zone.current[_zonedKey] ?? false;
+  bool get _zoned => Zone.current[RxZoneKeys.zonedKey] ?? false;
 
   final StreamController<T> _controller = StreamController.broadcast();
 
   /// Stream of value changes
   @nonVirtual
   Stream<T> get stream => _controller.stream;
-
-  /// Close the [stream] for testing
-  @protected
-  @visibleForTesting
-  Future<void> close() {
-    return _controller.close();
-  }
 
   /// Register with the [RxNotifier] for UI updates
   @protected
@@ -46,8 +37,8 @@ abstract class Rx<T> {
         }
       },
       zoneValues: {
-        _zonedKey: true,
-        _zoneNotifierKey: () => notified = true,
+        RxZoneKeys.zonedKey: true,
+        RxZoneKeys.notifierKey: () => notified = true,
       },
     );
     return notified;
@@ -63,9 +54,10 @@ abstract class Rx<T> {
 
   /// Notify listeners with the given value
   @protected
+  @nonVirtual
   void notifyWithValue(T value) {
     if (_zoned) {
-      Zone.current[_zoneNotifierKey].call();
+      Zone.current[RxZoneKeys.notifierKey].call();
       return;
     }
     _controller.add(value);
@@ -190,7 +182,7 @@ abstract class RxObject<T> extends RxValue<T> {
   bool run(VoidCallback action, {bool notify = true}) {
     var notified = false;
     if (notify) {
-      notifyIfChanged(() => notified = super.run(action));
+      notifyIfChanged(() => notified = super.run(action, notify: notify));
     } else {
       notified = super.run(action);
     }

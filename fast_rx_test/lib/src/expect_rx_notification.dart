@@ -1,8 +1,11 @@
 // ignore_for_file: implementation_imports, invalid_use_of_visible_for_testing_member
 
+import 'dart:async';
+
 import 'package:fast_rx/src/rx/rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:test/test.dart';
+import 'package:fast_rx/src/rx/rx_zone_keys.dart';
 
 /// Expect that every test in [shouldNotify] notifies exactly once, and that
 /// every test in [shouldNotNotify] does not notify.
@@ -10,25 +13,18 @@ expectRxNotification<T extends Rx>({
   List<RxTest<T>> shouldNotify = const [],
   List<RxTest<T>> shouldNotNotify = const [],
 }) {
-  runTest(RxTest<T> test, int count) {
-    final rx = test.generate();
-    expect(
-      rx.stream,
-      emitsInOrder([
-        ...List.generate(count, (_) => anything),
-        emitsDone,
-      ]),
-    );
-    test.transform(rx);
-    // ignore: invalid_use_of_protected_member
-    rx.close();
-  }
-
-  for (final test in shouldNotify) {
-    runTest(test, test.count);
-  }
-
-  for (final test in shouldNotNotify) {
-    runTest(test, 0);
-  }
+  var notifications = 0;
+  runZoned(
+    () {
+      for (final test in shouldNotify + shouldNotNotify) {
+        final rx = test.generate();
+        test.transform(rx);
+      }
+    },
+    zoneValues: {
+      RxZoneKeys.zonedKey: true,
+      RxZoneKeys.notifierKey: () => notifications++,
+    },
+  );
+  expect(notifications, shouldNotify.length);
 }

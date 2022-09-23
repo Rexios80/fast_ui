@@ -8,14 +8,14 @@ void main() {
       () => {1.rx}.rx.composite,
       (rx) {
         rx.run(() => rx.add(2.rx), notify: false);
-        rx.last.value = 3;
+        rx.last.value = 4;
       },
     ),
     RxTest(
       () => {1.rx}.rx.composite,
       (rx) {
         rx.run(() => rx.addAll([2.rx, 3.rx]), notify: false);
-        rx.last.value = 3;
+        rx.last.value = 4;
       },
     ),
   ];

@@ -5,22 +5,14 @@ import 'package:flutter/foundation.dart';
 
 /// Mixin version of [RxComposite] for use on classes that already extend [Rx]
 mixin RxCompositeMixin<T> on Rx<T> {
-  final _subs = <Rx, StreamSubscription>{};
-
-  @override
-  Future<void> close() async {
-    for (final rx in _subs.keys) {
-      await rx.close();
-    }
-    return super.close();
-  }
+  final _subs = <Stream, StreamSubscription>{};
 
   /// Add an [Rx] to this composite
   @protected
   void addRx(Rx rx) {
-    if (_subs[rx] != null) return;
+    if (_subs[rx.stream] != null) return;
     final sub = rx.stream.listen((_) => notify());
-    _subs[rx] = sub;
+    _subs[rx.stream] = sub;
   }
 
   /// Remove an [Rx] from this composite
@@ -32,7 +24,7 @@ mixin RxCompositeMixin<T> on Rx<T> {
 
   @override
   bool run(VoidCallback action, {bool notify = true}) {
-    final notified = super.run(action);
+    final notified = super.run(action, notify: notify);
     if (notify && notified) {
       this.notify();
     }
