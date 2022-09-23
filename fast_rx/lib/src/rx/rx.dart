@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 
 /// Base class for reactives
 abstract class Rx<T> {
-  bool get _zoned => Zone.current[RxZoneKeys.zonedKey] ?? false;
+  bool get _zoned => Zone.current[zonedKey] ?? false;
 
   final StreamController<T> _controller = StreamController.broadcast();
 
@@ -29,18 +29,14 @@ abstract class Rx<T> {
   @protected
   bool run(VoidCallback action, {bool notify = true}) {
     var notified = false;
-    runZoned(
+    runRxZoned(
       () {
         final result = action() as dynamic;
         if (result is Future) {
           throw RxRunActionWasAsync();
         }
       },
-      zoneValues: {
-        RxZoneKeys.zonedKey: true,
-        // Pass the id of the object for use in testing
-        RxZoneKeys.notifierKey: (int id) => notified = true,
-      },
+      notifier: (int id) => notified = true,
     );
     return notified;
   }
@@ -58,7 +54,7 @@ abstract class Rx<T> {
   @nonVirtual
   void notifyWithValue(T value) {
     if (_zoned) {
-      Zone.current[RxZoneKeys.notifierKey].call(identityHashCode(this));
+      Zone.current[notifierKey].call(identityHashCode(this));
       return;
     }
     _controller.add(value);

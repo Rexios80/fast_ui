@@ -1,7 +1,5 @@
 // ignore_for_file: implementation_imports, invalid_use_of_visible_for_testing_member
 
-import 'dart:async';
-
 import 'package:fast_rx/src/rx/rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:test/test.dart';
@@ -16,17 +14,12 @@ expectRxNotification<T extends Rx>({
   void runTest(RxTest<T> test, int count) {
     var notifications = 0;
     final rx = test.generate();
-    runZoned(
-      () {
-        test.transform(rx);
-      },
-      zoneValues: {
-        RxZoneKeys.zonedKey: true,
-        RxZoneKeys.notifierKey: (int id) {
-          if (id == identityHashCode(rx)) {
-            notifications++;
-          }
-        },
+    runRxZoned(
+      () => test.transform(rx),
+      notifier: (int id) {
+        if (id == identityHashCode(rx)) {
+          notifications++;
+        }
       },
     );
     expect(notifications, count);
