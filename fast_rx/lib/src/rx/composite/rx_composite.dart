@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:fast_rx/src/rx/rx.dart';
 import 'package:flutter/foundation.dart';
 
-/// An [Rx] that is composed of other [Rx] objects
-abstract class RxComposite extends Rx<void> {
+/// Mixin version of [RxComposite] for use on classes that already extend [Rx]
+mixin RxCompositeMixin<T> on Rx<T> {
   final _subs = <Stream, StreamSubscription>{};
 
   /// Add an [Rx] to this composite
   @protected
   void addRx(Rx rx) {
     final stream = rx.stream;
-    if (_subs[stream] != null) return; // Should this throw?
+    if (_subs[stream] != null) return;
     final sub = rx.stream.listen((_) => notify());
     _subs[stream] = sub;
   }
@@ -22,11 +22,6 @@ abstract class RxComposite extends Rx<void> {
     final stream = rx.stream;
     final sub = _subs.remove(stream);
     sub?.cancel();
-  }
-
-  @override
-  void notify() {
-    notifyWithValue(null);
   }
 
   @override
@@ -42,5 +37,13 @@ abstract class RxComposite extends Rx<void> {
     if (changed) {
       notify();
     }
+  }
+}
+
+/// An [Rx] that is composed of other [Rx] objects and notifies when they do
+abstract class RxComposite extends Rx<void> with RxCompositeMixin<void> {
+  @override
+  void notify() {
+    notifyWithValue(null);
   }
 }
