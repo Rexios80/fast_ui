@@ -9,7 +9,7 @@ abstract class Rx<T> {
   static const _zonedObjectKey = '_fast_rx_zoned_object_key';
 
   bool get _zoned {
-    final isThis = Zone.current[_zonedObjectKey] == this;
+    final isThis = Zone.current[_zonedObjectKey] == identityHashCode(this);
     final zoned = Zone.current[_zonedKey] ?? false;
     return isThis && zoned;
   }
@@ -45,7 +45,7 @@ abstract class Rx<T> {
       },
       zoneValues: {
         _zonedKey: true,
-        _zonedObjectKey: this,
+        _zonedObjectKey: identityHashCode(this),
       },
     );
   }
