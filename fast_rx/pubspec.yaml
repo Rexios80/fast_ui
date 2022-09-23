@@ -16,7 +16,6 @@ dev_dependencies:
     sdk: flutter
 
   rexios_lints: ^3.0.0
-  mockito: ^5.0.17
   fast_rx_test: ^0.3.0
 
 dependency_overrides:

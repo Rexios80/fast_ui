@@ -25,7 +25,7 @@ expectRxNotification<T extends Rx>({
   }
 
   for (final test in shouldNotify) {
-    runTest(test, 1);
+    runTest(test, test.count);
   }
 
   for (final test in shouldNotNotify) {

@@ -30,12 +30,13 @@ abstract class Rx<T> {
     RxNotifier.instance.addStream(stream);
   }
 
-  /// Run [action] with registration and notifications disabled
+  /// Run [action] with registration and notifications disabled. Will notify
+  /// after [action] is completed if [notify] is true and the child
+  /// implementation decides a notification should be sent.
   ///
   /// Returns true if a notification was attempted during [action]
   @protected
-  @visibleForTesting
-  bool run(VoidCallback action) {
+  bool run(VoidCallback action, {bool notify = true}) {
     var notified = false;
     runZoned(
       () {
@@ -185,11 +186,14 @@ abstract class RxObject<T> extends RxValue<T> {
     _value = value;
   }
 
-  /// Notify only if [action] changes the value
   @override
-  bool run(VoidCallback action) {
+  bool run(VoidCallback action, {bool notify = true}) {
     var notified = false;
-    notifyIfChanged(() => notified = super.run(action));
+    if (notify) {
+      notifyIfChanged(() => notified = super.run(action));
+    } else {
+      notified = super.run(action);
+    }
     return notified;
   }
 

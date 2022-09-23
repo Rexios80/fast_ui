@@ -31,10 +31,10 @@ mixin RxCompositeMixin<T> on Rx<T> {
   }
 
   @override
-  bool run(VoidCallback action) {
+  bool run(VoidCallback action, {bool notify = true}) {
     final notified = super.run(action);
-    if (notified) {
-      notify();
+    if (notify && notified) {
+      this.notify();
     }
     return notified;
   }

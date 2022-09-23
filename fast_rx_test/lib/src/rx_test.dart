@@ -11,6 +11,9 @@ class RxTest<T extends Rx> {
   /// A transformation to run on the generated [Rx] object
   final void Function(T rx) transform;
 
+  /// The number of times the expected consequence should occur
+  final int count;
+
   /// Create an [RxTest]
-  RxTest(this.generate, this.transform);
+  RxTest(this.generate, this.transform, {this.count = 1});
 }
