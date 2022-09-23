@@ -1,4 +1,5 @@
 ## 0.3.0
+- `RxValue ==` now behaves as expected
 - Removes `Rx.close`
 
 ## 0.2.10
