@@ -1,4 +1,4 @@
-import 'package:fast_rx/src/rx/rx_iterable.dart';
+import 'package:fast_rx/src/rx/object/rx_iterable.dart';
 import 'package:flutter/foundation.dart';
 
 /// A reactive set

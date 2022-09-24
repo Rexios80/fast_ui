@@ -1,4 +1,4 @@
-import 'package:fast_rx/src/rx/rx_object.dart';
+import 'package:fast_rx/src/rx/rx.dart';
 
 /// A reactive iterable
 abstract class RxIterable<E> extends RxObject<Iterable<E>>
