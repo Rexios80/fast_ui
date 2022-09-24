@@ -16,4 +16,3 @@ dependencies:
 dev_dependencies:
   test: ^1.19.0
   rexios_lints: ^3.0.0
-
