@@ -6,6 +6,7 @@
 - `RxObject` now extends `RxValue`
 - `RxValue ==` now behaves as expected
 - Removes `Rx.close`
+- A bunch of refactoring
 
 ## 0.2.10
 - Fixes an edge case where registration could occur outside of a `FastBuilder` builder
