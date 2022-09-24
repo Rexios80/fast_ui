@@ -4,6 +4,7 @@ import 'package:fast_ui/fast_ui.dart';
 import 'package:fast_ui_example/examples/fast_extensions_example.dart';
 import 'package:fast_ui_example/examples/fast_nav_example.dart';
 import 'package:fast_ui_example/examples/fast_overlays_example.dart';
+import 'package:fast_ui_example/examples/fast_rx_composite_example.dart';
 import 'package:fast_ui_example/examples/fast_rx_example.dart';
 import 'package:fast_ui_example/examples/fast_rx_persistence_example.dart';
 import 'package:flutter/material.dart';
@@ -80,6 +81,11 @@ class FastUiExample extends StatelessWidget {
             ElevatedButton(
               child: const Text('fast_rx Example'),
               onPressed: () => FastNav.push(FastRxExample()),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              child: const Text('fast_rx Composite Example'),
+              onPressed: () => FastNav.push(FastRxCompositeExample()),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
