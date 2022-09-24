@@ -11,12 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  fast_rx: ^0.2.7
+  fast_rx: ^0.3.0
 
 dev_dependencies:
   test: ^1.19.0
   rexios_lints: ^3.0.0
 
-dependency_overrides:
-  fast_rx:
-    path: ../fast_rx

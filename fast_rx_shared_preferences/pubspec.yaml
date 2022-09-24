@@ -17,10 +17,8 @@ dependencies:
 dev_dependencies:
   test: ^1.21.1
   rexios_lints: ^3.0.0
-  fast_rx: ^0.2.7
+  fast_rx: ^0.3.0
 
 dependency_overrides:
-  fast_rx:
-    path: ../fast_rx
   fast_rx_persistence:
     path: ../fast_rx_persistence
