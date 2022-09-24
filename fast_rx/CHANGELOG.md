@@ -1,7 +1,7 @@
 ## 0.3.0
-- Added `RxComposite` to allow for composition of `Rx` objects
-- Added `RxCompositeList`, `RxCompositeSet`, and `RxCompositeMap`
-- Added `composite` extension on `RxIterable<Rx>`s to create composite versions of them
+- Adds `RxComposite` to allow for composition of `Rx` objects
+- Adds `RxCompositeList`, `RxCompositeSet`, and `RxCompositeMap`
+- Adds `composite` extension on `RxIterable<Rx>`s to create composite versions of them
 - `Rx.value` field moved to `RxValue.value`
 - `RxObject` now extends `RxValue`
 - `RxValue ==` now behaves as expected

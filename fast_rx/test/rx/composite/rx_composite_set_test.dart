@@ -6,6 +6,11 @@ void main() {
   final shouldNotify = <RxTest<RxCompositeSet<RxInt>>>[
     RxTest(() => {1.rx}.rx.composite, (rx) {
       final other = 2.rx;
+      rx.run(() => rx.replaceAll([other]), notify: false);
+      other.value = 4;
+    }),
+    RxTest(() => {1.rx}.rx.composite, (rx) {
+      final other = 2.rx;
       rx.run(() => rx.add(other), notify: false);
       other.value = 4;
     }),
