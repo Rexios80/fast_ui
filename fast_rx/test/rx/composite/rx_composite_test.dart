@@ -1,6 +1,7 @@
-import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'composite.dart';
 
 void main() {
   final shouldNotify = <RxTest<Composite>>[
@@ -32,16 +33,4 @@ void main() {
       shouldNotRegister: shouldNotify,
     );
   });
-}
-
-class Composite extends RxComposite {
-  final a = 1.rx;
-  final b = 2.rx;
-  final c = 3.rx;
-
-  Composite() {
-    addRx(a);
-    addRx(b);
-    addRx(c);
-  }
 }
