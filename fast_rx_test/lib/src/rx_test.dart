@@ -12,7 +12,7 @@ class RxTest<T extends Rx> {
   final void Function(T rx) transform;
 
   /// The number of times the expected consequence should occur
-  /// 
+  ///
   /// This is ignored for "shouldNot" tests
   final int count;
 
