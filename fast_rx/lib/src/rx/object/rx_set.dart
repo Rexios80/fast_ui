@@ -1,4 +1,4 @@
-import 'package:fast_rx/src/rx/rx_iterable.dart';
+import 'package:fast_rx/src/rx/object/rx_iterable.dart';
 import 'package:flutter/foundation.dart';
 
 /// A reactive set
@@ -45,7 +45,7 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
   @override
   bool add(E value) {
     final result = this.value.add(value);
-    notify();
+    if (result) notify();
     return result;
   }
 
@@ -81,7 +81,9 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
 
   @override
   bool remove(Object? value) {
-    return notifyIfChanged(() => this.value.remove(value));
+    final result = this.value.remove(value);
+    if (result) notify();
+    return result;
   }
 
   @override
@@ -111,7 +113,7 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
 }
 
 /// Extension to allow creating reactive sets
-extension RxSetExtension<T> on Set<T> {
+extension RxSetExtension<E> on Set<E> {
   /// Create a reactive set
-  RxSet<T> get rx => RxSet<T>(this);
+  RxSet<E> get rx => RxSet<E>(this);
 }

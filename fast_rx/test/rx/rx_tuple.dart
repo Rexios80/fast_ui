@@ -40,9 +40,7 @@ class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
   @override
   @protected
   @visibleForTesting
-  bool shouldNotify(Tuple<T1, T2> oldValue) =>
-      oldValue.item1 != unregisteredValue.item1 ||
-      oldValue.item2 != unregisteredValue.item2;
+  bool shouldNotify(Tuple<T1, T2> oldValue) => oldValue != unregisteredValue;
 }
 
 extension RxTupleExtension<T1, T2> on Tuple<T1, T2> {

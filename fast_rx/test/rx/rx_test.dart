@@ -5,19 +5,21 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('Rx notifications', () {
     expectRxNotification(
-      shouldNotify: <RxTest<Rx<String>>>[
+      shouldNotify: <RxTest<RxValue<String>>>[
         RxTest(() => ''.rx, (rx) => rx.value = 'a'),
       ],
-      shouldNotNotify: <RxTest<Rx<String>>>[
+      shouldNotNotify: <RxTest<RxValue<String>>>[
+        // ignore: invalid_use_of_protected_member
         RxTest(() => ''.rx, (rx) => rx.run(() => rx.value = 'a')),
       ],
     );
 
     expectRxRegistration(
-      shouldRegister: <RxTest<Rx<String>>>[
+      shouldRegister: <RxTest<RxValue<String>>>[
         RxTest(() => ''.rx, (rx) => rx.value),
       ],
-      shouldNotRegister: <RxTest<Rx<String>>>[
+      shouldNotRegister: <RxTest<RxValue<String>>>[
+        // ignore: invalid_use_of_protected_member
         RxTest(() => ''.rx, (rx) => rx.run(() => rx.value)),
       ],
     );
@@ -25,10 +27,12 @@ void main() {
 
   test('Rx registration', () {
     expectRxRegistration(
-      shouldRegister: [
-        RxTest(() => ''.rx, (rx) => rx == ''),
+      shouldRegister: <RxTest<RxValue<String>>>[
+        RxTest(() => ''.rx, (rx) => rx == ''.rx, count: 2),
         RxTest(() => ''.rx, (rx) => rx.hashCode),
         RxTest(() => ''.rx, (rx) => rx.toString()),
+      ],
+      shouldNotRegister: <RxTest<RxValue<String>>>[
         RxTest(() => ''.rx, (rx) => rx.runtimeType),
       ],
     );
@@ -36,6 +40,7 @@ void main() {
 
   test('Rx.run async exception', () {
     expect(
+      // ignore: invalid_use_of_protected_member
       () => ''.rx.run(() async {}),
       throwsA(isA<RxRunActionWasAsync>()),
     );

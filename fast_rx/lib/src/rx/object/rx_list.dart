@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:fast_rx/src/rx/rx_iterable.dart';
+import 'package:fast_rx/src/rx/object/rx_iterable.dart';
 import 'package:flutter/foundation.dart';
 
 /// A reactive list
@@ -137,7 +137,9 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 
   @override
   bool remove(Object? value) {
-    return notifyIfChanged(() => this.value.remove(value));
+    final result = this.value.remove(value);
+    if (result) notify();
+    return result;
   }
 
   @override
@@ -209,7 +211,7 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 }
 
 /// Extension to allow creating reactive lists
-extension RxListExtension<T> on List<T> {
+extension RxListExtension<E> on List<E> {
   /// Create a reactive list
-  RxList<T> get rx => RxList<T>(this);
+  RxList<E> get rx => RxList<E>(this);
 }

@@ -10,14 +10,18 @@ Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.d
 [![pub points](https://badges.bar/fast_rx/pub%20points)](https://pub.dev/packages/fast_rx/score)
 
 ## Features
-| Class       | Use-case                                    |
-| ----------- | ------------------------------------------- |
-| FastBuilder | Rebuilds when reactive values within change |
-| RxValue<T>  | A reactive value                            |
-| RxObject<T> | A reactive object                           |
-| RxList<E>   | A reactive list                             |
-| RxMap<E>    | A reactive map                              |
-| RxSet<E>    | A reactive set                              |
+| Class           | Use-case                                    |
+| --------------- | ------------------------------------------- |
+| FastBuilder     | Rebuilds when reactive values within change |
+| RxValue<T>      | A reactive value                            |
+| RxObject<T>     | A reactive object                           |
+| RxList<E>       | A reactive list                             |
+| RxMap<E>        | A reactive map                              |
+| RxSet<E>        | A reactive set                              |
+| RxComposite     | A composite of Rx objects                   |
+| RxCompositeList | A composite version of RxList               |
+| RxCompositeMap  | A composite version of RxMap                |
+| RxCompositeSet  | A composite version of RxSet                |
 
 There are convenience typedefs for RxBool, RxInt, RxDouble, and RxString
 
@@ -60,8 +64,8 @@ void example() {
 
 ```
 
-### Custom RxObjects
-RxObject can be used to create reactive objects of classes outside of your control.
+### RxObject
+`RxObject` can be used to create reactive objects of classes outside of your control.
 If an object is within your control, consider making fields reactive instead.
 
 <!-- embedme test/rx/rx_tuple.dart -->
@@ -108,9 +112,7 @@ class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
   @override
   @protected
   @visibleForTesting
-  bool shouldNotify(Tuple<T1, T2> oldValue) =>
-      oldValue.item1 != unregisteredValue.item1 ||
-      oldValue.item2 != unregisteredValue.item2;
+  bool shouldNotify(Tuple<T1, T2> oldValue) => oldValue != unregisteredValue;
 }
 
 extension RxTupleExtension<T1, T2> on Tuple<T1, T2> {
@@ -119,8 +121,49 @@ extension RxTupleExtension<T1, T2> on Tuple<T1, T2> {
 
 ```
 
-### Testing custom RxObjects
-Custom RxObjects can be tested for valid registration and notifications using [fast_rx_test](https://pub.dev/packages/fast_rx_test).
+### RxComposite
+An `RxComposite` is an `Rx` that contains other `Rx` objects, and notifies with them.
+
+Create and use composite versions of `RxIterable`s:
+<!-- embedme readme/rx_composite.dart -->
+```dart
+import 'package:fast_rx/fast_rx.dart';
+
+void example() {
+  final compositeList = [0.rx].rx.composite;
+  final compositeMap = {0: 1.rx}.rx.composite;
+  final compositeSet = {0.rx}.rx.composite;
+
+  // All of these will cause their parent to notify
+  compositeList[0].value = 1;
+  compositeMap[0]!.value = 1;
+  compositeSet.first.value = 1;
+}
+
+```
+
+Custom `RxComposite`:
+<!-- embedme test/rx/composite/composite.dart -->
+```dart
+import 'package:fast_rx/fast_rx.dart';
+
+class Composite extends RxComposite {
+  final a = 1.rx;
+  final b = 2.rx;
+  final c = 3.rx;
+
+  Composite() {
+    // Register all rx fields so that this object notifies with them
+    addRx(a);
+    addRx(b);
+    addRx(c);
+  }
+}
+
+```
+
+### Testing custom Rx
+Custom Rx objects can be tested for valid registration and notifications using [fast_rx_test](https://pub.dev/packages/fast_rx_test).
 
 ## Additional information
 See [fast_ui](https://pub.dev/packages/fast_ui) for more information
