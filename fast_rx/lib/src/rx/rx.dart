@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:fast_rx/fast_rx.dart';
-import 'package:fast_rx/src/rx/rx_zone_keys.dart';
+import 'package:fast_rx/src/rx/rx_zone.dart';
 import 'package:fast_rx/src/rx_notifier.dart';
 import 'package:flutter/foundation.dart';
 
