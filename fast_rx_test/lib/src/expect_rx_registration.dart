@@ -20,7 +20,8 @@ expectRxRegistration<T extends Rx>({
   }
 
   if (shouldRegister.isNotEmpty) {
-    verify(notifier.addStream(any)).called(shouldRegister.length);
+    verify(notifier.addStream(any))
+        .called(shouldRegister.fold<int>(0, (a, b) => a + b.count));
   }
 
   for (final test in shouldNotRegister) {

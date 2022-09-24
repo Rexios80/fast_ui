@@ -27,12 +27,12 @@ void main() {
 
   test('Rx registration', () {
     expectRxRegistration(
-      shouldRegister: [
-        RxTest(() => ''.rx, (rx) => rx == ''),
+      shouldRegister: <RxTest<RxValue<String>>>[
+        RxTest(() => ''.rx, (rx) => rx == ''.rx, count: 2),
         RxTest(() => ''.rx, (rx) => rx.hashCode),
         RxTest(() => ''.rx, (rx) => rx.toString()),
       ],
-      shouldNotRegister: [
+      shouldNotRegister: <RxTest<RxValue<String>>>[
         RxTest(() => ''.rx, (rx) => rx.runtimeType),
       ],
     );
