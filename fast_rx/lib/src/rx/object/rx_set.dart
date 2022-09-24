@@ -113,7 +113,7 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
 }
 
 /// Extension to allow creating reactive sets
-extension RxSetExtension<T> on Set<T> {
+extension RxSetExtension<E> on Set<E> {
   /// Create a reactive set
-  RxSet<T> get rx => RxSet<T>(this);
+  RxSet<E> get rx => RxSet<E>(this);
 }

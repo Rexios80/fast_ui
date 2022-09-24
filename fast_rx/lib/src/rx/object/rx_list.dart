@@ -211,7 +211,7 @@ class RxList<E> extends RxIterable<E> implements List<E> {
 }
 
 /// Extension to allow creating reactive lists
-extension RxListExtension<T> on List<T> {
+extension RxListExtension<E> on List<E> {
   /// Create a reactive list
-  RxList<T> get rx => RxList<T>(this);
+  RxList<E> get rx => RxList<E>(this);
 }
