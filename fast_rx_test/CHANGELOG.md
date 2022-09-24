@@ -1,3 +1,7 @@
+## 0.3.2
+- Much more reliable `expectRxNotification` verification using `runRxZoned`
+- Adds `RxComposite` support to `expectRxNotification`
+
 ## 0.3.1
 - Documentation fixes
 
