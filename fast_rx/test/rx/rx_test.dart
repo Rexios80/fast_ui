@@ -29,10 +29,10 @@ void main() {
     expectRxRegistration(
       shouldRegister: [
         RxTest(() => ''.rx, (rx) => rx == ''),
+        RxTest(() => ''.rx, (rx) => rx.hashCode),
         RxTest(() => ''.rx, (rx) => rx.toString()),
       ],
       shouldNotRegister: [
-        RxTest(() => ''.rx, (rx) => rx.hashCode),
         RxTest(() => ''.rx, (rx) => rx.runtimeType),
       ],
     );

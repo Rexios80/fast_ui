@@ -6,9 +6,12 @@ const zonedKey = '_fast_rx_zoned_key';
 /// Key for the notifier callback in an rx zone
 const notifierKey = '_fast_rx_notifier_key';
 
-runRxZoned(void Function() body, {required void Function(int id) notifier}) {
+/// Run [action] in an rx zone
+/// 
+/// Will call [notifier] if a notification is attempted within this zone
+runRxZoned(void Function() action, {required void Function(int id) notifier}) {
   return runZoned(
-    body,
+    action,
     zoneValues: {
       zonedKey: true,
       notifierKey: notifier,

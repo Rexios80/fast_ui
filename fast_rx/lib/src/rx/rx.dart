@@ -109,8 +109,7 @@ class RxValue<T> extends Rx<T> {
 
   @override
   int get hashCode {
-    // This can't change, so we don't need to register here
-    return unregisteredValue.hashCode;
+    return value.hashCode;
   }
 
   @override
