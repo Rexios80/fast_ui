@@ -47,6 +47,7 @@ class RxCompositeList<E extends Rx> extends RxList<E>
 
   @override
   void fillRange(int start, int end, [E? fillValue]) {
+    unregisteredValue.sublist(start, end).forEach(removeRx);
     if (fillValue != null) {
       addRx(fillValue);
     }
