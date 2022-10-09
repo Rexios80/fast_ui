@@ -22,7 +22,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  rexios_lints: ^3.0.0
+  rexios_lints: ^4.0.0
 
 # Override fast packages so we can import fast_ui and use the local versions
 dependency_overrides:
