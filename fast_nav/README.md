@@ -1,11 +1,11 @@
 Navigate without context
 
-[![pub package](https://img.shields.io/pub/v/fast_nav.svg?label=fast_nav)](https://pub.dev/packages/fast_nav)
-[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg?flag=fast_nav)](https://codecov.io/gh/Rexios80/fast_ui)
+[![pub package](https://img.shields.io/pub/v/fast_nav)](https://pub.dev/packages/fast_nav)
+[![codecov](https://img.shields.io/codecov/c/github/Rexios80/fast_ui/master?flag=fast_nav)](https://codecov.io/gh/Rexios80/fast_ui)
 ![checks](https://img.shields.io/github/checks-status/Rexios80/fast_ui/master)
-[![popularity](https://badges.bar/fast_nav/popularity)](https://pub.dev/packages/fast_nav/score)
-[![likes](https://badges.bar/fast_nav/likes)](https://pub.dev/packages/fast_nav/score)
-[![pub points](https://badges.bar/fast_nav/pub%20points)](https://pub.dev/packages/fast_nav/score)
+[![popularity](https://img.shields.io/pub/popularity/fast_nav)](https://pub.dev/packages/fast_nav/score)
+[![likes](https://img.shields.io/pub/likes/fast_nav)](https://pub.dev/packages/fast_nav/score)
+[![pub points](https://img.shields.io/pub/points/fast_nav)](https://pub.dev/packages/fast_nav/score)
 
 ## Features
 fast_nav supports the following navigation methods:

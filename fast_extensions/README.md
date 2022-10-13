@@ -1,11 +1,11 @@
 Convenience extensions to make common Flutter tasks less annoying
 
-[![pub package](https://img.shields.io/pub/v/fast_extensions.svg?label=fast_extensions)](https://pub.dev/packages/fast_extensions)
-[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg?flag=fast_extensions)](https://codecov.io/gh/Rexios80/fast_ui)
+[![pub package](https://img.shields.io/pub/v/fast_extensions)](https://pub.dev/packages/fast_extensions)
+[![codecov](https://img.shields.io/codecov/c/github/Rexios80/fast_ui/master?flag=fast_extensions)](https://codecov.io/gh/Rexios80/fast_ui)
 ![checks](https://img.shields.io/github/checks-status/Rexios80/fast_ui/master)
-[![popularity](https://badges.bar/fast_extensions/popularity)](https://pub.dev/packages/fast_extensions/score)
-[![likes](https://badges.bar/fast_extensions/likes)](https://pub.dev/packages/fast_extensions/score)
-[![pub points](https://badges.bar/fast_extensions/pub%20points)](https://pub.dev/packages/fast_extensions/score)
+[![popularity](https://img.shields.io/pub/popularity/fast_extensions)](https://pub.dev/packages/fast_extensions/score)
+[![likes](https://img.shields.io/pub/likes/fast_extensions)](https://pub.dev/packages/fast_extensions/score)
+[![pub points](https://img.shields.io/pub/points/fast_extensions)](https://pub.dev/packages/fast_extensions/score)
 
 ## Features
 | Extension                 | Use-case                           |

@@ -1,11 +1,11 @@
 A Shared Preferences implementation of fast_rx_persistence storage
 
-[![pub package](https://img.shields.io/pub/v/fast_rx_shared_preferences.svg?label=fast_rx_shared_preferences)](https://pub.dev/packages/fast_rx_shared_preferences)
-[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg?flag=fast_rx_shared_preferences)](https://codecov.io/gh/Rexios80/fast_ui)
+[![pub package](https://img.shields.io/pub/v/fast_rx_shared_preferences)](https://pub.dev/packages/fast_rx_shared_preferences)
+[![codecov](https://img.shields.io/codecov/c/github/Rexios80/fast_ui/master?flag=fast_rx_shared_preferences)](https://codecov.io/gh/Rexios80/fast_ui)
 ![checks](https://img.shields.io/github/checks-status/Rexios80/fast_ui/master)
-[![popularity](https://badges.bar/fast_rx_shared_preferences/popularity)](https://pub.dev/packages/fast_rx_shared_preferences/score)
-[![likes](https://badges.bar/fast_rx_shared_preferences/likes)](https://pub.dev/packages/fast_rx_shared_preferences/score)
-[![pub points](https://badges.bar/fast_rx_shared_preferences/pub%20points)](https://pub.dev/packages/fast_rx_shared_preferences/score)
+[![popularity](https://img.shields.io/pub/popularity/fast_rx_shared_preferences)](https://pub.dev/packages/fast_rx_shared_preferences/score)
+[![likes](https://img.shields.io/pub/likes/fast_rx_shared_preferences)](https://pub.dev/packages/fast_rx_shared_preferences/score)
+[![pub points](https://img.shields.io/pub/points/fast_rx_shared_preferences)](https://pub.dev/packages/fast_rx_shared_preferences/score)
 
 ## Usage
 See [fast_rx_persistence](https://pub.dev/packages/fast_rx_persistence) for detailed usage information.

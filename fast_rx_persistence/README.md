@@ -1,11 +1,11 @@
 An interface for implementing fast_rx key/value store persistence
 
-[![pub package](https://img.shields.io/pub/v/fast_rx_persistence.svg?label=fast_rx_persistence)](https://pub.dev/packages/fast_rx_persistence)
-[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg?flag=fast_rx_persistence)](https://codecov.io/gh/Rexios80/fast_ui)
+[![pub package](https://img.shields.io/pub/v/fast_rx_persistence)](https://pub.dev/packages/fast_rx_persistence)
+[![codecov](https://img.shields.io/codecov/c/github/Rexios80/fast_ui/master?flag=fast_rx_persistence)](https://codecov.io/gh/Rexios80/fast_ui)
 ![checks](https://img.shields.io/github/checks-status/Rexios80/fast_ui/master)
-[![popularity](https://badges.bar/fast_rx_persistence/popularity)](https://pub.dev/packages/fast_rx_persistence/score)
-[![likes](https://badges.bar/fast_rx_persistence/likes)](https://pub.dev/packages/fast_rx_persistence/score)
-[![pub points](https://badges.bar/fast_rx_persistence/pub%20points)](https://pub.dev/packages/fast_rx_persistence/score)
+[![popularity](https://img.shields.io/pub/popularity/fast_rx_persistence)](https://pub.dev/packages/fast_rx_persistence/score)
+[![likes](https://img.shields.io/pub/likes/fast_rx_persistence)](https://pub.dev/packages/fast_rx_persistence/score)
+[![pub points](https://img.shields.io/pub/points/fast_rx_persistence)](https://pub.dev/packages/fast_rx_persistence/score)
 
 ## Features
 | Class                      | Use-case                                                    |

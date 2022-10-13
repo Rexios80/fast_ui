@@ -1,10 +1,10 @@
 Testing utilities for [fast_rx](https://pub.dev/packages/fast_rx)
 
-[![pub package](https://img.shields.io/pub/v/fast_rx_test.svg?label=fast_rx_test)](https://pub.dev/packages/fast_rx_test)
+[![pub package](https://img.shields.io/pub/v/fast_rx_test)](https://pub.dev/packages/fast_rx_test)
 ![checks](https://img.shields.io/github/checks-status/Rexios80/fast_ui/master)
-[![popularity](https://badges.bar/fast_rx_test/popularity)](https://pub.dev/packages/fast_rx_test/score)
-[![likes](https://badges.bar/fast_rx_test/likes)](https://pub.dev/packages/fast_rx_test/score)
-[![pub points](https://badges.bar/fast_rx_test/pub%20points)](https://pub.dev/packages/fast_rx_test/score)
+[![popularity](https://img.shields.io/pub/popularity/fast_rx_test)](https://pub.dev/packages/fast_rx_test/score)
+[![likes](https://img.shields.io/pub/likes/fast_rx_test)](https://pub.dev/packages/fast_rx_test/score)
+[![pub points](https://img.shields.io/pub/points/fast_rx_test)](https://pub.dev/packages/fast_rx_test/score)
 
 ## Features
 

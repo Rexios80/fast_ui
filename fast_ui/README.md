@@ -1,11 +1,11 @@
 fast_ui is a collection of Flutter packages aimed to make UI development faster
 
-[![pub package](https://img.shields.io/pub/v/fast_ui.svg?label=fast_ui)](https://pub.dev/packages/fast_ui)
-[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg)](https://codecov.io/gh/Rexios80/fast_ui)
+[![pub package](https://img.shields.io/pub/v/fast_ui)](https://pub.dev/packages/fast_ui)
+[![codecov](https://img.shields.io/codecov/c/github/Rexios80/fast_ui/master)](https://codecov.io/gh/Rexios80/fast_ui)
 ![checks](https://img.shields.io/github/checks-status/Rexios80/fast_ui/master)
-[![popularity](https://badges.bar/fast_ui/popularity)](https://pub.dev/packages/fast_ui/score)
-[![likes](https://badges.bar/fast_ui/likes)](https://pub.dev/packages/fast_ui/score)
-[![pub points](https://badges.bar/fast_ui/pub%20points)](https://pub.dev/packages/fast_ui/score)
+[![popularity](https://img.shields.io/pub/popularity/fast_ui)](https://pub.dev/packages/fast_ui/score)
+[![likes](https://img.shields.io/pub/likes/fast_ui)](https://pub.dev/packages/fast_ui/score)
+[![pub points](https://img.shields.io/pub/points/fast_ui)](https://pub.dev/packages/fast_ui/score)
 
 ## Packages
 
