@@ -29,17 +29,12 @@ void main() {
     RxTest(() => {0, 1, 2, 3, 5, 6}.rx, (rx) => rx.shouldNotify({})),
   ];
 
-  test('RxSet notifications', () {
-    expectRxNotification(
-      shouldNotify: shouldNotify + shouldNotifyAndRegister,
-      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
-    );
-  });
-
-  test('RxSet registration', () {
-    expectRxRegistration(
+  test('RxSet registration and notifications', () {
+    expectRx(
       shouldRegister: shouldRegister + shouldNotifyAndRegister,
       shouldNotRegister: shouldNotify + shouldNotNotifyOrRegister,
+      shouldNotify: shouldNotify + shouldNotifyAndRegister,
+      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
     );
   });
 }

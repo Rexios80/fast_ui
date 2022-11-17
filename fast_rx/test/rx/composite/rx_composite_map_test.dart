@@ -122,7 +122,7 @@ void main() {
   ];
 
   test('RxCompositeMap notifications', () {
-    expectRxNotification(
+    expectRx(
       shouldNotify: shouldNotify,
       shouldNotNotify: shouldNotNotify,
     );

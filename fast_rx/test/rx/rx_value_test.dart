@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('RxValue registration', () {
-    expectRxRegistration<RxString>(
+    expectRx<RxString>(
       shouldRegister: [
         RxTest(() => ''.rx, (rx) => rx.value),
       ],

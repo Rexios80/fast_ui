@@ -25,17 +25,12 @@ void main() {
     RxTest(() => Tuple(1, 2).rx, (rx) => rx.internalSetValue(Tuple(1, 3))),
   ];
 
-  test('RxObject notifications', () {
-    expectRxNotification(
-      shouldNotify: shouldNotify,
-      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
-    );
-  });
-
-  test('RxObject registration', () {
-    expectRxRegistration(
+  test('RxObject registration and notifications', () {
+    expectRx(
       shouldRegister: shouldRegister,
       shouldNotRegister: shouldNotify + shouldNotNotifyOrRegister,
+      shouldNotify: shouldNotify,
+      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
     );
   });
 }

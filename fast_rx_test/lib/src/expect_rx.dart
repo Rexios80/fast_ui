@@ -7,11 +7,31 @@ import 'package:fast_rx/src/rx/rx_zone.dart';
 
 /// Expect that every test in [shouldNotify] notifies exactly once, and that
 /// every test in [shouldNotNotify] does not notify.
-expectRxNotification<T extends Rx>({
+expectRx<T extends Rx>({
+  List<RxTest<T>> shouldRegister = const [],
+  List<RxTest<T>> shouldNotRegister = const [],
   List<RxTest<T>> shouldNotify = const [],
   List<RxTest<T>> shouldNotNotify = const [],
 }) {
-  void runTest(RxTest<T> test, int count) {
+  void testRegistration(RxTest<T> test, int count) {
+    var registrations = 0;
+    final rx = test.generate();
+    runRxZoned(
+      () => test.transform(rx),
+      registrar: (stream) => registrations++,
+    );
+    expect(registrations, count);
+  }
+
+  for (final test in shouldRegister) {
+    testRegistration(test, test.count);
+  }
+
+  for (final test in shouldNotRegister) {
+    testRegistration(test, 0);
+  }
+
+  void testNotifications(RxTest<T> test, int count) {
     var notifications = 0;
     final rx = test.generate();
     runRxZoned(
@@ -27,9 +47,9 @@ expectRxNotification<T extends Rx>({
   }
 
   for (final test in shouldNotify) {
-    runTest(test, test.count);
+    testNotifications(test, test.count);
   }
   for (final test in shouldNotNotify) {
-    runTest(test, 0);
+    testNotifications(test, 0);
   }
 }

@@ -212,7 +212,7 @@ void main() {
   ];
 
   test('RxCompositeList notifications', () {
-    expectRxNotification(
+    expectRx(
       shouldNotify: shouldNotify,
       shouldNotNotify: shouldNotNotify,
     );

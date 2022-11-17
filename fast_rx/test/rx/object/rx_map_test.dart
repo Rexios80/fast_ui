@@ -49,17 +49,12 @@ void main() {
     ),
   ];
 
-  test('RxMap notifications', () {
-    expectRxNotification(
-      shouldNotify: shouldNotify + shouldNotifyAndRegister,
-      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
-    );
-  });
-
-  test('RxMap registration', () {
-    expectRxRegistration(
+  test('RxMap registration and notifications', () {
+    expectRx(
       shouldRegister: shouldRegister + shouldNotifyAndRegister,
       shouldNotRegister: shouldNotify + shouldNotNotifyOrRegister,
+      shouldNotify: shouldNotify + shouldNotifyAndRegister,
+      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
     );
   });
 }

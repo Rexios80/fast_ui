@@ -2,43 +2,8 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:fast_rx/src/exceptions.dart';
+import 'package:fast_rx/src/rx/rx_zone.dart';
 import 'package:flutter/foundation.dart';
-
-/// Class to deal with setting up [RxObserver]s
-class RxNotifier {
-  static RxNotifier _instance = RxNotifier();
-
-  /// The active [RxNotifier] instance
-  static RxNotifier get instance => _instance;
-
-  /// Set the active [RxNotifier] instance
-  @visibleForTesting
-  static set instance(RxNotifier value) => _instance = value;
-
-  /// Create a new [RxNotifier] instance
-  @visibleForTesting
-  RxNotifier();
-
-  /// Holds the working [RxObserver]
-  RxObserver? _observerIntermediate;
-
-  /// Add a stream to the working [RxObserver]
-  void addStream(Stream stream) {
-    _observerIntermediate?.addStream(stream);
-  }
-
-  /// Set up the given [observer] with the given [builder]
-  T setupObserver<T>(RxObserver observer, ValueGetter<T> builder) {
-    _observerIntermediate = observer;
-    // Calling the builder will add any relevant streams to the observer
-    final built = builder();
-    _observerIntermediate = null;
-    if (!observer.listenable) {
-      throw NoRxValuesInFastBuilder();
-    }
-    return built;
-  }
-}
 
 /// Listen to multiple Rx streams
 class RxObserver {
@@ -55,10 +20,10 @@ class RxObserver {
   StreamSubscription? _subscription;
 
   /// Returns false if there are no streams to listen to
-  bool get listenable => _streams.isNotEmpty;
+  bool get _listenable => _streams.isNotEmpty;
 
   /// Add a stream to the observer
-  void addStream(Stream stream) {
+  void _addStream(Stream stream) {
     // Don't add duplicate streams
     if (_streams.contains(stream)) return;
     _streams.add(stream);
@@ -77,5 +42,15 @@ class RxObserver {
     for (final subscription in _streamSubscriptions) {
       subscription.cancel();
     }
+  }
+
+  /// Set up this observer with the given [builder]
+  T setup<T>(ValueGetter<T> builder) {
+    // Calling the builder will add any relevant streams to the observer
+    final built = runRxZoned(builder, registrar: _addStream);
+    if (!_listenable) {
+      throw NoRxValuesInFastBuilder();
+    }
+    return built;
   }
 }
