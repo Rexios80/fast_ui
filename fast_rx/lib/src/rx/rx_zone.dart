@@ -3,7 +3,7 @@ import 'dart:async';
 /// Key for the registrar in an rx zone
 const registrarKey = '_fast_rx_registrar_key';
 
-/// Key for the notifier callback in an rx zone
+/// Key for the notifier in an rx zone
 const notifierKey = '_fast_rx_notifier_key';
 
 /// An rx action to run in an rx zone
