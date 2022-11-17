@@ -1,3 +1,6 @@
+## 0.3.1
+- Removes the `RxNotifier` and uses `runRxZoned` for registration instead
+
 ## 0.3.0
 - Adds `RxComposite` to allow for composition of `Rx` objects
 - Adds `RxCompositeList`, `RxCompositeSet`, and `RxCompositeMap`
