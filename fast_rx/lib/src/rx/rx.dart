@@ -8,7 +8,7 @@ abstract class Rx<T> {
   /// Stream of value changes
   Stream<T> get stream => _controller.stream;
 
-  /// Register with the [RxNotifier] for UI updates
+  /// Register with the current zone's [RxRegistrar] if it exists
   ///
   /// Should not be called directly
   void register() {
@@ -136,7 +136,7 @@ abstract class RxObject<T> extends RxValue<T> {
   /// Create a reactive object
   RxObject(super.value);
 
-  /// Get the current value and register with the RxNotifier
+  /// Get the current value and register with the current zone's [RxRegistrar]
   ///
   /// Should only be used in methods that return a value.
   /// Otherwise, use [unregisteredValue].

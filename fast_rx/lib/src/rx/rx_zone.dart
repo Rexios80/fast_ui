@@ -1,10 +1,10 @@
 import 'dart:async';
 
 /// Key for the registrar in an rx zone
-const registrarKey = '_fast_rx_registrar_key';
+const _registrarKey = '_fast_rx_registrar_key';
 
 /// Key for the notifier in an rx zone
-const notifierKey = '_fast_rx_notifier_key';
+const _notifierKey = '_fast_rx_notifier_key';
 
 /// An rx action to run in an rx zone
 typedef RxAction<R> = R Function();
@@ -27,8 +27,8 @@ R runRxZoned<R>(
   return runZoned(
     action,
     zoneValues: {
-      registrarKey: registrar,
-      notifierKey: notifier,
+      _registrarKey: registrar,
+      _notifierKey: notifier,
     },
   );
 }
@@ -50,7 +50,7 @@ class RxZone {
 
   /// Get information about the current [RxZone] if it exists
   static RxZone get current => RxZone._(
-        registrar: Zone.current[registrarKey] as RxRegistrar?,
-        notifier: Zone.current[notifierKey] as RxNotifier?,
+        registrar: Zone.current[_registrarKey] as RxRegistrar?,
+        notifier: Zone.current[_notifierKey] as RxNotifier?,
       );
 }
