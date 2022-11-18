@@ -1,3 +1,6 @@
+## 0.1.5
+- Updated `fast_rx` to 0.4.0
+
 ## 0.1.4
 - Updated to work with `fast_rx` 0.3.0
 
