@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:fast_rx/src/rx/rx.dart';
-import 'package:flutter/foundation.dart';
+import 'package:fast_rx/fast_rx.dart';
 
 /// Mixin version of [RxComposite] for use on classes that already extend [Rx]
 mixin RxCompositeMixin<T> on Rx<T> {
   final _subs = <int, StreamSubscription>{};
 
   /// Add an [Rx] to this composite
-  @protected
+  /// 
+  /// Should not be called directly
   void addRx(Rx rx) {
     if (_subs[identityHashCode(rx)] != null) return;
 
@@ -19,14 +19,15 @@ mixin RxCompositeMixin<T> on Rx<T> {
   }
 
   /// Remove an [Rx] from this composite
-  @protected
+  /// 
+  /// Should not be called directly
   void removeRx(Rx rx) {
     final sub = _subs.remove(identityHashCode(rx));
     sub?.cancel();
   }
 
   @override
-  bool run(VoidCallback action, {bool notify = true}) {
+  bool run(RxAction action, {bool notify = true}) {
     final notified = super.run(action, notify: notify);
     if (notify && notified) {
       this.notify();
@@ -35,7 +36,6 @@ mixin RxCompositeMixin<T> on Rx<T> {
   }
 
   /// Check if an [Rx] stream is registered for testing
-  @visibleForTesting
   bool hasStream(int id) => _subs[id] != null;
 }
 

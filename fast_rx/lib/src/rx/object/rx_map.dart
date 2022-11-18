@@ -1,5 +1,5 @@
+import 'package:collection/collection.dart';
 import 'package:fast_rx/src/rx/rx.dart';
-import 'package:flutter/foundation.dart';
 
 /// A reactive map
 class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
@@ -7,15 +7,11 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
   RxMap([Map<K, V>? value]) : super(value ?? {});
 
   @override
-  @protected
-  @visibleForTesting
   Map<K, V> copyValue() => Map.from(unregisteredValue);
 
   @override
-  @protected
-  @visibleForTesting
   bool shouldNotify(Map<K, V> oldValue) =>
-      !mapEquals(unregisteredValue, oldValue);
+      !const MapEquality().equals(unregisteredValue, oldValue);
 
   /// Convenience method to replace all current elements with [elements]
   void replaceAll(Map<K, V> elements) {

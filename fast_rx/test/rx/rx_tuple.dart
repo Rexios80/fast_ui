@@ -1,5 +1,4 @@
 import 'package:fast_rx/fast_rx.dart';
-import 'package:flutter/material.dart';
 
 class Tuple<T1, T2> {
   T1 item1;
@@ -33,13 +32,9 @@ class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
   set item2(T2 value) => notifyIfChanged(() => unregisteredValue.item2 = value);
 
   @override
-  @protected
-  @visibleForTesting
   Tuple<T1, T2> copyValue() => Tuple.from(unregisteredValue);
 
   @override
-  @protected
-  @visibleForTesting
   bool shouldNotify(Tuple<T1, T2> oldValue) => oldValue != unregisteredValue;
 }
 

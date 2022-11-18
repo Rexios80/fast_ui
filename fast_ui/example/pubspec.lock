@@ -81,28 +81,28 @@ packages:
   fast_rx:
     dependency: "direct overridden"
     description:
-      path: "../../fast_rx/fast_rx"
+      path: "../../fast_rx"
       relative: true
     source: path
     version: "0.3.1"
   fast_rx_flutter:
     dependency: "direct overridden"
     description:
-      path: "../../fast_rx/fast_rx_flutter"
+      path: "../../fast_rx_flutter"
       relative: true
     source: path
     version: "0.0.1"
   fast_rx_persistence:
     dependency: "direct overridden"
     description:
-      path: "../../fast_rx/fast_rx_persistence"
+      path: "../../fast_rx_persistence"
       relative: true
     source: path
     version: "0.1.4"
   fast_rx_shared_preferences:
     dependency: "direct main"
     description:
-      path: "../../fast_rx/fast_rx_shared_preferences"
+      path: "../../fast_rx_shared_preferences"
       relative: true
     source: path
     version: "0.1.3"

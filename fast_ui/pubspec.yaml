@@ -25,6 +25,6 @@ dev_dependencies:
 
 dependency_overrides:
   fast_rx:
-    path: ../fast_rx/fast_rx
+    path: ../fast_rx
   fast_rx_flutter:
-    path: ../fast_rx/fast_rx_flutter
+    path: ../fast_rx_flutter
