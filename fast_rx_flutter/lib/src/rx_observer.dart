@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_flutter/fast_rx_flutter.dart';
 import 'package:flutter/foundation.dart';
 

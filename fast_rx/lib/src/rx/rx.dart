@@ -9,7 +9,7 @@ abstract class Rx<T> {
   Stream<T> get stream => _controller.stream;
 
   /// Register with the [RxNotifier] for UI updates
-  /// 
+  ///
   /// Should not be called directly
   void register() {
     RxZone.current.registrar?.call(stream);
@@ -43,7 +43,7 @@ abstract class Rx<T> {
   void notify();
 
   /// Notify listeners with the given value
-  /// 
+  ///
   /// Should not be called directly
   void notifyWithValue(T value) {
     final notifier = RxZone.current.notifier;
@@ -75,7 +75,7 @@ class RxValue<T> extends Rx<T> {
   ///
   /// Used to prevent unnecessary calls to [register] in internal methods such
   /// as [copyValue], [shouldNotify], or methods that do not return a value
-  /// 
+  ///
   /// Should not be called directly
   T get unregisteredValue => _value;
 
@@ -140,7 +140,7 @@ abstract class RxObject<T> extends RxValue<T> {
   ///
   /// Should only be used in methods that return a value.
   /// Otherwise, use [unregisteredValue].
-  /// 
+  ///
   /// Should not be called directly
   @override
   T get value {
@@ -161,7 +161,7 @@ abstract class RxObject<T> extends RxValue<T> {
   ///
   /// Example: Used by fast_rx_persistence to set [_value] from a key/value
   /// store after initialization
-  /// 
+  ///
   /// Should not be called directly
   void internalSetValue(T value) {
     _value = value;
@@ -186,7 +186,7 @@ abstract class RxObject<T> extends RxValue<T> {
   /// Notify if [transform] changed the value such that [shouldNotify] returns true
   ///
   /// If the value is guaranteed to change, use [notify] instead
-  /// 
+  ///
   /// Should not be called directly
   U notifyIfChanged<U>(U Function() transform) {
     final old = copyValue();
@@ -198,12 +198,12 @@ abstract class RxObject<T> extends RxValue<T> {
   }
 
   /// Copy the value for update emission
-  /// 
+  ///
   /// Should not be called directly
   T copyValue();
 
   /// Check if the value has changed
-  /// 
+  ///
   /// Should not be called directly
   bool shouldNotify(T oldValue);
 }

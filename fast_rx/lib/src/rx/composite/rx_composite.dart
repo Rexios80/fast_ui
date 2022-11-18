@@ -7,7 +7,7 @@ mixin RxCompositeMixin<T> on Rx<T> {
   final _subs = <int, StreamSubscription>{};
 
   /// Add an [Rx] to this composite
-  /// 
+  ///
   /// Should not be called directly
   void addRx(Rx rx) {
     if (_subs[identityHashCode(rx)] != null) return;
@@ -19,7 +19,7 @@ mixin RxCompositeMixin<T> on Rx<T> {
   }
 
   /// Remove an [Rx] from this composite
-  /// 
+  ///
   /// Should not be called directly
   void removeRx(Rx rx) {
     final sub = _subs.remove(identityHashCode(rx));

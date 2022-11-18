@@ -3,7 +3,6 @@
 import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:test/test.dart';
-import 'package:fast_rx/src/rx/rx_zone.dart';
 
 /// Expect that every test in [shouldNotify] notifies exactly once, and that
 /// every test in [shouldNotNotify] does not notify.
