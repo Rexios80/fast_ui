@@ -1,5 +1,5 @@
 ## 0.4.0
-- Moves flutter components to `fast_rx_flutter` package
+- BREAKING: Moves flutter components to `fast_rx_flutter` package
 
 ## 0.3.1
 - Removes the `RxNotifier` and uses `runRxZoned` for registration instead
