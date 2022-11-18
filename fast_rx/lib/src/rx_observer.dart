@@ -31,6 +31,15 @@ class RxObserver {
     _streamSubscriptions.add(subscription);
   }
 
+  /// Clear out the streams and the subscriptions to them
+  void _clearStreams() {
+    _streams.clear();
+    for (final subscription in _streamSubscriptions) {
+      subscription.cancel();
+    }
+    _streamSubscriptions.clear();
+  }
+
   /// Listen to all [_streams] and call [callback] when any of them emits
   void listen(VoidCallback callback) {
     _subscription = _controller.stream.listen((_) => callback());
@@ -39,13 +48,14 @@ class RxObserver {
   /// Cancel all stream subscriptions
   void dispose() {
     _subscription?.cancel();
-    for (final subscription in _streamSubscriptions) {
-      subscription.cancel();
-    }
+    _clearStreams();
   }
 
   /// Set up this observer with the given [builder]
   T setup<T>(ValueGetter<T> builder) {
+    // Clear out existing streams (for hot reloading)
+    _clearStreams();
+
     // Calling the builder will add any relevant streams to the observer
     final built = runRxZoned(builder, registrar: _addStream);
     if (!_listenable) {
