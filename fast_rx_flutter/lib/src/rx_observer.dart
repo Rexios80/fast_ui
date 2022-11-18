@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:fast_rx/src/exceptions.dart';
-import 'package:fast_rx/src/rx/rx_zone.dart';
+import 'package:fast_rx_flutter/fast_rx_flutter.dart';
 import 'package:flutter/foundation.dart';
 
 /// Listen to multiple Rx streams

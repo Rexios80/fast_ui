@@ -1,4 +1,4 @@
-fast_rx is a reactive state management solution for Flutter
+An easy to understand implementation of reactive values and objects
 
 Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.dev/packages/observable_ish), and similar packages
 
@@ -12,7 +12,6 @@ Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.d
 ## Features
 | Class           | Use-case                                    |
 | --------------- | ------------------------------------------- |
-| FastBuilder     | Rebuilds when reactive values within change |
 | RxValue<T>      | A reactive value                            |
 | RxObject<T>     | A reactive object                           |
 | RxList<E>       | A reactive list                             |
@@ -23,13 +22,14 @@ Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.d
 | RxCompositeMap  | A composite version of RxMap                |
 | RxCompositeSet  | A composite version of RxSet                |
 
-There are convenience typedefs for RxBool, RxInt, RxDouble, and RxString
+There are convenience typedefs for `RxBool`, `RxInt`, `RxDouble`, and `RxString`
+
+See [fast_rx_flutter](https://pub.dev/packages/fast_rx_flutter) for Flutter-specific components
 
 ## Usage
 <!-- embedme readme/usage.dart -->
 ```dart
 import 'package:fast_rx/fast_rx.dart';
-import 'package:flutter/material.dart';
 
 void example() {
   // ...
@@ -43,15 +43,7 @@ void example() {
 
   // ...
 
-  FastBuilder(() => Text('$count'));
-  FastBuilder(
-    () => Text('$count'),
-    condition: () => true,
-  );
-
-  // ...
-
-  // Will print the value and trigger a rebuild of FastBuilders
+  // Will print the value
   count.value = 1;
 
   final list = <int>[].rx;
@@ -71,7 +63,6 @@ If an object is within your control, consider making fields reactive instead.
 <!-- embedme test/rx/rx_tuple.dart -->
 ```dart
 import 'package:fast_rx/fast_rx.dart';
-import 'package:flutter/material.dart';
 
 class Tuple<T1, T2> {
   T1 item1;
@@ -105,13 +96,9 @@ class RxTuple<T1, T2> extends RxObject<Tuple<T1, T2>> implements Tuple<T1, T2> {
   set item2(T2 value) => notifyIfChanged(() => unregisteredValue.item2 = value);
 
   @override
-  @protected
-  @visibleForTesting
   Tuple<T1, T2> copyValue() => Tuple.from(unregisteredValue);
 
   @override
-  @protected
-  @visibleForTesting
   bool shouldNotify(Tuple<T1, T2> oldValue) => oldValue != unregisteredValue;
 }
 

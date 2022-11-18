@@ -8,10 +8,9 @@ Testing utilities for [fast_rx](https://pub.dev/packages/fast_rx)
 
 ## Features
 
-| Method               | Use-case                                         |
-| -------------------- | ------------------------------------------------ |
-| expectRxNotification | Check for valid rx stream notifications          |
-| expectRxRegistration | Check for valid registration with the RxNotifier |
+| Method   | Use-case                                          |
+| -------- | ------------------------------------------------- |
+| expectRx | Check for valid rx registration and notifications |
 
 ## Getting started
 
@@ -22,7 +21,7 @@ See [fast_rx](https://pub.dev/packages/fast_rx)
 <!-- embedme ../fast_rx/test/rx/rx_object_test.dart -->
 ```dart
 import 'package:fast_rx_test/fast_rx_test.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'rx_tuple.dart';
 
 void main() {

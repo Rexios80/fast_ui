@@ -1,5 +1,5 @@
-import 'package:fast_rx/src/rx_observer.dart';
-import 'package:fast_rx/fast_rx.dart';
+import 'package:fast_rx_flutter/fast_rx_flutter.dart';
+import 'package:fast_rx_flutter/src/rx_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

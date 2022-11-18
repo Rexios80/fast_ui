@@ -11,7 +11,7 @@ fast_ui is a collection of Flutter packages aimed to make UI development faster
 
 | Package                                                             | Description                                                      |
 | ------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| [fast_rx](https://pub.dev/packages/fast_rx)                         | Reactive state management                                        |
+| [fast_rx_flutter](https://pub.dev/packages/fast_rx_flutter)         | Reactive state management                                        |
 | [fast_rx_persistence](https://pub.dev/packages/fast_rx_persistence) | Interface for creating key/value store persistence for Rx values |
 | [fast_nav](https://pub.dev/packages/fast_nav)                       | Contextless navigation                                           |
 | [fast_overlays](https://pub.dev/packages/fast_overlays)             | Contextless overlays (snackbars, dialogs, etc.)                  |

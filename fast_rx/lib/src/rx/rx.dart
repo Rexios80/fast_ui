@@ -1,18 +1,16 @@
 import 'dart:async';
 import 'package:fast_rx/fast_rx.dart';
-import 'package:fast_rx/src/rx/rx_zone.dart';
-import 'package:flutter/foundation.dart';
 
 /// Base class for reactives
 abstract class Rx<T> {
   final StreamController<T> _controller = StreamController.broadcast();
 
   /// Stream of value changes
-  @nonVirtual
   Stream<T> get stream => _controller.stream;
 
   /// Register with the [RxNotifier] for UI updates
-  @protected
+  ///
+  /// Should not be called directly
   void register() {
     RxZone.current.registrar?.call(stream);
   }
@@ -22,8 +20,7 @@ abstract class Rx<T> {
   /// implementation decides a notification should be sent.
   ///
   /// Returns true if a notification was attempted during [action]
-  @protected
-  bool run(VoidCallback action, {bool notify = true}) {
+  bool run(RxAction action, {bool notify = true}) {
     var notified = false;
     runRxZoned(
       () {
@@ -46,8 +43,8 @@ abstract class Rx<T> {
   void notify();
 
   /// Notify listeners with the given value
-  @protected
-  @nonVirtual
+  ///
+  /// Should not be called directly
   void notifyWithValue(T value) {
     final notifier = RxZone.current.notifier;
     if (notifier != null) {
@@ -79,8 +76,7 @@ class RxValue<T> extends Rx<T> {
   /// Used to prevent unnecessary calls to [register] in internal methods such
   /// as [copyValue], [shouldNotify], or methods that do not return a value
   ///
-  /// Overrides should be annotated with `@protected`
-  @protected
+  /// Should not be called directly
   T get unregisteredValue => _value;
 
   /// Set the current value
@@ -145,10 +141,8 @@ abstract class RxObject<T> extends RxValue<T> {
   /// Should only be used in methods that return a value.
   /// Otherwise, use [unregisteredValue].
   ///
-  /// Overrides should be annotated with `@protected`
+  /// Should not be called directly
   @override
-  @protected
-  @mustCallSuper
   T get value {
     return super.value;
   }
@@ -156,8 +150,6 @@ abstract class RxObject<T> extends RxValue<T> {
   // coverage:ignore-start
   /// Unused for RxObject
   @override
-  @protected
-  @nonVirtual
   set value(T value) {
     throw RxObjectValueIsReadOnly();
   }
@@ -169,14 +161,14 @@ abstract class RxObject<T> extends RxValue<T> {
   ///
   /// Example: Used by fast_rx_persistence to set [_value] from a key/value
   /// store after initialization
-  @protected
-  @nonVirtual
+  ///
+  /// Should not be called directly
   void internalSetValue(T value) {
     _value = value;
   }
 
   @override
-  bool run(VoidCallback action, {bool notify = true}) {
+  bool run(RxAction action, {bool notify = true}) {
     final bool notified;
     if (notify) {
       notified = notifyIfChanged(() => super.run(action, notify: notify));
@@ -194,7 +186,8 @@ abstract class RxObject<T> extends RxValue<T> {
   /// Notify if [transform] changed the value such that [shouldNotify] returns true
   ///
   /// If the value is guaranteed to change, use [notify] instead
-  @protected
+  ///
+  /// Should not be called directly
   U notifyIfChanged<U>(U Function() transform) {
     final old = copyValue();
     final result = transform();
@@ -206,15 +199,11 @@ abstract class RxObject<T> extends RxValue<T> {
 
   /// Copy the value for update emission
   ///
-  /// Overrides should be annotated with `@protected`
-  @protected
-  @visibleForTesting
+  /// Should not be called directly
   T copyValue();
 
   /// Check if the value has changed
   ///
-  /// Overrides should be annotated with `@protected`
-  @protected
-  @visibleForTesting
+  /// Should not be called directly
   bool shouldNotify(T oldValue);
 }

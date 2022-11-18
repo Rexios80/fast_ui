@@ -1,3 +1,6 @@
+## 0.1.2
+- Replaced fast_rx with fast_rx_flutter
+
 ## 0.1.1
 - Added fast_rx_persistence to default packages
 - Added fast_rx_shared_preferences to add-on packages

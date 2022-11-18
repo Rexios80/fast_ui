@@ -1,4 +1,5 @@
-import 'package:fast_rx/fast_rx.dart';
+import 'package:fast_rx_flutter/fast_rx_flutter.dart';
+import 'package:flutter/material.dart';
 
 void example() {
   // ...
@@ -12,7 +13,15 @@ void example() {
 
   // ...
 
-  // Will print the value
+  FastBuilder(() => Text('$count'));
+  FastBuilder(
+    () => Text('$count'),
+    condition: () => true,
+  );
+
+  // ...
+
+  // Will print the value and trigger a rebuild of FastBuilders
   count.value = 1;
 
   final list = <int>[].rx;

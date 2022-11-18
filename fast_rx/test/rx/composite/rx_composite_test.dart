@@ -1,5 +1,5 @@
 import 'package:fast_rx_test/fast_rx_test.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 import 'composite.dart';
 
