@@ -12,7 +12,3 @@ dependencies:
 
 dev_dependencies:
   rexios_lints: ^4.0.0
-
-dependency_overrides:
-  fast_rx:
-    path: ../fast_rx
