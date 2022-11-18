@@ -1,6 +1,6 @@
 import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 void main() {
   final shouldNotify = <RxTest<RxMap<String, int>>>[
@@ -49,17 +49,12 @@ void main() {
     ),
   ];
 
-  test('RxMap notifications', () {
-    expectRxNotification(
-      shouldNotify: shouldNotify + shouldNotifyAndRegister,
-      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
-    );
-  });
-
-  test('RxMap registration', () {
-    expectRxRegistration(
+  test('RxMap registration and notifications', () {
+    expectRx(
       shouldRegister: shouldRegister + shouldNotifyAndRegister,
       shouldNotRegister: shouldNotify + shouldNotNotifyOrRegister,
+      shouldNotify: shouldNotify + shouldNotifyAndRegister,
+      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
     );
   });
 }

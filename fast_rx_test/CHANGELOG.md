@@ -1,3 +1,8 @@
+## 0.4.0
+- Uses `runRxZoned` for registration testing as well
+- Removes dependency on `RxNotifier`
+- Combines `expectRxRegistration` and `expectRxNotification` into `expectRx`
+
 ## 0.3.2
 - Much more reliable `expectRxNotification` verification using `runRxZoned`
 - Adds `RxComposite` support to `expectRxNotification`

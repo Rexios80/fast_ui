@@ -13,6 +13,7 @@ jobs:
             "fast_nav",
             "fast_overlays",
             "fast_rx",
+            "fast_rx_flutter",
             "fast_rx_persistence",
             "fast_rx_shared_preferences",
             "fast_rx_test",
@@ -36,11 +37,11 @@ jobs:
         run: |
           npm install embedme
           npx embedme README.md --verify
-      - name: Build runner
-        if: ${{ matrix.project == 'fast_rx_test' }}
-        run: |
-          flutter pub run build_runner build --delete-conflicting-outputs
-          git diff --exit-code
+      # - name: Build runner
+      #   if: ${{ matrix.project == 'fast_rx_test' }}
+      #   run: |
+      #     flutter pub run build_runner build --delete-conflicting-outputs
+      #     git diff --exit-code
       - name: Pana
         run: |
           flutter pub global activate pana

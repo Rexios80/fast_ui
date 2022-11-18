@@ -1,3 +1,9 @@
+## 0.4.0
+- BREAKING: Moves flutter components to `fast_rx_flutter` package
+
+## 0.3.1
+- Removes the `RxNotifier` and uses `runRxZoned` for registration instead
+
 ## 0.3.0
 - Adds `RxComposite` to allow for composition of `Rx` objects
 - Adds `RxCompositeList`, `RxCompositeSet`, and `RxCompositeMap`

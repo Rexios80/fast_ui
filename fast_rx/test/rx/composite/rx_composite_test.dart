@@ -1,5 +1,5 @@
 import 'package:fast_rx_test/fast_rx_test.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 import 'composite.dart';
 
@@ -20,17 +20,12 @@ void main() {
     RxTest(() => Composite(), (rx) => rx.a.value),
   ];
 
-  test('RxComposite notifications', () {
-    expectRxNotification(
-      shouldNotify: shouldNotify,
-      shouldNotNotify: shouldRegister,
-    );
-  });
-
-  test('RxComposite registration', () {
-    expectRxRegistration(
+  test('RxComposite registration and notifications', () {
+    expectRx(
       shouldRegister: shouldRegister,
       shouldNotRegister: shouldNotify,
+      shouldNotify: shouldNotify,
+      shouldNotNotify: shouldRegister,
     );
   });
 }

@@ -1,11 +1,11 @@
 Show overlays without context
 
-[![pub package](https://img.shields.io/pub/v/fast_overlays.svg?label=fast_overlays)](https://pub.dev/packages/fast_overlays)
-[![codecov](https://codecov.io/gh/Rexios80/fast_ui/branch/master/graph/badge.svg?flag=fast_overlays)](https://codecov.io/gh/Rexios80/fast_ui)
+[![pub package](https://img.shields.io/pub/v/fast_overlays)](https://pub.dev/packages/fast_overlays)
+[![codecov](https://img.shields.io/codecov/c/github/Rexios80/fast_ui/master?flag=fast_overlays)](https://codecov.io/gh/Rexios80/fast_ui)
 ![checks](https://img.shields.io/github/checks-status/Rexios80/fast_ui/master)
-[![popularity](https://badges.bar/fast_overlays/popularity)](https://pub.dev/packages/fast_overlays/score)
-[![likes](https://badges.bar/fast_overlays/likes)](https://pub.dev/packages/fast_overlays/score)
-[![pub points](https://badges.bar/fast_overlays/pub%20points)](https://pub.dev/packages/fast_overlays/score)
+[![popularity](https://img.shields.io/pub/popularity/fast_overlays)](https://pub.dev/packages/fast_overlays/score)
+[![likes](https://img.shields.io/pub/likes/fast_overlays)](https://pub.dev/packages/fast_overlays/score)
+[![pub points](https://img.shields.io/pub/points/fast_overlays)](https://pub.dev/packages/fast_overlays/score)
 
 ## Features
 Unlike other contextless overlay solutions, fast_overlays uses Flutter's built-in overlay implementations

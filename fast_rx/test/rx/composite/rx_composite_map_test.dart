@@ -1,6 +1,6 @@
 import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 void main() {
   final shouldNotify = <RxTest<RxCompositeMap<int, RxInt>>>[
@@ -122,7 +122,7 @@ void main() {
   ];
 
   test('RxCompositeMap notifications', () {
-    expectRxNotification(
+    expectRx(
       shouldNotify: shouldNotify,
       shouldNotNotify: shouldNotNotify,
     );

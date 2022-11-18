@@ -1,7 +1,7 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:fast_rx/src/rx/object/rx_iterable.dart';
-import 'package:flutter/foundation.dart';
 
 /// A reactive list
 class RxList<E> extends RxIterable<E> implements List<E> {
@@ -9,27 +9,21 @@ class RxList<E> extends RxIterable<E> implements List<E> {
   RxList([List<E>? value]) : super(value ?? []);
 
   @override
-  @protected
   List<E> get value {
     return super.value as List<E>;
   }
 
   @override
-  @protected
   List<E> get unregisteredValue {
     return super.unregisteredValue as List<E>;
   }
 
   @override
-  @protected
-  @visibleForTesting
   List<E> copyValue() => List.from(unregisteredValue);
 
   @override
-  @protected
-  @visibleForTesting
   bool shouldNotify(Iterable<E> oldValue) =>
-      !listEquals(unregisteredValue, oldValue as List<E>);
+      !const ListEquality().equals(unregisteredValue, oldValue as List<E>);
 
   @override
   void replaceAll(Iterable<E> elements) {

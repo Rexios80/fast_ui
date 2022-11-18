@@ -1,7 +1,7 @@
 import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx/src/rx/object/rx_iterable.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 void main() {
   final shouldRegister = <RxTest<RxIterable<int>>>[
@@ -40,17 +40,12 @@ void main() {
     RxTest(() => [0, 1, 2].rx, (rx) => rx.forEach((e) => null)),
   ];
 
-  test('RxIterable notifications', () {
-    expectRxNotification<RxIterable<int>>(
-      shouldNotify: [],
-      shouldNotNotify: shouldRegister + shouldNotRegisterOrNotify,
-    );
-  });
-
-  test('RxIterable registration', () {
-    expectRxRegistration(
+  test('RxIterable registration and notifications', () {
+    expectRx<RxIterable<int>>(
       shouldRegister: shouldRegister,
       shouldNotRegister: shouldNotRegisterOrNotify,
+      shouldNotify: [],
+      shouldNotNotify: shouldRegister + shouldNotRegisterOrNotify,
     );
   });
 }

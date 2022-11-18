@@ -1,5 +1,5 @@
+import 'package:collection/collection.dart';
 import 'package:fast_rx/src/rx/object/rx_iterable.dart';
-import 'package:flutter/foundation.dart';
 
 /// A reactive set
 class RxSet<E> extends RxIterable<E> implements Set<E> {
@@ -7,27 +7,21 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
   RxSet([Set<E>? value]) : super(value ?? {});
 
   @override
-  @protected
   Set<E> get value {
     return super.value as Set<E>;
   }
 
   @override
-  @protected
   Set<E> get unregisteredValue {
     return super.unregisteredValue as Set<E>;
   }
 
   @override
-  @protected
-  @visibleForTesting
   Set<E> copyValue() => Set.from(unregisteredValue);
 
   @override
-  @protected
-  @visibleForTesting
   bool shouldNotify(Iterable<E> oldValue) =>
-      !setEquals(unregisteredValue, oldValue as Set<E>);
+      !const SetEquality().equals(unregisteredValue, oldValue as Set<E>);
 
   @override
   void replaceAll(Iterable<E> elements) {
