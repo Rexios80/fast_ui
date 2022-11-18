@@ -36,12 +36,12 @@ jobs:
         run: |
           npm install embedme
           npx embedme README.md --verify
-      - name: Build runner
-        if: ${{ matrix.project == 'fast_rx_test' }}
-        run: |
-          flutter pub run build_runner build --delete-conflicting-outputs
-          git diff --exit-code
-      - name: Pana
-        run: |
-          flutter pub global activate pana
-          pana --no-warning --exit-code-threshold 0
+      # - name: Build runner
+      #   if: ${{ matrix.project == 'fast_rx_test' }}
+      #   run: |
+      #     flutter pub run build_runner build --delete-conflicting-outputs
+      #     git diff --exit-code
+      # - name: Pana
+      #   run: |
+      #     flutter pub global activate pana
+      #     pana --no-warning --exit-code-threshold 0
