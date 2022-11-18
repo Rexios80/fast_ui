@@ -33,11 +33,11 @@ dependency_overrides:
   fast_overlays:
     path: ../../fast_overlays
   fast_rx:
-    path: ../../fast_rx/fast_rx
+    path: ../../fast_rx
   fast_rx_flutter:
-    path: ../../fast_rx/fast_rx_flutter
+    path: ../../fast_rx_flutter
   fast_rx_persistence:
-    path: ../../fast_rx/fast_rx_persistence
+    path: ../../fast_rx_persistence
 
 flutter:
   uses-material-design: true
