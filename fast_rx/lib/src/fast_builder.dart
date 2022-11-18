@@ -1,4 +1,4 @@
-import 'package:fast_rx/src/rx_notifier.dart';
+import 'package:fast_rx/src/rx_observer.dart';
 import 'package:flutter/material.dart';
 
 /// A [StatefulWidget] that updates with it's observer
@@ -34,7 +34,7 @@ class _FastBuilderState extends State<FastBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return RxNotifier.instance.setupObserver(_observer, widget.builder);
+    return _observer.setup(widget.builder);
   }
 
   @override

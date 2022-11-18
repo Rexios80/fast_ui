@@ -40,17 +40,12 @@ void main() {
     RxTest(() => [0, 1, 2].rx, (rx) => rx.forEach((e) => null)),
   ];
 
-  test('RxIterable notifications', () {
-    expectRxNotification<RxIterable<int>>(
-      shouldNotify: [],
-      shouldNotNotify: shouldRegister + shouldNotRegisterOrNotify,
-    );
-  });
-
-  test('RxIterable registration', () {
-    expectRxRegistration(
+  test('RxIterable registration and notifications', () {
+    expectRx<RxIterable<int>>(
       shouldRegister: shouldRegister,
       shouldNotRegister: shouldNotRegisterOrNotify,
+      shouldNotify: [],
+      shouldNotNotify: shouldRegister + shouldNotRegisterOrNotify,
     );
   });
 }

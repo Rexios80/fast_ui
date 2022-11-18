@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx/src/rx/rx_zone.dart';
-import 'package:fast_rx/src/rx_notifier.dart';
 import 'package:flutter/foundation.dart';
 
 /// Base class for reactives
 abstract class Rx<T> {
-  bool get _zoned => Zone.current[zonedKey] ?? false;
-
   final StreamController<T> _controller = StreamController.broadcast();
 
   /// Stream of value changes
@@ -17,8 +14,7 @@ abstract class Rx<T> {
   /// Register with the [RxNotifier] for UI updates
   @protected
   void register() {
-    if (_zoned) return;
-    RxNotifier.instance.addStream(stream);
+    RxZone.current.registrar?.call(stream);
   }
 
   /// Run [action] with registration and notifications disabled. Will notify
@@ -53,8 +49,9 @@ abstract class Rx<T> {
   @protected
   @nonVirtual
   void notifyWithValue(T value) {
-    if (_zoned) {
-      Zone.current[notifierKey].call(identityHashCode(this));
+    final notifier = RxZone.current.notifier;
+    if (notifier != null) {
+      notifier(identityHashCode(this));
       return;
     }
     _controller.add(value);

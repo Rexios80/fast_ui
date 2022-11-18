@@ -50,17 +50,12 @@ void main() {
     RxTest(() => [0, 1, 2].rx, (rx) => rx.shouldNotify([0, 1, 2, 3])),
   ];
 
-  test('RxList notifications', () {
-    expectRxNotification(
-      shouldNotify: shouldNotify + shouldNotifyAndRegister,
-      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
-    );
-  });
-
-  test('RxList registration', () {
-    expectRxRegistration(
+  test('RxList registration and notifications', () {
+    expectRx(
       shouldRegister: shouldRegister + shouldNotifyAndRegister,
       shouldNotRegister: shouldNotify + shouldNotNotifyOrRegister,
+      shouldNotify: shouldNotify + shouldNotifyAndRegister,
+      shouldNotNotify: shouldRegister + shouldNotNotifyOrRegister,
     );
   });
 }

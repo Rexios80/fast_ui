@@ -20,17 +20,12 @@ void main() {
     RxTest(() => Composite(), (rx) => rx.a.value),
   ];
 
-  test('RxComposite notifications', () {
-    expectRxNotification(
-      shouldNotify: shouldNotify,
-      shouldNotNotify: shouldRegister,
-    );
-  });
-
-  test('RxComposite registration', () {
-    expectRxRegistration(
+  test('RxComposite registration and notifications', () {
+    expectRx(
       shouldRegister: shouldRegister,
       shouldNotRegister: shouldNotify,
+      shouldNotify: shouldNotify,
+      shouldNotNotify: shouldRegister,
     );
   });
 }

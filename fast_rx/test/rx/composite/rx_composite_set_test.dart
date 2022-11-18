@@ -93,7 +93,7 @@ void main() {
   ];
 
   test('RxCompositeSet notifications', () {
-    expectRxNotification(
+    expectRx(
       shouldNotify: shouldNotify,
       shouldNotNotify: shouldNotNotify,
     );

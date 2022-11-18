@@ -3,37 +3,25 @@ import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('Rx notifications', () {
-    expectRxNotification(
+  test('Rx registration and notifications', () {
+    expectRx(
+      shouldRegister: <RxTest<RxValue<String>>>[
+        RxTest(() => ''.rx, (rx) => rx.value),
+        RxTest(() => ''.rx, (rx) => rx == ''.rx, count: 2),
+        RxTest(() => ''.rx, (rx) => rx.hashCode),
+        RxTest(() => ''.rx, (rx) => rx.toString()),
+      ],
+      shouldNotRegister: <RxTest<RxValue<String>>>[
+        // ignore: invalid_use_of_protected_member
+        RxTest(() => ''.rx, (rx) => rx.run(() => rx.value)),
+        RxTest(() => ''.rx, (rx) => rx.runtimeType),
+      ],
       shouldNotify: <RxTest<RxValue<String>>>[
         RxTest(() => ''.rx, (rx) => rx.value = 'a'),
       ],
       shouldNotNotify: <RxTest<RxValue<String>>>[
         // ignore: invalid_use_of_protected_member
         RxTest(() => ''.rx, (rx) => rx.run(() => rx.value = 'a')),
-      ],
-    );
-
-    expectRxRegistration(
-      shouldRegister: <RxTest<RxValue<String>>>[
-        RxTest(() => ''.rx, (rx) => rx.value),
-      ],
-      shouldNotRegister: <RxTest<RxValue<String>>>[
-        // ignore: invalid_use_of_protected_member
-        RxTest(() => ''.rx, (rx) => rx.run(() => rx.value)),
-      ],
-    );
-  });
-
-  test('Rx registration', () {
-    expectRxRegistration(
-      shouldRegister: <RxTest<RxValue<String>>>[
-        RxTest(() => ''.rx, (rx) => rx == ''.rx, count: 2),
-        RxTest(() => ''.rx, (rx) => rx.hashCode),
-        RxTest(() => ''.rx, (rx) => rx.toString()),
-      ],
-      shouldNotRegister: <RxTest<RxValue<String>>>[
-        RxTest(() => ''.rx, (rx) => rx.runtimeType),
       ],
     );
   });
