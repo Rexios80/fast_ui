@@ -5,16 +5,8 @@ homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
-  flutter: ">=1.17.0"
-
-dependencies:
-  flutter:
-    sdk: flutter
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
   rexios_lints: ^4.0.0
   fast_rx_test: ^0.3.2
 

@@ -1,7 +1,6 @@
 library fast_rx_flutter;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'package:fast_rx/fast_rx.dart';
+
+export 'src/exceptions.dart';
+export 'src/fast_builder.dart';

@@ -14,7 +14,7 @@ dependencies:
   fast_extensions: any
   fast_nav: any
   fast_overlays: any
-  fast_rx: any
+  fast_rx_flutter: any
   fast_rx_persistence: any
 
 dev_dependencies:
@@ -22,3 +22,9 @@ dev_dependencies:
     sdk: flutter
 
   rexios_lints: ^4.0.0
+
+dependency_overrides:
+  fast_rx:
+    path: ../fast_rx/fast_rx
+  fast_rx_flutter:
+    path: ../fast_rx/fast_rx_flutter
