@@ -156,8 +156,7 @@ abstract class RxObject<T> extends RxValue<T> {
   // coverage:ignore-end
 
   /// Internal setter for [_value]. Should only be used in Rx extensions and
-  /// never externally. Does not notify. If used properly, the warning for
-  /// using a protected member can be safely ignored.
+  /// never externally. Does not notify.
   ///
   /// Example: Used by fast_rx_persistence to set [_value] from a key/value
   /// store after initialization
