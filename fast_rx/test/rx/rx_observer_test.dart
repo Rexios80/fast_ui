@@ -8,6 +8,8 @@ void main() {
     builder() => rx.value;
 
     observer.setup(builder);
+
+    // These get tested by UI implementations
     observer.listen(() {});
     observer.dispose();
   });
