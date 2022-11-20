@@ -8,6 +8,8 @@ void main() {
     builder() => rx.value;
 
     observer.setup(builder);
+    observer.listen(() {});
+    observer.dispose();
   });
 
   test('RxObserver should throw', () {
