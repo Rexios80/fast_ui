@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:fast_rx_flutter/fast_rx_flutter.dart';
-import 'package:flutter/foundation.dart';
+import 'package:fast_rx/fast_rx.dart';
 
 /// Listen to multiple Rx streams
 class RxObserver {
@@ -40,7 +39,7 @@ class RxObserver {
   }
 
   /// Listen to all [_streams] and call [callback] when any of them emits
-  void listen(VoidCallback callback) {
+  void listen(void Function() callback) {
     _subscription = _controller.stream.listen((_) => callback());
   }
 
@@ -51,14 +50,14 @@ class RxObserver {
   }
 
   /// Set up this observer with the given [builder]
-  T setup<T>(ValueGetter<T> builder) {
+  T setup<T>(T Function() builder) {
     // Clear out existing streams (for hot reloading)
     _clearStreams();
 
     // Calling the builder will add any relevant streams to the observer
     final built = runRxZoned(builder, registrar: _addStream);
     if (!_listenable) {
-      throw NoRxValuesInFastBuilder();
+      throw RxObserverIsNotListenable();
     }
     return built;
   }

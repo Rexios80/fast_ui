@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  fast_rx: ^0.4.0
+  fast_rx: ^0.4.1
 
 dev_dependencies:
   flutter_test:
