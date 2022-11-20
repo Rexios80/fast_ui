@@ -1,3 +1,7 @@
+## 0.4.1
+- Moves `RxObserver` back into `fast_rx`
+- Documentation updates
+
 ## 0.4.0
 - BREAKING: Moves flutter components to `fast_rx_flutter` package
 
