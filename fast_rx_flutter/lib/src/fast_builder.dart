@@ -1,4 +1,4 @@
-import 'package:fast_rx_flutter/src/rx_observer.dart';
+import 'package:fast_rx/fast_rx.dart';
 import 'package:flutter/material.dart';
 
 /// A [StatefulWidget] that updates with it's observer

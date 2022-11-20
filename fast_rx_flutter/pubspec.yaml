@@ -1,6 +1,6 @@
 name: fast_rx_flutter
 description: Reactive Flutter widgets and convenience components for fast_rx
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx_flutter
 
 environment:
@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  fast_rx: ^0.4.0
+  fast_rx: ^0.4.1
 
 dev_dependencies:
   flutter_test:
