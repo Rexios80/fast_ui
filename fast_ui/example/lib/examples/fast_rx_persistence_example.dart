@@ -26,6 +26,12 @@ class FastRxPersistenceExample extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: <Widget>[
+            Text(
+              'Reload the page to see the persisted values',
+              textAlign: TextAlign.center,
+              style: context.textTheme.titleMedium,
+            ),
+            const SizedBox(height: 20),
             const Text('Reactive int preference:'),
             FastBuilder(
               () => Text(
