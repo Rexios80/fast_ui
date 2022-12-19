@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  fast_rx_persistence: ^0.1.0
+  fast_rx_persistence: ^0.2.0
   shared_preferences: ^2.0.15
 
 dev_dependencies:
