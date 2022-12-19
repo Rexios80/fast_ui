@@ -11,6 +11,11 @@ An interface for implementing fast_rx key/value store persistence
 | Class                      | Use-case                                                    |
 | -------------------------- | ----------------------------------------------------------- |
 | FastRxPersistenceInterface | Interface for getting/setting values in the key/value store |
+| FastRxPersistenceConverter | Used to convert a value to/from a persistence store         |
+| InlineConverter            | Convenience class to create a custom converter inline       |
+| EnumStringConverter        | Convenience class to convert an enum to/from string         |
+| EnumIntConverter           | Convenience class to convert an enum to/from int            |
+
 
 ## Usage
 A Shared Preferences implementation is provided by [fast_rx_shared_preferences](https://pub.dev/packages/fast_rx_shared_preferences)

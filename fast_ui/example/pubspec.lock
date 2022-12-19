@@ -98,7 +98,7 @@ packages:
       path: "../../fast_rx_persistence"
       relative: true
     source: path
-    version: "0.2.0"
+    version: "0.2.0+1"
   fast_rx_shared_preferences:
     dependency: "direct main"
     description:
