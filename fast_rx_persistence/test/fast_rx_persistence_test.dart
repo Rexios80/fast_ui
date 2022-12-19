@@ -45,21 +45,13 @@ void main() {
       ),
     );
 
-    // Both decode and encode must be specified if one of them is
-    expect(
-      () => 0.rx.persist<String>('key', decode: (value) => int.parse(value)),
-      throwsA(isA<AssertionError>()),
-    );
-    expect(
-      () => 0.rx.persist<String>('key', encode: (value) => value.toString()),
-      throwsA(isA<AssertionError>()),
-    );
-
     final rx = <int>[].rx
       ..persist<List<String>>(
         'key',
-        decode: (value) => value.map(int.parse).toList(),
-        encode: (value) => value.map((e) => e.toString()).toList(),
+        converter: InlineConverter(
+          fromStore: (value) => value.map(int.parse).toList(),
+          toStore: (value) => value.map((e) => e.toString()).toList(),
+        ),
       );
 
     expect(listEquals(rx, [17]), isTrue);

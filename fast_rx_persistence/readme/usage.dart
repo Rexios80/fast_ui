@@ -1,6 +1,11 @@
 import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_persistence/fast_rx_persistence.dart';
 
+final intStringConverter = InlineConverter(
+  fromStore: int.parse,
+  toStore: (value) => value.toString(),
+);
+
 void example() {
   FastRxPersistence.init(Store());
 
@@ -21,8 +26,7 @@ void example() {
       // Otherwise the store passed into [FastRxPersistence.init] will be
       // used.
       store: Store(),
-      decode: int.parse,
-      encode: (value) => value.toString(),
+      converter: intStringConverter,
     );
 
   // Saves the value to the store as a string

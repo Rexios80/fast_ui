@@ -1,4 +1,5 @@
 import 'package:fast_rx_persistence/src/exceptions.dart';
+import 'package:fast_rx_persistence/src/fast_rx_persistence_converter.dart';
 import 'package:fast_rx_persistence/src/fast_rx_persistence_interface.dart';
 import 'package:fast_rx/fast_rx.dart';
 import 'package:flutter/foundation.dart';
@@ -59,18 +60,14 @@ extension RxPersistenceExtension<T> on RxValue<T> {
   void persist<I>(
     String key, {
     FastRxPersistenceInterface? store,
-    T Function(I value)? decode,
-    I Function(T value)? encode,
+    FastRxPersistenceConverter<T, I>? converter,
   }) {
-    assert(
-      (decode == null && encode == null) || (decode != null && encode != null),
-    );
-
     final interface = store ?? FastRxPersistence.store;
 
     final storeValue = interface.get(key);
     if (storeValue != null) {
-      final transformedValue = decode?.call(storeValue as I) ?? storeValue as T;
+      final transformedValue =
+          converter?.fromStore(storeValue as I) ?? storeValue as T;
 
       if (this is RxObject) {
         // ignore: invalid_use_of_protected_member
@@ -82,7 +79,7 @@ extension RxPersistenceExtension<T> on RxValue<T> {
     }
 
     stream.listen((value) {
-      final storeValue = encode?.call(value) ?? value as I;
+      final storeValue = converter?.toStore(value) ?? value as I;
       interface.set(key, storeValue);
     });
   }
