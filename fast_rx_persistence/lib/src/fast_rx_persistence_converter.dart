@@ -1,6 +1,6 @@
 /// Convert a value to/from a [FastRxPersistenceInterface]
-/// - [T] is the type of the value read from the store
-/// - [I] is the type of the value written to the store
+/// - [T] is the type of the value outside the store
+/// - [I] is the type of the value inside the store
 abstract class FastRxPersistenceConverter<T, I> {
   /// Constructor
   const FastRxPersistenceConverter();
