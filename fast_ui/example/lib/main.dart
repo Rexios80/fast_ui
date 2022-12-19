@@ -87,21 +87,24 @@ class FastUiExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('fast_ui Example'), actions: [
-        FastBuilder(
-          () => IconButton(
-            icon: Icon(
-              themeMode.value == ThemeMode.light
-                  ? Icons.dark_mode
-                  : Icons.light_mode,
-            ),
-            onPressed: () => themeMode.value =
+      appBar: AppBar(
+        title: const Text('fast_ui Example'),
+        actions: [
+          FastBuilder(
+            () => IconButton(
+              icon: Icon(
                 themeMode.value == ThemeMode.light
-                    ? ThemeMode.dark
-                    : ThemeMode.light,
+                    ? Icons.dark_mode
+                    : Icons.light_mode,
+              ),
+              onPressed: () => themeMode.value =
+                  themeMode.value == ThemeMode.light
+                      ? ThemeMode.dark
+                      : ThemeMode.light,
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
