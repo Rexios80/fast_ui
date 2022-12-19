@@ -46,10 +46,7 @@ extension RxPersistenceExtension<T> on RxValue<T> {
   /// - [key] - The key used to store the value
   /// - [store] - An optional override of the default
   /// [FastRxPersistenceInterface] given with [FastRxPersistence.init]
-  /// - [decode] - A function to transform the internal store value
-  /// from type [I] to type [T]
-  /// - [encode] - A function to transform the value from type [T] to type
-  /// [I] for storage in the store
+  /// - [converter] - A converter to transform the value to and from the store
   ///
   /// On initialization, the store is asked for an existing value for the [key].
   /// If one exists, the current [value] is replaced and listeners are notified.
