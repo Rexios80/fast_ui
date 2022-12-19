@@ -1,3 +1,6 @@
+## 0.1.4
+- Updates `fast_rx_persistence` to latest version
+
 ## 0.1.3
 - Fixes string list casting issue
 
