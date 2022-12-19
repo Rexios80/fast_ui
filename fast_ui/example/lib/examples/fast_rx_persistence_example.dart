@@ -10,8 +10,10 @@ class FastRxPersistenceExample extends StatelessWidget {
   final transformedPref = <int>[].rx
     ..persist<List<String>>(
       'transformed',
-      decode: (value) => value.map(int.parse).toList(),
-      encode: (value) => value.map((e) => e.toString()).toList(),
+      converter: InlineConverter(
+        fromStore: (value) => value.map(int.parse).toList(),
+        toStore: (value) => value.map((e) => e.toString()).toList(),
+      ),
     );
 
   FastRxPersistenceExample({super.key});
@@ -26,6 +28,12 @@ class FastRxPersistenceExample extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: <Widget>[
+            Text(
+              'Reload the page to see the persisted values',
+              textAlign: TextAlign.center,
+              style: context.textTheme.titleMedium,
+            ),
+            const SizedBox(height: 20),
             const Text('Reactive int preference:'),
             FastBuilder(
               () => Text(

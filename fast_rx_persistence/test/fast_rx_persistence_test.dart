@@ -45,21 +45,13 @@ void main() {
       ),
     );
 
-    // Both decode and encode must be specified if one of them is
-    expect(
-      () => 0.rx.persist<String>('key', decode: (value) => int.parse(value)),
-      throwsA(isA<AssertionError>()),
-    );
-    expect(
-      () => 0.rx.persist<String>('key', encode: (value) => value.toString()),
-      throwsA(isA<AssertionError>()),
-    );
-
     final rx = <int>[].rx
       ..persist<List<String>>(
         'key',
-        decode: (value) => value.map(int.parse).toList(),
-        encode: (value) => value.map((e) => e.toString()).toList(),
+        converter: InlineConverter(
+          fromStore: (value) => value.map(int.parse).toList(),
+          toStore: (value) => value.map((e) => e.toString()).toList(),
+        ),
       );
 
     expect(listEquals(rx, [17]), isTrue);
@@ -71,6 +63,27 @@ void main() {
       listEquals(FastRxPersistence.store.get('key') as List, ['17', '12']),
       isTrue,
     );
+  });
+
+  test('Enum transformation', () async {
+    FastRxPersistence.init(Store(values: {'key0': 'zero', 'key1': 0}));
+
+    final rx0 = TestEnum.one.rx
+      ..persist('key0', converter: const EnumStringConverter(TestEnum.values));
+    final rx1 = TestEnum.one.rx
+      ..persist('key1', converter: const EnumIntConverter(TestEnum.values));
+
+    expect(rx0.value, TestEnum.zero);
+    expect(rx1.value, TestEnum.zero);
+
+    rx0.value = TestEnum.one;
+    rx1.value = TestEnum.one;
+
+    // Wait for the stream to emit the update
+    await Future.delayed(Duration.zero);
+
+    expect(FastRxPersistence.store.get('key0'), 'one');
+    expect(FastRxPersistence.store.get('key1'), 1);
   });
 }
 
@@ -88,4 +101,9 @@ class Store extends FastRxPersistenceInterface {
   void set(String key, Object? value) {
     _store[key] = value;
   }
+}
+
+enum TestEnum {
+  zero,
+  one,
 }

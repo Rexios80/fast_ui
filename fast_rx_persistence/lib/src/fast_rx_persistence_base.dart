@@ -1,4 +1,5 @@
 import 'package:fast_rx_persistence/src/exceptions.dart';
+import 'package:fast_rx_persistence/src/fast_rx_persistence_converter.dart';
 import 'package:fast_rx_persistence/src/fast_rx_persistence_interface.dart';
 import 'package:fast_rx/fast_rx.dart';
 import 'package:flutter/foundation.dart';
@@ -45,10 +46,7 @@ extension RxPersistenceExtension<T> on RxValue<T> {
   /// - [key] - The key used to store the value
   /// - [store] - An optional override of the default
   /// [FastRxPersistenceInterface] given with [FastRxPersistence.init]
-  /// - [decode] - A function to transform the internal store value
-  /// from type [I] to type [T]
-  /// - [encode] - A function to transform the value from type [T] to type
-  /// [I] for storage in the store
+  /// - [converter] - A converter to transform the value to and from the store
   ///
   /// On initialization, the store is asked for an existing value for the [key].
   /// If one exists, the current [value] is replaced and listeners are notified.
@@ -59,18 +57,14 @@ extension RxPersistenceExtension<T> on RxValue<T> {
   void persist<I>(
     String key, {
     FastRxPersistenceInterface? store,
-    T Function(I value)? decode,
-    I Function(T value)? encode,
+    FastRxPersistenceConverter<T, I>? converter,
   }) {
-    assert(
-      (decode == null && encode == null) || (decode != null && encode != null),
-    );
-
     final interface = store ?? FastRxPersistence.store;
 
     final storeValue = interface.get(key);
     if (storeValue != null) {
-      final transformedValue = decode?.call(storeValue as I) ?? storeValue as T;
+      final transformedValue =
+          converter?.fromStore(storeValue as I) ?? storeValue as T;
 
       if (this is RxObject) {
         // ignore: invalid_use_of_protected_member
@@ -82,7 +76,7 @@ extension RxPersistenceExtension<T> on RxValue<T> {
     }
 
     stream.listen((value) {
-      final storeValue = encode?.call(value) ?? value as I;
+      final storeValue = converter?.toStore(value) ?? value as I;
       interface.set(key, storeValue);
     });
   }

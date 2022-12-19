@@ -17,30 +17,16 @@ void main() async {
 
   await FastRxSharedPreferences.init();
 
-  runApp(const FastUiExampleApp());
+  runApp(const FastUiExamplePreview());
 }
 
-class FastUiExampleApp extends StatelessWidget {
-  const FastUiExampleApp({super.key});
+class FastUiExamplePreview extends StatelessWidget {
+  const FastUiExamplePreview({super.key});
 
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-      builder: (context) => MaterialApp(
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
-        // Initialize both FastNav and FastOverlays in one line
-        navigatorKey: FastNav.init(FastOverlays.init()),
-        navigatorObservers: [FastNavObserver()],
-        title: 'fast_ui Example',
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
-        onGenerateRoute: (settings) => FastNav.generateAnonymousRoute(
-          settings: settings,
-          page: const FastUiExample(),
-        ),
-      ),
+      builder: (_) => const FastUiExampleApp(),
       tools: [
         ToolPanelSection(
           title: 'Links',
@@ -67,13 +53,58 @@ class FastUiExampleApp extends StatelessWidget {
   }
 }
 
+final themeMode = ThemeMode.light.rx;
+
+class FastUiExampleApp extends StatelessWidget {
+  const FastUiExampleApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FastBuilder(
+      () => MaterialApp(
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
+        // Initialize both FastNav and FastOverlays in one line
+        navigatorKey: FastNav.init(FastOverlays.init()),
+        navigatorObservers: [FastNavObserver()],
+        title: 'fast_ui Example',
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        themeMode: themeMode.value,
+        onGenerateRoute: (settings) => FastNav.generateAnonymousRoute(
+          settings: settings,
+          page: const FastUiExample(),
+        ),
+      ),
+    );
+  }
+}
+
 class FastUiExample extends StatelessWidget {
   const FastUiExample({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('fast_ui Example')),
+      appBar: AppBar(
+        title: const Text('fast_ui Example'),
+        actions: [
+          FastBuilder(
+            () => IconButton(
+              icon: Icon(
+                themeMode.value == ThemeMode.light
+                    ? Icons.dark_mode
+                    : Icons.light_mode,
+              ),
+              onPressed: () => themeMode.value =
+                  themeMode.value == ThemeMode.light
+                      ? ThemeMode.dark
+                      : ThemeMode.light,
+            ),
+          ),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
