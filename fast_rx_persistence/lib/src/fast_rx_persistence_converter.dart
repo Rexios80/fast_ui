@@ -18,13 +18,13 @@ class InlineConverter<T, I> extends FastRxPersistenceConverter<T, I> {
   /// - [fromStore]: Convert the value read from the store
   /// - [toStore]: Convert the value written to the store
   const InlineConverter({
-    required T Function(I) fromStore,
-    required I Function(T) toStore,
+    required T Function(I value) fromStore,
+    required I Function(T value) toStore,
   })  : _fromStoreInline = fromStore,
         _toStoreInline = toStore;
 
-  final T Function(I) _fromStoreInline;
-  final I Function(T) _toStoreInline;
+  final T Function(I value) _fromStoreInline;
+  final I Function(T value) _toStoreInline;
 
   @override
   T fromStore(I value) => _fromStoreInline(value);
