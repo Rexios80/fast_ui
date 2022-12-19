@@ -1,6 +1,6 @@
 name: fast_rx_persistence
 description: An interface for implementing fast_rx key/value store persistence
-version: 0.1.5
+version: 0.2.0
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx_persistence
 
 environment:
