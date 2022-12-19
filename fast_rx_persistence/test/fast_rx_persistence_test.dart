@@ -66,24 +66,24 @@ void main() {
   });
 
   test('Enum transformation', () async {
-    FastRxPersistence.init(Store(values: {'key0': 'zero', 'key1': 1}));
+    FastRxPersistence.init(Store(values: {'key0': 'zero', 'key1': 0}));
 
-    final rx0 = TestEnum.two.rx
+    final rx0 = TestEnum.one.rx
       ..persist('key0', converter: const EnumStringConverter(TestEnum.values));
-    final rx1 = TestEnum.two.rx
+    final rx1 = TestEnum.one.rx
       ..persist('key1', converter: const EnumIntConverter(TestEnum.values));
 
     expect(rx0.value, TestEnum.zero);
-    expect(rx1.value, TestEnum.one);
+    expect(rx1.value, TestEnum.zero);
 
-    rx0.value = TestEnum.two;
-    rx1.value = TestEnum.two;
+    rx0.value = TestEnum.one;
+    rx1.value = TestEnum.one;
 
     // Wait for the stream to emit the update
     await Future.delayed(Duration.zero);
 
-    expect(FastRxPersistence.store.get('key0'), 'two');
-    expect(FastRxPersistence.store.get('key1'), 2);
+    expect(FastRxPersistence.store.get('key0'), 'one');
+    expect(FastRxPersistence.store.get('key1'), 1);
   });
 }
 
@@ -106,5 +106,4 @@ class Store extends FastRxPersistenceInterface {
 enum TestEnum {
   zero,
   one,
-  two,
 }
