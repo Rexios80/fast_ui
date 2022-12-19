@@ -1,3 +1,6 @@
+## 0.2.0+1
+- Updates documentation
+
 ## 0.2.0
 - BREAKING: Replaces `decode` and `encode` parameters with a `converter` paramerter that takes a `FastRxPersistenceConverter`. The simplest migration is to pass in an `InlineConverter` with `fromStore` and `toStore` parameters.
 - Adds `EnumStringConverter` and `EnumIntConverter` for convenience
