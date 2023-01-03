@@ -92,30 +92,6 @@ class FastOverlays {
 
   //* Bottom sheets
 
-  /// Show a bottom sheet
-  //! Requires a scaffold context
-  // static PersistentBottomSheetController<T> showBottomSheet<T>({
-  //   required WidgetBuilder builder,
-  //   Color? backgroundColor,
-  //   double? elevation,
-  //   ShapeBorder? shape,
-  //   Clip? clipBehavior,
-  //   BoxConstraints? constraints,
-  //   AnimationController? transitionAnimationController,
-  // }) {
-  //   _checkInit();
-  //   return material.showBottomSheet(
-  //     context: _navigatorKey.currentContext!,
-  //     builder: builder,
-  //     backgroundColor: backgroundColor,
-  //     elevation: elevation,
-  //     shape: shape,
-  //     clipBehavior: clipBehavior,
-  //     constraints: constraints,
-  //     transitionAnimationController: transitionAnimationController,
-  //   );
-  // }
-
   /// Show a modal bottom sheet
   static Future<T?> showModalBottomSheet<T>({
     required WidgetBuilder builder,
@@ -418,5 +394,106 @@ class FastOverlays {
       useRootNavigator: useRootNavigator,
       routeSettings: routeSettings,
     );
+  }
+
+  //* Scaffold
+
+  static const _defaultScaffoldName = '_defaultScaffold';
+
+  static final _scaffoldKeys = <String, GlobalKey<ScaffoldState>>{};
+
+  /// Register a [Scaffold] with [FastOverlays]
+  ///
+  /// If you wish to use multiple scaffolds on screen at once, you must specify
+  /// a unique [name] for each scaffold.
+  static GlobalKey<ScaffoldState> registerScaffold({
+    String name = _defaultScaffoldName,
+    GlobalKey<ScaffoldState>? key,
+  }) {
+    return _scaffoldKeys[name] ??= key ?? GlobalKey<ScaffoldState>();
+  }
+
+  static ScaffoldState _getScaffoldState({
+    required String scaffoldName,
+  }) {
+    final key = _scaffoldKeys[scaffoldName];
+
+    if (key == null) {
+      throw ScaffoldNotRegistered(
+        scaffoldName:
+            scaffoldName == _defaultScaffoldName ? null : scaffoldName,
+      );
+    }
+
+    try {
+      return key.currentState!;
+    } catch (e) {
+      throw InvalidScaffoldContext(
+        scaffoldName:
+            scaffoldName == _defaultScaffoldName ? null : scaffoldName,
+      );
+    }
+  }
+
+  /// Show a bottom sheet
+  ///
+  /// Must call [registerScaffold] first
+  static PersistentBottomSheetController<T> showBottomSheet<T>(
+    WidgetBuilder builder, {
+    String scaffoldName = _defaultScaffoldName,
+    Color? backgroundColor,
+    double? elevation,
+    ShapeBorder? shape,
+    Clip? clipBehavior,
+    BoxConstraints? constraints,
+    bool? enableDrag,
+    AnimationController? transitionAnimationController,
+  }) {
+    return _getScaffoldState(scaffoldName: scaffoldName).showBottomSheet(
+      builder,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      shape: shape,
+      clipBehavior: clipBehavior,
+      constraints: constraints,
+      enableDrag: enableDrag,
+      transitionAnimationController: transitionAnimationController,
+    );
+  }
+
+  /// Open a drawer
+  ///
+  /// Must call [registerScaffold] first
+  static void openDrawer({
+    String scaffoldName = _defaultScaffoldName,
+  }) {
+    _getScaffoldState(scaffoldName: scaffoldName).openDrawer();
+  }
+
+  /// Close a drawer
+  ///
+  /// Must call [registerScaffold] first
+  static void closeDrawer({
+    String scaffoldName = _defaultScaffoldName,
+  }) {
+    _getScaffoldState(scaffoldName: scaffoldName).closeDrawer();
+  }
+
+  /// Open an end drawer
+  ///
+  /// Must call [registerScaffold] first
+  static void openEndDrawer({
+    String scaffoldName = _defaultScaffoldName,
+  }) {
+    _getScaffoldState(scaffoldName: scaffoldName).openEndDrawer();
+  }
+
+  /// Close an end drawer
+  ///
+  /// Must call [registerScaffold] first
+  static void closeEndDrawer({
+    String scaffoldName = _defaultScaffoldName,
+  }) {
+    _getScaffoldState(scaffoldName: scaffoldName).closeEndDrawer();
   }
 }
