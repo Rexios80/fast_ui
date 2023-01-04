@@ -10,7 +10,7 @@ Show overlays without context
 ## Features
 Unlike other contextless overlay solutions, fast_overlays uses Flutter's built-in overlay implementations
 
-The `FastOverlays` class can be used to manage the following overlays:
+fast_overlays supports the following overlays:
 - Snackbar
 - Material banner
 - Modal bottom sheet
@@ -24,18 +24,13 @@ The `FastOverlays` class can be used to manage the following overlays:
 - About dialog
 - General dialog
 
-The `FastScaffold` class can be used to manage the following overlays that require a Scaffold context:
-- Bottom sheet
-- Drawer
-- End drawer
-
 ### Convenience classes
 | Class            | Use-case                    |
 | ---------------- | --------------------------- |
 | SnackBarDuration | SnackBar duration constants |
 
 ## Getting started
-Register a GlobalKey with FastOverlays and your MaterialApp.
+Register a GlobalKey with FastOverlays and your MaterialApp
 
 <!-- embedme readme/getting_started.dart -->
 ```dart
@@ -52,29 +47,7 @@ void example() {
 
 ```
 
-Register a GlobalKey with FastScaffold and a Scaffold. Keep the following in mind when using FastScaffold:
-- If you need to have more than one Scaffold on screen at a time, then you must register each scaffold with a unique name
-- Attempting to use a Scaffold with invalid context (off screen, not registered, etc.) will throw an exception
-
-<!-- embedme readme/getting_started_2.dart -->
-```dart
-import 'package:fast_overlays/fast_overlays.dart';
-import 'package:flutter/material.dart';
-
-void example() {
-  // ...
-
-  Scaffold(
-    key: FastScaffold.register(),
-  );
-}
-
-```
-
 ## Usage
-
-FastOverlays
-
 <!-- embedme readme/usage.dart -->
 ```dart
 import 'package:fast_overlays/fast_overlays.dart';
@@ -86,21 +59,6 @@ void showSnackbar() {
       content: Text('I am a snackbar'),
       duration: SnackBarDuration.indefinite,
     ),
-  );
-}
-
-```
-
-FastScaffold
-
-<!-- embedme readme/usage_2.dart -->
-```dart
-import 'package:fast_overlays/fast_overlays.dart';
-import 'package:flutter/material.dart';
-
-void showSnackbar() {
-  FastScaffold.showBottomSheet(
-    (context) => const Text('I am a bottom sheet'),
   );
 }
 

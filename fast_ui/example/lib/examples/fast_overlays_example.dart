@@ -7,32 +7,12 @@ class FastOverlaysExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: FastScaffold.register(),
       appBar: AppBar(
         title: const Text('fast_overlays Example'),
-        leading: const IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: FastNav.pop,
-        ),
-        actions: const [SizedBox.shrink()],
-      ),
-      drawer: const Drawer(
-        child: ElevatedButton(
-          onPressed: FastScaffold.closeDrawer,
-          child: Text('Close Drawer'),
-        ),
-      ),
-      endDrawer: const Drawer(
-        child: ElevatedButton(
-          onPressed: FastScaffold.closeEndDrawer,
-          child: Text('Close End Drawer'),
-        ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(8),
         children: [
-          const Text('FastOverlays'),
-          const SizedBox(height: 16),
           ElevatedButton(
             child: const Text('Snackbar'),
             onPressed: () {
@@ -164,32 +144,6 @@ class FastOverlaysExample extends StatelessWidget {
                 ),
               );
             },
-          ),
-          const SizedBox(height: 16),
-          const Text('FastScaffold'),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            child: const Text('Bottom Sheet'),
-            onPressed: () {
-              FastScaffold.showBottomSheet(
-                (context) => const Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Text('I am a bottom sheet'),
-                ),
-                elevation: 16,
-                constraints: const BoxConstraints(minWidth: double.infinity),
-              );
-            },
-          ),
-          const SizedBox(height: 16),
-          const ElevatedButton(
-            onPressed: FastScaffold.openDrawer,
-            child: Text('Open Drawer'),
-          ),
-          const SizedBox(height: 16),
-          const ElevatedButton(
-            onPressed: FastScaffold.openEndDrawer,
-            child: Text('Open End Drawer'),
           ),
         ],
       ),
