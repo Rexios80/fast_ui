@@ -29,12 +29,12 @@ class FastOverlaysExample extends StatelessWidget {
             child: const Text('Material Banner'),
             onPressed: () {
               FastOverlays.showMaterialBanner(
-                MaterialBanner(
-                  content: const Text('I am a material banner'),
+                const MaterialBanner(
+                  content: Text('I am a material banner'),
                   actions: [
                     TextButton(
-                      child: const Text('Close'),
-                      onPressed: () => FastOverlays.hideCurrentMaterialBanner(),
+                      onPressed: FastOverlays.hideCurrentMaterialBanner,
+                      child: Text('Close'),
                     ),
                   ],
                 ),
@@ -82,11 +82,9 @@ class FastOverlaysExample extends StatelessWidget {
             },
           ),
           const SizedBox(height: 16),
-          ElevatedButton(
-            child: const Text('License Page'),
-            onPressed: () {
-              FastOverlays.showLicensePage();
-            },
+          const ElevatedButton(
+            onPressed: FastOverlays.showLicensePage,
+            child: Text('License Page'),
           ),
           const SizedBox(height: 16),
           ElevatedButton(
@@ -121,11 +119,9 @@ class FastOverlaysExample extends StatelessWidget {
             },
           ),
           const SizedBox(height: 16),
-          ElevatedButton(
-            child: const Text('About Dialog'),
-            onPressed: () {
-              FastOverlays.showAboutDialog();
-            },
+          const ElevatedButton(
+            onPressed: FastOverlays.showAboutDialog,
+            child: Text('About Dialog'),
           ),
           const SizedBox(height: 16),
           ElevatedButton(

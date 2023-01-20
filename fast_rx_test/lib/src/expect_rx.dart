@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 
 /// Expect that every test in [shouldNotify] notifies exactly once, and that
 /// every test in [shouldNotNotify] does not notify.
-expectRx<T extends Rx>({
+void expectRx<T extends Rx>({
   List<RxTest<T>> shouldRegister = const [],
   List<RxTest<T>> shouldNotRegister = const [],
   List<RxTest<T>> shouldNotify = const [],
@@ -35,7 +35,7 @@ expectRx<T extends Rx>({
     final rx = test.generate();
     runRxZoned(
       () => test.transform(rx),
-      notifier: (int id) {
+      notifier: (id) {
         if (id == identityHashCode(rx) ||
             (rx is RxCompositeMixin && rx.hasStream(id))) {
           notifications++;

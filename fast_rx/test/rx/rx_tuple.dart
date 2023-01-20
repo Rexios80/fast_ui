@@ -9,7 +9,7 @@ class Tuple<T1, T2> {
   Tuple.from(Tuple<T1, T2> other) : this(other.item1, other.item2);
 
   @override
-  operator ==(Object other) =>
+  bool operator ==(Object other) =>
       other is Tuple<T1, T2> && other.item1 == item1 && other.item2 == item2;
 
   @override

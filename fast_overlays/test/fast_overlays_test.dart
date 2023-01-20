@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  buildBaseWidget() => MaterialApp(
+  Widget buildBaseWidget() => MaterialApp(
         navigatorKey: FastOverlays.init(),
         home: const Scaffold(),
       );
 
   test('Check init', () {
     expect(
-      () => FastOverlays.hideCurrentSnackBar(),
+      FastOverlays.hideCurrentSnackBar,
       throwsA(isA<FastOverlaysNotInitialized>()),
     );
 
@@ -25,7 +25,7 @@ void main() {
   testWidgets('Snackbar', (tester) async {
     await tester.pumpWidget(buildBaseWidget());
 
-    showSnackbar([String name = 'test_snackbar']) async {
+    Future<void> showSnackbar([String name = 'test_snackbar']) async {
       FastOverlays.showSnackBar(SnackBar(content: Text(name)));
       await tester.pumpAndSettle();
     }
@@ -53,7 +53,7 @@ void main() {
   testWidgets('MaterialBanner', (tester) async {
     await tester.pumpWidget(buildBaseWidget());
 
-    showMaterialBanner([String name = 'test_banner']) async {
+    Future<void> showMaterialBanner([String name = 'test_banner']) async {
       FastOverlays.showMaterialBanner(
         MaterialBanner(
           content: Text(name),

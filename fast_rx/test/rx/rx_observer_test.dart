@@ -5,7 +5,7 @@ void main() {
   test('RxObserver should not throw', () {
     final observer = RxObserver();
     final rx = ''.rx;
-    builder() => rx.value;
+    void builder() => rx.value;
 
     observer.setup(builder);
 
@@ -16,7 +16,7 @@ void main() {
 
   test('RxObserver should throw', () {
     final observer = RxObserver();
-    builder() => '';
+    void builder() => '';
 
     expect(
       () => observer.setup(builder),

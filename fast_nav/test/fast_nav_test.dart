@@ -118,7 +118,7 @@ void main() {
     await tester.pumpWidget(buildBaseWidget());
     expect(FastNav.canPop(), false);
 
-    push([String name = 'test_page']) async {
+    Future<void> push([String name = 'test_page']) async {
       unawaited(FastNav.push(Text(name)));
       await tester.pumpAndSettle();
     }
@@ -195,7 +195,7 @@ void main() {
     await tester.pumpWidget(buildBaseWidget());
     expect(FastNav.canPop(), false);
 
-    pushNamed([String name = 'test_page']) async {
+    Future<void> pushNamed([String name = 'test_page']) async {
       unawaited(FastNav.pushNamed(name));
       await tester.pumpAndSettle();
     }
@@ -289,7 +289,7 @@ void main() {
     expect(find.text('home'), findsOneWidget);
     expect(FastNav.canPop(navigatorName: 'nestedNavigator'), false);
 
-    push({String name = 'test_page'}) async {
+    Future<void> push({String name = 'test_page'}) async {
       unawaited(FastNav.push(Text(name), navigatorName: 'nestedNavigator'));
       await tester.pumpAndSettle();
     }
