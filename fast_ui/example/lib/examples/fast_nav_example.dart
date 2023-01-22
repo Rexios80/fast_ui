@@ -52,9 +52,9 @@ class Page2 extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              child: const Text('Pop page 2'),
-              onPressed: () => FastNav.pop(),
+            const ElevatedButton(
+              onPressed: FastNav.pop,
+              child: Text('Pop page 2'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
@@ -75,10 +75,10 @@ class Page3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Page 3')),
-      body: Center(
+      body: const Center(
         child: ElevatedButton(
-          child: const Text('Pop page 3'),
-          onPressed: () => FastNav.pop(),
+          onPressed: FastNav.pop,
+          child: Text('Pop page 3'),
         ),
       ),
     );
@@ -107,9 +107,9 @@ class NestedPage1 extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                child: const Text('Pop to root navigator'),
-                onPressed: () => FastNav.pop(),
+              const ElevatedButton(
+                onPressed: FastNav.pop,
+                child: Text('Pop to root navigator'),
               ),
             ],
           ),

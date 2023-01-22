@@ -60,7 +60,7 @@ class TestObject {
   TestObject(this.count);
 
   @override
-  operator ==(Object other) => other is TestObject && other.count == count;
+  bool operator ==(Object other) => other is TestObject && other.count == count;
 
   @override
   int get hashCode => count.hashCode;

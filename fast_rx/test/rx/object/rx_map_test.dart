@@ -31,7 +31,7 @@ void main() {
     RxTest(() => {'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.isNotEmpty),
     RxTest(() => {'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.keys),
     RxTest(() => {'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.length),
-    RxTest(() => {'a': 1, 'b': 2}.rx, (rx) => rx.map((a, b) => MapEntry(a, b))),
+    RxTest(() => {'a': 1, 'b': 2}.rx, (rx) => rx.map(MapEntry.new)),
     RxTest(() => {'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.values),
   ];
   final shouldNotifyAndRegister = <RxTest<RxMap<String, int>>>[

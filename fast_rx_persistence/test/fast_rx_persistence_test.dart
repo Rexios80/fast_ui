@@ -4,9 +4,7 @@ import 'package:test/test.dart';
 import 'package:fast_rx/fast_rx.dart';
 
 void main() {
-  setUp(() {
-    FastRxPersistence.reset();
-  });
+  setUp(FastRxPersistence.reset);
 
   test('Check init', () {
     expect(
