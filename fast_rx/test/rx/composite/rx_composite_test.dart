@@ -5,9 +5,9 @@ import 'composite.dart';
 
 void main() {
   final shouldNotify = <RxTest<Composite>>[
-    RxTest(() => Composite(), (rx) => rx.a.value = 2),
+    RxTest(Composite.new, (rx) => rx.a.value = 2),
     RxTest(
-      () => Composite(),
+      Composite.new,
       (rx) => rx.run(() {
         rx.a.value = 2;
         rx.b.value = 3;
@@ -17,7 +17,7 @@ void main() {
   ];
 
   final shouldRegister = <RxTest<Composite>>[
-    RxTest(() => Composite(), (rx) => rx.a.value),
+    RxTest(Composite.new, (rx) => rx.a.value),
   ];
 
   test('RxComposite registration and notifications', () {

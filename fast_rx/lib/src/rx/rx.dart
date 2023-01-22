@@ -29,7 +29,7 @@ abstract class Rx<T> {
           throw RxRunActionWasAsync();
         }
       },
-      notifier: (int id) => notified = true,
+      notifier: (id) => notified = true,
     );
     return notified;
   }
