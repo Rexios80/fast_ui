@@ -38,7 +38,7 @@ class FastRxPersistenceExample extends StatelessWidget {
             FastBuilder(
               () => Text(
                 '$intPref',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
             const SizedBox(height: 16),
@@ -46,7 +46,7 @@ class FastRxPersistenceExample extends StatelessWidget {
             FastBuilder(
               () => Text(
                 '$doublePref',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
             const SizedBox(height: 16),
@@ -54,7 +54,7 @@ class FastRxPersistenceExample extends StatelessWidget {
             FastBuilder(
               () => Text(
                 '$boolPref',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
             const SizedBox(height: 16),
@@ -62,7 +62,7 @@ class FastRxPersistenceExample extends StatelessWidget {
             FastBuilder(
               () => Text(
                 '$stringPref',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
             const SizedBox(height: 16),
@@ -70,7 +70,7 @@ class FastRxPersistenceExample extends StatelessWidget {
             FastBuilder(
               () => Text(
                 '$stringListPref',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
             const SizedBox(height: 16),
@@ -78,7 +78,7 @@ class FastRxPersistenceExample extends StatelessWidget {
             FastBuilder(
               () => Text(
                 '$transformedPref',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
           ],

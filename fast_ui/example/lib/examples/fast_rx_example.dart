@@ -24,7 +24,7 @@ class FastRxExample extends StatelessWidget {
             FastBuilder(
               () => Text(
                 '$_int',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               condition: () => _rebuild.value,
             ),
@@ -33,7 +33,7 @@ class FastRxExample extends StatelessWidget {
             FastBuilder(
               () => Text(
                 '$_list',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               condition: () => _rebuild.value,
             ),
@@ -42,7 +42,7 @@ class FastRxExample extends StatelessWidget {
             FastBuilder(
               () => Text(
                 '$_set',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               condition: () => _rebuild.value,
             ),
@@ -51,7 +51,7 @@ class FastRxExample extends StatelessWidget {
             FastBuilder(
               () => Text(
                 '$_map',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               condition: () => _rebuild.value,
             ),

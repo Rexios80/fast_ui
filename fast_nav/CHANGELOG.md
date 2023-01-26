@@ -1,3 +1,6 @@
+## 0.2.5
+- Updates for Flutter 3.7
+
 ## 0.2.4
 - Fixed hot reload
 
