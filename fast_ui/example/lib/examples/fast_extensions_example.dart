@@ -14,7 +14,7 @@ class FastExtensionsExample extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Headline 4', style: context.textTheme.headline4),
+            Text('Headline Medium', style: context.textTheme.headlineMedium),
             Text('Back button tooltip: ${context.backButtonTooltip}'),
             Text('Country code: ${context.countryCode}'),
             Text('Language code: ${context.languageCode}'),
