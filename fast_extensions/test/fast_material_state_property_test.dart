@@ -1,7 +1,6 @@
 import 'package:fast_extensions/src/fast_material_state_property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fast_extensions/src/fast_material_color.dart';
 
 void main() {
   test('FastMaterialStateProperty', () {
