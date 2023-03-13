@@ -8,13 +8,14 @@ Convenience extensions to make common Flutter tasks less annoying
 [![pub points](https://img.shields.io/pub/points/fast_extensions)](https://pub.dev/packages/fast_extensions/score)
 
 ## Features
-| Extension                 | Use-case                           |
-| ------------------------- | ---------------------------------- |
-| FastLocale                | Localizations.localeOf(context)    |
-| FastMaterialColor         | FastMaterialColor.fromColor(color) |
-| FastMaterialLocalizations | MaterialLocalizations.of(context)  |
-| FastMediaQuery            | MediaQuery.of(context)             |
-| FastTheme                 | Theme.of(context)                  |
+| Extension                 | Use-case                                 |
+| ------------------------- | ---------------------------------------- |
+| FastLocale                | Localizations.localeOf(context)          |
+| FastMaterialColor         | FastMaterialColor.fromColor(color)       |
+| FastMaterialLocalizations | MaterialLocalizations.of(context)        |
+| FastMaterialStateProperty | Create MaterialStateProperty using a map |
+| FastMediaQuery            | MediaQuery.of(context)                   |
+| FastTheme                 | Theme.of(context)                        |
 
 
 ## Usage
@@ -34,6 +35,16 @@ void example(BuildContext context) {
 
   // FastMaterialLocalizations
   context.backButtonTooltip;
+
+  // FastMaterialStateProperty
+  final msp = FastMaterialStateProperty(
+    {MaterialState.selected: Colors.white},
+    defaultValue: Colors.black,
+  );
+  ThemeData(
+    segmentedButtonTheme:
+        SegmentedButtonThemeData(style: ButtonStyle(foregroundColor: msp)),
+  );
 
   // FastMediaQuery
   context.screenWidth;
