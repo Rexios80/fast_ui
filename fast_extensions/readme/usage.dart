@@ -13,6 +13,16 @@ void example(BuildContext context) {
   // FastMaterialLocalizations
   context.backButtonTooltip;
 
+  // FastMaterialStateProperty
+  final msp = FastMaterialStateProperty(
+    {MaterialState.selected: Colors.white},
+    defaultValue: Colors.black,
+  );
+  ThemeData(
+    segmentedButtonTheme:
+        SegmentedButtonThemeData(style: ButtonStyle(foregroundColor: msp)),
+  );
+
   // FastMediaQuery
   context.screenWidth;
   context.screenHeight;
