@@ -28,7 +28,7 @@ jobs:
 
       - name: Upgrade dependencies
         run: puby upgrade --major-versions
-      
+
       - name: Check pubspec diff
         id: pubspec_check
         run: |
