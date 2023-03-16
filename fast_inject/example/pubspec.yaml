@@ -1,0 +1,23 @@
+name: fast_inject_example
+publish_to: none
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  fast_inject:
+    path: ../
+  fast_rx_flutter:
+    path: ../../fast_rx_flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  rexios_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
