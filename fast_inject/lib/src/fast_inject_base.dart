@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 
 class Injector {
-  /// Get the injector of the current context
+  /// Get the closest injector of the current context
   static Injector? of(BuildContext context) =>
       context.findAncestorStateOfType<_FastWidgetState>()?.widget._injector;
 
   /// If this injector will accept new registrations
   ///
   /// Set to true after `initState` is called
-  var finalized = false;
+  var _finalized = false;
 
   /// The instance registry
   final registry = <Type, Object>{};
 
   /// Register the instance of type [T]
   void register<T>(T instance) {
-    if (finalized) {
+    if (_finalized) {
       throw Exception('Cannot register new instances after initState');
-    }
-    if (instance == null) {
+    } else if (instance == null) {
       throw Exception('Instance cannot be null');
     } else if (registry.containsKey(T)) {
       throw Exception('Type $T is already registered in this context');
@@ -47,6 +46,10 @@ mixin Injectable on StatefulWidget {
 
   /// Inject a dependency into this widget
   void inject<T>(T instance) => _injector.register(instance);
+
+  /// Inject all dependencies from another injector
+  void injectAll(Injector injector) =>
+      _injector.registry.addAll(injector.registry);
 }
 
 abstract class FastStatefulWidget extends StatefulWidget with Injectable {
@@ -80,7 +83,7 @@ abstract class FastState<T extends Injectable> extends State<T> {
     }
 
     // Disallow further registrations
-    widget._injector.finalized = true;
+    widget._injector._finalized = true;
   }
 }
 
