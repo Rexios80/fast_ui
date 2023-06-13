@@ -10,9 +10,11 @@ class FastBuilder extends StatefulWidget {
   ///
   /// Defaults to always rebuild
   final ValueGetter<bool>? condition;
+  final List<RxObject>? observables;
 
   /// A [FastBuilder] updates when reactive properties within change
-  const FastBuilder(this.builder, {super.key, this.condition});
+  const FastBuilder(this.builder,
+      {super.key, this.condition, this.observables});
 
   @override
   State<StatefulWidget> createState() {
@@ -34,7 +36,7 @@ class _FastBuilderState extends State<FastBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return _observer.setup(widget.builder);
+    return _observer.setup(widget.builder, observables: widget.observables);
   }
 
   @override

@@ -50,12 +50,17 @@ class RxObserver {
   }
 
   /// Set up this observer with the given [builder]
-  T setup<T>(T Function() builder) {
+  T setup<T>(T Function() builder, {List<RxObject>? observables}) {
     // Clear out existing streams (for hot reloading)
     _clearStreams();
 
     // Calling the builder will add any relevant streams to the observer
     final built = runRxZoned(builder, registrar: _addStream);
+    if (observables != null) {
+      for (final observable in observables) {
+        _addStream(observable.stream);
+      }
+    }
     if (!_listenable) {
       throw RxObserverIsNotListenable();
     }
