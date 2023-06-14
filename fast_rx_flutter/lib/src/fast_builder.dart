@@ -10,6 +10,12 @@ class FastBuilder extends StatefulWidget {
   ///
   /// Defaults to always rebuild
   final ValueGetter<bool>? condition;
+
+  /// A list of [Rx] objects to listen to that's not within the [builder]
+  ///
+  /// RxObserverIsNotListenable will be thrown if observed widgets are only in
+  /// the parent scope and not the builder. Take care to avoid duplicating
+  ///  variables in the observable list and builder
   final List<Rx>? observables;
 
   /// A [FastBuilder] updates when reactive properties within change
