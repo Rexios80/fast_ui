@@ -50,7 +50,7 @@ class RxObserver {
   }
 
   /// Set up this observer with the given [builder]
-  T setup<T>(T Function() builder, {List<RxObject>? observables}) {
+  T setup<T>(T Function() builder, {List<Rx>? observables}) {
     // Clear out existing streams (for hot reloading)
     _clearStreams();
 

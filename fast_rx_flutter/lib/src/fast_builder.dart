@@ -10,7 +10,7 @@ class FastBuilder extends StatefulWidget {
   ///
   /// Defaults to always rebuild
   final ValueGetter<bool>? condition;
-  final List<RxObject>? observables;
+  final List<Rx>? observables;
 
   /// A [FastBuilder] updates when reactive properties within change
   const FastBuilder(this.builder,
