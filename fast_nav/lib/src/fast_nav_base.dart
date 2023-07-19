@@ -11,9 +11,8 @@ class FastNav {
   /// Register the root navigator with [FastNav]
   ///
   /// Call in the [MaterialApp] constructor
-  static GlobalKey<NavigatorState> init([GlobalKey<NavigatorState>? key]) {
-    return registerNavigator(_rootNavigatorName, key: key);
-  }
+  static GlobalKey<NavigatorState> init([GlobalKey<NavigatorState>? key]) =>
+      registerNavigator(_rootNavigatorName, key: key);
 
   /// Register a nested navigator with [FastNav]
   ///
@@ -22,9 +21,8 @@ class FastNav {
   static GlobalKey<NavigatorState> registerNavigator(
     String name, {
     GlobalKey<NavigatorState>? key,
-  }) {
-    return _navigatorKeys[name] ??= key ?? GlobalKey<NavigatorState>();
-  }
+  }) =>
+      _navigatorKeys[name] ??= key ?? GlobalKey<NavigatorState>();
 
   static NavigatorState _getNavigatorState(String navigatorName) {
     if (!_navigatorKeys.containsKey(navigatorName)) {
@@ -38,9 +36,7 @@ class FastNav {
 
   /// Reset [FastNav] for testing
   @visibleForTesting
-  static void reset() {
-    _navigatorKeys.clear();
-  }
+  static void reset() => _navigatorKeys.clear();
 
   //* Common navigation methods
 
