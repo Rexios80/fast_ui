@@ -161,7 +161,6 @@ class FastNav {
     String newRouteName,
     bool Function(Route<dynamic> route) predicate, {
     String navigatorName = _rootNavigatorName,
-    bool preventDuplicates = false,
     Object? arguments,
   }) =>
       _getNavigatorState(navigatorName).pushNamedAndRemoveUntil<T>(
