@@ -67,15 +67,11 @@ class FastUiExampleApp extends StatelessWidget {
         builder: DevicePreview.appBuilder,
         // Initialize both FastNav and FastOverlays in one line
         navigatorKey: FastNav.init(FastOverlays.init()),
-        navigatorObservers: [FastNavObserver()],
         title: 'fast_ui Example',
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         themeMode: themeMode.value,
-        onGenerateRoute: (settings) => FastNav.generateAnonymousRoute(
-          settings: settings,
-          page: const FastUiExample(),
-        ),
+        home: const FastUiExample(),
       ),
     );
   }

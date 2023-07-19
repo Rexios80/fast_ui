@@ -18,19 +18,6 @@ class FastNavExample extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              child: const Text('Push duplicate with prevention'),
-              onPressed: () => FastNav.push(
-                const FastNavExample(),
-                preventDuplicates: true,
-              ),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              child: const Text('Push duplicate without prevention'),
-              onPressed: () => FastNav.push(const FastNavExample()),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
               child: const Text('Push nested navigator'),
               onPressed: () => FastNav.push(const NestedPage1()),
             ),
