@@ -10,7 +10,7 @@ class NestedNavigator extends StatelessWidget {
   final String name;
 
   /// [NavigatorObserver]s to be added to the nested navigator
-  final Iterable<NavigatorObserver> observers;
+  final List<NavigatorObserver> observers;
 
   /// Called to generate a route for a given [RouteSettings].
   final RouteFactory? onGenerateRoute;
@@ -34,15 +34,15 @@ class NestedNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Navigator(
       key: FastNav.registerNavigator(name, key: navigatorKey),
-      observers: [FastNavObserver(name), ...observers],
+      observers: observers,
       onGenerateRoute: (settings) {
         final route = onGenerateRoute?.call(settings);
         if (route != null) {
           return route;
         } else if (home != null) {
-          return FastNav.generateAnonymousRoute(
+          return MaterialPageRoute(
             settings: settings,
-            page: home!,
+            builder: (_) => home!,
           );
         } else {
           return null;

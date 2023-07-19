@@ -22,7 +22,6 @@ fast_nav supports the following navigation methods:
 
 Convenience features:
 - Nested navigation with a NestedNavigator class for simple setup
-- Optional duplicate page prevention
 
 ## Getting started
 Register a GlobalKey with FastNav and your MaterialApp
@@ -35,13 +34,6 @@ import 'package:flutter/material.dart';
 void example() {
   MaterialApp(
     navigatorKey: FastNav.init(),
-    // Required for duplicate prevention
-    navigatorObservers: [FastNavObserver()],
-    // Required for anonymous page route duplicate prevention to work on root page
-    onGenerateRoute: (settings) => FastNav.generateAnonymousRoute(
-      settings: settings,
-      page: const Text('home'),
-    ),
   );
 }
 

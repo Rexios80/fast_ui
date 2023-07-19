@@ -1,3 +1,7 @@
+## 0.3.0
+- Removes duplicate prevention and simplifies code
+- `NestedNavigator.observers` is now of type `List` instead of `Iterable`
+
 ## 0.2.5
 - Updates for Flutter 3.7
 
