@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:fast_rx/src/rx/object/rx_iterable.dart';
 
-/// A reactive list
+/// A reactive [List]
 class RxList<E> extends RxIterable<E> implements List<E> {
-  /// Create a reactive list
+  /// Create a reactive [List]
   RxList([List<E>? value]) : super(value ?? []);
 
   @override
@@ -204,8 +204,8 @@ class RxList<E> extends RxIterable<E> implements List<E> {
   }
 }
 
-/// Extension to allow creating reactive lists
+/// Extension to allow creating reactive [List]s
 extension RxListExtension<E> on List<E> {
-  /// Create a reactive list
+  /// Create a reactive [List]
   RxList<E> get rx => RxList<E>(this);
 }

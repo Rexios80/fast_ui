@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:fast_rx/src/rx/rx.dart';
 
-/// A reactive map
+/// A reactive [Map]
 class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
-  /// Create a reactive map
+  /// Create a reactive [Map]
   RxMap([Map<K, V>? value]) : super(value ?? {});
 
   @override
@@ -127,8 +127,8 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
   }
 }
 
-/// Extension to allow creating reactive maps
+/// Extension to allow creating reactive [Map]s
 extension RxMapExtension<K, V> on Map<K, V> {
-  /// Create a reactive map
+  /// Create a reactive [Map]
   RxMap<K, V> get rx => RxMap<K, V>(this);
 }

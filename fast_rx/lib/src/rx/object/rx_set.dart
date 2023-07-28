@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:fast_rx/src/rx/object/rx_iterable.dart';
 
-/// A reactive set
+/// A reactive [Set]
 class RxSet<E> extends RxIterable<E> implements Set<E> {
-  /// Create a reactive set
+  /// Create a reactive [Set]
   RxSet([Set<E>? value]) : super(value ?? {});
 
   @override
@@ -106,8 +106,8 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
   }
 }
 
-/// Extension to allow creating reactive sets
+/// Extension to allow creating reactive [Set]s
 extension RxSetExtension<E> on Set<E> {
-  /// Create a reactive set
+  /// Create a reactive [Set]
   RxSet<E> get rx => RxSet<E>(this);
 }
