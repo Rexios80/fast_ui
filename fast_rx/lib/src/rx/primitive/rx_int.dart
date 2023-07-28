@@ -1,4 +1,4 @@
-import 'package:fast_rx/fast_rx.dart';
+import 'package:fast_rx/src/rx/primitive/rx_num.dart';
 
 /// A reactive [int]
 class RxInt extends RxNum {
@@ -53,54 +53,60 @@ class RxInt extends RxNum {
   /// See [int.toSigned]
   int toSigned(int width) => value.toSigned(width);
 
-  /// See the [int] documentation
+  @override
   int operator -() => -value;
 
-  /// See [int.abs]
   @override
   int abs() => value.abs();
 
-  /// See [int.sign]
   @override
   int get sign => value.sign;
 
-  /// See [int.round]
   @override
   int round() => value.round();
 
-  /// See [int.floor]
   @override
   int floor() => value.floor();
 
-  /// See [int.ceil]
   @override
   int ceil() => value.ceil();
 
-  /// See [int.truncate]
   @override
   int truncate() => value.truncate();
 
-  /// See [int.roundToDouble]
   @override
   double roundToDouble() => value.roundToDouble();
 
-  /// See [int.floorToDouble]
   @override
   double floorToDouble() => value.floorToDouble();
 
-  /// See [int.ceilToDouble]
   @override
   double ceilToDouble() => value.ceilToDouble();
 
-  /// See [int.truncateToDouble]
   @override
   double truncateToDouble() => value.truncateToDouble();
 
-  @override
-  String toString();
-
   /// See [int.toRadixString]
   String toRadixString(int radix) => value.toRadixString(radix);
+
+  @override
+  num operator %(num other) => value % other;
+
+  @override
+  num operator *(num other) => value * other;
+
+  @override
+  num operator +(num other) => value + other;
+
+  @override
+  num operator -(num other) => value - other;
+
+  @override
+  num clamp(num lowerLimit, num upperLimit) =>
+      value.clamp(lowerLimit, upperLimit);
+
+  @override
+  num remainder(num other) => value.remainder(other);
 }
 
 /// Extension to allow creating reactive [int]s

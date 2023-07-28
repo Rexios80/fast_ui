@@ -15,7 +15,6 @@ Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.d
 | RxBool          | A reactive bool               |
 | RxDouble        | A reactive double             |
 | RxInt           | A reactive int                |
-| RxNum           | A reactive num                |
 | RxString        | A reactive string             |
 | RxValue<T>      | A reactive value              |
 | RxObject<T>     | A reactive object             |
@@ -26,6 +25,8 @@ Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.d
 | RxCompositeList | A composite version of RxList |
 | RxCompositeMap  | A composite version of RxMap  |
 | RxCompositeSet  | A composite version of RxSet  |
+
+Because `int` cannot be extended, the type-checker will not be able to properly infer the return types of all methods
 
 See [fast_rx_flutter](https://pub.dev/packages/fast_rx_flutter) for Flutter-specific components
 

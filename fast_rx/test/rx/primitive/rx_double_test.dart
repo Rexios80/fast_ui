@@ -23,6 +23,7 @@ void main() {
     RxTest(() => 0.0.rx, (rx) => rx.ceilToDouble()),
     RxTest(() => 0.0.rx, (rx) => rx.truncateToDouble()),
     RxTest(() => 0.0.rx, (rx) => rx.toString()),
+    RxTest(() => 0.0.rx, (rx) => rx.clamp(0, 5)),
   ];
 
   test('RxDouble registration and notifications', () {
@@ -50,5 +51,6 @@ void main() {
     expect(rx.ceilToDouble(), rx.value.ceilToDouble());
     expect(rx.truncateToDouble(), rx.value.truncateToDouble());
     expect(rx.toString(), rx.value.toString());
+    expect(rx.clamp(0, 5), rx.value.clamp(0, 5));
   });
 }

@@ -32,6 +32,12 @@ void main() {
     RxTest(() => 0.rx, (rx) => rx.truncateToDouble()),
     RxTest(() => 0.rx, (rx) => rx.toString()),
     RxTest(() => 0.rx, (rx) => rx.toRadixString(2)),
+    RxTest(() => 0.rx, (rx) => rx % 2),
+    RxTest(() => 0.rx, (rx) => rx * 2),
+    RxTest(() => 0.rx, (rx) => rx + 2),
+    RxTest(() => 0.rx, (rx) => rx - 2),
+    RxTest(() => 0.rx, (rx) => rx.clamp(0, 5)),
+    RxTest(() => 0.rx, (rx) => rx.remainder(5)),
   ];
 
   test('RxInt registration and notifications', () {
@@ -68,5 +74,11 @@ void main() {
     expect(rx.truncateToDouble(), rx.value.truncateToDouble());
     expect(rx.toString(), rx.value.toString());
     expect(rx.toRadixString(2), rx.value.toRadixString(2));
+    expect(rx % 2, rx.value % 2);
+    expect(rx * 2, rx.value * 2);
+    expect(rx + 2, rx.value + 2);
+    expect(rx - 2, rx.value - 2);
+    expect(rx.clamp(0, 5), rx.value.clamp(0, 5));
+    expect(rx.remainder(5), rx.value.remainder(5));
   });
 }

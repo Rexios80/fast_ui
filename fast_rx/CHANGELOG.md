@@ -1,5 +1,5 @@
 ## 0.4.2
-- `RxBool`, `RxDouble`, `RxInt`, and `RxString` are now full classes with copies of all methods of their primitives
+- `RxBool`, `RxDouble`, `RxInt`, and `RxString` are now full classes with all the methods of their primitives
 
 ## 0.4.1
 - Moves `RxObserver` back into `fast_rx`

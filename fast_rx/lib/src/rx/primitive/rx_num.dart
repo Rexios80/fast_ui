@@ -5,70 +5,105 @@ abstract class RxNum extends RxValue<num> implements Comparable<num> {
   /// Create a reactive [num]
   RxNum(super.value);
 
-  int compareTo(num other);
+  @override
+  int compareTo(num other) => value.compareTo(other);
 
+  /// See the [num] documentation
   num operator +(num other);
+
+  /// See the [num] documentation
   num operator -(num other);
 
+  /// See the [num] documentation
   num operator *(num other);
 
+  /// See the [num] documentation
   num operator %(num other);
 
-  double operator /(num other);
+  /// See the [num] documentation
+  double operator /(num other) => value / other;
 
-  int operator ~/(num other);
+  /// See the [num] documentation
+  int operator ~/(num other) => value ~/ other;
 
+  /// See the [num] documentation
   num operator -();
 
+  /// See [num.remainder]
   num remainder(num other);
 
-  bool operator <(num other);
+  /// See the [num] documentation
+  bool operator <(num other) => value < other;
 
-  bool operator <=(num other);
+  /// See the [num] documentation
+  bool operator <=(num other) => value <= other;
 
-  bool operator >(num other);
+  /// See the [num] documentation
+  bool operator >(num other) => value > other;
 
-  bool operator >=(num other);
+  /// See the [num] documentation
+  bool operator >=(num other) => value >= other;
 
-  bool get isNaN;
+  /// See [num.isNan]
+  bool get isNaN => value.isNaN;
 
-  bool get isNegative;
+  /// See [num.isNegative]
+  bool get isNegative => value.isNegative;
 
-  bool get isInfinite;
+  /// See [num.isInfinite]
+  bool get isInfinite => value.isInfinite;
 
-  bool get isFinite;
+  /// See [num.isFinite]
+  bool get isFinite => value.isFinite;
 
+  /// See [num.abs]
   num abs();
 
+  /// See [num.sign]
   num get sign;
 
-  int round();
+  /// See [num.round]
+  int round() => value.round();
 
-  int floor();
+  /// See [num.floor]
+  int floor() => value.floor();
 
-  int ceil();
+  /// See [num.ceil]
+  int ceil() => value.ceil();
 
-  int truncate();
+  /// See [num.truncate]
+  int truncate() => value.truncate();
 
-  double roundToDouble();
+  /// See [num.roundToDouble]
+  double roundToDouble() => value.roundToDouble();
 
-  double floorToDouble();
+  /// See [num.floorToDouble]
+  double floorToDouble() => value.floorToDouble();
 
-  double ceilToDouble();
+  /// See [num.ceilToDouble]
+  double ceilToDouble() => value.ceilToDouble();
 
-  double truncateToDouble();
+  /// See [num.truncateToDouble]
+  double truncateToDouble() => value.truncateToDouble();
 
+  /// See [num.clamp]
   num clamp(num lowerLimit, num upperLimit);
 
-  int toInt();
+  /// See [num.compareTo]
+  int toInt() => value.toInt();
 
-  double toDouble();
+  /// See [num.toDouble]
+  double toDouble() => value.toDouble();
 
-  String toStringAsFixed(int fractionDigits);
+  /// See [num.toStringAsFixed]
+  String toStringAsFixed(int fractionDigits) =>
+      value.toStringAsFixed(fractionDigits);
 
-  String toStringAsExponential([int? fractionDigits]);
+  /// See [num.toStringAsExponential]
+  String toStringAsExponential([int? fractionDigits]) =>
+      value.toStringAsExponential(fractionDigits);
 
-  String toStringAsPrecision(int precision);
-
-  String toString();
+  /// See [num.toStringAsPrecision]
+  String toStringAsPrecision(int precision) =>
+      value.toStringAsPrecision(precision);
 }

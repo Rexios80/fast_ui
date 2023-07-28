@@ -6,7 +6,11 @@ void example() {
   final count = 0.rx;
 
   // All primitive methods are available on their reactive versions
-  final asdf = count + 2;
+  // NOTE: The type checker cannot automatically infer the return type of all
+  // methods, so you may need to cast the return value to the correct
+  // primitive type
+  count + 2; // This return a num
+  count.value + 2; // This returns an int
 
   // ...
 
