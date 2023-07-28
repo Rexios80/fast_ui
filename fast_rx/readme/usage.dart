@@ -7,8 +7,7 @@ void example() {
 
   // All primitive methods are available on their reactive versions
   // NOTE: The type checker cannot automatically infer the return type of all
-  // methods, so you may need to cast the return value to the correct
-  // primitive type
+  // methods
   count + 2; // This return a num
   count.value + 2; // This returns an int
 
