@@ -13,9 +13,6 @@ class RxBool extends RxValue<bool> {
 
   /// See the [bool] documentation
   bool operator ^(bool other) => other ^ value;
-
-  @override
-  String toString() => value ? 'true' : 'false';
 }
 
 /// Extension to allow creating reactive [bool]s
