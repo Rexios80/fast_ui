@@ -6,13 +6,13 @@ class RxBool extends RxValue<bool> {
   RxBool(super.value);
 
   /// See the [bool] documentation
-  bool operator &(bool other) => other && value;
+  bool operator &(bool other) => other & value;
 
   /// See the [bool] documentation
-  bool operator |(bool other) => other || value;
+  bool operator |(bool other) => other | value;
 
   /// See the [bool] documentation
-  bool operator ^(bool other) => !other == value;
+  bool operator ^(bool other) => other ^ value;
 
   @override
   String toString() => value ? 'true' : 'false';
