@@ -65,18 +65,26 @@ void main() {
     expect(rx.padRight(1), rx.value.padRight(1));
     expect(rx.contains(''), rx.value.contains(''));
     expect(rx.replaceFirst('', ''), rx.value.replaceFirst('', ''));
-    expect(rx.replaceFirstMapped('', (_) => ''), rx.value.replaceFirstMapped('', (_) => ''));
+    expect(
+      rx.replaceFirstMapped('', (_) => ''),
+      rx.value.replaceFirstMapped('', (_) => ''),
+    );
     expect(rx.replaceAll('', ''), rx.value.replaceAll('', ''));
-    expect(rx.replaceAllMapped('', (_) => ''), rx.value.replaceAllMapped('', (_) => ''));
+    expect(
+      rx.replaceAllMapped('', (_) => ''),
+      rx.value.replaceAllMapped('', (_) => ''),
+    );
     expect(rx.replaceRange(0, 1, ''), rx.value.replaceRange(0, 1, ''));
     expect(rx.split(''), rx.value.split(''));
-    expect(rx.splitMapJoin('', onMatch: (_) => ''), rx.value.splitMapJoin('', onMatch: (_) => ''));
+    expect(
+      rx.splitMapJoin('', onMatch: (_) => ''),
+      rx.value.splitMapJoin('', onMatch: (_) => ''),
+    );
     expect(rx.codeUnits, rx.value.codeUnits);
     expect(rx.runes, rx.value.runes);
     expect(rx.toLowerCase(), rx.value.toLowerCase());
     expect(rx.toUpperCase(), rx.value.toUpperCase());
     expect(rx.allMatches(''), rx.value.allMatches(''));
     expect(rx.matchAsPrefix(''), rx.value.matchAsPrefix(''));
-
   });
 }

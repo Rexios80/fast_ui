@@ -62,30 +62,6 @@ class RxInt extends RxNum {
   @override
   int get sign => value.sign;
 
-  @override
-  int round() => value.round();
-
-  @override
-  int floor() => value.floor();
-
-  @override
-  int ceil() => value.ceil();
-
-  @override
-  int truncate() => value.truncate();
-
-  @override
-  double roundToDouble() => value.roundToDouble();
-
-  @override
-  double floorToDouble() => value.floorToDouble();
-
-  @override
-  double ceilToDouble() => value.ceilToDouble();
-
-  @override
-  double truncateToDouble() => value.truncateToDouble();
-
   /// See [int.toRadixString]
   String toRadixString(int radix) => value.toRadixString(radix);
 
@@ -100,10 +76,6 @@ class RxInt extends RxNum {
 
   @override
   num operator -(num other) => value - other;
-
-  @override
-  num clamp(num lowerLimit, num upperLimit) =>
-      value.clamp(lowerLimit, upperLimit);
 
   @override
   num remainder(num other) => value.remainder(other);

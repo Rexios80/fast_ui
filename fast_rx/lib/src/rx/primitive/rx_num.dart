@@ -87,7 +87,8 @@ abstract class RxNum extends RxValue<num> implements Comparable<num> {
   double truncateToDouble() => value.truncateToDouble();
 
   /// See [num.clamp]
-  num clamp(num lowerLimit, num upperLimit);
+  num clamp(num lowerLimit, num upperLimit) =>
+      value.clamp(lowerLimit, upperLimit);
 
   /// See [num.compareTo]
   int toInt() => value.toInt();

@@ -24,12 +24,6 @@ class RxDouble extends RxNum {
   double operator %(num other) => value % other;
 
   @override
-  double operator /(num other) => value / other;
-
-  @override
-  int operator ~/(num other) => value ~/ other;
-
-  @override
   double operator -() => -value;
 
   @override
@@ -37,34 +31,6 @@ class RxDouble extends RxNum {
 
   @override
   double get sign => value.sign;
-
-  @override
-  int round() => value.round();
-
-  @override
-  int floor() => value.floor();
-
-  @override
-  int ceil() => value.ceil();
-
-  @override
-  int truncate() => value.truncate();
-
-  @override
-  double roundToDouble() => value.roundToDouble();
-
-  @override
-  double floorToDouble() => value.floorToDouble();
-
-  @override
-  double ceilToDouble() => value.ceilToDouble();
-
-  @override
-  double truncateToDouble() => value.truncateToDouble();
-
-  @override
-  num clamp(num lowerLimit, num upperLimit) =>
-      value.clamp(lowerLimit, upperLimit);
 }
 
 /// Extension to allow creating reactive [double]s
