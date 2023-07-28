@@ -10,19 +10,22 @@ Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.d
 [![pub points](https://img.shields.io/pub/points/fast_rx)](https://pub.dev/packages/fast_rx/score)
 
 ## Features
-| Class           | Use-case                                    |
-| --------------- | ------------------------------------------- |
-| RxValue<T>      | A reactive value                            |
-| RxObject<T>     | A reactive object                           |
-| RxList<E>       | A reactive list                             |
-| RxMap<E>        | A reactive map                              |
-| RxSet<E>        | A reactive set                              |
-| RxComposite     | A composite of Rx objects                   |
-| RxCompositeList | A composite version of RxList               |
-| RxCompositeMap  | A composite version of RxMap                |
-| RxCompositeSet  | A composite version of RxSet                |
-
-There are convenience typedefs for `RxBool`, `RxInt`, `RxDouble`, and `RxString`
+| Class           | Use-case                      |
+| --------------- | ----------------------------- |
+| RxBool          | A reactive bool               |
+| RxDouble        | A reactive double             |
+| RxInt           | A reactive int                |
+| RxNum           | A reactive num                |
+| RxString        | A reactive string             |
+| RxValue<T>      | A reactive value              |
+| RxObject<T>     | A reactive object             |
+| RxList<E>       | A reactive list               |
+| RxMap<E>        | A reactive map                |
+| RxSet<E>        | A reactive set                |
+| RxComposite     | A composite of Rx objects     |
+| RxCompositeList | A composite version of RxList |
+| RxCompositeMap  | A composite version of RxMap  |
+| RxCompositeSet  | A composite version of RxSet  |
 
 See [fast_rx_flutter](https://pub.dev/packages/fast_rx_flutter) for Flutter-specific components
 

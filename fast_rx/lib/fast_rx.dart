@@ -15,8 +15,9 @@ export 'src/rx/object/rx_set.dart';
 
 // rx/primitive
 export 'src/rx/primitive/rx_bool.dart';
-export 'src/rx/primitive/rx_int.dart';
 export 'src/rx/primitive/rx_double.dart';
+export 'src/rx/primitive/rx_int.dart';
+export 'src/rx/primitive/rx_num.dart';
 export 'src/rx/primitive/rx_string.dart';
 
 // rx

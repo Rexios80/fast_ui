@@ -5,6 +5,9 @@ void example() {
 
   final count = 0.rx;
 
+  // All primitive methods are available on their reactive versions
+  final asdf = count + 2;
+
   // ...
 
   // ignore: avoid_print

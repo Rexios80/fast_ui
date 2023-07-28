@@ -1,9 +1,12 @@
 import 'package:fast_rx/fast_rx.dart';
 
 /// A reactive [int]
-class RxInt extends RxValue<int> {
+class RxInt extends RxNum {
   /// Create a reactive [int]
   RxInt(super.value);
+
+  @override
+  int get value => super.value as int;
 
   /// See the [int] documentation
   int operator &(int other) => other & value;
@@ -54,33 +57,43 @@ class RxInt extends RxValue<int> {
   int operator -() => -value;
 
   /// See [int.abs]
+  @override
   int abs() => value.abs();
 
   /// See [int.sign]
+  @override
   int get sign => value.sign;
 
   /// See [int.round]
+  @override
   int round() => value.round();
 
   /// See [int.floor]
+  @override
   int floor() => value.floor();
 
   /// See [int.ceil]
+  @override
   int ceil() => value.ceil();
 
   /// See [int.truncate]
+  @override
   int truncate() => value.truncate();
 
   /// See [int.roundToDouble]
+  @override
   double roundToDouble() => value.roundToDouble();
 
   /// See [int.floorToDouble]
+  @override
   double floorToDouble() => value.floorToDouble();
 
   /// See [int.ceilToDouble]
+  @override
   double ceilToDouble() => value.ceilToDouble();
 
   /// See [int.truncateToDouble]
+  @override
   double truncateToDouble() => value.truncateToDouble();
 
   @override
