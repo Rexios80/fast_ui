@@ -1,14 +1,13 @@
 name: fast_rx_test
 description: Testing utilities for fast_rx. Check for valid rx registration and notifications.
-version: 0.4.0
+version: 0.4.1
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx_test
 
 environment:
   sdk: ">=2.17.0 <4.0.0"
 
 dependencies:
-  fast_rx:
-    path: ../fast_rx
+  fast_rx: ^0.5.0
   test: ^1.19.0
 
 dev_dependencies:
