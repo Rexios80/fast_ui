@@ -34,15 +34,36 @@ void main() {
   test('RxDuration/Duration equivalency', () {
     final rx = Duration.zero.rx;
     expect(rx * 1, rx.value * 1);
-    expect(rx + const Duration(seconds: 1), rx.value + const Duration(seconds: 1));
+    expect(
+      rx + const Duration(seconds: 1),
+      rx.value + const Duration(seconds: 1),
+    );
     expect(-rx, -rx.value);
-    expect(rx - const Duration(seconds: 1), rx.value - const Duration(seconds: 1));
-    expect(rx < const Duration(seconds: 1), rx.value < const Duration(seconds: 1));
-    expect(rx <= const Duration(seconds: 1), rx.value <= const Duration(seconds: 1));
-    expect(rx > const Duration(seconds: 1), rx.value > const Duration(seconds: 1));
-    expect(rx >= const Duration(seconds: 1), rx.value >= const Duration(seconds: 1));
+    expect(
+      rx - const Duration(seconds: 1),
+      rx.value - const Duration(seconds: 1),
+    );
+    expect(
+      rx < const Duration(seconds: 1),
+      rx.value < const Duration(seconds: 1),
+    );
+    expect(
+      rx <= const Duration(seconds: 1),
+      rx.value <= const Duration(seconds: 1),
+    );
+    expect(
+      rx > const Duration(seconds: 1),
+      rx.value > const Duration(seconds: 1),
+    );
+    expect(
+      rx >= const Duration(seconds: 1),
+      rx.value >= const Duration(seconds: 1),
+    );
     expect(rx.abs(), rx.value.abs());
-    expect(rx.compareTo(const Duration(seconds: 1)), rx.value.compareTo(const Duration(seconds: 1)));
+    expect(
+      rx.compareTo(const Duration(seconds: 1)),
+      rx.value.compareTo(const Duration(seconds: 1)),
+    );
     expect(rx.inDays, rx.value.inDays);
     expect(rx.inHours, rx.value.inHours);
     expect(rx.inMicroseconds, rx.value.inMicroseconds);
