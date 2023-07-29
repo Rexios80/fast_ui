@@ -13,7 +13,9 @@ Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.d
 | Class           | Use-case                      |
 | --------------- | ----------------------------- |
 | RxBool          | A reactive bool               |
+| RxDateTime      | A reactive DateTime           |
 | RxDouble        | A reactive double             |
+| RxDuration      | A reactive Duration           |
 | RxInt           | A reactive int                |
 | RxString        | A reactive string             |
 | RxValue<T>      | A reactive value              |
