@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:fast_rx/src/rx/object/rx_iterable.dart';
+import 'package:meta/meta.dart';
 
 /// A reactive [List]
 class RxList<E> extends RxIterable<E> implements List<E> {
@@ -9,6 +10,7 @@ class RxList<E> extends RxIterable<E> implements List<E> {
   RxList([List<E>? value]) : super(value ?? []);
 
   @override
+  @protected
   List<E> get value {
     return super.value as List<E>;
   }

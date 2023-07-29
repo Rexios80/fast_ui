@@ -1,7 +1,7 @@
 import 'package:fast_rx/fast_rx.dart';
 
 /// A reactive [Duration]
-class RxDuration extends RxValue<Duration> implements Duration {
+class RxDuration extends RxPrimitive<Duration> implements Duration {
   /// Create a reactive [Duration]
   RxDuration(super.value);
 

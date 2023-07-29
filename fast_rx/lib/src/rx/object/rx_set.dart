@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:fast_rx/src/rx/object/rx_iterable.dart';
+import 'package:meta/meta.dart';
 
 /// A reactive [Set]
 class RxSet<E> extends RxIterable<E> implements Set<E> {
@@ -7,6 +8,7 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
   RxSet([Set<E>? value]) : super(value ?? {});
 
   @override
+  @protected
   Set<E> get value {
     return super.value as Set<E>;
   }

@@ -5,6 +5,7 @@ class RxDouble extends RxNum {
   /// Create a reactive [double]
   RxDouble(super.value);
 
+  // Since [double] cannot be extended, this must be exposed
   @override
   double get value => super.value as double;
 

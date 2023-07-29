@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:test/test.dart';

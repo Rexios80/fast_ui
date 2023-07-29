@@ -5,6 +5,7 @@ class RxInt extends RxNum {
   /// Create a reactive [int]
   RxInt(super.value);
 
+  // Since [int] cannot be extended, this must be exposed
   @override
   int get value => super.value as int;
 

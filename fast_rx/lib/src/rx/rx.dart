@@ -117,6 +117,18 @@ extension RxValueExtension<T> on T {
   RxValue<T> get rx => RxValue<T>(this);
 }
 
+/// A reactive primitive
+abstract class RxPrimitive<T> extends RxValue<T> {
+  /// Create a reactive primitive
+  RxPrimitive(super.value);
+
+  /// Reactive primitives do not expose their [value] getter since all
+  /// methods are available on the [RxPrimitive]
+  @override
+  @protected
+  T get value => super.value;
+}
+
 /// An object that will properly emit updates when calling notify
 ///
 /// Useful for creating reactive versions of objects you don't control. If an

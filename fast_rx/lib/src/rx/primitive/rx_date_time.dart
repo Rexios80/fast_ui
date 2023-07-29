@@ -1,7 +1,7 @@
 import 'package:fast_rx/fast_rx.dart';
 
 /// A reactive [DateTime]
-class RxDateTime extends RxValue<DateTime> implements DateTime {
+class RxDateTime extends RxPrimitive<DateTime> implements DateTime {
   /// Create a reactive [DateTime]
   RxDateTime(super.value);
 
