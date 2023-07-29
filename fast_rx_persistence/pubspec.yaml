@@ -1,6 +1,6 @@
 name: fast_rx_persistence
 description: An interface for implementing fast_rx key/value store persistence
-version: 0.2.0+1
+version: 0.2.1
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx_persistence
 
 environment:
@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  fast_rx: ^0.4.0
+  fast_rx: ^0.5.0
 
 dev_dependencies:
   test: ^1.19.0

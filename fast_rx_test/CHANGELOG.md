@@ -1,3 +1,6 @@
+## 0.4.1
+- Upgrades `fast_rx`
+
 ## 0.4.0
 - Uses `runRxZoned` for registration testing as well
 - Removes dependency on `RxNotifier`
