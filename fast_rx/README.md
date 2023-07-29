@@ -28,7 +28,7 @@ Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.d
 | RxCompositeMap  | A composite version of RxMap  |
 | RxCompositeSet  | A composite version of RxSet  |
 
-NOTE: Because `int` cannot be extended, the type-checker will not be able to properly infer the return types of all methods
+NOTE: Because `int` cannot be extended, the type-checker will not be able to properly infer the return type of all methods on `RxInt`
 
 See [fast_rx_flutter](https://pub.dev/packages/fast_rx_flutter) for Flutter-specific components
 
