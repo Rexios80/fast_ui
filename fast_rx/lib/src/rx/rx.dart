@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:fast_rx/fast_rx.dart';
+import 'package:meta/meta.dart';
 
 /// Base class for reactives
 abstract class Rx<T> {
@@ -10,10 +11,9 @@ abstract class Rx<T> {
 
   /// Register with the current zone's [RxRegistrar] if it exists
   ///
-  /// Should not be called directly
-  void register() {
-    RxZone.current.registrar?.call(stream);
-  }
+  /// Ideally this should never be called directly, but there are cases
+  /// where automatic registration will not happen
+  void register() => RxZone.current.registrar?.call(stream);
 
   /// Run [action] with registration and notifications disabled. Will notify
   /// after [action] is completed if [notify] is true and the child
@@ -43,8 +43,7 @@ abstract class Rx<T> {
   void notify();
 
   /// Notify listeners with the given value
-  ///
-  /// Should not be called directly
+  @protected
   void notifyWithValue(T value) {
     final notifier = RxZone.current.notifier;
     if (notifier != null) {
@@ -75,8 +74,7 @@ class RxValue<T> extends Rx<T> {
   ///
   /// Used to prevent unnecessary calls to [register] in internal methods such
   /// as [copyValue], [shouldNotify], or methods that do not return a value
-  ///
-  /// Should not be called directly
+  @protected
   T get unregisteredValue => _value;
 
   /// Set the current value
@@ -90,9 +88,7 @@ class RxValue<T> extends Rx<T> {
   }
 
   @override
-  void notify() {
-    notifyWithValue(_value);
-  }
+  void notify() => notifyWithValue(_value);
 
   // Override [Object] methods so that they call [register]
 
@@ -105,20 +101,14 @@ class RxValue<T> extends Rx<T> {
   }
 
   @override
-  int get hashCode {
-    return value.hashCode;
-  }
+  int get hashCode => value.hashCode;
 
   @override
-  String toString() {
-    return value.toString();
-  }
+  String toString() => value.toString();
 
   @override
-  Type get runtimeType {
-    // This can't change, so we don't need to register here
-    return unregisteredValue.runtimeType;
-  }
+  // This can't change, so we don't need to register here
+  Type get runtimeType => unregisteredValue.runtimeType;
 }
 
 /// Extension to allow creating reactive values
@@ -140,19 +130,14 @@ abstract class RxObject<T> extends RxValue<T> {
   ///
   /// Should only be used in methods that return a value.
   /// Otherwise, use [unregisteredValue].
-  ///
-  /// Should not be called directly
   @override
-  T get value {
-    return super.value;
-  }
+  @protected
+  T get value => super.value;
 
   // coverage:ignore-start
   /// Unused for RxObject
   @override
-  set value(T value) {
-    throw RxObjectValueIsReadOnly();
-  }
+  set value(T value) => throw RxObjectValueIsReadOnly();
   // coverage:ignore-end
 
   /// Internal setter for [_value]. Should only be used in Rx extensions and
@@ -160,11 +145,8 @@ abstract class RxObject<T> extends RxValue<T> {
   ///
   /// Example: Used by fast_rx_persistence to set [_value] from a key/value
   /// store after initialization
-  ///
-  /// Should not be called directly
-  void internalSetValue(T value) {
-    _value = value;
-  }
+  @protected
+  void internalSetValue(T value) => _value = value;
 
   @override
   bool run(RxAction action, {bool notify = true}) {
@@ -178,15 +160,12 @@ abstract class RxObject<T> extends RxValue<T> {
   }
 
   @override
-  void notify() {
-    notifyWithValue(copyValue());
-  }
+  void notify() => notifyWithValue(copyValue());
 
   /// Notify if [transform] changed the value such that [shouldNotify] returns true
   ///
   /// If the value is guaranteed to change, use [notify] instead
-  ///
-  /// Should not be called directly
+  @protected
   U notifyIfChanged<U>(U Function() transform) {
     final old = copyValue();
     final result = transform();
@@ -197,12 +176,10 @@ abstract class RxObject<T> extends RxValue<T> {
   }
 
   /// Copy the value for update emission
-  ///
-  /// Should not be called directly
+  @protected
   T copyValue();
 
   /// Check if the value has changed
-  ///
-  /// Should not be called directly
+  @protected
   bool shouldNotify(T oldValue);
 }

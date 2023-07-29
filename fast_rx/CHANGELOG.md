@@ -1,4 +1,5 @@
-## 0.4.2
+## 0.5.0
+- BREAKING: Reintroduces `@protected` annotations through the `meta` package
 - `RxBool`, `RxDouble`, `RxInt`, and `RxString` are now full classes with all the methods of their primitives
 - Adds `RxDateTime` and `RxDuration`
 

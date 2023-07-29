@@ -1,6 +1,6 @@
 name: fast_rx
 description: An easy to understand implementation of reactive values and objects
-version: 0.4.2
+version: 0.5.0
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx
 
 environment:
@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   collection: ^1.16.0
+  meta: ^1.9.1
 
 dev_dependencies:
   test: ^1.22.0
