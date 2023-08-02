@@ -10,7 +10,6 @@ Convenience extensions to make common Flutter tasks less annoying
 ## Features
 | Extension                 | Use-case                                 |
 | ------------------------- | ---------------------------------------- |
-| FastNavigation            | Navigator.of(context)                    |
 | FastLocale                | Localizations.localeOf(context)          |
 | FastMaterialColor         | FastMaterialColor.fromColor(color)       |
 | FastMaterialLocalizations | MaterialLocalizations.of(context)        |
