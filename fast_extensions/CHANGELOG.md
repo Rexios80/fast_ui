@@ -1,3 +1,6 @@
+## 0.1.4
+- Adds `FastNavigation`
+
 ## 0.1.3
 - Adds `FastMaterialStateProperty`
 
