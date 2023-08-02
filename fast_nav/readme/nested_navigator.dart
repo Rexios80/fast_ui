@@ -11,5 +11,5 @@ void example() {
 
   // ...
 
-  FastNav.push(const Text('New page'), navigatorName: 'nestedNavigator');
+  FastNav.push(const Text('New page'), navigator: 'nestedNavigator');
 }

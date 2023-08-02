@@ -28,13 +28,13 @@ void main() {
       FastNav.pop();
       throw 'Did not throw';
     } catch (e) {
-      expect((e as NavigatorNotRegistered).navigatorName, isNull);
+      expect((e as NavigatorNotRegistered).navigator, isNull);
     }
     try {
-      FastNav.pop(navigatorName: 'test');
+      FastNav.pop(navigator: 'test');
       throw 'Did not throw';
     } catch (e) {
-      expect((e as NavigatorNotRegistered).navigatorName, 'test');
+      expect((e as NavigatorNotRegistered).navigator, 'test');
     }
 
     FastNav.reset();
@@ -51,7 +51,7 @@ void main() {
     unawaited(
       FastNav.push(
         const SizedBox.shrink(),
-        navigatorName: 'nestedNavigator',
+        navigator: 'nestedNavigator',
       ),
     );
 
@@ -159,20 +159,20 @@ void main() {
   testWidgets('NestedNavigator', (tester) async {
     await tester.pumpWidget(buildNestedNavigatorWidget());
     expect(find.text('home'), findsOneWidget);
-    expect(FastNav.canPop(navigatorName: 'nestedNavigator'), false);
+    expect(FastNav.canPop(navigator: 'nestedNavigator'), false);
 
     Future<void> push({String name = 'test_page'}) async {
-      unawaited(FastNav.push(Text(name), navigatorName: 'nestedNavigator'));
+      unawaited(FastNav.push(Text(name), navigator: 'nestedNavigator'));
       await tester.pumpAndSettle();
     }
 
     await push();
     expect(find.text('test_page'), findsOneWidget);
-    expect(FastNav.canPop(navigatorName: 'nestedNavigator'), true);
+    expect(FastNav.canPop(navigator: 'nestedNavigator'), true);
 
-    FastNav.pop(navigatorName: 'nestedNavigator');
+    FastNav.pop(navigator: 'nestedNavigator');
     await tester.pumpAndSettle();
     expect(find.text('home'), findsOneWidget);
-    expect(FastNav.canPop(navigatorName: 'nestedNavigator'), false);
+    expect(FastNav.canPop(navigator: 'nestedNavigator'), false);
   });
 }

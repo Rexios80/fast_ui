@@ -5,17 +5,17 @@ abstract class FastNavException implements Exception {}
 /// has not been registered with FastNav
 class NavigatorNotRegistered implements FastNavException {
   /// The name of the navigator that was not registered
-  final String? navigatorName;
+  final String? navigator;
 
-  /// Creates a [NavigatorNotRegistered] with the given [navigatorName]
-  NavigatorNotRegistered({this.navigatorName});
+  /// Creates a [NavigatorNotRegistered] with the given [navigator]
+  NavigatorNotRegistered({this.navigator});
 
   @override
   String toString() {
-    if (navigatorName == null) {
+    if (navigator == null) {
       return 'Root navigator not registered. Call FastNav.init() first.';
     } else {
-      return 'Navigator with name $navigatorName not registered.'
+      return 'Navigator with name $navigator not registered.'
           ' Call FastNav.registerNavigator() first.';
     }
   }
