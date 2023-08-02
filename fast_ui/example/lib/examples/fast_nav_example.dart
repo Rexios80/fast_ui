@@ -90,7 +90,7 @@ class NestedPage1 extends StatelessWidget {
                 child: const Text('Push nested page 2'),
                 onPressed: () => FastNav.push(
                   const NestedPage2(),
-                  navigatorName: 'nestedNavigator',
+                  navigator: 'nestedNavigator',
                 ),
               ),
               const SizedBox(height: 16),
@@ -116,7 +116,7 @@ class NestedPage2 extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           child: const Text('Pop nested page 2'),
-          onPressed: () => FastNav.pop(navigatorName: 'nestedNavigator'),
+          onPressed: () => FastNav.pop(navigator: 'nestedNavigator'),
         ),
       ),
     );

@@ -86,7 +86,7 @@ packages:
       path: "../../fast_nav"
       relative: true
     source: path
-    version: "0.3.0"
+    version: "0.4.0"
   fast_overlays:
     dependency: "direct overridden"
     description:
