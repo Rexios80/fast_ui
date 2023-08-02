@@ -1,6 +1,7 @@
 ## 0.4.0
 - Renames `navigatorName` parameter to `navigator`
 - Adds context extensions
+
 ## 0.3.0
 - Removes duplicate prevention and simplifies code
 - `NestedNavigator.observers` is now of type `List` instead of `Iterable`
