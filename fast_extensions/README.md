@@ -26,6 +26,10 @@ import 'package:fast_extensions/fast_extensions.dart';
 import 'package:flutter/material.dart';
 
 void example(BuildContext context) {
+  // FastNavigation
+  context.push(const Text('page'));
+  context.pop(false);
+
   // FastLocale
   context.countryCode;
   context.languageCode;
