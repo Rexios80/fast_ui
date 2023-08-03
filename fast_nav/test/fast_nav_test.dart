@@ -1,18 +1,26 @@
 import 'dart:async';
 
 import 'package:fast_nav/fast_nav.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Widget buildBaseWidget() => MaterialApp(
+final routes = {
+  '/': (context) => const Text('home'),
+  'test_page': (context) => const Text('test_page'),
+  'test_page_2': (context) => const Text('test_page_2'),
+  'test_page_3': (context) => const Text('test_page_3'),
+  'test_page_4': (context) => const Text('test_page_4'),
+};
+
+Widget buildMaterialApp() => MaterialApp(
       navigatorKey: FastNav.init(),
-      routes: {
-        '/': (context) => const Text('home'),
-        'test_page': (context) => const Text('test_page'),
-        'test_page_2': (context) => const Text('test_page_2'),
-        'test_page_3': (context) => const Text('test_page_3'),
-        'test_page_4': (context) => const Text('test_page_4'),
-      },
+      routes: routes,
+    );
+
+Widget buildCupertinoApp() => CupertinoApp(
+      navigatorKey: FastNav.init(),
+      routes: routes,
     );
 
 Widget buildNestedNavigatorWidget() => MaterialApp(
@@ -28,13 +36,13 @@ void main() {
       FastNav.pop();
       throw 'Did not throw';
     } catch (e) {
-      expect((e as NavigatorNotRegistered).navigatorName, isNull);
+      expect((e as NavigatorNotRegistered).navigator, isNull);
     }
     try {
-      FastNav.pop(navigatorName: 'test');
+      FastNav.pop(navigator: 'test');
       throw 'Did not throw';
     } catch (e) {
-      expect((e as NavigatorNotRegistered).navigatorName, 'test');
+      expect((e as NavigatorNotRegistered).navigator, 'test');
     }
 
     FastNav.reset();
@@ -51,7 +59,7 @@ void main() {
     unawaited(
       FastNav.push(
         const SizedBox.shrink(),
-        navigatorName: 'nestedNavigator',
+        navigator: 'nestedNavigator',
       ),
     );
 
@@ -62,7 +70,7 @@ void main() {
   });
 
   testWidgets('Anonymous routes', (tester) async {
-    await tester.pumpWidget(buildBaseWidget());
+    await tester.pumpWidget(buildMaterialApp());
     expect(FastNav.canPop(), false);
 
     Future<void> push([String name = 'test_page']) async {
@@ -111,7 +119,7 @@ void main() {
   });
 
   testWidgets('Named routes', (tester) async {
-    await tester.pumpWidget(buildBaseWidget());
+    await tester.pumpWidget(buildMaterialApp());
     expect(FastNav.canPop(), false);
 
     Future<void> pushNamed([String name = 'test_page']) async {
@@ -159,20 +167,30 @@ void main() {
   testWidgets('NestedNavigator', (tester) async {
     await tester.pumpWidget(buildNestedNavigatorWidget());
     expect(find.text('home'), findsOneWidget);
-    expect(FastNav.canPop(navigatorName: 'nestedNavigator'), false);
+    expect(FastNav.canPop(navigator: 'nestedNavigator'), false);
 
     Future<void> push({String name = 'test_page'}) async {
-      unawaited(FastNav.push(Text(name), navigatorName: 'nestedNavigator'));
+      unawaited(FastNav.push(Text(name), navigator: 'nestedNavigator'));
       await tester.pumpAndSettle();
     }
 
     await push();
     expect(find.text('test_page'), findsOneWidget);
-    expect(FastNav.canPop(navigatorName: 'nestedNavigator'), true);
+    expect(FastNav.canPop(navigator: 'nestedNavigator'), true);
 
-    FastNav.pop(navigatorName: 'nestedNavigator');
+    FastNav.pop(navigator: 'nestedNavigator');
     await tester.pumpAndSettle();
     expect(find.text('home'), findsOneWidget);
-    expect(FastNav.canPop(navigatorName: 'nestedNavigator'), false);
+    expect(FastNav.canPop(navigator: 'nestedNavigator'), false);
+  });
+
+  testWidgets('CupertinoRoute', (tester) async {
+    await tester.pumpWidget(buildCupertinoApp());
+
+    unawaited(
+      FastNav.push(const Text('test_page'), routeType: RouteType.cupertino),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('test_page'), findsOneWidget);
   });
 }

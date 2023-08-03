@@ -7,7 +7,7 @@ class NestedNavigator extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
 
   /// The name of the nested navigator
-  final String name;
+  final String? name;
 
   /// [NavigatorObserver]s to be added to the nested navigator
   final List<NavigatorObserver> observers;
@@ -24,7 +24,7 @@ class NestedNavigator extends StatelessWidget {
   NestedNavigator({
     super.key,
     GlobalKey<NavigatorState>? navigatorKey,
-    required this.name,
+    this.name,
     this.observers = const [],
     this.onGenerateRoute,
     this.home,
@@ -33,7 +33,9 @@ class NestedNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      key: FastNav.registerNavigator(name, key: navigatorKey),
+      key: name != null
+          ? FastNav.registerNavigator(name!, key: navigatorKey)
+          : null,
       observers: observers,
       onGenerateRoute: (settings) {
         final route = onGenerateRoute?.call(settings);

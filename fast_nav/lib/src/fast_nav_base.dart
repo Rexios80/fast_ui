@@ -1,3 +1,4 @@
+import 'package:fast_nav/src/context_extension.dart';
 import 'package:fast_nav/src/exceptions.dart';
 import 'package:flutter/material.dart';
 
@@ -24,14 +25,14 @@ class FastNav {
   }) =>
       _navigatorKeys[name] ??= key ?? GlobalKey<NavigatorState>();
 
-  static NavigatorState _getNavigatorState(String navigatorName) {
-    if (!_navigatorKeys.containsKey(navigatorName)) {
+  static BuildContext _getContext(String? navigator) {
+    navigator ??= _rootNavigatorName;
+    if (!_navigatorKeys.containsKey(navigator)) {
       throw NavigatorNotRegistered(
-        navigatorName:
-            navigatorName == _rootNavigatorName ? null : navigatorName,
+        navigator: navigator == _rootNavigatorName ? null : navigator,
       );
     }
-    return _navigatorKeys[navigatorName]!.currentState!;
+    return _navigatorKeys[navigator]!.currentContext!;
   }
 
   /// Reset [FastNav] for testing
@@ -41,51 +42,51 @@ class FastNav {
   //* Common navigation methods
 
   /// Pop the current page
-  static void pop<T extends Object?>({
-    String navigatorName = _rootNavigatorName,
-    T? result,
-  }) =>
-      _getNavigatorState(navigatorName).pop<T>(result);
+  static void pop<T extends Object?>({String? navigator, T? result}) =>
+      _getContext(navigator).pop<T>(result);
 
   /// Whether the navigator can be popped
-  static bool canPop({String navigatorName = _rootNavigatorName}) =>
-      _getNavigatorState(navigatorName).canPop();
+  static bool canPop({String? navigator}) => _getContext(navigator).canPop();
 
   //* Anonymous navigation
 
   /// Navigate to an anonymous page route
   static Future<T?> push<T extends Object?>(
     Widget page, {
-    String navigatorName = _rootNavigatorName,
-    RouteSettings settings = const RouteSettings(),
-    bool maintainState = true,
-    bool fullscreenDialog = false,
+    String? navigator,
+    RouteType? routeType,
+    RouteSettings? settings,
+    bool? maintainState,
+    bool? fullscreenDialog,
+    bool? allowSnapshotting,
   }) =>
-      _getNavigatorState(navigatorName).push<T>(
-        MaterialPageRoute<T>(
-          builder: (_) => page,
-          settings: settings,
-          maintainState: maintainState,
-          fullscreenDialog: fullscreenDialog,
-        ),
+      _getContext(navigator).push<T>(
+        page,
+        routeType: routeType,
+        settings: settings,
+        maintainState: maintainState,
+        fullscreenDialog: fullscreenDialog,
+        allowSnapshotting: allowSnapshotting,
       );
 
   /// Replace the current page with a new anonymous page route
   static Future<T?> pushReplacement<T extends Object?, TO extends Object?>(
     Widget page, {
-    String navigatorName = _rootNavigatorName,
-    RouteSettings settings = const RouteSettings(),
-    bool maintainState = true,
-    bool fullscreenDialog = false,
+    String? navigator,
+    RouteType? routeType,
+    RouteSettings? settings,
+    bool? maintainState,
+    bool? fullscreenDialog,
+    bool? allowSnapshotting,
     TO? result,
   }) =>
-      _getNavigatorState(navigatorName).pushReplacement<T, TO>(
-        MaterialPageRoute<T>(
-          builder: (_) => page,
-          settings: settings,
-          maintainState: maintainState,
-          fullscreenDialog: fullscreenDialog,
-        ),
+      _getContext(navigator).pushReplacement<T, TO>(
+        page,
+        routeType: routeType,
+        settings: settings,
+        maintainState: maintainState,
+        fullscreenDialog: fullscreenDialog,
+        allowSnapshotting: allowSnapshotting,
         result: result,
       );
 
@@ -93,37 +94,40 @@ class FastNav {
   static Future<T?> pushAndRemoveUntil<T extends Object?>(
     Widget page,
     bool Function(Route<dynamic> route) predicate, {
-    String navigatorName = _rootNavigatorName,
-    RouteSettings settings = const RouteSettings(),
-    bool maintainState = true,
-    bool fullscreenDialog = false,
+    String? navigator,
+    RouteType? routeType,
+    RouteSettings? settings,
+    bool? maintainState,
+    bool? fullscreenDialog,
+    bool? allowSnapshotting,
   }) =>
-      _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
-        MaterialPageRoute<T>(
-          builder: (_) => page,
-          settings: settings,
-          maintainState: maintainState,
-          fullscreenDialog: fullscreenDialog,
-        ),
+      _getContext(navigator).pushAndRemoveUntil<T>(
+        page,
+        routeType: routeType,
+        settings: settings,
+        maintainState: maintainState,
+        fullscreenDialog: fullscreenDialog,
+        allowSnapshotting: allowSnapshotting,
         predicate,
       );
 
   /// Remove all pages and push a new anonymous page route
   static Future<T?> pushAndRemoveAll<T extends Object?>(
     Widget page, {
-    String navigatorName = _rootNavigatorName,
-    RouteSettings settings = const RouteSettings(),
-    bool maintainState = true,
-    bool fullscreenDialog = false,
+    String? navigator,
+    RouteType? routeType,
+    RouteSettings? settings,
+    bool? maintainState,
+    bool? fullscreenDialog,
+    bool? allowSnapshotting,
   }) =>
-      _getNavigatorState(navigatorName).pushAndRemoveUntil<T>(
-        MaterialPageRoute<T>(
-          builder: (_) => page,
-          settings: settings,
-          maintainState: maintainState,
-          fullscreenDialog: fullscreenDialog,
-        ),
-        (_) => false,
+      _getContext(navigator).pushAndRemoveAll<T>(
+        page,
+        routeType: routeType,
+        settings: settings,
+        maintainState: maintainState,
+        fullscreenDialog: fullscreenDialog,
+        allowSnapshotting: allowSnapshotting,
       );
 
   //* Named navigation
@@ -131,10 +135,10 @@ class FastNav {
   /// Navigate to a named page route
   static Future<T?> pushNamed<T extends Object?>(
     String routeName, {
-    String navigatorName = _rootNavigatorName,
+    String navigator = _rootNavigatorName,
     Object? arguments,
   }) =>
-      _getNavigatorState(navigatorName).pushNamed<T>(
+      _getContext(navigator).pushNamed<T>(
         routeName,
         arguments: arguments,
       );
@@ -142,11 +146,11 @@ class FastNav {
   /// Replace the current page with a named page route
   static Future<T?> pushReplacementNamed<T extends Object?, TO extends Object?>(
     String routeName, {
-    String navigatorName = _rootNavigatorName,
+    String navigator = _rootNavigatorName,
     TO? result,
     Object? arguments,
   }) =>
-      _getNavigatorState(navigatorName).pushReplacementNamed<T, TO>(
+      _getContext(navigator).pushReplacementNamed<T, TO>(
         routeName,
         result: result,
         arguments: arguments,
@@ -156,10 +160,10 @@ class FastNav {
   static Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
     String newRouteName,
     bool Function(Route<dynamic> route) predicate, {
-    String navigatorName = _rootNavigatorName,
+    String navigator = _rootNavigatorName,
     Object? arguments,
   }) =>
-      _getNavigatorState(navigatorName).pushNamedAndRemoveUntil<T>(
+      _getContext(navigator).pushNamedAndRemoveUntil<T>(
         newRouteName,
         predicate,
         arguments: arguments,
@@ -168,12 +172,11 @@ class FastNav {
   /// Remove all pages and push a named page route
   static Future<T?> pushNamedAndRemoveAll<T extends Object?>(
     String newRouteName, {
-    String navigatorName = _rootNavigatorName,
+    String navigator = _rootNavigatorName,
     Object? arguments,
   }) =>
-      _getNavigatorState(navigatorName).pushNamedAndRemoveUntil<T>(
+      _getContext(navigator).pushNamedAndRemoveAll<T>(
         newRouteName,
-        (_) => false,
         arguments: arguments,
       );
 }
