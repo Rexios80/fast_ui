@@ -1,6 +1,7 @@
 ## 0.4.0
 - Renames `navigatorName` parameter to `navigator`
 - Adds context extensions
+- `NestedNavigator` `name` field is now optional
 
 ## 0.3.0
 - Removes duplicate prevention and simplifies code
