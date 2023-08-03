@@ -121,14 +121,13 @@ class FastNav {
     bool? fullscreenDialog,
     bool? allowSnapshotting,
   }) =>
-      _getContext(navigator).pushAndRemoveUntil<T>(
+      _getContext(navigator).pushAndRemoveAll<T>(
         page,
         routeType: routeType,
         settings: settings,
         maintainState: maintainState,
         fullscreenDialog: fullscreenDialog,
         allowSnapshotting: allowSnapshotting,
-        (_) => false,
       );
 
   //* Named navigation
@@ -176,9 +175,8 @@ class FastNav {
     String navigator = _rootNavigatorName,
     Object? arguments,
   }) =>
-      _getContext(navigator).pushNamedAndRemoveUntil<T>(
+      _getContext(navigator).pushNamedAndRemoveAll<T>(
         newRouteName,
-        (_) => false,
         arguments: arguments,
       );
 }
