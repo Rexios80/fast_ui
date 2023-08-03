@@ -1,6 +1,7 @@
 ## 0.4.0
-- Renames `navigatorName` parameter to `navigator`
 - Adds context extensions
+- Adds support for Cupertino routes
+- Renames `navigatorName` parameter to `navigator`
 - `NestedNavigator` `name` field is now optional
 
 ## 0.3.0
