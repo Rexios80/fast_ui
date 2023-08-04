@@ -1,3 +1,6 @@
+## 0.4.1
+- Fixes method signature of `context.pop`
+
 ## 0.4.0
 - Adds context extensions
 - Adds support for Cupertino routes

@@ -1,6 +1,6 @@
 name: fast_nav
 description: Navigate without context. Call navigation methods from your business logic.
-version: 0.4.0
+version: 0.4.1
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_nav
 
 environment:
