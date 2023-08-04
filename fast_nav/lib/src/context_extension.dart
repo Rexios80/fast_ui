@@ -48,7 +48,7 @@ extension FastNavigationExtension on BuildContext {
   //* Common navigation methods
 
   /// Pop the current page
-  void pop<T extends Object?>(T? result) => Navigator.of(this).pop(result);
+  void pop<T extends Object?>([T? result]) => Navigator.of(this).pop(result);
 
   /// Whether the navigator can be popped
   bool canPop() => Navigator.of(this).canPop();
