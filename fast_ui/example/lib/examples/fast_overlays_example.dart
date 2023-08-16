@@ -135,7 +135,7 @@ class FastOverlaysExample extends StatelessWidget {
                     TextButton(
                       child: const Text('Close'),
                       onPressed: () => Navigator.of(context).pop(),
-                    )
+                    ),
                   ],
                 ),
               );
