@@ -20,7 +20,7 @@ class FastRxPersistence {
 
   /// Initialize the internal [store] instance. Must be called
   /// before using any other features. Subsequent calls will have no effect.
-  static void init(FastRxPersistenceInterface store) async {
+  static void init(FastRxPersistenceInterface store) {
     _store ??= store;
   }
 

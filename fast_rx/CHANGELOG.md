@@ -1,3 +1,13 @@
+## 0.5.1
+- `RxDateTime` and `RxDuration` now extend `RxPrimitive`
+- Adds `@protected` annotation to `value` getter of `RxPrimitive`
+- Adds `@protected` annotation to `value` getter of `RxList` and `RxSet`
+
+## 0.5.0 (RETRACTED)
+- BREAKING: Reintroduces `@protected` annotations through the `meta` package
+- `RxBool`, `RxDouble`, `RxInt`, and `RxString` are now full classes with all the methods of their primitives
+- Adds `RxDateTime` and `RxDuration`
+
 ## 0.4.1
 - Moves `RxObserver` back into `fast_rx`
 - Documentation updates

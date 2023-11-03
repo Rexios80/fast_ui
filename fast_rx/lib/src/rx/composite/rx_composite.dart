@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:fast_rx/fast_rx.dart';
+import 'package:meta/meta.dart';
 
 /// Mixin version of [RxComposite] for use on classes that already extend [Rx]
 mixin RxCompositeMixin<T> on Rx<T> {
   final _subs = <int, StreamSubscription>{};
 
   /// Add an [Rx] to this composite
-  ///
-  /// Should not be called directly
+  @protected
   void addRx(Rx rx) {
     if (_subs[identityHashCode(rx)] != null) return;
 
@@ -19,8 +19,7 @@ mixin RxCompositeMixin<T> on Rx<T> {
   }
 
   /// Remove an [Rx] from this composite
-  ///
-  /// Should not be called directly
+  @protected
   void removeRx(Rx rx) {
     final sub = _subs.remove(identityHashCode(rx));
     sub?.cancel();

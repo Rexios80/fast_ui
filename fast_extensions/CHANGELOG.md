@@ -1,3 +1,7 @@
+## 0.1.4
+- Updates for Flutter 3.13.0
+- Adds `FastWidgetsLocalizations`
+
 ## 0.1.3
 - Adds `FastMaterialStateProperty`
 

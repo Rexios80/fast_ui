@@ -1,10 +1,10 @@
 name: fast_rx_shared_preferences
 description: A Shared Preferences implementation of fast_rx_persistence storage for Flutter
-version: 0.1.4
+version: 0.1.4+1
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_rx_shared_preferences
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.17.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -16,5 +16,5 @@ dependencies:
 
 dev_dependencies:
   test: ^1.21.1
-  rexios_lints: ^5.0.0
-  fast_rx: ^0.4.0
+  rexios_lints: ^6.0.0
+  fast_rx: ^0.5.1

@@ -68,7 +68,7 @@ void main() async {
 
   test('String list preference', () async {
     await setup({
-      'key': <dynamic>['']
+      'key': <dynamic>[''],
     });
 
     final pref = <String>[].rx..persist('key');

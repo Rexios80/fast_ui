@@ -1,10 +1,10 @@
 name: fast_nav
 description: Navigate without context. Call navigation methods from your business logic.
-version: 0.2.5
+version: 0.4.1
 homepage: https://github.com/Rexios80/fast_ui/tree/master/fast_nav
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.17.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -15,4 +15,4 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  rexios_lints: ^5.0.0
+  rexios_lints: ^6.0.0

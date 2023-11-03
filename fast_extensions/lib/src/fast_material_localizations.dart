@@ -250,24 +250,6 @@ extension FastMaterialLocalizations on BuildContext {
   String remainingTextFieldCharacterCount(int remaining) =>
       materialLocalizations.remainingTextFieldCharacterCount(remaining);
 
-  /// The [MaterialLocalizations.reorderItemDown] of the current [BuildContext]
-  String get reorderItemDown => materialLocalizations.reorderItemDown;
-
-  /// The [MaterialLocalizations.reorderItemLeft] of the current [BuildContext]
-  String get reorderItemLeft => materialLocalizations.reorderItemLeft;
-
-  /// The [MaterialLocalizations.reorderItemRight] of the current [BuildContext]
-  String get reorderItemRight => materialLocalizations.reorderItemRight;
-
-  /// The [MaterialLocalizations.reorderItemToEnd] of the current [BuildContext]
-  String get reorderItemToEnd => materialLocalizations.reorderItemToEnd;
-
-  /// The [MaterialLocalizations.reorderItemToStart] of the current [BuildContext]
-  String get reorderItemToStart => materialLocalizations.reorderItemToStart;
-
-  /// The [MaterialLocalizations.reorderItemUp] of the current [BuildContext]
-  String get reorderItemUp => materialLocalizations.reorderItemUp;
-
   /// The [MaterialLocalizations.rowsPerPageTitle] of the current [BuildContext]
   String get rowsPerPageTitle => materialLocalizations.rowsPerPageTitle;
 

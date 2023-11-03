@@ -10,19 +10,25 @@ Inspired by [GetX](https://pub.dev/packages/get), [observable_ish](https://pub.d
 [![pub points](https://img.shields.io/pub/points/fast_rx)](https://pub.dev/packages/fast_rx/score)
 
 ## Features
-| Class           | Use-case                                    |
-| --------------- | ------------------------------------------- |
-| RxValue<T>      | A reactive value                            |
-| RxObject<T>     | A reactive object                           |
-| RxList<E>       | A reactive list                             |
-| RxMap<E>        | A reactive map                              |
-| RxSet<E>        | A reactive set                              |
-| RxComposite     | A composite of Rx objects                   |
-| RxCompositeList | A composite version of RxList               |
-| RxCompositeMap  | A composite version of RxMap                |
-| RxCompositeSet  | A composite version of RxSet                |
+| Class           | Use-case                      |
+| --------------- | ----------------------------- |
+| RxBool          | A reactive bool               |
+| RxDateTime      | A reactive DateTime           |
+| RxDouble        | A reactive double             |
+| RxDuration      | A reactive Duration           |
+| RxInt           | A reactive int                |
+| RxString        | A reactive string             |
+| RxValue<T>      | A reactive value              |
+| RxObject<T>     | A reactive object             |
+| RxList<E>       | A reactive list               |
+| RxMap<E>        | A reactive map                |
+| RxSet<E>        | A reactive set                |
+| RxComposite     | A composite of Rx objects     |
+| RxCompositeList | A composite version of RxList |
+| RxCompositeMap  | A composite version of RxMap  |
+| RxCompositeSet  | A composite version of RxSet  |
 
-There are convenience typedefs for `RxBool`, `RxInt`, `RxDouble`, and `RxString`
+NOTE: Because `int` cannot be extended, the type-checker will not be able to properly infer the return type of all methods on `RxInt`
 
 See [fast_rx_flutter](https://pub.dev/packages/fast_rx_flutter) for Flutter-specific components
 
@@ -35,6 +41,12 @@ void example() {
   // ...
 
   final count = 0.rx;
+
+  // All primitive methods are available on their reactive versions
+  // NOTE: The type checker cannot automatically infer the return type of all
+  // methods
+  count + 2; // This returns a num
+  count.value + 2; // This returns an int
 
   // ...
 

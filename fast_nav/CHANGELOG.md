@@ -1,3 +1,16 @@
+## 0.4.1
+- Fixes method signature of `context.pop`
+
+## 0.4.0
+- Adds context extensions
+- Adds support for Cupertino routes
+- Renames `navigatorName` parameter to `navigator`
+- `NestedNavigator` `name` field is now optional
+
+## 0.3.0
+- Removes duplicate prevention and simplifies code
+- `NestedNavigator.observers` is now of type `List` instead of `Iterable`
+
 ## 0.2.5
 - Updates for Flutter 3.7
 
