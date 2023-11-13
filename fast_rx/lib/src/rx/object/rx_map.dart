@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:fast_rx/src/rx/rx.dart';
+import 'package:meta/meta.dart';
 
 /// A reactive [Map]
 class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
@@ -7,9 +8,11 @@ class RxMap<K, V> extends RxObject<Map<K, V>> implements Map<K, V> {
   RxMap([Map<K, V>? value]) : super(value ?? {});
 
   @override
+  @protected
   Map<K, V> copyValue() => Map.from(unregisteredValue);
 
   @override
+  @protected
   bool shouldNotify(Map<K, V> oldValue) =>
       !const MapEquality().equals(unregisteredValue, oldValue);
 

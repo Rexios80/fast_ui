@@ -149,6 +149,7 @@ abstract class RxObject<T> extends RxValue<T> {
   // coverage:ignore-start
   /// Unused for RxObject
   @override
+  @protected
   set value(T value) => throw RxObjectValueIsReadOnly();
   // coverage:ignore-end
 

@@ -46,7 +46,9 @@ void main() {
   ];
 
   final shouldNotNotifyOrRegister = <RxTest<RxList<int>>>[
+    // ignore: invalid_use_of_protected_member
     RxTest(() => [0, 1, 2].rx, (rx) => rx.copyValue()),
+    // ignore: invalid_use_of_protected_member
     RxTest(() => [0, 1, 2].rx, (rx) => rx.shouldNotify([0, 1, 2, 3])),
   ];
 

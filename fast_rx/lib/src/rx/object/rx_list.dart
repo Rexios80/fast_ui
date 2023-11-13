@@ -16,14 +16,17 @@ class RxList<E> extends RxIterable<E> implements List<E> {
   }
 
   @override
+  @protected
   List<E> get unregisteredValue {
     return super.unregisteredValue as List<E>;
   }
 
   @override
+  @protected
   List<E> copyValue() => List.from(unregisteredValue);
 
   @override
+  @protected
   bool shouldNotify(Iterable<E> oldValue) =>
       !const ListEquality().equals(unregisteredValue, oldValue as List<E>);
 

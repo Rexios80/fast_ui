@@ -40,7 +40,9 @@ void main() {
     RxTest(() => {'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.update('a', (a) => 3)),
   ];
   final shouldNotNotifyOrRegister = <RxTest<RxMap<String, int>>>[
+    // ignore: invalid_use_of_protected_member
     RxTest(() => {'a': 0, 'b': 1, 'c': 2}.rx, (rx) => rx.copyValue()),
+    // ignore: invalid_use_of_protected_member
     RxTest(() => {'a': 1, 'b': 2, 'c': 3}.rx, (rx) => rx.shouldNotify({})),
     RxTest(
       () => {'a': 1, 'b': 2, 'c': 3}.rx,
