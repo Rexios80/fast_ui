@@ -107,14 +107,14 @@ packages:
       path: "../../fast_rx_flutter"
       relative: true
     source: path
-    version: "0.1.2"
+    version: "0.1.3"
   fast_rx_persistence:
     dependency: "direct overridden"
     description:
       path: "../../fast_rx_persistence"
       relative: true
     source: path
-    version: "0.2.1"
+    version: "0.2.2"
   fast_rx_shared_preferences:
     dependency: "direct main"
     description:

@@ -1,3 +1,6 @@
+## 0.2.3
+- Lower dependency constraints on `meta` and `collection`
+
 ## 0.2.2
 - Removes dependency on Flutter
 - Upgrades `fast_rx`
