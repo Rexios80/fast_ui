@@ -1,4 +1,5 @@
 ## 0.2.2
+- Removes dependency on Flutter
 - Upgrades `fast_rx`
 
 ## 0.2.1

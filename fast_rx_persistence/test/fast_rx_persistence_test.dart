@@ -1,5 +1,5 @@
+import 'package:collection/collection.dart';
 import 'package:fast_rx_persistence/fast_rx_persistence.dart';
-import 'package:flutter/foundation.dart';
 import 'package:test/test.dart';
 import 'package:fast_rx/fast_rx.dart';
 
@@ -52,13 +52,14 @@ void main() {
         ),
       );
 
-    expect(listEquals(rx, [17]), isTrue);
+    expect(const ListEquality().equals(rx, [17]), isTrue);
 
     rx.add(12);
     // Wait for the stream to emit the update
     await Future.delayed(Duration.zero);
     expect(
-      listEquals(FastRxPersistence.store.get('key') as List, ['17', '12']),
+      const ListEquality()
+          .equals(FastRxPersistence.store.get('key') as List, ['17', '12']),
       isTrue,
     );
   });
