@@ -1,3 +1,6 @@
+## 0.2.2
+- Upgrades `fast_rx`
+
 ## 0.2.1
 - Upgrades `fast_rx`
 
