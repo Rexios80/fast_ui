@@ -17,7 +17,7 @@ void main() {
       expect(context.screenShortestSide, mediaQuery.size.shortestSide);
       expect(context.screenLongestSide, mediaQuery.size.longestSide);
       expect(context.devicePixelRatio, mediaQuery.devicePixelRatio);
-      expect(context.textScaleFactor, mediaQuery.textScaleFactor);
+      expect(context.textScaler, mediaQuery.textScaler);
       expect(context.platformBrightness, mediaQuery.platformBrightness);
       expect(context.windowViewInsets, mediaQuery.viewInsets);
       expect(context.windowPadding, mediaQuery.padding);

@@ -1,3 +1,6 @@
+## 0.1.5
+- Updates for Flutter 3.16.0
+
 ## 0.1.4
 - Updates for Flutter 3.13.0
 - Adds `FastWidgetsLocalizations`

@@ -27,8 +27,8 @@ extension FastMediaQuery on BuildContext {
   /// The [MediaQueryData.devicePixelRatio] of the current [BuildContext]
   double get devicePixelRatio => mediaQuery.devicePixelRatio;
 
-  /// The [MediaQueryData.textScaleFactor] of the current [BuildContext]
-  double get textScaleFactor => mediaQuery.textScaleFactor;
+  /// The [MediaQueryData.textScaler] of the current [BuildContext]
+  TextScaler get textScaler => mediaQuery.textScaler;
 
   /// The [MediaQueryData.platformBrightness] of the current [BuildContext]
   Brightness get platformBrightness => mediaQuery.platformBrightness;
