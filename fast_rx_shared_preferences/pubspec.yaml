@@ -17,4 +17,4 @@ dependencies:
 dev_dependencies:
   test: ^1.21.1
   rexios_lints: ^6.0.0
-  fast_rx: ^0.5.1
+  fast_rx: ^0.6.0
