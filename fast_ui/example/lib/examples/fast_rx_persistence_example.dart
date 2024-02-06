@@ -10,7 +10,7 @@ class FastRxPersistenceExample extends StatelessWidget {
   final transformedPref = <int>[].rx
     ..persist<List<String>>(
       'transformed',
-      converter: InlineConverter(
+      converter: PersistenceConverter.inline(
         fromStore: (value) => value.map(int.parse).toList(),
         toStore: (value) => value.map((e) => e.toString()).toList(),
       ),

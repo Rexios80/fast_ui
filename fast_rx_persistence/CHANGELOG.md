@@ -1,3 +1,6 @@
+## 0.3.0
+- Enum values no longer need to be passed into enum converters
+
 ## 0.2.3
 - Lower dependency constraints on `meta` and `collection`
 
