@@ -1,5 +1,9 @@
 ## 0.3.0
-- Enum values no longer need to be passed into enum converters
+- BREAKING: Renames `FastRxPersistenceConverter` to `PersistenceConverter`
+- BREAKING: Renames `InlineConverter` to `PersistenceConverter.inline`
+- BREAKING: Renames `EnumConverter` to `EnumPersistenceConverter`
+- BREAKING: Renames `EnumStringConverter` to `EnumPersistenceConverter.string`
+- BREAKING: Renames `EnumIntConverter` to `EnumPersistenceConverter.int`
 
 ## 0.2.3
 - Lower dependency constraints on `meta` and `collection`

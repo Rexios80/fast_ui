@@ -53,13 +53,13 @@ abstract class EnumPersistenceConverter<T extends Enum, I>
   static EnumPersistenceConverter<T, String> string<T extends Enum>(
     List<T> values,
   ) =>
-      _StringEnumPersistenceConverter<T>(values);
+      _StringEnumPersistenceConverter(values);
 
   /// An int [EnumPersistenceConverter]
   static EnumPersistenceConverter<T, int> integer<T extends Enum>(
     List<T> values,
   ) =>
-      _IntEnumPersistenceConverter<T>(values);
+      _IntEnumPersistenceConverter(values);
 }
 
 /// Converter between [Enum] and [String]
