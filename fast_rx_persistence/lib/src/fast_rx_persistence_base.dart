@@ -57,7 +57,7 @@ extension RxPersistenceExtension<T> on RxValue<T> {
   void persist<I>(
     String key, {
     FastRxPersistenceInterface? store,
-    FastRxPersistenceConverter<T, I>? converter,
+    PersistenceConverter<T, I>? converter,
   }) {
     final interface = store ?? FastRxPersistence.store;
 
