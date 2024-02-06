@@ -34,7 +34,7 @@ void example() {
   final rx3 = TestEnum.one.rx
     ..persist(
       'key',
-      converter: EnumPersistenceConverter.string(),
+      converter: EnumPersistenceConverter.string(TestEnum.values),
     );
 
   // Saves the value to the store as a string

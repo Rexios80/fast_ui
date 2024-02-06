@@ -68,9 +68,15 @@ void main() {
     FastRxPersistence.init(Store(values: {'key0': 'zero', 'key1': 0}));
 
     final rx0 = TestEnum.one.rx
-      ..persist('key0', converter: EnumPersistenceConverter.string());
+      ..persist(
+        'key0',
+        converter: EnumPersistenceConverter.string(TestEnum.values),
+      );
     final rx1 = TestEnum.one.rx
-      ..persist('key1', converter: EnumPersistenceConverter.integer());
+      ..persist(
+        'key1',
+        converter: EnumPersistenceConverter.integer(TestEnum.values),
+      );
 
     expect(rx0.value, TestEnum.zero);
     expect(rx1.value, TestEnum.zero);

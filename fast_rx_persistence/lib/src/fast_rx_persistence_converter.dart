@@ -44,28 +44,32 @@ class _InlinePersistenceConverter<T, I> extends PersistenceConverter<T, I> {
 abstract class EnumPersistenceConverter<T extends Enum, I>
     extends PersistenceConverter<T, I> {
   /// Constructor
-  const EnumPersistenceConverter();
+  const EnumPersistenceConverter(this.values);
 
-  /// Generic enum types must be casted to [dynamic] to access [values]
-  List<T> get _values => (T as dynamic).values;
+  /// Then enum values
+  final List<T> values;
 
   /// A string [EnumPersistenceConverter]
-  static EnumPersistenceConverter<T, String> string<T extends Enum>() =>
-      _StringEnumPersistenceConverter<T>();
+  static EnumPersistenceConverter<T, String> string<T extends Enum>(
+    List<T> values,
+  ) =>
+      _StringEnumPersistenceConverter<T>(values);
 
   /// An int [EnumPersistenceConverter]
-  static EnumPersistenceConverter<T, int> integer<T extends Enum>() =>
-      _IntEnumPersistenceConverter<T>();
+  static EnumPersistenceConverter<T, int> integer<T extends Enum>(
+    List<T> values,
+  ) =>
+      _IntEnumPersistenceConverter<T>(values);
 }
 
 /// Converter between [Enum] and [String]
 class _StringEnumPersistenceConverter<T extends Enum>
     extends EnumPersistenceConverter<T, String> {
   /// Constructor
-  const _StringEnumPersistenceConverter();
+  const _StringEnumPersistenceConverter(super.values);
 
   @override
-  T fromStore(String value) => _values.byName(value);
+  T fromStore(String value) => values.byName(value);
 
   @override
   String toStore(T value) => value.name;
@@ -75,10 +79,10 @@ class _StringEnumPersistenceConverter<T extends Enum>
 class _IntEnumPersistenceConverter<T extends Enum>
     extends EnumPersistenceConverter<T, int> {
   /// Constructor
-  const _IntEnumPersistenceConverter();
+  const _IntEnumPersistenceConverter(super.values);
 
   @override
-  T fromStore(int value) => _values[value];
+  T fromStore(int value) => values[value];
 
   @override
   int toStore(T value) => value.index;
