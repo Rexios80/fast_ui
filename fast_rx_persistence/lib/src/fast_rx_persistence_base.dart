@@ -2,7 +2,7 @@ import 'package:fast_rx_persistence/src/exceptions.dart';
 import 'package:fast_rx_persistence/src/fast_rx_persistence_converter.dart';
 import 'package:fast_rx_persistence/src/fast_rx_persistence_interface.dart';
 import 'package:fast_rx/fast_rx.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 /// A fast_rx implementation of key/value store persistence
 class FastRxPersistence {
@@ -57,7 +57,7 @@ extension RxPersistenceExtension<T> on RxValue<T> {
   void persist<I>(
     String key, {
     FastRxPersistenceInterface? store,
-    FastRxPersistenceConverter<T, I>? converter,
+    PersistenceConverter<T, I>? converter,
   }) {
     final interface = store ?? FastRxPersistence.store;
 

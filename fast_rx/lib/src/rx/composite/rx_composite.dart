@@ -35,6 +35,7 @@ mixin RxCompositeMixin<T> on Rx<T> {
   }
 
   /// Check if an [Rx] stream is registered for testing
+  @visibleForTesting
   bool hasStream(int id) => _subs[id] != null;
 }
 

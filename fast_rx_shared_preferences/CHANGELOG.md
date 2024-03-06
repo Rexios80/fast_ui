@@ -1,3 +1,6 @@
+## 0.1.5
+- Updates `fast_rx_persistence` to latest version
+
 ## 0.1.4+1
 - Formatting fix for Flutter 3.13.0
 

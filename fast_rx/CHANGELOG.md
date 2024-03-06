@@ -1,3 +1,6 @@
+## 0.6.0
+- Adds more `@protected` annotations
+
 ## 0.5.1
 - `RxDateTime` and `RxDuration` now extend `RxPrimitive`
 - Adds `@protected` annotation to `value` getter of `RxPrimitive`

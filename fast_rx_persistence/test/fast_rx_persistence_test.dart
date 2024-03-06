@@ -1,5 +1,5 @@
+import 'package:collection/collection.dart';
 import 'package:fast_rx_persistence/fast_rx_persistence.dart';
-import 'package:flutter/foundation.dart';
 import 'package:test/test.dart';
 import 'package:fast_rx/fast_rx.dart';
 
@@ -46,19 +46,20 @@ void main() {
     final rx = <int>[].rx
       ..persist<List<String>>(
         'key',
-        converter: InlineConverter(
+        converter: PersistenceConverter.inline(
           fromStore: (value) => value.map(int.parse).toList(),
           toStore: (value) => value.map((e) => e.toString()).toList(),
         ),
       );
 
-    expect(listEquals(rx, [17]), isTrue);
+    expect(const ListEquality().equals(rx, [17]), isTrue);
 
     rx.add(12);
     // Wait for the stream to emit the update
     await Future.delayed(Duration.zero);
     expect(
-      listEquals(FastRxPersistence.store.get('key') as List, ['17', '12']),
+      const ListEquality()
+          .equals(FastRxPersistence.store.get('key') as List, ['17', '12']),
       isTrue,
     );
   });
@@ -67,9 +68,15 @@ void main() {
     FastRxPersistence.init(Store(values: {'key0': 'zero', 'key1': 0}));
 
     final rx0 = TestEnum.one.rx
-      ..persist('key0', converter: const EnumStringConverter(TestEnum.values));
+      ..persist(
+        'key0',
+        converter: EnumPersistenceConverter.string(TestEnum.values),
+      );
     final rx1 = TestEnum.one.rx
-      ..persist('key1', converter: const EnumIntConverter(TestEnum.values));
+      ..persist(
+        'key1',
+        converter: EnumPersistenceConverter.integer(TestEnum.values),
+      );
 
     expect(rx0.value, TestEnum.zero);
     expect(rx1.value, TestEnum.zero);

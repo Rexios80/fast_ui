@@ -14,14 +14,17 @@ class RxSet<E> extends RxIterable<E> implements Set<E> {
   }
 
   @override
+  @protected
   Set<E> get unregisteredValue {
     return super.unregisteredValue as Set<E>;
   }
 
   @override
+  @protected
   Set<E> copyValue() => Set.from(unregisteredValue);
 
   @override
+  @protected
   bool shouldNotify(Iterable<E> oldValue) =>
       !const SetEquality().equals(unregisteredValue, oldValue as Set<E>);
 

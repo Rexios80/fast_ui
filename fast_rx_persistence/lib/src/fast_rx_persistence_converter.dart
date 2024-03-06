@@ -1,23 +1,30 @@
 /// Convert a value to/from a [FastRxPersistenceInterface]
 /// - [T] is the type of the value outside the store
 /// - [I] is the type of the value inside the store
-abstract class FastRxPersistenceConverter<T, I> {
+abstract class PersistenceConverter<T, I> {
   /// Constructor
-  const FastRxPersistenceConverter();
+  const PersistenceConverter();
 
   /// Convert the value read from the store
   T fromStore(I value);
 
   /// Convert the value written to the store
   I toStore(T value);
+
+  /// Conveniently create a [PersistenceConverter] inline
+  factory PersistenceConverter.inline({
+    required T Function(I value) fromStore,
+    required I Function(T value) toStore,
+  }) =>
+      _InlinePersistenceConverter(fromStore: fromStore, toStore: toStore);
 }
 
-/// Conveniently create a [FastRxPersistenceConverter] inline
-class InlineConverter<T, I> extends FastRxPersistenceConverter<T, I> {
+/// Conveniently create a [PersistenceConverter] inline
+class _InlinePersistenceConverter<T, I> extends PersistenceConverter<T, I> {
   /// Constructor
   /// - [fromStore]: Convert the value read from the store
   /// - [toStore]: Convert the value written to the store
-  const InlineConverter({
+  const _InlinePersistenceConverter({
     required T Function(I value) fromStore,
     required I Function(T value) toStore,
   })  : _fromStoreInline = fromStore,
@@ -34,19 +41,32 @@ class InlineConverter<T, I> extends FastRxPersistenceConverter<T, I> {
 }
 
 /// Converter between [Enum] and [I]
-abstract class EnumConverter<T extends Enum, I>
-    extends FastRxPersistenceConverter<T, I> {
+abstract class EnumPersistenceConverter<T extends Enum, I>
+    extends PersistenceConverter<T, I> {
   /// Constructor
-  const EnumConverter(this.values);
+  const EnumPersistenceConverter(this.values);
 
   /// Then enum values
   final List<T> values;
+
+  /// A string [EnumPersistenceConverter]
+  static EnumPersistenceConverter<T, String> string<T extends Enum>(
+    List<T> values,
+  ) =>
+      _StringEnumPersistenceConverter(values);
+
+  /// An int [EnumPersistenceConverter]
+  static EnumPersistenceConverter<T, int> integer<T extends Enum>(
+    List<T> values,
+  ) =>
+      _IntEnumPersistenceConverter(values);
 }
 
 /// Converter between [Enum] and [String]
-class EnumStringConverter<T extends Enum> extends EnumConverter<T, String> {
+class _StringEnumPersistenceConverter<T extends Enum>
+    extends EnumPersistenceConverter<T, String> {
   /// Constructor
-  const EnumStringConverter(super.values);
+  const _StringEnumPersistenceConverter(super.values);
 
   @override
   T fromStore(String value) => values.byName(value);
@@ -56,9 +76,10 @@ class EnumStringConverter<T extends Enum> extends EnumConverter<T, String> {
 }
 
 /// Converter between [Enum] and [int]
-class EnumIntConverter<T extends Enum> extends EnumConverter<T, int> {
+class _IntEnumPersistenceConverter<T extends Enum>
+    extends EnumPersistenceConverter<T, int> {
   /// Constructor
-  const EnumIntConverter(super.values);
+  const _IntEnumPersistenceConverter(super.values);
 
   @override
   T fromStore(int value) => values[value];
