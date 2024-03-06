@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class _Injector {
   /// Get the closest injector of the current context
   static _Injector? of(BuildContext context) =>
-      context.findAncestorStateOfType<_FastWidgetState>()?.widget._injector;
+      context.findAncestorStateOfType<_FastWidgetState>()?._injector;
 
   /// If this injector will accept new registrations
   var _finalized = false;
@@ -12,8 +12,8 @@ class _Injector {
   final _registry = <Type, Object>{};
 
   /// Register the instance of type [T]
-  /// 
-  /// This will override any inherited registrations of [T]
+  ///
+  /// This will override any inherited dependencies of [T]
   void register<T extends Object>(T instance) {
     if (_finalized) {
       throw Exception('Cannot register new instances after `initState`');
@@ -32,22 +32,46 @@ class _Injector {
     return instance;
   }
 
-  /// Merge with the parent [_Injector] if it exists
-  void inheritRegistrations(BuildContext context) {
+  /// Inherit all dependencies from the given [BuildContext] or [Injectable].
+  /// Only one of [context] or [injectable] may be provided.
+  ///
+  /// Will not override any existing dependencies
+  void inheritDependencies({
+    BuildContext? context,
+    Injectable? injectable,
+    bool finalize = true,
+  }) {
+    assert(
+      (context != null) ^ (injectable != null),
+      'Provide only one of context or injectable',
+    );
+
     if (_finalized) {
-      throw Exception('Cannot merge with parent injector after `initState`');
+      throw Exception('Cannot inherit dependencies after `initState`');
     }
 
-    final parentInjector = _Injector.of(context);
-    if (parentInjector == null) return;
+    final entries = <MapEntry<Type, Object>>[];
 
-    for (final entry in parentInjector._registry.entries) {
-      // Don't overwrite existing registrations
+    if (context != null) {
+      final parentInjector = _Injector.of(context);
+      if (parentInjector != null) {
+        entries.addAll(parentInjector._registry.entries);
+      }
+    }
+
+    if (injectable != null) {
+      entries.addAll(injectable._injector._registry.entries);
+    }
+
+    for (final entry in entries) {
+      // Don't overwrite existing dependencies
       if (_registry.containsKey(entry.key)) continue;
       _registry[entry.key] = entry.value;
     }
 
-    _finalized = true;
+    if (finalize) {
+      _finalized = true;
+    }
   }
 }
 
@@ -62,6 +86,20 @@ mixin Injectable on StatefulWidget {
   ///
   /// This will override any inherited instances of [T]
   void inject<T extends Object>(T instance) => _injector.register(instance);
+
+  /// Inherit all dependencies from the given [BuildContext] or [Injectable].
+  /// Only one of [context] or [injectable] may be provided.
+  ///
+  /// Will not override any existing dependencies
+  void inheritDependencies<T extends Injectable>({
+    BuildContext? context,
+    Injectable? injectable,
+  }) =>
+      _injector.inheritDependencies(
+        context: context,
+        injectable: injectable,
+        finalize: false,
+      );
 }
 
 abstract class FastStatefulWidget extends StatefulWidget with Injectable {
@@ -73,10 +111,12 @@ abstract class FastStatefulWidget extends StatefulWidget with Injectable {
 }
 
 abstract class FastState<T extends Injectable> extends State<T> {
+  late final _injector = _Injector()..inheritDependencies(injectable: widget);
+
   @override
   void initState() {
     super.initState();
-    widget._injector.inheritRegistrations(context);
+    widget.inheritDependencies(context: context);
   }
 }
 

@@ -24,11 +24,25 @@ class Counter extends FastWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FastBuilder(() => Text('${controller.count}')),
+            /// This widget will inherit the [CountController]
+            CountDisplay(),
+            ElevatedButton(
+              onPressed: () => FastNav.push(
+                Counter()
+
+                  /// Navigation creates a new dependency context
+                  /// This call will inherit all dependencies from this widget
+                  /// If in a child widget that is not [Injectable], pass the current [BuildContext] instead
+                  /// In this case, the [CountController]
+                  ..inheritDependencies(injectable: this),
+              ),
+              child: const Text('Push'),
+            ),
           ],
         ),
       ),
@@ -37,5 +51,18 @@ class Counter extends FastWidget {
         child: const Icon(Icons.add),
       ),
     );
+  }
+}
+
+/// A child widget to show that dependencies are inherited
+class CountDisplay extends FastWidget {
+  /// The inherited [CountController]
+  late final controller = get<CountController>();
+
+  CountDisplay({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FastBuilder(() => Text('${controller.count}'));
   }
 }
