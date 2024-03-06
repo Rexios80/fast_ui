@@ -12,6 +12,8 @@ dependencies:
     path: ../
   fast_rx_flutter:
     path: ../../fast_rx_flutter
+  fast_nav:
+    path: ../../fast_nav
 
 dev_dependencies:
   flutter_test:

@@ -56,6 +56,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  fast_nav:
+    dependency: "direct main"
+    description:
+      path: "../../fast_nav"
+      relative: true
+    source: path
+    version: "0.4.1"
   fast_rx:
     dependency: transitive
     description:
