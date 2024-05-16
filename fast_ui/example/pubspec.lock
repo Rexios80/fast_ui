@@ -50,20 +50,22 @@ packages:
     source: hosted
     version: "1.18.0"
   device_frame:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: device_frame
-      sha256: afe76182aec178d171953d9b4a50a43c57c7cf3c77d8b09a48bf30c8fa04dd9d
-      url: "https://pub.dev"
-    source: hosted
+      path: device_frame
+      ref: "7d3e08a7b00077751d9a9eb9c2317f8f0b91c51d"
+      resolved-ref: "7d3e08a7b00077751d9a9eb9c2317f8f0b91c51d"
+      url: "https://github.com/Rexios80/flutter_device_preview"
+    source: git
     version: "1.1.0"
   device_preview:
     dependency: "direct main"
     description:
-      name: device_preview
-      sha256: "2f097bf31b929e15e6756dbe0ec1bcb63952ab9ed51c25dc5a2c722d2b21fdaf"
-      url: "https://pub.dev"
-    source: hosted
+      path: device_preview
+      ref: "7d3e08a7b00077751d9a9eb9c2317f8f0b91c51d"
+      resolved-ref: "7d3e08a7b00077751d9a9eb9c2317f8f0b91c51d"
+      url: "https://github.com/Rexios80/flutter_device_preview"
+    source: git
     version: "1.1.0"
   fake_async:
     dependency: transitive
@@ -79,7 +81,7 @@ packages:
       path: "../../fast_extensions"
       relative: true
     source: path
-    version: "0.1.5"
+    version: "0.2.0"
   fast_nav:
     dependency: "direct overridden"
     description:

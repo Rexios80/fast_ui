@@ -38,6 +38,17 @@ dependency_overrides:
     path: ../../fast_rx_flutter
   fast_rx_persistence:
     path: ../../fast_rx_persistence
+  
+  device_preview:
+    git:
+      url: https://github.com/Rexios80/flutter_device_preview
+      ref: 7d3e08a7b00077751d9a9eb9c2317f8f0b91c51d
+      path: device_preview
+  device_frame:
+    git:
+      url: https://github.com/Rexios80/flutter_device_preview
+      ref: 7d3e08a7b00077751d9a9eb9c2317f8f0b91c51d
+      path: device_frame
 
 flutter:
   uses-material-design: true
