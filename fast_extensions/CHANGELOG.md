@@ -1,3 +1,7 @@
+## 0.2.0
+- Refactors `FastMaterialStateProperty` into `FastWidgetStateProperty` for Flutter 3.22.0
+- Requires Flutter 3.22.0
+
 ## 0.1.5
 - Updates for Flutter 3.16.0
 

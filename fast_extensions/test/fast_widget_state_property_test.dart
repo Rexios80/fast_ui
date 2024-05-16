@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('FastMaterialStateProperty', () {
-    final msp = FastMaterialStateProperty(
-      {MaterialState.selected: Colors.white},
+  test('FastWidgetStateProperty', () {
+    final wsp = FastWidgetStateProperty(
+      {WidgetState.selected: Colors.white},
       defaultValue: Colors.black,
     );
     // Expect that the primary shade matches the color we passed in
     expect(
-      msp.resolve({MaterialState.disabled, MaterialState.selected}),
+      wsp.resolve({WidgetState.disabled, WidgetState.selected}),
       Colors.white,
     );
 
     expect(
-      msp.resolve({MaterialState.disabled}),
+      wsp.resolve({WidgetState.disabled}),
       Colors.black,
     );
   });

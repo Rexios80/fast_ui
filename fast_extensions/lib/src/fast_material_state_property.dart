@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-/// Create a [MaterialStateProperty] using only a map of [MaterialState]s
-class FastMaterialStateProperty<T> extends MaterialStateProperty<T?> {
+/// Create a [WidgetStateProperty] using only a map of [WidgetState]s
+class FastWidgetStateProperty<T> extends WidgetStateProperty<T?> {
   /// The map used to resolve the property
-  final Map<MaterialState, T> resolution;
+  final Map<WidgetState, T> resolution;
 
   /// The value to use if no match is found in [resolution]
   final T? defaultValue;
 
   /// Constructor
-  FastMaterialStateProperty(this.resolution, {this.defaultValue});
+  FastWidgetStateProperty(this.resolution, {this.defaultValue});
 
   @override
-  T? resolve(Set<MaterialState> states) {
+  T? resolve(Set<WidgetState> states) {
     for (final state in states) {
       if (resolution.containsKey(state)) {
         return resolution[state];

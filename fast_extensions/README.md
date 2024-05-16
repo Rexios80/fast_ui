@@ -8,18 +8,20 @@ Convenience extensions to make common Flutter tasks less annoying
 [![pub points](https://img.shields.io/pub/points/fast_extensions)](https://pub.dev/packages/fast_extensions/score)
 
 ## Features
-| Extension                 | Use-case                                 |
-| ------------------------- | ---------------------------------------- |
-| FastLocale                | Localizations.localeOf(context)          |
-| FastMaterialColor         | FastMaterialColor.fromColor(color)       |
-| FastMaterialLocalizations | MaterialLocalizations.of(context)        |
-| FastMaterialStateProperty | Create MaterialStateProperty using a map |
-| FastMediaQuery            | MediaQuery.of(context)                   |
-| FastTheme                 | Theme.of(context)                        |
 
+| Extension                 | Use-case                               |
+| ------------------------- | -------------------------------------- |
+| FastLocale                | Localizations.localeOf(context)        |
+| FastMaterialColor         | FastMaterialColor.fromColor(color)     |
+| FastMaterialLocalizations | MaterialLocalizations.of(context)      |
+| FastWidgetStateProperty   | Create WidgetStateProperty using a map |
+| FastMediaQuery            | MediaQuery.of(context)                 |
+| FastTheme                 | Theme.of(context)                      |
 
 ## Usage
+
 <!-- embedme readme/usage.dart -->
+
 ```dart
 import 'package:fast_extensions/fast_extensions.dart';
 import 'package:flutter/material.dart';
@@ -36,14 +38,14 @@ void example(BuildContext context) {
   // FastMaterialLocalizations
   context.backButtonTooltip;
 
-  // FastMaterialStateProperty
-  final msp = FastMaterialStateProperty(
-    {MaterialState.selected: Colors.white},
+  // FastWidgetStateProperty
+  final wsp = FastWidgetStateProperty(
+    {WidgetState.selected: Colors.white},
     defaultValue: Colors.black,
   );
   ThemeData(
     segmentedButtonTheme:
-        SegmentedButtonThemeData(style: ButtonStyle(foregroundColor: msp)),
+        SegmentedButtonThemeData(style: ButtonStyle(foregroundColor: wsp)),
   );
 
   // FastMediaQuery
@@ -61,4 +63,5 @@ void example(BuildContext context) {
 ```
 
 ## Additional information
+
 See [fast_ui](https://pub.dev/packages/fast_ui) for more information
