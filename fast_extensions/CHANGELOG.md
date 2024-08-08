@@ -1,3 +1,6 @@
+## 0.3.0
+- Removes deprecated `ButtonBarThemeData`
+
 ## 0.2.0
 - Refactors `FastMaterialStateProperty` into `FastWidgetStateProperty` for Flutter 3.22.0
 - Requires Flutter 3.22.0

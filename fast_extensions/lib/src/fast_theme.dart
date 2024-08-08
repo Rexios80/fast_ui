@@ -84,9 +84,6 @@ extension FastTheme on BuildContext {
   /// The [DividerThemeData] of the current [BuildContext]
   DividerThemeData get dividerTheme => theme.dividerTheme;
 
-  /// The [ButtonBarThemeData] of the current [BuildContext]
-  ButtonBarThemeData get buttonBarTheme => theme.buttonBarTheme;
-
   /// The [BottomNavigationBarThemeData] of the current [BuildContext]
   BottomNavigationBarThemeData get bottomNavigationBarTheme =>
       theme.bottomNavigationBarTheme;
