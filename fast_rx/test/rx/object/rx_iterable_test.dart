@@ -36,8 +36,9 @@ void main() {
   ];
 
   final shouldNotRegisterOrNotify = <RxTest<RxIterable<int>>>[
-    // ignore: avoid_returning_null_for_void, avoid_function_literals_in_foreach_calls
-    RxTest(() => [0, 1, 2].rx, (rx) => rx.forEach((e) => null)),
+    // We are testing the forEach call here
+    // ignore: avoid_function_literals_in_foreach_calls
+    RxTest(() => [0, 1, 2].rx, (rx) => rx.forEach((e) {})),
   ];
 
   test('RxIterable registration and notifications', () {

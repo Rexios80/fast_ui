@@ -54,6 +54,7 @@ void main() {
     expect(rx.lastIndexOf(''), rx.value.lastIndexOf(''));
     expect(rx.isEmpty, rx.value.isEmpty);
     expect(rx.isNotEmpty, rx.value.isNotEmpty);
+    // This line tests the `+` operator
     // ignore: prefer_interpolation_to_compose_strings
     expect(rx + '', rx.value + '');
     expect(rx.substring(0), rx.value.substring(0));

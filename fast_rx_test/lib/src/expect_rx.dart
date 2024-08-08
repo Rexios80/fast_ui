@@ -1,5 +1,3 @@
-// ignore_for_file: implementation_imports, invalid_use_of_visible_for_testing_member
-
 import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:test/test.dart';
@@ -37,6 +35,8 @@ void expectRx<T extends Rx>({
       () => test.transform(rx),
       notifier: (id) {
         if (id == identityHashCode(rx) ||
+            // This is a test
+            // ignore: invalid_use_of_visible_for_testing_member
             (rx is RxCompositeMixin && rx.hasStream(id))) {
           notifications++;
         }
