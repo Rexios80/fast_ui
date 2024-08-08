@@ -22,7 +22,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  rexios_lints: ^6.0.0
+  rexios_lints: ^8.0.0
 
 # Override fast packages so we can import fast_ui and use the local versions
 dependency_overrides:
@@ -38,7 +38,7 @@ dependency_overrides:
     path: ../../fast_rx_flutter
   fast_rx_persistence:
     path: ../../fast_rx_persistence
-  
+
   device_preview:
     git:
       url: https://github.com/Rexios80/flutter_device_preview

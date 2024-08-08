@@ -67,6 +67,7 @@ extension RxPersistenceExtension<T> on RxValue<T> {
           converter?.fromStore(storeValue as I) ?? storeValue as T;
 
       if (this is RxObject) {
+        // This is intended usage of the internal setter
         // ignore: invalid_use_of_protected_member
         (this as RxObject).internalSetValue(transformedValue);
         notify();

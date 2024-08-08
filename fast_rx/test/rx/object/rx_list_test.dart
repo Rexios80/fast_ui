@@ -1,3 +1,6 @@
+// This is a test
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:fast_rx/fast_rx.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:test/test.dart';
@@ -46,9 +49,7 @@ void main() {
   ];
 
   final shouldNotNotifyOrRegister = <RxTest<RxList<int>>>[
-    // ignore: invalid_use_of_protected_member
     RxTest(() => [0, 1, 2].rx, (rx) => rx.copyValue()),
-    // ignore: invalid_use_of_protected_member
     RxTest(() => [0, 1, 2].rx, (rx) => rx.shouldNotify([0, 1, 2, 3])),
   ];
 

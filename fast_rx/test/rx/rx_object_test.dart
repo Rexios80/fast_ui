@@ -1,3 +1,6 @@
+// This is a test
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:test/test.dart';
 import 'rx_tuple.dart';
@@ -21,7 +24,6 @@ void main() {
   final shouldNotNotifyOrRegister = <RxTest<RxTuple<int, int>>>[
     RxTest(() => Tuple(1, 2).rx, (rx) => rx.copyValue()),
     RxTest(() => Tuple(1, 2).rx, (rx) => rx.shouldNotify(Tuple(2, 2))),
-    // ignore: invalid_use_of_protected_member
     RxTest(() => Tuple(1, 2).rx, (rx) => rx.internalSetValue(Tuple(1, 3))),
   ];
 

@@ -31,6 +31,7 @@ class FastRxSharedPreferences {
   @visibleForTesting
   static void reset() {
     _prefs = null;
+    // This is only used for testing
     // ignore: invalid_use_of_visible_for_testing_member
     FastRxPersistence.reset();
   }

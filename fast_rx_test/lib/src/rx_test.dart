@@ -1,6 +1,4 @@
-// ignore_for_file: implementation_imports
-
-import 'package:fast_rx/src/rx/rx.dart';
+import 'package:fast_rx/fast_rx.dart';
 
 /// A container for a [transform] on an [Rx] object
 class RxTest<T extends Rx> {

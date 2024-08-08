@@ -13,7 +13,6 @@ void example() {
 
   // ...
 
-  // ignore: avoid_print
   count.stream.listen(print);
 
   // ...
