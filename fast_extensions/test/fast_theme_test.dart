@@ -39,7 +39,6 @@ void main() {
       expect(context.popupMenuTheme, theme.popupMenuTheme);
       expect(context.bannerTheme, theme.bannerTheme);
       expect(context.dividerTheme, theme.dividerTheme);
-      expect(context.buttonBarTheme, theme.buttonBarTheme);
       expect(context.bottomNavigationBarTheme, theme.bottomNavigationBarTheme);
       expect(context.timePickerTheme, theme.timePickerTheme);
       expect(context.textButtonTheme, theme.textButtonTheme);
