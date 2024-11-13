@@ -33,10 +33,10 @@ extension FastTheme on BuildContext {
   SliderThemeData get sliderTheme => theme.sliderTheme;
 
   /// The [TabBarTheme] of the current [BuildContext]
-  TabBarTheme get tabBarTheme => theme.tabBarTheme;
+  dynamic get tabBarTheme => theme.tabBarTheme;
 
   /// The [CardTheme] of the current [BuildContext]
-  CardTheme get cardTheme => theme.cardTheme;
+  dynamic get cardTheme => theme.cardTheme;
 
   /// The [ChipThemeData] of the current [BuildContext]
   ChipThemeData get chipTheme => theme.chipTheme;
@@ -57,7 +57,7 @@ extension FastTheme on BuildContext {
   ColorScheme get colorScheme => theme.colorScheme;
 
   /// The [DialogTheme] of the current [BuildContext]
-  DialogTheme get dialogTheme => theme.dialogTheme;
+  dynamic get dialogTheme => theme.dialogTheme;
 
   /// The [FloatingActionButtonThemeData] of the current [BuildContext]
   FloatingActionButtonThemeData get floatingActionButtonTheme =>

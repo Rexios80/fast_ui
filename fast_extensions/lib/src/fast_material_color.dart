@@ -8,7 +8,9 @@ extension FastMaterialColor on MaterialColor {
   static MaterialColor fromColor(Color color) {
     final strengths = [0.05];
     final swatch = <int, Color>{};
-    final r = color.red, g = color.green, b = color.blue;
+    final r = (color.r * 255).round();
+    final g = (color.g * 255).round();
+    final b = (color.b * 255).round();
 
     for (var i = 1; i < 10; i++) {
       strengths.add(0.1 * i);
@@ -22,6 +24,6 @@ extension FastMaterialColor on MaterialColor {
         1,
       );
     }
-    return MaterialColor(color.value, swatch);
+    return MaterialColor(color.toARGB32(), swatch);
   }
 }

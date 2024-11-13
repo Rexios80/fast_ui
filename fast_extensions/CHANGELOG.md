@@ -1,3 +1,7 @@
+## 0.3.1
+- Makes `tabBarTheme`, `cardTheme`, and `dialogTheme` return types `dynamic` to prevent breaking changes with [this Flutter PR](https://github.com/flutter/flutter/pull/156253)
+- Fixes `Color.value` deprecation
+
 ## 0.3.0
 - Removes deprecated `ButtonBarThemeData`
 
