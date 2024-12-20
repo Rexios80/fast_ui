@@ -8,7 +8,9 @@ extension FastMaterialColor on MaterialColor {
   static MaterialColor fromColor(Color color) {
     final strengths = [0.05];
     final swatch = <int, Color>{};
-    final r = color.red, g = color.green, b = color.blue;
+    final r = (color.r * 255).round();
+    final g = (color.g * 255).round();
+    final b = (color.b * 255).round();
 
     for (var i = 1; i < 10; i++) {
       strengths.add(0.1 * i);
@@ -22,6 +24,19 @@ extension FastMaterialColor on MaterialColor {
         1,
       );
     }
-    return MaterialColor(color.value, swatch);
+    return MaterialColor(_valueForColor(color), swatch);
+  }
+
+  /// Copied from [Color] class
+  static int _floatToInt8(double x) {
+    return (x * 255.0).round() & 0xff;
+  }
+
+  /// Copied from [Color] class
+  static int _valueForColor(Color color) {
+    return _floatToInt8(color.a) << 24 |
+        _floatToInt8(color.r) << 16 |
+        _floatToInt8(color.g) << 8 |
+        _floatToInt8(color.b) << 0;
   }
 }
