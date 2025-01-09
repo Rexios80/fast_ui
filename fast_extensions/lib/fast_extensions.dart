@@ -1,5 +1,3 @@
-library fast_extensions;
-
 export 'src/fast_locale.dart';
 export 'src/fast_material_color.dart';
 export 'src/fast_material_localizations.dart';

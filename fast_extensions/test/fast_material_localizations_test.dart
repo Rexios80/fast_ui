@@ -130,48 +130,48 @@ void main() {
         materialLocalizations.firstPageTooltip,
       );
       expect(
-        context.formatCompactDate(DateTime.now()),
-        materialLocalizations.formatCompactDate(DateTime.now()),
+        context.formatCompactDate(DateTime.timestamp()),
+        materialLocalizations.formatCompactDate(DateTime.timestamp()),
       );
       expect(
         context.formatDecimal(123),
         materialLocalizations.formatDecimal(123),
       );
       expect(
-        context.formatFullDate(DateTime.now()),
-        materialLocalizations.formatFullDate(DateTime.now()),
+        context.formatFullDate(DateTime.timestamp()),
+        materialLocalizations.formatFullDate(DateTime.timestamp()),
       );
       expect(
         context.formatHour(TimeOfDay.now()),
         materialLocalizations.formatHour(TimeOfDay.now()),
       );
       expect(
-        context.formatMediumDate(DateTime.now()),
-        materialLocalizations.formatMediumDate(DateTime.now()),
+        context.formatMediumDate(DateTime.timestamp()),
+        materialLocalizations.formatMediumDate(DateTime.timestamp()),
       );
       expect(
         context.formatMinute(TimeOfDay.now()),
         materialLocalizations.formatMinute(TimeOfDay.now()),
       );
       expect(
-        context.formatMonthYear(DateTime.now()),
-        materialLocalizations.formatMonthYear(DateTime.now()),
+        context.formatMonthYear(DateTime.timestamp()),
+        materialLocalizations.formatMonthYear(DateTime.timestamp()),
       );
       expect(
-        context.formatShortDate(DateTime.now()),
-        materialLocalizations.formatShortDate(DateTime.now()),
+        context.formatShortDate(DateTime.timestamp()),
+        materialLocalizations.formatShortDate(DateTime.timestamp()),
       );
       expect(
-        context.formatShortMonthDay(DateTime.now()),
-        materialLocalizations.formatShortMonthDay(DateTime.now()),
+        context.formatShortMonthDay(DateTime.timestamp()),
+        materialLocalizations.formatShortMonthDay(DateTime.timestamp()),
       );
       expect(
         context.formatTimeOfDay(TimeOfDay.now()),
         materialLocalizations.formatTimeOfDay(TimeOfDay.now()),
       );
       expect(
-        context.formatYear(DateTime.now()),
-        materialLocalizations.formatYear(DateTime.now()),
+        context.formatYear(DateTime.timestamp()),
+        materialLocalizations.formatYear(DateTime.timestamp()),
       );
       expect(
         context.hideAccountsLabel,

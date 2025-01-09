@@ -7,36 +7,51 @@ import 'package:test/test.dart';
 
 void main() {
   final shouldRegister = <RxTest<RxDateTime>>[
-    RxTest(() => DateTime.now().rx, (rx) => rx.add(const Duration(seconds: 1))),
-    RxTest(() => DateTime.now().rx, (rx) => rx.compareTo(DateTime.now())),
-    RxTest(() => DateTime.now().rx, (rx) => rx.day),
-    RxTest(() => DateTime.now().rx, (rx) => rx.difference(DateTime.now())),
-    RxTest(() => DateTime.now().rx, (rx) => rx.hour),
-    RxTest(() => DateTime.now().rx, (rx) => rx.isAfter(DateTime.now())),
     RxTest(
-      () => DateTime.now().rx,
-      (rx) => rx.isAtSameMomentAs(DateTime.now()),
+      () => DateTime.timestamp().rx,
+      (rx) => rx.add(const Duration(seconds: 1)),
     ),
-    RxTest(() => DateTime.now().rx, (rx) => rx.isBefore(DateTime.now())),
-    RxTest(() => DateTime.now().rx, (rx) => rx.isUtc),
-    RxTest(() => DateTime.now().rx, (rx) => rx.microsecond),
-    RxTest(() => DateTime.now().rx, (rx) => rx.microsecondsSinceEpoch),
-    RxTest(() => DateTime.now().rx, (rx) => rx.millisecond),
-    RxTest(() => DateTime.now().rx, (rx) => rx.millisecondsSinceEpoch),
-    RxTest(() => DateTime.now().rx, (rx) => rx.minute),
-    RxTest(() => DateTime.now().rx, (rx) => rx.month),
-    RxTest(() => DateTime.now().rx, (rx) => rx.second),
     RxTest(
-      () => DateTime.now().rx,
+      () => DateTime.timestamp().rx,
+      (rx) => rx.compareTo(DateTime.timestamp()),
+    ),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.day),
+    RxTest(
+      () => DateTime.timestamp().rx,
+      (rx) => rx.difference(DateTime.timestamp()),
+    ),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.hour),
+    RxTest(
+      () => DateTime.timestamp().rx,
+      (rx) => rx.isAfter(DateTime.timestamp()),
+    ),
+    RxTest(
+      () => DateTime.timestamp().rx,
+      (rx) => rx.isAtSameMomentAs(DateTime.timestamp()),
+    ),
+    RxTest(
+      () => DateTime.timestamp().rx,
+      (rx) => rx.isBefore(DateTime.timestamp()),
+    ),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.isUtc),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.microsecond),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.microsecondsSinceEpoch),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.millisecond),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.millisecondsSinceEpoch),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.minute),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.month),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.second),
+    RxTest(
+      () => DateTime.timestamp().rx,
       (rx) => rx.subtract(const Duration(seconds: 1)),
     ),
-    RxTest(() => DateTime.now().rx, (rx) => rx.timeZoneName),
-    RxTest(() => DateTime.now().rx, (rx) => rx.timeZoneOffset),
-    RxTest(() => DateTime.now().rx, (rx) => rx.toIso8601String()),
-    RxTest(() => DateTime.now().rx, (rx) => rx.toLocal()),
-    RxTest(() => DateTime.now().rx, (rx) => rx.toUtc()),
-    RxTest(() => DateTime.now().rx, (rx) => rx.weekday),
-    RxTest(() => DateTime.now().rx, (rx) => rx.year),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.timeZoneName),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.timeZoneOffset),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.toIso8601String()),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.toLocal()),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.toUtc()),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.weekday),
+    RxTest(() => DateTime.timestamp().rx, (rx) => rx.year),
   ];
 
   test('RxDateTime registration and notifications', () {
@@ -44,7 +59,7 @@ void main() {
   });
 
   test('RxDateTime/DateTime equivalency', () {
-    final now = DateTime.now();
+    final now = DateTime.timestamp();
     final rx = now.rx;
     expect(
       rx.add(const Duration(seconds: 1)),
