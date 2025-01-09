@@ -1,5 +1,5 @@
 /// fast_ui
-library fast_ui;
+library;
 
 export 'package:fast_extensions/fast_extensions.dart';
 export 'package:fast_nav/fast_nav.dart';

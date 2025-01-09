@@ -100,9 +100,9 @@ void main() {
 
     unawaited(
       FastOverlays.showDatePicker(
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime.now(),
+        initialDate: DateTime.timestamp(),
+        firstDate: DateTime.timestamp(),
+        lastDate: DateTime.timestamp(),
         helpText: 'test_date_picker',
       ),
     );
@@ -115,8 +115,8 @@ void main() {
 
     unawaited(
       FastOverlays.showDateRangePicker(
-        firstDate: DateTime.now(),
-        lastDate: DateTime.now(),
+        firstDate: DateTime.timestamp(),
+        lastDate: DateTime.timestamp(),
         helpText: 'test_date_range_picker',
       ),
     );

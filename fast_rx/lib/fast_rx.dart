@@ -1,5 +1,3 @@
-library fast_rx;
-
 export 'src/exceptions.dart';
 
 // rx/composite
