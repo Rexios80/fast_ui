@@ -16,7 +16,7 @@ Reactive Flutter widgets and convenience components for fast_rx
 <!-- embedme readme/usage.dart -->
 ```dart
 import 'package:fast_rx_flutter/fast_rx_flutter.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void example() {
   // ...

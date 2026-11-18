@@ -1,5 +1,5 @@
 import 'package:fast_rx/fast_rx.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// A [StatefulWidget] that updates with it's observer
 class FastBuilder extends StatefulWidget {
