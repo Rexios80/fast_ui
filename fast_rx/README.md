@@ -162,6 +162,3 @@ class Composite extends RxComposite {
 
 ### Testing custom Rx
 Custom Rx objects can be tested for valid registration and notifications using [fast_rx_test](https://pub.dev/packages/fast_rx_test).
-
-## Additional information
-See [fast_ui](https://pub.dev/packages/fast_ui) for more information
