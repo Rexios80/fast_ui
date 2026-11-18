@@ -1,5 +1,5 @@
 import 'package:fast_rx_flutter/fast_rx_flutter.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void example() {
   // ...
@@ -8,7 +8,7 @@ void example() {
 
   // ...
 
-  // ignore: avoid_print
+  // ignore: avoid_print, the example prints values as they change
   count.stream.listen(print);
 
   // ...

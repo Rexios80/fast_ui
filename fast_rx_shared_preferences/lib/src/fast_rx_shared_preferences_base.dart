@@ -15,8 +15,9 @@ class FastRxSharedPreferences {
   ///
   /// Must call [init] before accessing
   static SharedPreferences get prefs {
-    _checkInit();
-    return _prefs!;
+    final prefs = _prefs;
+    if (prefs == null) throw FastRxSharedPreferencesNotInitialized();
+    return prefs;
   }
 
   /// Initializes [FastRxPersistence] with a [SharedPreferencesStore]
@@ -34,13 +35,5 @@ class FastRxSharedPreferences {
     // This is only used for testing
     // ignore: invalid_use_of_visible_for_testing_member
     FastRxPersistence.reset();
-  }
-
-  static void _checkInit() {
-    try {
-      _prefs!;
-    } catch (e) {
-      throw FastRxSharedPreferencesNotInitialized();
-    }
   }
 }

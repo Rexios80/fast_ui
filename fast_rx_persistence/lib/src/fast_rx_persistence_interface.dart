@@ -1,5 +1,8 @@
 /// Interface to get and set values from a key/value store
 abstract class FastRxPersistenceInterface {
+  /// Constructor
+  const FastRxPersistenceInterface();
+
   /// Get a value from the key/value store
   Object? get(String key);
 

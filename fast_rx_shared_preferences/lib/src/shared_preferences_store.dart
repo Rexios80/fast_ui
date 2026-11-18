@@ -1,7 +1,9 @@
 import 'package:fast_rx_persistence/fast_rx_persistence.dart';
+import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// A [SharedPreferences] implementation of [FastRxPersistenceInterface]
+@immutable
 class SharedPreferencesStore extends FastRxPersistenceInterface {
   final SharedPreferences _prefs;
 

@@ -12,9 +12,10 @@ dependencies:
     sdk: flutter
 
   fast_rx_persistence: ^0.3.0
+  meta: ^1.9.0
   shared_preferences: ^2.0.15
 
 dev_dependencies:
   test: ^1.21.1
-  rexios_lints: ^9.1.0
+  rexios_lints: ^20.0.0
   fast_rx: ^0.6.0

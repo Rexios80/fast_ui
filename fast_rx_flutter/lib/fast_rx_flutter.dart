@@ -1,4 +1,4 @@
-library fast_rx_flutter;
+library;
 
 export 'package:fast_rx/fast_rx.dart';
 

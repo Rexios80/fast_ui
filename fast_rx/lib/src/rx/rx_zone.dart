@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:meta/meta.dart';
+
 /// Key for the registrar in an rx zone
 const _registrarKey = '_fast_rx_registrar_key';
 
@@ -35,6 +37,7 @@ R runRxZoned<R>(
 
 /// Convenience class to get the [RxRegistrar] and [RxNotifier] of the current
 /// [Zone] if they exist
+@immutable
 class RxZone {
   /// This zone's registrar
   final RxRegistrar? registrar;
@@ -43,7 +46,7 @@ class RxZone {
   final RxNotifier? notifier;
 
   /// Constructor
-  RxZone._({
+  const RxZone._({
     this.registrar,
     this.notifier,
   });

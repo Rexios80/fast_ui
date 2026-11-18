@@ -14,8 +14,9 @@ class FastRxPersistence {
   ///
   /// Must call [init] before accessing
   static FastRxPersistenceInterface get store {
-    _checkInit();
-    return _store!;
+    final store = _store;
+    if (store == null) throw FastRxPersistenceNotInitialized();
+    return store;
   }
 
   /// Initialize the internal [store] instance. Must be called
@@ -28,14 +29,6 @@ class FastRxPersistence {
   @visibleForTesting
   static void reset() {
     _store = null;
-  }
-
-  static void _checkInit() {
-    try {
-      _store!;
-    } catch (e) {
-      throw FastRxPersistenceNotInitialized();
-    }
   }
 }
 
