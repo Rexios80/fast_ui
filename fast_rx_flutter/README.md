@@ -51,6 +51,3 @@ void example() {
 ```
 
 See [fast_rx](https://pub.dev/packages/fast_rx) for more documentation
-
-## Additional information
-See [fast_ui](https://pub.dev/packages/fast_ui) for more information
