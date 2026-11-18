@@ -1,3 +1,7 @@
+## 0.3.3
+
+- Makes `inputDecorationTheme`, `appBarTheme`, and `bottomAppBarTheme` return types `dynamic` to prevent breaking changes with Flutter 3.50
+
 ## 0.3.2
 
 - Fixes `Color.value` deprecation

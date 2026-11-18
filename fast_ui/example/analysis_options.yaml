@@ -1,1 +1,9 @@
 include: package:rexios_lints/flutter/core_extra.yaml
+
+analyzer:
+  errors:
+    # rexios_lints 9.x still enables the legacy analyzer plugin API.
+    included_file_warning: ignore
+    # Flutter 3.50 deprecates package:flutter/material.dart. The example still
+    # supports the Flutter SDK constraint of the packages it demonstrates.
+    deprecated_member_use: ignore

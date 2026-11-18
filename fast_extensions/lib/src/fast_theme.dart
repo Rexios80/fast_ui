@@ -21,7 +21,7 @@ extension FastTheme on BuildContext {
   TextTheme get primaryTextTheme => theme.primaryTextTheme;
 
   /// The [InputDecorationTheme] of the current [BuildContext]
-  InputDecorationTheme get inputDecorationTheme => theme.inputDecorationTheme;
+  dynamic get inputDecorationTheme => theme.inputDecorationTheme;
 
   /// The [ThemeData.iconTheme] of the current [BuildContext]
   IconThemeData get iconTheme => theme.iconTheme;
@@ -45,13 +45,13 @@ extension FastTheme on BuildContext {
   PageTransitionsTheme get pageTransitionsTheme => theme.pageTransitionsTheme;
 
   /// The [AppBarTheme] of the current [BuildContext]
-  AppBarTheme get appBarTheme => theme.appBarTheme;
+  dynamic get appBarTheme => theme.appBarTheme;
 
   /// The [ScrollbarThemeData] of the current [BuildContext]
   ScrollbarThemeData get scrollbarTheme => theme.scrollbarTheme;
 
   /// The [BottomAppBarTheme] of the current [BuildContext]
-  BottomAppBarTheme get bottomAppBarTheme => theme.bottomAppBarTheme;
+  dynamic get bottomAppBarTheme => theme.bottomAppBarTheme;
 
   /// The [ColorScheme] of the current [BuildContext]
   ColorScheme get colorScheme => theme.colorScheme;
