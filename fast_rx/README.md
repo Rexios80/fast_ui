@@ -134,7 +134,7 @@ void example() {
 
   // All of these will cause their parent to notify
   compositeList[0].value = 1;
-  compositeMap[0]!.value = 1;
+  compositeMap.values.first.value = 1;
   compositeSet.first.value = 1;
 }
 

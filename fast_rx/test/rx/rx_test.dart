@@ -26,7 +26,9 @@ void main() {
 
   test('Rx.run async exception', () {
     expect(
-      () => ''.rx.run(() async {}),
+      () => ''.rx.run(() async {
+        await null;
+      }),
       throwsA(isA<RxRunActionWasAsync>()),
     );
   });

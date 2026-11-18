@@ -1,6 +1,9 @@
+import 'package:meta/meta.dart';
+
 /// Convert a value to/from a [FastRxPersistenceInterface]
 /// - [T] is the type of the value outside the store
 /// - [I] is the type of the value inside the store
+@immutable
 abstract class PersistenceConverter<T, I> {
   /// Constructor
   const PersistenceConverter();
@@ -20,6 +23,7 @@ abstract class PersistenceConverter<T, I> {
 }
 
 /// Conveniently create a [PersistenceConverter] inline
+@immutable
 class _InlinePersistenceConverter<T, I> extends PersistenceConverter<T, I> {
   /// Constructor
   /// - [fromStore]: Convert the value read from the store
@@ -41,6 +45,7 @@ class _InlinePersistenceConverter<T, I> extends PersistenceConverter<T, I> {
 }
 
 /// Converter between [Enum] and [I]
+@immutable
 abstract class EnumPersistenceConverter<T extends Enum, I>
     extends PersistenceConverter<T, I> {
   /// Constructor
@@ -63,6 +68,7 @@ abstract class EnumPersistenceConverter<T extends Enum, I>
 }
 
 /// Converter between [Enum] and [String]
+@immutable
 class _StringEnumPersistenceConverter<T extends Enum>
     extends EnumPersistenceConverter<T, String> {
   /// Constructor
@@ -76,6 +82,7 @@ class _StringEnumPersistenceConverter<T extends Enum>
 }
 
 /// Converter between [Enum] and [int]
+@immutable
 class _IntEnumPersistenceConverter<T extends Enum>
     extends EnumPersistenceConverter<T, int> {
   /// Constructor

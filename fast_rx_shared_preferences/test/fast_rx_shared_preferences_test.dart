@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 import 'package:fast_rx/fast_rx.dart';
 
-void main() async {
+void main() {
   Future<void> setup([Map<String, Object>? values]) async {
     FastRxSharedPreferences.reset();
     SharedPreferences.setMockInitialValues(values ?? {});

@@ -1,4 +1,5 @@
 import 'package:fast_rx/fast_rx.dart';
+import 'package:meta/meta.dart';
 import 'package:fast_rx_test/fast_rx_test.dart';
 import 'package:test/test.dart';
 
@@ -54,10 +55,11 @@ void main() {
   });
 }
 
+@immutable
 class TestObject {
   final int count;
 
-  TestObject(this.count);
+  const TestObject(this.count);
 
   @override
   bool operator ==(Object other) => other is TestObject && other.count == count;

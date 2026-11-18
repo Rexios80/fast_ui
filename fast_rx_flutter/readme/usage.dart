@@ -8,7 +8,7 @@ void example() {
 
   // ...
 
-  // ignore: avoid_print
+  // ignore: avoid_print, the example prints values as they change
   count.stream.listen(print);
 
   // ...

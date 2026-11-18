@@ -1,7 +1,8 @@
 import 'package:collection/collection.dart';
-import 'package:fast_rx_persistence/fast_rx_persistence.dart';
-import 'package:test/test.dart';
 import 'package:fast_rx/fast_rx.dart';
+import 'package:fast_rx_persistence/fast_rx_persistence.dart';
+import 'package:meta/meta.dart';
+import 'package:test/test.dart';
 
 void main() {
   setUp(FastRxPersistence.reset);
@@ -28,7 +29,7 @@ void main() {
   });
 
   test('Reading', () {
-    FastRxPersistence.init(Store(values: {'key': 17}));
+    FastRxPersistence.init(Store(values: const {'key': 17}));
 
     final rx = 0.rx..persist('key');
     expect(rx.value, 17);
@@ -37,7 +38,7 @@ void main() {
   test('Transformation', () async {
     FastRxPersistence.init(
       Store(
-        values: {
+        values: const {
           'key': ['17'],
         },
       ),
@@ -65,7 +66,7 @@ void main() {
   });
 
   test('Enum transformation', () async {
-    FastRxPersistence.init(Store(values: {'key0': 'zero', 'key1': 0}));
+    FastRxPersistence.init(Store(values: const {'key0': 'zero', 'key1': 0}));
 
     final rx0 = TestEnum.one.rx
       ..persist(
@@ -92,10 +93,12 @@ void main() {
   });
 }
 
+@immutable
 class Store extends FastRxPersistenceInterface {
   final Map<String, dynamic> _store;
 
-  Store({Map<String, dynamic>? values}) : _store = values ?? {};
+  Store({Map<String, dynamic>? values})
+      : _store = Map<String, dynamic>.from(values ?? const {});
 
   @override
   Object? get(String key) {

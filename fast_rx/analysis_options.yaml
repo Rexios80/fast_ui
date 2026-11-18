@@ -1,6 +1,1 @@
 include: package:rexios_lints/dart/package_extra.yaml
-
-analyzer:
-  errors:
-    # rexios_lints 9.x still enables the legacy analyzer plugin API.
-    included_file_warning: ignore

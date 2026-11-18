@@ -12,8 +12,6 @@ mixin RxCompositeMixin<T> on Rx<T> {
   void addRx(Rx rx) {
     if (_subs[identityHashCode(rx)] != null) return;
 
-    // Pana was complaining about this for no reason
-    // ignore: cancel_subscriptions
     final sub = rx.stream.listen((_) => notify());
     _subs[identityHashCode(rx)] = sub;
   }
